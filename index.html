@@ -562,14 +562,14 @@ body{
 .product-buy:active{transform:scale(.95)}
 
 /* ===== ★ FOCUS PLAYLIST CUSTOM STYLE (แก้ไขแล้ว) ★ ===== */
-.music{padding:20px}
+.music{padding:20px 10px}
 .music .song-list {
     display: flex;
     flex-direction: row;
-    justify-content: center; /* ★ จัดกึ่งกลางเสมอ */
+    justify-content: center;
+    align-items: center;
     overflow-x: auto;
-    gap: 12px;
-    padding: 10px 16px; /* ★ เพิ่มระยะขอบซ้ายขวา ไม่ให้ชิดขอบเกินไป */
+    padding: 20px 10px 10px;
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
@@ -585,75 +585,129 @@ body{
     border-radius: 20px;
     border: 2px solid #ffffff;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
+    margin-left: -14px; /* ทำให้ซ้อนกัน */
     position: relative;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
     background-color: #1a1a1a;
-    transition: transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s, border-color .3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+    transition: transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s, border-color .3s, z-index .3s;
+    z-index: 1;
     isolation: isolate;
 }
-.music .song-item:hover {
-    transform: translateY(-4px) scale(1.05);
-    border-color: #ffffff;
-    box-shadow: 0 10px 24px -8px rgba(255,255,255,.5);
+.music .song-item:first-child {
+    margin-left: 0;
 }
-.music .song-item::after {
-    padding: 3px;
+/* เอียงสลับซ้าย-ขวา */
+.music .song-item:nth-child(odd) { transform: rotate(-6deg); }
+.music .song-item:nth-child(even) { transform: rotate(6deg); }
+
+/* ตอนเอาเมาส์ชี้ ให้ตั้งตรงและเด้งขึ้น */
+.music .song-item:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.15);
+    z-index: 10;
+    box-shadow: 0 12px 28px -8px rgba(255,255,255,.6);
+    border-color: #ffffff;
 }
 .music .song-item .song-info,
 .music .song-item .song-play {
     display: none !important;
 }
 .music .song-item .song-overlay {
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.3);
     transition: background .3s;
 }
 .music .song-item.active .song-overlay {
     background: rgba(0,0,0,0);
 }
+
+/* ★ แสงวิ่งรอบขอบ (เฉพาะเพลงที่กำลังเล่น) ★ */
+@keyframes borderSpin{ to{ --border-angle: 360deg; } }
+@property --border-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
+.music .song-item::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    padding:3px;
+    background:conic-gradient(
+        from var(--border-angle),
+        transparent 0%,
+        var(--song-glow, #00e07a) 20%,
+        transparent 40%,
+        transparent 60%,
+        var(--song-glow, #00e07a) 80%,
+        transparent 100%
+    );
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .4s ease;
+    z-index:10;
+}
+.music .song-item.playing::after {
+    opacity:1;
+    animation: borderSpin 3s linear infinite;
+}
+
+/* ★ คลื่นเสียง (เฉพาะเพลงที่กำลังเล่น) ★ */
 .music .song-item .song-eq {
     position: absolute;
     bottom: 6px;
     left: 50%;
     transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    padding-bottom: 7px;
+    width: 32px;
+    height: 32px;
+    padding-bottom: 8px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.75);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     display: none;
     align-items: flex-end;
     justify-content: center;
     gap: 3px;
-    box-shadow: none;
-    animation: none;
+    z-index: 15;
+    box-shadow: 0 0 10px var(--song-glow, #00e07a);
 }
 .music .song-item.playing .song-eq {
     display: flex;
 }
 .music .song-item .song-eq i {
-    background: #fff;
     width: 3px;
+    background: #fff;
+    border-radius: 2px;
+    animation: eq .9s ease-in-out infinite;
 }
+.music .song-item .song-eq i:nth-child(1) { height: 40%; animation-delay: 0s; }
+.music .song-item .song-eq i:nth-child(2) { height: 90%; animation-delay: 0.15s; }
+.music .song-item .song-eq i:nth-child(3) { height: 60%; animation-delay: 0.3s; }
+
+@keyframes eq {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+}
+
 @media (max-width: 400px) {
     .music .song-item {
         width: 72px !important;
         height: 72px !important;
         min-height: 72px !important;
         border-radius: 16px !important;
+        margin-left: -12px !important;
     }
     .music .song-item .song-eq {
         width: 26px !important;
         height: 26px !important;
         padding-bottom: 5px !important;
         bottom: 5px !important;
+        gap: 2px !important;
     }
+    .music .song-item .song-eq i { width: 2.5px; }
 }
 /* ===== จบส่วน FOCUS PLAYLIST ===== */
 
