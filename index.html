@@ -94,7 +94,6 @@ body{
 
 .wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 
-/* ★ CARD — โปร่งใสขึ้น เห็น GIF ทะลุ */
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -200,6 +199,29 @@ body{
   color:#fff;margin-bottom:11px;text-transform:uppercase;
 }
 .verified-badge svg{width:12px;height:12px}
+
+/* ★ VIEW COUNTER */
+.view-counter{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.5px;
+  color:var(--muted);
+  margin-bottom:10px;
+  transition:.25s;
+}
+.view-counter:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.view-counter svg{width:14px;height:14px;color:var(--lime2);opacity:.85}
+.view-counter #viewCount{color:#fff;font-weight:700;min-width:20px;text-align:center}
 
 .hero h1{
   font-size:26px;font-weight:700;letter-spacing:.2px;
@@ -386,6 +408,7 @@ body{
 .cert-list-arrow svg{width:13px;height:13px}
 .cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
 
+/* ★ CHART */
 .chart-wrap{
   position:relative;
   width:100%;
@@ -400,6 +423,30 @@ body{
   height:auto;
   display:block;
 }
+
+/* ★ อนิเมชันเส้นกราฟ */
+#equityLine{
+  stroke-dasharray:2500;
+  stroke-dashoffset:2500;
+}
+#equityArea{
+  opacity:0;
+  transition:opacity .9s ease .6s;
+}
+#equityDot,#equityDotOuter{
+  opacity:0;
+  transition:opacity .5s ease 1.4s;
+}
+.chart-wrap.animate #equityLine{
+  animation:drawLine 2.2s cubic-bezier(.4,.0,.2,1) forwards;
+}
+.chart-wrap.animate #equityArea{opacity:1}
+.chart-wrap.animate #equityDot,
+.chart-wrap.animate #equityDotOuter{opacity:1}
+@keyframes drawLine{
+  to{stroke-dashoffset:0}
+}
+
 .chart-mini{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -614,7 +661,6 @@ footer{
   font-family:'JetBrains Mono',monospace;
   font-size:11px;color:#666;letter-spacing:.4px;
 }
-footer .dot{color:#fff;margin:0 6px}
 
 .toast{
   position:fixed;left:50%;bottom:30px;transform:translate(-50%,120px);
@@ -701,9 +747,6 @@ footer .dot{color:#fff;margin:0 6px}
   border:1px solid var(--border);
   image-rendering:auto;
   image-rendering:smooth;
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transform:translateZ(0);
 }
 
 .buy-modal{
@@ -846,13 +889,10 @@ footer .dot{color:#fff;margin:0 6px}
 <div class="bg-gif-overlay" aria-hidden="true"></div>
 
 <div class="ticker">
-  <div class="ticker-track">
-    <span><b class="sym">XAU/USD</b> <em class="up">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up">18,240 ▲ 0.45%</em></span>
-    <span><b class="sym">XAU/USD</b> <em class="up">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up">18,240 ▲ 0.45%</em></span>
+  <div class="ticker-track" id="tickerTrack">
+    <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
+    <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
+    <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
   </div>
 </div>
 
@@ -876,6 +916,16 @@ footer .dot{color:#fff;margin:0 6px}
 
     <h1>mun</h1>
     <div class="handle">@munzq · FX &amp; Trading Prop Firm</div>
+
+    <!-- ★ VIEW COUNTER -->
+    <div class="view-counter" id="viewCounter" title="Total Profile Views">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      <span id="viewCount">—</span>
+      <span>views</span>
+    </div>
 
     <p class="bio">beta testing son…</p>
 
@@ -969,7 +1019,7 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
 
     <div class="tab-pane" id="pane-chart">
-      <div class="chart-wrap">
+      <div class="chart-wrap" id="chartWrap">
         <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet" id="equityChart">
           <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
             <line x1="36" y1="16" x2="308" y2="16"/>
@@ -1000,8 +1050,8 @@ footer .dot{color:#fff;margin:0 6px}
           <path id="equityArea" fill="url(#areaGrad)"/>
           <path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(0,224,122,.6))"/>
 
-          <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
           <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
+          <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
 
           <g font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#808080" text-anchor="middle">
             <text x="36" y="152">JAN</text>
@@ -1059,7 +1109,7 @@ footer .dot{color:#fff;margin:0 6px}
   </section>
 
   <footer>
-    © <span id="year"></span> mun <span class="dot">//</span> Discipline &gt; Prediction
+    © 2026 munzq. All Rights Reserved. Designed &amp; Developed by munzq.
   </footer>
 </main>
 
@@ -1135,6 +1185,8 @@ const CONFIG = {
   discordUserId: "YOUR_DISCORD_USER_ID",
   sellingEnabled: false,
   autoplayIndex: 0,
+  counterNamespace: "munzq-bio",
+  counterKey: "views",
 
   songs: [
     {
@@ -1169,8 +1221,6 @@ const CERTS = {
   e8:   { firm:'E8 Markets',          image:'e8.jpg' }
 };
 
-document.getElementById('year').textContent = new Date().getFullYear();
-
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById('toast');
@@ -1196,6 +1246,112 @@ function copyDiscord(){
   }
 }
 
+/* ★ VIEW COUNTER — Abacus API + fallback */
+function loadViewCount(){
+  const el = document.getElementById('viewCount');
+  if (!el) return;
+
+  const sessionKey = 'munzq_bio_viewed';
+  let alreadyCounted = false;
+  try { alreadyCounted = !!sessionStorage.getItem(sessionKey); } catch(e){}
+
+  const url = alreadyCounted
+    ? 'https://abacus.jasoncameron.dev/get/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey
+    : 'https://abacus.jasoncameron.dev/hit/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey;
+
+  if (!alreadyCounted){
+    try { sessionStorage.setItem(sessionKey, '1'); } catch(e){}
+  }
+
+  let done = false;
+  const timeoutId = setTimeout(() => {
+    if (done) return;
+    done = true;
+    el.textContent = getFallback().toLocaleString('en-US');
+  }, 4000);
+
+  fetch(url, { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error('http'); return r.json(); })
+    .then(data => {
+      if (done) return;
+      done = true;
+      clearTimeout(timeoutId);
+      if (data && typeof data.value === 'number'){
+        el.textContent = data.value.toLocaleString('en-US');
+        try { localStorage.setItem('munzq_views', String(data.value)); } catch(e){}
+      } else {
+        el.textContent = getFallback().toLocaleString('en-US');
+      }
+    })
+    .catch(() => {
+      if (done) return;
+      done = true;
+      clearTimeout(timeoutId);
+      el.textContent = getFallback().toLocaleString('en-US');
+    });
+
+  function getFallback(){
+    try {
+      let v = parseInt(localStorage.getItem('munzq_views') || '0', 10);
+      v = v + 1;
+      localStorage.setItem('munzq_views', String(v));
+      return v;
+    } catch(e){ return 1; }
+  }
+}
+loadViewCount();
+
+/* ★ TICKER — ราคาจริง realtime */
+function applyTicker(data, key){
+  if (!data || !data.price) return;
+  const els = document.querySelectorAll('[data-ticker="' + key + '"]');
+  const isUp = data.change >= 0;
+  const arrow = isUp ? '▲' : '▼';
+  const cls = isUp ? 'up' : 'dn';
+  let priceStr;
+  if (key === 'BTC') priceStr = Math.round(data.price).toLocaleString('en-US');
+  else if (key === 'XAU') priceStr = data.price.toFixed(2);
+  else if (key === 'NAS') priceStr = Math.round(data.price).toLocaleString('en-US');
+  else priceStr = String(data.price);
+  els.forEach(el => {
+    el.className = cls;
+    el.textContent = priceStr + ' ' + arrow + ' ' + Math.abs(data.change).toFixed(2) + '%';
+  });
+}
+
+function updateTicker(){
+  // BTC — CoinGecko
+  fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true', {cache:'no-store'})
+    .then(r => r.ok ? r.json() : null)
+    .then(c => {
+      if (c && c.bitcoin && c.bitcoin.usd){
+        applyTicker({ price: c.bitcoin.usd, change: c.bitcoin.usd_24h_change || 0 }, 'BTC');
+      }
+    }).catch(()=>{});
+
+  // XAU — gold-api.com
+  fetch('https://api.gold-api.com/price/XAU', {cache:'no-store'})
+    .then(r => r.ok ? r.json() : null)
+    .then(g => {
+      if (g && g.price){ applyTicker({ price: g.price, change: 0 }, 'XAU'); }
+    }).catch(()=>{});
+
+  // NAS100 — Yahoo Finance
+  fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENDX?interval=1d&range=1d', {cache:'no-store'})
+    .then(r => r.ok ? r.json() : null)
+    .then(n => {
+      const result = n && n.chart && n.chart.result && n.chart.result[0];
+      if (result){
+        const price = result.meta.regularMarketPrice;
+        const prev = result.meta.previousClose || result.meta.chartPreviousClose;
+        const change = prev ? ((price - prev) / prev) * 100 : 0;
+        applyTicker({ price, change }, 'NAS');
+      }
+    }).catch(()=>{});
+}
+updateTicker();
+setInterval(updateTicker, 60000);
+
 let currentTab = 'stats';
 function switchTab(name){
   currentTab = name;
@@ -1212,6 +1368,13 @@ function switchTab(name){
         animateCount(el);
       }
     });
+  }
+  // ★ CHART animation on tab open
+  if (name === 'chart'){
+    const wrap = document.getElementById('chartWrap');
+    wrap.classList.remove('animate');
+    void wrap.offsetWidth;
+    wrap.classList.add('animate');
   }
 }
 
@@ -1261,8 +1424,19 @@ function drawChart(){
   const baseline = padT + h;
   const areaD = d + ` L ${pts[pts.length-1][0].toFixed(2)},${baseline} L ${pts[0][0].toFixed(2)},${baseline} Z`;
 
-  document.getElementById('equityLine').setAttribute('d', d);
+  const lineEl = document.getElementById('equityLine');
+  lineEl.setAttribute('d', d);
   document.getElementById('equityArea').setAttribute('d', areaD);
+
+  // ★ คำนวณความยาวจริงของเส้น สำหรับ animation
+  try {
+    const len = lineEl.getTotalLength();
+    lineEl.style.strokeDasharray = len;
+    lineEl.style.strokeDashoffset = len;
+  } catch(e){
+    lineEl.style.strokeDasharray = 2500;
+    lineEl.style.strokeDashoffset = 2500;
+  }
 
   const last = pts[pts.length - 1];
   document.getElementById('equityDot').setAttribute('cx', last[0]);
