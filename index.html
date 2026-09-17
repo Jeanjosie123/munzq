@@ -157,7 +157,6 @@ body{
 
 .hero{padding:30px 22px 24px;text-align:center;position:relative;}
 
-/* ★ VIEW COUNTER — มุมขวาบน */
 .view-counter{
   position:absolute;
   top:16px;
@@ -907,7 +906,6 @@ footer{
 
   <header class="card hero reveal">
 
-    <!-- ★ VIEW COUNTER — ย้ายมุมขวาบน · ลบ "views" -->
     <div class="view-counter" id="viewCounter" title="Total Profile Views">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -1098,7 +1096,7 @@ footer{
     <div class="song-list" id="songList"></div>
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      EsdeeKids&amp;Yeat · Full Track
+      Altare &amp; Don Toliver · Full Track
     </div>
   </section>
 
@@ -1188,24 +1186,23 @@ const CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
   sellingEnabled: false,
-  autoplayIndex: 0,
   counterNamespace: "munzq-bio",
   counterKey: "views",
 
   songs: [
     {
-      title:   "LV Sandals",
-      artist:  "EsDeeKid, fakemink, Rico Ace",
-      videoId: "K6QjQeKfmUs",
+      title:   "bye (Altare Remix)",
+      artist:  "Ariana Grande, Altare",
+      videoId: "agneRtEe-t8",
       startAt: 0,
-      cover:   "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02cff4bd68d5d0dd9a0a748045"
+      cover:   "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg"
     },
     {
-      title:   "Flawlëss (feat. Lil Uzi Vert)",
-      artist:  "Yeat, Lil Uzi Vert",
-      videoId: "NzXGXMgdGOI",
-      startAt: 42,
-      cover:   "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c665c7f2be1f6d3214a93a76"
+      title:   "NEW DROP",
+      artist:  "Don Toliver",
+      videoId: "86kPjLvo86M",
+      startAt: 0,
+      cover:   "https://img.youtube.com/vi/86kPjLvo86M/maxresdefault.jpg"
     }
   ],
 
@@ -1652,10 +1649,11 @@ function onPlayerStateChange(e){
 }
 function onPlayerError(e){ console.warn('YouTube error:', e.data); }
 
+/* ★ สุ่มเพลงตอนเปิดเว็บ */
 function tryAutoplay(){
   if (autoplayAttempted) return;
   autoplayAttempted = true;
-  const idx = CONFIG.autoplayIndex || 0;
+  const idx = Math.floor(Math.random() * CONFIG.songs.length);
   const song = CONFIG.songs[idx];
   if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
@@ -1670,7 +1668,7 @@ function handleFirstInteraction(){
   userInteracted = true;
   autoplayHint.classList.remove('show');
   if (ytReady && ytPlayer && !isPlaying){
-    if (currentIndex === -1) loadAndPlay(CONFIG.autoplayIndex || 0);
+    if (currentIndex === -1) loadAndPlay(Math.floor(Math.random() * CONFIG.songs.length));
     else { try { ytPlayer.playVideo(); } catch(e){} }
   }
 }
