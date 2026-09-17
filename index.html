@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Trader Bio · Prop Firm Verified</title>
+<title>munzq</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -155,7 +155,34 @@ body{
 .ticker-track .dn{color:var(--red)}
 @keyframes scroll{to{transform:translateX(-100%)}}
 
-.hero{padding:30px 22px 24px;text-align:center}
+.hero{padding:30px 22px 24px;text-align:center;position:relative;}
+
+/* ★ VIEW COUNTER — มุมขวาบน */
+.view-counter{
+  position:absolute;
+  top:16px;
+  right:16px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.5px;
+  color:var(--muted);
+  transition:.25s;
+  z-index:5;
+}
+.view-counter:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.view-counter svg{width:13px;height:13px;color:var(--lime2);opacity:.85}
+.view-counter #viewCount{color:#fff;font-weight:700;min-width:18px;text-align:center}
+
 .avatar-ring{width:118px;height:118px;margin:0 auto 16px;position:relative}
 .avatar-ring::before{
   content:"";position:absolute;inset:-4px;border-radius:50%;
@@ -199,29 +226,6 @@ body{
   color:#fff;margin-bottom:11px;text-transform:uppercase;
 }
 .verified-badge svg{width:12px;height:12px}
-
-/* ★ VIEW COUNTER */
-.view-counter{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.5px;
-  color:var(--muted);
-  margin-bottom:10px;
-  transition:.25s;
-}
-.view-counter:hover{border-color:rgba(255,255,255,.3);color:#fff}
-.view-counter svg{width:14px;height:14px;color:var(--lime2);opacity:.85}
-.view-counter #viewCount{color:#fff;font-weight:700;min-width:20px;text-align:center}
 
 .hero h1{
   font-size:26px;font-weight:700;letter-spacing:.2px;
@@ -408,7 +412,6 @@ body{
 .cert-list-arrow svg{width:13px;height:13px}
 .cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
 
-/* ★ CHART */
 .chart-wrap{
   position:relative;
   width:100%;
@@ -424,7 +427,6 @@ body{
   display:block;
 }
 
-/* ★ อนิเมชันเส้นกราฟ */
 #equityLine{
   stroke-dasharray:2500;
   stroke-dashoffset:2500;
@@ -877,6 +879,8 @@ footer{
   .buy-actions{grid-template-columns:1fr}
   .tab{font-size:9.5px;padding:10px 4px}
   .tab-pane{padding:16px}
+  .view-counter{top:12px;right:12px;padding:4px 9px;font-size:10px}
+  .view-counter svg{width:11px;height:11px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -902,6 +906,16 @@ footer{
 <main class="wrap">
 
   <header class="card hero reveal">
+
+    <!-- ★ VIEW COUNTER — ย้ายมุมขวาบน · ลบ "views" -->
+    <div class="view-counter" id="viewCounter" title="Total Profile Views">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      <span id="viewCount">—</span>
+    </div>
+
     <div class="verified-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
       Verified Trader
@@ -916,16 +930,6 @@ footer{
 
     <h1>mun</h1>
     <div class="handle">@munzq · FX &amp; Trading Prop Firm</div>
-
-    <!-- ★ VIEW COUNTER -->
-    <div class="view-counter" id="viewCounter" title="Total Profile Views">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-        <circle cx="12" cy="12" r="3"/>
-      </svg>
-      <span id="viewCount">—</span>
-      <span>views</span>
-    </div>
 
     <p class="bio">beta testing son…</p>
 
@@ -1246,7 +1250,7 @@ function copyDiscord(){
   }
 }
 
-/* ★ VIEW COUNTER — Abacus API + fallback */
+/* ★ VIEW COUNTER */
 function loadViewCount(){
   const el = document.getElementById('viewCount');
   if (!el) return;
@@ -1301,7 +1305,7 @@ function loadViewCount(){
 }
 loadViewCount();
 
-/* ★ TICKER — ราคาจริง realtime */
+/* ★ TICKER */
 function applyTicker(data, key){
   if (!data || !data.price) return;
   const els = document.querySelectorAll('[data-ticker="' + key + '"]');
@@ -1320,7 +1324,6 @@ function applyTicker(data, key){
 }
 
 function updateTicker(){
-  // BTC — CoinGecko
   fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true', {cache:'no-store'})
     .then(r => r.ok ? r.json() : null)
     .then(c => {
@@ -1329,14 +1332,12 @@ function updateTicker(){
       }
     }).catch(()=>{});
 
-  // XAU — gold-api.com
   fetch('https://api.gold-api.com/price/XAU', {cache:'no-store'})
     .then(r => r.ok ? r.json() : null)
     .then(g => {
       if (g && g.price){ applyTicker({ price: g.price, change: 0 }, 'XAU'); }
     }).catch(()=>{});
 
-  // NAS100 — Yahoo Finance
   fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENDX?interval=1d&range=1d', {cache:'no-store'})
     .then(r => r.ok ? r.json() : null)
     .then(n => {
@@ -1369,7 +1370,6 @@ function switchTab(name){
       }
     });
   }
-  // ★ CHART animation on tab open
   if (name === 'chart'){
     const wrap = document.getElementById('chartWrap');
     wrap.classList.remove('animate');
@@ -1428,7 +1428,6 @@ function drawChart(){
   lineEl.setAttribute('d', d);
   document.getElementById('equityArea').setAttribute('d', areaD);
 
-  // ★ คำนวณความยาวจริงของเส้น สำหรับ animation
   try {
     const len = lineEl.getTotalLength();
     lineEl.style.strokeDasharray = len;
