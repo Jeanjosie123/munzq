@@ -46,13 +46,17 @@ body{
   padding:44px 16px 60px;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ★ BG GIF — ชัดขึ้น
+   ═══════════════════════════════════════════════════════════ */
 .bg-gif{
   position:fixed;inset:-15px;z-index:-4;
-  background-image:url('https://media.tenor.com/zVWBYAc3fzUAAAAM/bmw-car.gif');
+  background-image:url('https://media.tenor.com/zVwBYAc3fzUAAAAM/bmw-car.gif');
   background-size:cover;background-position:center;
-  filter:blur(5px) brightness(.85) saturate(105%);
-  -webkit-filter:blur(5px) brightness(.85) saturate(105%);
-  opacity:.5;pointer-events:none;
+  filter:blur(3px) brightness(1.05) saturate(115%);
+  -webkit-filter:blur(3px) brightness(1.05) saturate(115%);
+  opacity:.85;
+  pointer-events:none;
   animation:bgPan 24s ease-in-out infinite alternate;
 }
 @keyframes bgPan{
@@ -64,8 +68,11 @@ body{
 .bg-gif-overlay{
   position:fixed;inset:0;z-index:-3;pointer-events:none;
   background:
-    radial-gradient(ellipse 100% 80% at 50% 30%,rgba(0,0,0,.10) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.65) 100%),
-    linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.25) 100%);
+    radial-gradient(ellipse 100% 80% at 50% 30%,
+      rgba(0,0,0,.05) 0%,
+      rgba(0,0,0,.20) 55%,
+      rgba(0,0,0,.45) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.15) 100%);
 }
 
 .aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
@@ -264,11 +271,10 @@ body{
 .sec-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
 /* ═══════════════════════════════════════════════════════════
-   ★ PERFORMANCE + PROP FIRM — รวมเป็น section เดียว + tabs
+   ★ PERFORMANCE + PROP FIRM — รวม section + tabs (ENGLISH)
    ═══════════════════════════════════════════════════════════ */
 .perf-section{padding:0;overflow:hidden}
 
-/* Tabs */
 .tabs{
   display:flex;
   gap:4px;
@@ -285,7 +291,7 @@ body{
   font-family:'JetBrains Mono',monospace;
   font-size:10.5px;
   font-weight:700;
-  letter-spacing:.6px;
+  letter-spacing:.8px;
   cursor:pointer;
   border-radius:10px 10px 0 0;
   position:relative;
@@ -312,7 +318,6 @@ body{
   box-shadow:0 0 12px rgba(255,255,255,.7);
 }
 
-/* Tab panes */
 .tab-pane{display:none;padding:20px}
 .tab-pane.active{display:block;animation:fadeIn .35s cubic-bezier(.2,.8,.3,1)}
 @keyframes fadeIn{
@@ -320,7 +325,6 @@ body{
   to{opacity:1;transform:translateY(0)}
 }
 
-/* ── Stats pane ── */
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .stat{
   padding:16px 14px;
@@ -347,7 +351,6 @@ body{
 .stat .num.red{color:var(--red)}
 .stat .sub{font-size:10.5px;color:var(--muted);font-weight:300;letter-spacing:.3px}
 
-/* ── Certificates pane ── */
 .cert-list{display:flex;flex-direction:column;gap:10px}
 .cert-list-item{
   display:flex;gap:12px;align-items:center;
@@ -388,7 +391,6 @@ body{
 .cert-list-arrow svg{width:13px;height:13px}
 .cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
 
-/* ── Chart pane ── */
 .chart-wrap{
   position:relative;
   width:100%;
@@ -434,7 +436,6 @@ body{
   text-transform:uppercase;
 }
 
-/* Rest sections */
 .shop{padding:20px}
 .product-glow{
   position:relative;
@@ -657,7 +658,6 @@ footer .dot{color:#fff;margin:0 6px}
 .autoplay-hint svg{width:13px;height:13px;animation:pulseHint 1.6s ease-in-out infinite}
 @keyframes pulseHint{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
 
-/* CERT image modal */
 .modal{
   position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.85);
@@ -711,7 +711,6 @@ footer .dot{color:#fff;margin:0 6px}
   transform:translateZ(0);
 }
 
-/* BUY modal */
 .buy-modal{
   position:fixed;inset:0;z-index:300;
   background:rgba(0,0,0,.85);
@@ -904,21 +903,18 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       ★ PERFORMANCE + PROP FIRM — รวมเป็น section เดียว
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- PERFORMANCE + PROP FIRM -->
   <div class="sec-title reveal" style="animation-delay:.05s">Performance &amp; Prop Firm</div>
 
   <section class="card perf-section reveal" style="animation-delay:.1s">
 
-    <!-- Tabs -->
+    <!-- ★ Tabs — ภาษาอังกฤษ -->
     <div class="tabs">
-      <button class="tab active" data-tab="stats" onclick="switchTab('stats')">สถิติ</button>
-      <button class="tab" data-tab="certs" onclick="switchTab('certs')">ใบกองทุน</button>
-      <button class="tab" data-tab="chart" onclick="switchTab('chart')">chart กราฟ</button>
+      <button class="tab active" data-tab="stats" onclick="switchTab('stats')">STATS</button>
+      <button class="tab" data-tab="certs" onclick="switchTab('certs')">CERTS</button>
+      <button class="tab" data-tab="chart" onclick="switchTab('chart')">CHART</button>
     </div>
 
-    <!-- Pane: สถิติ -->
     <div class="tab-pane active" id="pane-stats">
       <div class="stats">
         <div class="stat">
@@ -944,7 +940,6 @@ footer .dot{color:#fff;margin:0 6px}
       </div>
     </div>
 
-    <!-- Pane: ใบกองทุน -->
     <div class="tab-pane" id="pane-certs">
       <div class="cert-list">
         <div class="cert-list-item" onclick="viewCert('acg')">
@@ -980,11 +975,9 @@ footer .dot{color:#fff;margin:0 6px}
       </div>
     </div>
 
-    <!-- Pane: chart กราฟ -->
     <div class="tab-pane" id="pane-chart">
       <div class="chart-wrap">
         <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet" id="equityChart">
-          <!-- Grid lines + Y labels -->
           <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
             <line x1="36" y1="16" x2="308" y2="16"/>
             <line x1="36" y1="46" x2="308" y2="46"/>
@@ -992,7 +985,6 @@ footer .dot{color:#fff;margin:0 6px}
             <line x1="36" y1="106" x2="308" y2="106"/>
             <line x1="36" y1="136" x2="308" y2="136"/>
           </g>
-          <!-- Y axis labels -->
           <g font-family="'JetBrains Mono', monospace" font-size="8" fill="#808080" text-anchor="end">
             <text x="30" y="19">200%</text>
             <text x="30" y="49">150%</text>
@@ -1001,7 +993,6 @@ footer .dot{color:#fff;margin:0 6px}
             <text x="30" y="139">0%</text>
           </g>
 
-          <!-- Area (ใต้เส้น) — สร้างจาก JS -->
           <defs>
             <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#00e07a" stop-opacity=".45"/>
@@ -1016,11 +1007,9 @@ footer .dot{color:#fff;margin:0 6px}
           <path id="equityArea" fill="url(#areaGrad)"/>
           <path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(0,224,122,.6))"/>
 
-          <!-- Dot at end -->
           <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
           <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
 
-          <!-- X axis labels -->
           <g font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#808080" text-anchor="middle">
             <text x="36" y="152">JAN</text>
             <text x="90" y="152">MAR</text>
@@ -1090,7 +1079,6 @@ footer .dot{color:#fff;margin:0 6px}
   <span>แตะที่ไหนก็ได้เพื่อเล่นเพลง</span>
 </div>
 
-<!-- CERT image modal -->
 <div class="modal" id="certModal" onclick="closeCert(event)">
   <div class="modal-inner">
     <div class="modal-head">
@@ -1105,7 +1093,6 @@ footer .dot{color:#fff;margin:0 6px}
   </div>
 </div>
 
-<!-- BUY modal -->
 <div class="buy-modal" id="buyModal" onclick="closeBuyModal(event)">
   <div class="buy-inner">
     <div class="buy-head">
@@ -1150,9 +1137,6 @@ footer .dot{color:#fff;margin:0 6px}
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   ⚙️ CONFIG
-   ═══════════════════════════════════════════════════════════════ */
 const CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
@@ -1180,9 +1164,8 @@ const CONFIG = {
     { id:"p1", name:"ไม่รู้เลยก๊า", price:"฿999", image:"" }
   ],
 
-  // ★★ ข้อมูลกราฟ equity curve (แก้ได้) ★★
   chart: {
-    data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180], // % ต่อเดือน
+    data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180],
     maxY: 200
   }
 };
@@ -1192,7 +1175,6 @@ const CERTS = {
   fund: { firm:'The Funded Trader',   image:'funded.jpg' },
   e8:   { firm:'E8 Markets',          image:'e8.jpg' }
 };
-/* ═══════════════════════════════════════════════════════════════ */
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -1221,9 +1203,7 @@ function copyDiscord(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ TABS — สลับแท็บ
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── TABS ─── */
 let currentTab = 'stats';
 function switchTab(name){
   currentTab = name;
@@ -1233,7 +1213,6 @@ function switchTab(name){
   document.querySelectorAll('.tab-pane').forEach(p => {
     p.classList.toggle('active', p.id === 'pane-' + name);
   });
-  // trigger stats animation เมื่อเปิดแท็บ stats
   if (name === 'stats'){
     document.querySelectorAll('#pane-stats .num[data-count]').forEach(el => {
       if (!el.dataset.animated){
@@ -1244,9 +1223,7 @@ function switchTab(name){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ CERT IMAGE MODAL
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── CERT MODAL ─── */
 function viewCert(id){
   const cert = CERTS[id];
   if (!cert) return;
@@ -1269,9 +1246,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ EQUITY CHART — วาดเส้นกราฟด้วย SVG
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── EQUITY CHART ─── */
 function drawChart(){
   const data = CONFIG.chart.data;
   const maxY = CONFIG.chart.maxY;
@@ -1285,7 +1260,6 @@ function drawChart(){
     padT + h - (v / maxY) * h
   ]);
 
-  // smooth path (Catmull-Rom-ish)
   let d = `M ${pts[0][0].toFixed(2)},${pts[0][1].toFixed(2)}`;
   for (let i = 0; i < pts.length - 1; i++){
     const [x1, y1] = pts[i];
@@ -1294,7 +1268,6 @@ function drawChart(){
     d += ` C ${cx.toFixed(2)},${y1.toFixed(2)} ${cx.toFixed(2)},${y2.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`;
   }
 
-  // area = line + close to bottom
   const baseline = padT + h;
   const areaD = d + ` L ${pts[pts.length-1][0].toFixed(2)},${baseline} L ${pts[0][0].toFixed(2)},${baseline} Z`;
 
@@ -1309,9 +1282,7 @@ function drawChart(){
 }
 drawChart();
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ SHOP
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── SHOP ─── */
 let selectedProductId = null;
 
 function renderProducts(){
@@ -1390,9 +1361,7 @@ function confirmBuy(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ DISCORD STATUS
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── DISCORD STATUS ─── */
 const statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
 let lanyardWs = null;
 let lanyardHeartbeat = null;
@@ -1439,9 +1408,7 @@ function connectLanyard(){
 }
 connectLanyard();
 
-/* ═══════════════════════════════════════════════════════════════
-   🎵 YOUTUBE IFRAME API
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── YOUTUBE ─── */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
@@ -1583,7 +1550,7 @@ function updateUI(){
   });
 }
 
-/* ── ตัวเลขวิ่ง ── */
+/* ─── COUNT ─── */
 function animateCount(el){
   const raw    = parseFloat(el.dataset.count);
   const prefix = el.dataset.prefix || '';
