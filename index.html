@@ -146,7 +146,8 @@ body{
 }
 .ticker-track span{
   font-family:'JetBrains Mono',monospace;
-  font-size:11.5px;font-weight:600;letter-spacing:.4px;
+,  font-size:11.5px;font-weight255:600;letter-sp,.acing14);
+ :.4px;
   display:inline-flex;align-items:center;gap:6px;
   text-shadow:0 1px 4px rgba(0,0,0,.9);
 }
@@ -200,41 +201,19 @@ body{
 }
 .verified-badge svg{width:12px;height:12px}
 
-/* ★ VIEW COUNTER */
 .view-counter{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 12px;
-  border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:999px;
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   font-family:'JetBrains Mono',monospace;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.5px;
-  color:var(--muted);
-  margin-bottom:10px;
-  transition:.25s;
+  font-size:11px;font-weight:600;letter-spacing:.5px;
+  color:var(--muted);margin-bottom:10px;transition:.25s;
 }
-.view-counter:hover{
-  border-color:rgba(255,255,255,.3);
-  color:#fff;
-}
-.view-counter svg{
-  width:14px;height:14px;
-  color:var(--lime2);
-  opacity:.85;
-}
-.view-counter #viewCount{
-  color:#fff;
-  font-weight:700;
-  min-width:20px;
-  text-align:center;
-}
-.view-counter.loading #viewCount{opacity:.4}
+.view-counter:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.view-counter svg{width:14px;height:14px;color:var(--lime2);opacity:.85}
+.view-counter #viewCount{color:#fff;font-weight:700;min-width:20px;text-align:center}
 
 .hero h1{
   font-size:26px;font-weight:700;letter-spacing:.2px;
@@ -257,8 +236,7 @@ body{
   width:48px;height:48px;border-radius:50%;flex-shrink:0;
   display:grid;place-items:center;color:#fff;text-decoration:none;cursor:pointer;
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(10px) saturate(120%);
+  border:1px solid rgba(255,255 backdrop-filter:blur(10px) saturate(120%);
   -webkit-backdrop-filter:blur(10px) saturate(120%);
   transition:.28s cubic-bezier(.34,1.56,.64,1);
   position:relative;overflow:visible;
@@ -307,30 +285,17 @@ body{
 .perf-section{padding:0;overflow:hidden}
 
 .tabs{
-  display:flex;
-  gap:4px;
-  padding:14px 14px 0;
-  background:transparent;
-  border-bottom:1px solid var(--border);
+  display:flex;gap:4px;padding:14px 14px 0;
+  background:transparent;border-bottom:1px solid var(--border);
 }
 .tab{
-  flex:1;
-  padding:11px 6px;
-  border:none;
-  background:transparent;
+  flex:1;padding:11px 6px;border:none;background:transparent;
   color:var(--muted);
   font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;
-  font-weight:700;
-  letter-spacing:.8px;
-  cursor:pointer;
-  border-radius:10px 10px 0 0;
-  position:relative;
-  transition:.22s;
-  text-transform:uppercase;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:10.5px;font-weight:700;letter-spacing:.8px;
+  cursor:pointer;border-radius:10px 10px 0 0;
+  position:relative;transition:.22s;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .tab:hover{color:#fff;background:rgba(255,255,255,.04)}
 .tab.active{
@@ -338,23 +303,13 @@ body{
   background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
 }
 .tab.active::after{
-  content:"";
-  position:absolute;
-  bottom:-1px;
-  left:12%;
-  right:12%;
-  height:2px;
-  background:#fff;
-  border-radius:2px;
-  box-shadow:0 0 12px rgba(255,255,255,.7);
+  content:"";position:absolute;bottom:-1px;left:12%;right:12%;height:2px;
+  background:#fff;border-radius:2px;box-shadow:0 0 12px rgba(255,255,255,.7);
 }
 
 .tab-pane{display:none;padding:20px}
 .tab-pane.active{display:block;animation:fadeIn .35s cubic-bezier(.2,.8,.3,1)}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
-}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .stat{
@@ -421,104 +376,86 @@ body{
 .cert-list-arrow svg{width:13px;height:13px}
 .cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
 
-/* CHART */
 .chart-wrap{
-  position:relative;
-  width:100%;
+  position:relative;width:100%;
   background:rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.06);
   border-radius:14px;
-  padding:14px 10px 8px;
-  margin-bottom:14px;
+  padding:14px 10px 8px;margin-bottom:14px;
 }
-.chart-svg{
-  width:100%;
-  height:auto;
-  display:block;
-}
-#equityLine{
-  stroke-dasharray:2000;
-  stroke-dashoffset:2000;
-}
-#equityArea{
-  opacity:0;
-  transition:opacity .8s ease .5s;
-}
-#equityDot,#equityDotOuter{
-  opacity:0;
-  transition:opacity .5s ease 1.3s;
-}
-.chart-wrap.animate #equityLine{
-  animation:drawLine 2s cubic-bezier(.4,.0,.2,1) forwards;
-}
+.chart-svg{width:100%;height:auto;display:block}
+#equityLine{stroke-dasharray:2000;stroke-dashoffset:2000}
+#equityArea{opacity:0;transition:opacity .8s ease .5s}
+#equityDot,#equityDotOuter{opacity:0;transition:opacity .5s ease 1.3s}
+.chart-wrap.animate #equityLine{animation:drawLine 2s cubic-bezier(.4,.0,.2,1) forwards}
 .chart-wrap.animate #equityArea{opacity:1}
 .chart-wrap.animate #equityDot,
 .chart-wrap.animate #equityDotOuter{opacity:1}
-@keyframes drawLine{
-  to{stroke-dashoffset:0}
-}
+@keyframes drawLine{to{stroke-dashoffset:0}}
 
-.chart-mini{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:4px;
-}
+.chart-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
 .chart-mini-item{
-  padding:10px 8px;
-  border-radius:10px;
+  padding:10px 8px;border-radius:10px;
   background:rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.06);
   text-align:center;
 }
 .chart-mini-item .v{
   font-family:'JetBrains Mono',monospace;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:-.3px;
-  margin-bottom:2px;
+  font-size:13px;font-weight:800;letter-spacing:-.3px;margin-bottom:2px;
 }
 .chart-mini-item .v.up{color:var(--green)}
 .chart-mini-item .v.dn{color:var(--red)}
 .chart-mini-item .v.nt{color:#fff}
 .chart-mini-item .l{
   font-family:'JetBrains Mono',monospace;
-  font-size:9px;
-  letter-spacing:.6px;
-  color:var(--muted);
-  text-transform:uppercase;
+  font-size:9px;letter-spacing:.6px;color:var(--muted);text-transform:uppercase;
 }
 
-/* SHOP */
+/* ═══════════════════════════════════════════════════════════
+   ★ SHOP — วิธีที่ชัวร์ที่สุด: ใช้ padding + gradient
+   ═══════════════════════════════════════════════════════════ */
 .shop{padding:20px}
 
-/* ★ ใช้ box-shadow แทน gradient-padding trick */
-.product-card{
+/* ★ ใช้ SVG border แทน — ชัวร์ทุกเบราว์เซอร์ */
+.product-item{
+  position:relative;
+  padding:2px;
+  border-radius:16px;
+  background:linear-gradient(135deg,
+    #ff0066,
+    #ffcc00,
+    #00ff99,
+    #00ccff,
+    #6633ff,
+    #ff33cc,
+    #ff0066);
+  background-size:300% 300%;
+  animation:rainbowShift 6s ease infinite;
+}
+@keyframes rainbowShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.product-inner{
   display:flex;
   align-items:center;
   gap:14px;
   padding:14px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#0f0f0f,#050505);
-  border:1px solid rgba(255,255,255,.12);
-  position:relative;
-  transition:.28s cubic-bezier(.2,.8,.3,1);
-  animation:rainbowGlow 4s linear infinite;
+  border-radius:14px;
+  background:#080808;
+  transition:.25s;
 }
-@keyframes rainbowGlow{
-  0%{box-shadow:0 0 18px -4px rgba(255,0,102,.6), 0 0 30px -4px rgba(255,204,0,.35)}
-  25%{box-shadow:0 0 18px -4px rgba(255,204,0,.6), 0 0 30px -4px rgba(0,255,153,.35)}
-  50%{box-shadow:0 0 18px -4px rgba(0,255,153,.6), 0 0 30px -4px rgba(0,204,255,.35)}
-  75%{box-shadow:0 0 18px -4px rgba(0,204,255,.6), 0 0 30px -4px rgba(102,51,255,.35)}
-  100%{box-shadow:0 0 18px -4px rgba(102,51,255,.6), 0 0 30px -4px rgba(255,51,204,.35)}
-}
-.product-card:hover{transform:translateY(-2px)}
+.product-item:hover .product-inner{background:#0f0f0f}
 
 .product-thumb{
   width:56px;height:56px;flex-shrink:0;
   border-radius:12px;
-  background-size:cover;background-position:center;
   background-color:#0a0a0a;
+  background-size:cover;
+  background-position:center;
   border:1px solid rgba(255,255,255,.12);
   display:grid;place-items:center;
   color:rgba(255,255,255,.4);
@@ -545,15 +482,14 @@ body{
   color:#fff;
   font-family:'JetBrains Mono',monospace;
   font-size:11px;font-weight:700;letter-spacing:.5px;
-  cursor:pointer;
+  cursor:pointer;flex-shrink:0;white-space:nowrap;
   transition:.22s cubic-bezier(.34,1.56,.64,1);
-  display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
 }
 .product-buy svg{width:12px;height:12px;flex-shrink:0}
 .product-buy:hover{
   background:#fff;color:#000;
-  border-color:#fff;
-  transform:scale(1.05);
+  border-color:#fff;transform:scale(1.05);
 }
 .product-buy:active{transform:scale(.95)}
 
@@ -654,13 +590,9 @@ body{
 }
 
 footer{
-  text-align:center;
-  padding:22px 8px 4px;
+  text-align:center;padding:22px 8px 4px;
   font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;
-  color:#666;
-  letter-spacing:.5px;
-  line-height:1.7;
+  font-size:10.5px;color:#666;letter-spacing:.5px;line-height:1.7;
 }
 footer .footer-line{display:block}
 footer .footer-brand{color:#aaa;font-weight:600}
@@ -750,9 +682,6 @@ footer .footer-brand{color:#aaa;font-weight:600}
   border:1px solid var(--border);
   image-rendering:auto;
   image-rendering:smooth;
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transform:translateZ(0);
 }
 
 .buy-modal{
@@ -927,7 +856,7 @@ footer .footer-brand{color:#aaa;font-weight:600}
     <h1>mun</h1>
     <div class="handle">@munzq · FX &amp; Trading Prop Firm</div>
 
-    <div class="view-counter" id="viewCounter" title="Total Profile Views">
+    <div class="view-counter" id="viewCounter">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
         <circle cx="12" cy="12" r="3"/>
@@ -971,22 +900,22 @@ footer .footer-brand{color:#aaa;font-weight:600}
       <div class="stats">
         <div class="stat">
           <div class="lbl-top">Win Rate</div>
-          <div class="num green" data-count="68" data-suffix="%">0%</div>
+          <div class="num green">68%</div>
           <div class="sub">จาก 240 ไม้ล่าสุด</div>
         </div>
         <div class="stat">
           <div class="lbl-top">Risk : Reward</div>
-          <div class="num lime" data-count="2.4" data-prefix="1:" data-decimals="1">1:0</div>
+          <div class="num lime">1:2.4</div>
           <div class="sub">เฉลี่ยต่อไม้</div>
         </div>
         <div class="stat">
           <div class="lbl-top">Profit Factor</div>
-          <div class="num gold" data-count="2.1" data-decimals="1">0</div>
+          <div class="num gold">2.1</div>
           <div class="sub">กำไร ÷ ขาดทุน</div>
         </div>
         <div class="stat">
           <div class="lbl-top">Max Drawdown</div>
-          <div class="num red" data-count="4.8" data-suffix="%" data-decimals="1">0%</div>
+          <div class="num red">4.8%</div>
           <div class="sub">ต่ำสุดที่ยอมรับได้</div>
         </div>
       </div>
@@ -1190,9 +1119,6 @@ footer .footer-brand{color:#aaa;font-weight:600}
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   ⚙️ CONFIG
-   ═══════════════════════════════════════════════════════════════ */
 var CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
@@ -1234,8 +1160,9 @@ var CERTS = {
   e8:   { firm:'E8 Markets',          image:'e8.jpg' }
 };
 
-document.getElementById('year').textContent = new Date().getFullYear();
-
+/* ═══════════════════════════════════════════════════════════
+   ★ Toast
+   ═══════════════════════════════════════════════════════════ */
 var toastTimer;
 function showToast(msg){
   var t = document.getElementById('toast');
@@ -1245,6 +1172,9 @@ function showToast(msg){
   toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ★ Copy Discord
+   ═══════════════════════════════════════════════════════════ */
 function copyDiscord(){
   var user = CONFIG.discordUsername;
   var done = function(){ showToast('คัดลอก Discord: ' + user + ' แล้ว'); };
@@ -1261,136 +1191,97 @@ function copyDiscord(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ COUNTER — แสดง 68%, 1:2.4, 2.1, 4.8% ทันที (ไม่มี observer)
-   ═══════════════════════════════════════════════════════════════ */
-function animateCount(el){
-  var raw    = parseFloat(el.dataset.count);
-  var prefix = el.dataset.prefix || '';
-  var suffix = el.dataset.suffix || '';
-  var divide = parseFloat(el.dataset.divide || 1);
-  var decimals = parseInt(el.dataset.decimals !== undefined ? el.dataset.decimals : (raw % 1 !== 0 ? 1 : 0));
-  var target = raw / divide;
-  var dur = 1500, start = performance.now();
-  function frame(now){
-    var p = Math.min((now - start) / dur, 1);
-    var eased = 1 - Math.pow(1 - p, 3);
-    var val = target * eased;
-    el.textContent = prefix + val.toLocaleString('en-US',{
-      minimumFractionDigits: decimals, maximumFractionDigits: decimals
-    }) + suffix;
-    if (p < 1) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-
-/* ★ เรียกทันทีตอนโหลด — ตัวเลขวิ่งแน่นอน */
-function runAllCounters(){
-  var els = document.querySelectorAll('#pane-stats .num[data-count]');
-  for (var i = 0; i < els.length; i++){
-    animateCount(els[i]);
-  }
-}
-/* รอ DOM + font พร้อม แล้วค่อยวิ่ง */
-if (document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', function(){ setTimeout(runAllCounters, 200); });
-} else {
-  setTimeout(runAllCounters, 200);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   ★ VIEW COUNTER — Abacus API + fallback
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   ★ VIEW COUNTER
+   ═══════════════════════════════════════════════════════════ */
 function loadViewCount(){
-  var el = document.getElementById('viewCounter');
   var countEl = document.getElementById('viewCount');
+
+  // fallback: localStorage
+  function getLocalFallback(){
+    try {
+      var v = parseInt(localStorage.getItem('munzq_views') || '0', 10);
+      v = v + 1;
+      localStorage.setItem('munzq_views', String(v));
+      return v;
+    } catch(e){ return 1; }
+  }
 
   var sessionKey = 'munzq_bio_viewed';
   var alreadyCounted = false;
   try { alreadyCounted = !!sessionStorage.getItem(sessionKey); } catch(e){}
 
   var url = alreadyCounted
-    ? ('https://abacus.jasoncameron.dev/get/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey)
-    : ('https://abacus.jasoncameron.dev/hit/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey);
+    ? 'https://abacus.jasoncameron.dev/get/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey
+    : 'https://abacus.jasoncameron.dev/hit/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey;
 
   if (!alreadyCounted){
     try { sessionStorage.setItem(sessionKey, '1'); } catch(e){}
   }
 
+  var done = false;
   var timeoutId = setTimeout(function(){
-    // fallback หลัง 4 วิ ถ้า API ไม่ตอบ
-    countEl.textContent = getFallbackCount().toLocaleString('en-US');
-    el.classList.remove('loading');
-  }, 4000);
+    if (done) return;
+    done = true;
+    countEl.textContent = getLocalFallback().toLocaleString('en-US');
+  }, 3500);
 
   fetch(url, { cache: 'no-store' })
-    .then(function(r){
-      if (!r.ok) throw new Error('http ' + r.status);
-      return r.json();
-    })
+    .then(function(r){ if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
     .then(function(data){
+      if (done) return;
+      done = true;
       clearTimeout(timeoutId);
       if (data && typeof data.value === 'number'){
         countEl.textContent = data.value.toLocaleString('en-US');
-        try { localStorage.setItem('munzq_views_fallback', String(data.value)); } catch(e){}
+        try { localStorage.setItem('munzq_views', String(data.value)); } catch(e){}
       } else {
-        countEl.textContent = getFallbackCount().toLocaleString('en-US');
+        countEl.textContent = getLocalFallback().toLocaleString('en-US');
       }
-      el.classList.remove('loading');
     })
-    .catch(function(err){
+    .catch(function(){
+      if (done) return;
+      done = true;
       clearTimeout(timeoutId);
-      console.warn('View counter failed:', err);
-      countEl.textContent = getFallbackCount().toLocaleString('en-US');
-      el.classList.remove('loading');
+      countEl.textContent = getLocalFallback().toLocaleString('en-US');
     });
 }
 
-function getFallbackCount(){
-  // ใช้ localStorage เก็บค่าไว้ ถ้าไม่เคยมี → สุ่ม 100-999
-  var cached;
-  try { cached = localStorage.getItem('munzq_views_fallback'); } catch(e){}
-  if (cached) {
-    var n = parseInt(cached, 10) + 1;
-    try { localStorage.setItem('munzq_views_fallback', String(n)); } catch(e){}
-    return n;
+/* ═══════════════════════════════════════════════════════════
+   ★ TICKER
+   ═══════════════════════════════════════════════════════════ */
+function applyTicker(t, key){
+  if (!t || !t.price) return;
+  var els = document.querySelectorAll('[data-ticker="' + key + '"]');
+  var isUp = t.change >= 0;
+  var arrow = isUp ? '▲' : '▼';
+  var cls = isUp ? 'up' : 'dn';
+  var priceStr;
+  if (key === 'BTC') priceStr = Math.round(t.price).toLocaleString('en-US');
+  else if (key === 'XAU') priceStr = t.price.toFixed(2);
+  else if (key === 'NAS') priceStr = Math.round(t.price).toLocaleString('en-US');
+  else priceStr = String(t.price);
+  for (var i = 0; i < els.length; i++){
+    els[i].className = cls;
+    els[i].textContent = priceStr + ' ' + arrow + ' ' + Math.abs(t.change).toFixed(2) + '%';
   }
-  var initial = Math.floor(Math.random() * 400) + 200;
-  try { localStorage.setItem('munzq_views_fallback', String(initial)); } catch(e){}
-  return initial;
 }
 
-loadViewCount();
-
-/* ═══════════════════════════════════════════════════════════════
-   ★ TICKER — ราคาจริง (optional — ถ้าล่มก็ใช้ค่าเริ่มต้น)
-   ═══════════════════════════════════════════════════════════════ */
 function updateTicker(){
-  var tickers = {};
-
-  // BTC
   fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true', {cache:'no-store'})
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(c){
       if (c && c.bitcoin && c.bitcoin.usd){
-        tickers.BTC = { price: c.bitcoin.usd, change: c.bitcoin.usd_24h_change || 0 };
-        applyTicker(tickers.BTC, 'BTC');
+        applyTicker({ price: c.bitcoin.usd, change: c.bitcoin.usd_24h_change || 0 }, 'BTC');
       }
-    })
-    .catch(function(){});
+    }).catch(function(){});
 
-  // XAU
   fetch('https://api.gold-api.com/price/XAU', {cache:'no-store'})
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(g){
-      if (g && g.price){
-        tickers.XAU = { price: g.price, change: 0 };
-        applyTicker(tickers.XAU, 'XAU');
-      }
-    })
-    .catch(function(){});
+      if (g && g.price){ applyTicker({ price: g.price, change: 0 }, 'XAU'); }
+    }).catch(function(){});
 
-  // NAS100 (Yahoo Finance)
   fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENDX?interval=1d&range=1d', {cache:'no-store'})
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(n){
@@ -1399,41 +1290,15 @@ function updateTicker(){
         var price = result.meta.regularMarketPrice;
         var prev = result.meta.previousClose || result.meta.chartPreviousClose;
         var change = prev ? ((price - prev) / prev) * 100 : 0;
-        tickers.NAS = { price: price, change: change };
-        applyTicker(tickers.NAS, 'NAS');
+        applyTicker({ price: price, change: change }, 'NAS');
       }
-    })
-    .catch(function(){});
+    }).catch(function(){});
 }
 
-function applyTicker(t, key){
-  if (!t || !t.price) return;
-  var els = document.querySelectorAll('[data-ticker="' + key + '"]');
-  var isUp = t.change >= 0;
-  var arrow = isUp ? '▲' : '▼';
-  var cls = isUp ? 'up' : 'dn';
-
-  var priceStr;
-  if (key === 'BTC') priceStr = Math.round(t.price).toLocaleString('en-US');
-  else if (key === 'XAU') priceStr = t.price.toFixed(2);
-  else if (key === 'NAS') priceStr = Math.round(t.price).toLocaleString('en-US');
-  else priceStr = String(t.price);
-
-  for (var i = 0; i < els.length; i++){
-    els[i].className = cls;
-    els[i].textContent = priceStr + ' ' + arrow + ' ' + Math.abs(t.change).toFixed(2) + '%';
-  }
-}
-
-setTimeout(updateTicker, 500);
-setInterval(updateTicker, 60000);
-
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    ★ TABS
-   ═══════════════════════════════════════════════════════════════ */
-var currentTab = 'stats';
+   ═══════════════════════════════════════════════════════════ */
 function switchTab(name){
-  currentTab = name;
   var tabs = document.querySelectorAll('.tab');
   for (var i = 0; i < tabs.length; i++){
     tabs[i].classList.toggle('active', tabs[i].dataset.tab === name);
@@ -1442,19 +1307,17 @@ function switchTab(name){
   for (var j = 0; j < panes.length; j++){
     panes[j].classList.toggle('active', panes[j].id === 'pane-' + name);
   }
-
-  // ★ CHART: เล่นอนิเมชันใหม่ทุกครั้งที่เปิด
   if (name === 'chart'){
     var wrap = document.getElementById('chartWrap');
     wrap.classList.remove('animate');
-    void wrap.offsetWidth;  // force reflow
+    void wrap.offsetWidth;
     wrap.classList.add('animate');
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    ★ CERT MODAL
-   ═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════ */
 function viewCert(id){
   var cert = CERTS[id];
   if (!cert) return;
@@ -1477,9 +1340,9 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    ★ EQUITY CHART
-   ═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════ */
 function drawChart(){
   var data = CONFIG.chart.data;
   var maxY = CONFIG.chart.maxY;
@@ -1488,12 +1351,13 @@ function drawChart(){
   var w = W - padL - padR;
   var h = H - padT - padB;
 
-  var pts = data.map(function(v, i){
-    return [
+  var pts = [];
+  for (var i = 0; i < data.length; i++){
+    pts.push([
       padL + (i / (data.length - 1)) * w,
-      padT + h - (v / maxY) * h
-    ];
-  });
+      padT + h - (data[i] / maxY) * h
+    ]);
+  }
 
   var d = 'M ' + pts[0][0].toFixed(2) + ',' + pts[0][1].toFixed(2);
   for (var i = 0; i < pts.length - 1; i++){
@@ -1510,7 +1374,6 @@ function drawChart(){
   lineEl.setAttribute('d', d);
   document.getElementById('equityArea').setAttribute('d', areaD);
 
-  // ★ ตั้งค่า stroke dasharray ให้ตรงกับความยาวจริง
   try {
     var len = lineEl.getTotalLength();
     lineEl.style.strokeDasharray = len;
@@ -1526,15 +1389,15 @@ function drawChart(){
   document.getElementById('equityDotOuter').setAttribute('cx', last[0]);
   document.getElementById('equityDotOuter').setAttribute('cy', last[1]);
 }
-drawChart();
 
-/* ═══════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    ★ SHOP
-   ═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════ */
 var selectedProductId = null;
 
 function renderProducts(){
   var list = document.getElementById('productList');
+  if (!list) return;
   if (!CONFIG.products || CONFIG.products.length === 0){
     list.innerHTML = '<div class="soon-text">soon…</div>';
     return;
@@ -1557,25 +1420,26 @@ function renderProducts(){
     }
 
     html +=
-      '<div class="product-card">' +
-        thumbHTML +
-        '<div class="product-info">' +
-          '<div class="product-name">' + p.name + '</div>' +
-          '<div class="product-price">' + p.price + '</div>' +
+      '<div class="product-item">' +
+        '<div class="product-inner">' +
+          thumbHTML +
+          '<div class="product-info">' +
+            '<div class="product-name">' + p.name + '</div>' +
+            '<div class="product-price">' + p.price + '</div>' +
+          '</div>' +
+          '<button class="product-buy" onclick="openBuyModal(\'' + p.id + '\')">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+              '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
+              '<path d="M3 6h18"/>' +
+              '<path d="M16 10a4 4 0 0 1-8 0"/>' +
+            '</svg>' +
+            'BUY' +
+          '</button>' +
         '</div>' +
-        '<button class="product-buy" onclick="openBuyModal(\'' + p.id + '\')">' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
-            '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
-            '<path d="M3 6h18"/>' +
-            '<path d="M16 10a4 4 0 0 1-8 0"/>' +
-          '</svg>' +
-          'BUY' +
-        '</button>' +
       '</div>';
   }
   list.innerHTML = html;
 }
-renderProducts();
 
 function openBuyModal(id){
   var p = null;
@@ -1620,15 +1484,16 @@ function confirmBuy(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ★ DISCORD STATUS
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   ★ DISCORD STATUS (Lanyard)
+   ═══════════════════════════════════════════════════════════ */
 var statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
 var lanyardWs = null;
 var lanyardHeartbeat = null;
 
 function updateDiscordStatus(status){
-  document.getElementById('statusDot').className = 'status-dot ' + (statusColors[status] || 'offline');
+  var dot = document.getElementById('statusDot');
+  if (dot) dot.className = 'status-dot ' + (statusColors[status] || 'offline');
 }
 
 function connectLanyard(){
@@ -1636,7 +1501,7 @@ function connectLanyard(){
   fetch('https://api.lanyard.rest/v1/users/' + CONFIG.discordUserId)
     .then(function(r){ return r.json(); })
     .then(function(res){ if (res.success && res.data) updateDiscordStatus(res.data.discord_status); })
-    .catch(function(err){ console.warn('Lanyard REST error:', err); });
+    .catch(function(err){ console.warn('Lanyard error:', err); });
 
   lanyardWs = new WebSocket('wss://api.lanyard.rest/socket');
   lanyardWs.addEventListener('open', function(){
@@ -1667,11 +1532,10 @@ function connectLanyard(){
     setTimeout(connectLanyard, 5000);
   });
 }
-connectLanyard();
 
-/* ═══════════════════════════════════════════════════════════════
-   🎵 YOUTUBE
-   ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   ★ YOUTUBE
+   ═══════════════════════════════════════════════════════════ */
 var ytPlayer = null;
 var ytReady = false;
 var currentIndex = -1;
@@ -1680,10 +1544,9 @@ var pendingPlay = null;
 var autoplayAttempted = false;
 var userInteracted = false;
 
-var songList = document.getElementById('songList');
-var autoplayHint = document.getElementById('autoplayHint');
-
 function renderSongList(){
+  var songList = document.getElementById('songList');
+  if (!songList) return;
   songList.innerHTML = '';
   for (var i = 0; i < CONFIG.songs.length; i++){
     (function(i){
@@ -1707,7 +1570,6 @@ function renderSongList(){
     })(i);
   }
 }
-renderSongList();
 
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('ytPlayer', {
@@ -1738,7 +1600,8 @@ function onPlayerReady(){
 function onPlayerStateChange(e){
   if (e.data === YT.PlayerState.PLAYING){
     isPlaying = true;
-    autoplayHint.classList.remove('show');
+    var hint = document.getElementById('autoplayHint');
+    if (hint) hint.classList.remove('show');
     updateUI();
   } else if (e.data === YT.PlayerState.PAUSED){
     isPlaying = false; updateUI();
@@ -1761,25 +1624,29 @@ function tryAutoplay(){
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
   setTimeout(function(){ if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
   updateUI();
-  setTimeout(function(){ if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
+  setTimeout(function(){
+    if (!isPlaying){
+      var hint = document.getElementById('autoplayHint');
+      if (hint) hint.classList.add('show');
+    }
+  }, 1800);
 }
 
 function handleFirstInteraction(){
   if (userInteracted) return;
   userInteracted = true;
-  autoplayHint.classList.remove('show');
+  var hint = document.getElementById('autoplayHint');
+  if (hint) hint.classList.remove('show');
   if (ytReady && ytPlayer && !isPlaying){
     if (currentIndex === -1) loadAndPlay(CONFIG.autoplayIndex || 0);
     else { try { ytPlayer.playVideo(); } catch(e){} }
   }
 }
-['click','touchstart','keydown','scroll'].forEach(function(evt){
-  document.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
-});
 
 function toggleSong(index){
   userInteracted = true;
-  autoplayHint.classList.remove('show');
+  var hint = document.getElementById('autoplayHint');
+  if (hint) hint.classList.remove('show');
   if (index === currentIndex && isPlaying){ pauseCurrent(); return; }
   if (index === currentIndex && !isPlaying){ resumeCurrent(); return; }
   loadAndPlay(index);
@@ -1809,6 +1676,21 @@ function updateUI(){
     items[i].classList.toggle('playing', i === currentIndex && isPlaying);
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ★ INIT — เรียกทันที (ไม่ต้องรอ load)
+   ═══════════════════════════════════════════════════════════ */
+renderSongList();
+renderProducts();
+drawChart();
+loadViewCount();
+updateTicker();
+connectLanyard();
+setInterval(updateTicker, 60000);
+
+['click','touchstart','keydown','scroll'].forEach(function(evt){
+  document.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
+});
 
 window.addEventListener('load', function(){
   var reveals = document.querySelectorAll('.reveal');
