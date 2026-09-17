@@ -94,7 +94,6 @@ body{
 
 .wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 
-/* ★ CARD — โปร่งใสขึ้น เห็น GIF ทะลุ */
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -127,6 +126,9 @@ body{
   -webkit-backdrop-filter:blur(28px) saturate(120%);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ★ TICKER — อ้างอิงราคาจริง (จะถูกอัปเดตด้วย JS)
+   ═══════════════════════════════════════════════════════════ */
 .ticker{
   position:fixed;top:0;left:0;right:0;z-index:100;height:34px;
   overflow:hidden;white-space:nowrap;pointer-events:none;
@@ -150,10 +152,22 @@ body{
   font-size:11.5px;font-weight:600;letter-spacing:.4px;
   display:inline-flex;align-items:center;gap:6px;
   text-shadow:0 1px 4px rgba(0,0,0,.9);
+  transition:opacity .4s;
 }
 .ticker-track .sym{color:var(--muted)}
 .ticker-track .up{color:var(--green)}
 .ticker-track .dn{color:var(--red)}
+.ticker-track .live-dot{
+  display:inline-block;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--green);
+  margin-right:2px;
+  animation:liveDot 1.5s ease-in-out infinite;
+}
+@keyframes liveDot{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.8)}
+}
 @keyframes scroll{to{transform:translateX(-100%)}}
 
 .hero{padding:30px 22px 24px;text-align:center}
@@ -188,6 +202,42 @@ body{
 .status-dot.dnd{background:#f23f43;box-shadow:0 0 14px rgba(242,63,67,.9)}
 .status-dot.offline{background:#80848e;box-shadow:0 0 14px rgba(128,132,142,.5);animation:none}
 @keyframes pulse{50%{box-shadow:0 0 22px rgba(0,224,122,1)}}
+
+/* ★ VIEW COUNTER (ลูกตา) */
+.view-counter{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.5px;
+  color:var(--muted);
+  margin-bottom:10px;
+  transition:.25s;
+}
+.view-counter:hover{
+  border-color:rgba(255,255,255,.3);
+  color:#fff;
+}
+.view-counter svg{
+  width:14px;height:14px;
+  color:var(--lime2);
+  opacity:.85;
+}
+.view-counter #viewCount{
+  color:#fff;
+  font-weight:700;
+  min-width:20px;
+  text-align:center;
+}
+.view-counter.loading #viewCount{opacity:.4}
 
 .verified-badge{
   display:inline-flex;align-items:center;gap:5px;
@@ -386,6 +436,7 @@ body{
 .cert-list-arrow svg{width:13px;height:13px}
 .cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
 
+/* ★ CHART */
 .chart-wrap{
   position:relative;
   width:100%;
@@ -400,6 +451,33 @@ body{
   height:auto;
   display:block;
 }
+/* ★ อนิเมชันเส้นกราฟ */
+#equityLine{
+  stroke-dasharray:2000;
+  stroke-dashoffset:2000;
+}
+#equityArea{
+  opacity:0;
+  transition:opacity .8s ease .6s;
+}
+#equityDot,#equityDotOuter{
+  opacity:0;
+  transition:opacity .5s ease 1.4s;
+}
+.chart-wrap.animate #equityLine{
+  animation:drawLine 2s cubic-bezier(.4,.0,.2,1) forwards;
+}
+.chart-wrap.animate #equityArea{
+  opacity:1;
+}
+.chart-wrap.animate #equityDot,
+.chart-wrap.animate #equityDotOuter{
+  opacity:1;
+}
+@keyframes drawLine{
+  to{stroke-dashoffset:0}
+}
+
 .chart-mini{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -609,12 +687,23 @@ body{
   letter-spacing:1px;padding:6px 0;text-align:center;
 }
 
+/* ★ FOOTER — ลิขสิทธิ์ทางการ */
 footer{
-  text-align:center;padding:18px 0 4px;
+  text-align:center;
+  padding:22px 8px 4px;
   font-family:'JetBrains Mono',monospace;
-  font-size:11px;color:#666;letter-spacing:.4px;
+  font-size:10.5px;
+  color:#666;
+  letter-spacing:.5px;
+  line-height:1.7;
 }
-footer .dot{color:#fff;margin:0 6px}
+footer .footer-line{
+  display:block;
+}
+footer .footer-brand{
+  color:#aaa;
+  font-weight:600;
+}
 
 .toast{
   position:fixed;left:50%;bottom:30px;transform:translate(-50%,120px);
@@ -834,6 +923,7 @@ footer .dot{color:#fff;margin:0 6px}
   .buy-actions{grid-template-columns:1fr}
   .tab{font-size:9.5px;padding:10px 4px}
   .tab-pane{padding:16px}
+  footer{font-size:9.5px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -845,14 +935,12 @@ footer .dot{color:#fff;margin:0 6px}
 <div class="bg-gif" aria-hidden="true"></div>
 <div class="bg-gif-overlay" aria-hidden="true"></div>
 
+<!-- ★ TICKER — จะถูกอัปเดตด้วย JS -->
 <div class="ticker">
-  <div class="ticker-track">
-    <span><b class="sym">XAU/USD</b> <em class="up">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up">18,240 ▲ 0.45%</em></span>
-    <span><b class="sym">XAU/USD</b> <em class="up">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up">18,240 ▲ 0.45%</em></span>
+  <div class="ticker-track" id="tickerTrack">
+    <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
+    <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
+    <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
   </div>
 </div>
 
@@ -876,6 +964,16 @@ footer .dot{color:#fff;margin:0 6px}
 
     <h1>mun</h1>
     <div class="handle">@munzq · FX &amp; Trading Prop Firm</div>
+
+    <!-- ★ VIEW COUNTER -->
+    <div class="view-counter loading" id="viewCounter" title="Total Profile Views">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      <span id="viewCount">—</span>
+      <span>views</span>
+    </div>
 
     <p class="bio">beta testing son…</p>
 
@@ -968,9 +1066,10 @@ footer .dot{color:#fff;margin:0 6px}
       </div>
     </div>
 
+    <!-- ★ CHART -->
     <div class="tab-pane" id="pane-chart">
-      <div class="chart-wrap">
-        <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet" id="equityChart">
+      <div class="chart-wrap" id="chartWrap">
+        <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet">
           <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
             <line x1="36" y1="16" x2="308" y2="16"/>
             <line x1="36" y1="46" x2="308" y2="46"/>
@@ -1000,8 +1099,8 @@ footer .dot{color:#fff;margin:0 6px}
           <path id="equityArea" fill="url(#areaGrad)"/>
           <path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(0,224,122,.6))"/>
 
-          <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
           <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
+          <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
 
           <g font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#808080" text-anchor="middle">
             <text x="36" y="152">JAN</text>
@@ -1058,8 +1157,10 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
   </section>
 
+  <!-- ★ FOOTER — ลิขสิทธิ์ทางการ -->
   <footer>
-    © <span id="year"></span> mun <span class="dot">//</span> Discipline &gt; Prediction
+    <span class="footer-line">© 2026 <span class="footer-brand">munzq</span>. All Rights Reserved.</span>
+    <span class="footer-line">Designed &amp; Developed by <span class="footer-brand">munzq</span>.</span>
   </footer>
 </main>
 
@@ -1130,11 +1231,18 @@ footer .dot{color:#fff;margin:0 6px}
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
+/* ═══════════════════════════════════════════════════════════════
+   ⚙️ CONFIG
+   ═══════════════════════════════════════════════════════════════ */
 const CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
   sellingEnabled: false,
   autoplayIndex: 0,
+
+  // ★ View counter
+  counterNamespace: "munzq-bio",
+  counterKey: "views",
 
   songs: [
     {
@@ -1160,7 +1268,14 @@ const CONFIG = {
   chart: {
     data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180],
     maxY: 200
-  }
+  },
+
+  // ★ คู่เงินที่ ticker จะอัปเดต
+  tickers: [
+    { key:"XAU", sym:"XAU/USD", apiSym:"XAU" },
+    { key:"BTC", sym:"BTC/USD", apiSym:"BTC" },
+    { key:"NAS", sym:"NAS100",  apiSym:"NAS100" }
+  ]
 };
 
 const CERTS = {
@@ -1168,6 +1283,7 @@ const CERTS = {
   fund: { firm:'The Funded Trader',   image:'funded.jpg' },
   e8:   { firm:'E8 Markets',          image:'e8.jpg' }
 };
+/* ═══════════════════════════════════════════════════════════════ */
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -1196,6 +1312,130 @@ function copyDiscord(){
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ VIEW COUNTER — Abacus API
+   ─────────────────────────────────────────────────────────────
+   ใช้ https://abacus.jasoncameron.dev/ (ฟรี ไม่ต้อง API key)
+   ═══════════════════════════════════════════════════════════════ */
+async function loadViewCount(){
+  const el = document.getElementById('viewCounter');
+  const count = document.getElementById('viewCount');
+
+  // กันตัวเองนับซ้ำใน session เดียวกัน
+  const sessionKey = 'munzq_bio_viewed';
+  const alreadyCounted = sessionStorage.getItem(sessionKey);
+
+  try {
+    let url;
+    if (alreadyCounted){
+      // ถ้าเคยนับใน session นี้แล้ว → แค่ดึงค่ามาแสดง
+      url = `https://abacus.jasoncameron.dev/get/${CONFIG.counterNamespace}/${CONFIG.counterKey}`;
+    } else {
+      // ครั้งแรกของ session → increment + ค่าใหม่
+      url = `https://abacus.jasoncameron.dev/hit/${CONFIG.counterNamespace}/${CONFIG.counterKey}`;
+      sessionStorage.setItem(sessionKey, '1');
+    }
+
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('counter fetch failed');
+    const data = await res.json();
+    if (data && typeof data.value === 'number'){
+      count.textContent = data.value.toLocaleString('en-US');
+      el.classList.remove('loading');
+    } else {
+      throw new Error('bad payload');
+    }
+  } catch (err){
+    // ★ fallback: แสดง "—" ถ้าโหลดไม่ได้
+    console.warn('View counter error:', err);
+    count.textContent = '—';
+    el.classList.remove('loading');
+  }
+}
+loadViewCount();
+
+/* ═══════════════════════════════════════════════════════════════
+   ★ TICKER — ราคาจริง (จะพยายามดึงจาก API หลายเจ้า)
+   ─────────────────────────────────────────────────────────────
+   Fallback: ถ้า API ล่ม → ใช้ข้อมูลตัวอย่าง
+   ═══════════════════════════════════════════════════════════════ */
+async function updateTicker(){
+  try {
+    // ใช้ exchangerate.host (ฟรี ไม่ต้อง API key)
+    // ดึง BTC, XAU, และ NAS100 (ใช้ดัชนีไม่ได้ → ใช้ราคาน้ำมัน/หุ้นแทน)
+    const [cryptoRes, forexRes] = await Promise.all([
+      fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true').catch(()=>null),
+      fetch('https://open.er-api.com/v6/latest/USD').catch(()=>null)
+    ]);
+
+    const tickers = {};
+
+    // BTC
+    if (cryptoRes && cryptoRes.ok){
+      const c = await cryptoRes.json();
+      if (c.bitcoin && c.bitcoin.usd){
+        tickers.BTC = {
+          price: c.bitcoin.usd,
+          change: c.bitcoin.usd_24h_change || 0
+        };
+      }
+    }
+
+    // XAU (ทอง) — ใช้ API ฟรีจาก gold-api.com (ไม่ต้อง key)
+    try {
+      const goldRes = await fetch('https://api.gold-api.com/price/XAU').catch(()=>null);
+      if (goldRes && goldRes.ok){
+        const g = await goldRes.json();
+        if (g && g.price){
+          tickers.XAU = { price: g.price, change: 0 };
+        }
+      }
+    } catch(e){}
+
+    // NAS100 — ใช้ Yahoo Finance (CORS เปิดในเบราว์เซอร์)
+    try {
+      const nasRes = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENDX?interval=1d&range=1d').catch(()=>null);
+      if (nasRes && nasRes.ok){
+        const n = await nasRes.json();
+        const result = n.chart && n.chart.result && n.chart.result[0];
+        if (result){
+          const price = result.meta.regularMarketPrice;
+          const prev = result.meta.previousClose || result.meta.chartPreviousClose;
+          const change = prev ? ((price - prev) / prev) * 100 : 0;
+          tickers.NAS = { price, change };
+        }
+      }
+    } catch(e){}
+
+    // ★ อัปเดตทุก span ที่มี data-ticker
+    document.querySelectorAll('[data-ticker]').forEach(el => {
+      const key = el.dataset.ticker;
+      const t = tickers[key];
+      if (!t || !t.price) return;
+
+      const isUp = t.change >= 0;
+      const arrow = isUp ? '▲' : '▼';
+      const cls = isUp ? 'up' : 'dn';
+
+      let priceStr;
+      if (key === 'BTC') priceStr = Math.round(t.price).toLocaleString('en-US');
+      else if (key === 'XAU') priceStr = t.price.toFixed(2);
+      else if (key === 'NAS') priceStr = Math.round(t.price).toLocaleString('en-US');
+
+      el.className = cls;
+      el.textContent = `${priceStr} ${arrow} ${Math.abs(t.change).toFixed(2)}%`;
+    });
+  } catch (err){
+    console.warn('Ticker update failed:', err);
+  }
+}
+updateTicker();
+// อัปเดตทุก 60 วินาที
+setInterval(updateTicker, 60000);
+
+/* ═══════════════════════════════════════════════════════════════
+   ★ TABS
+   ═══════════════════════════════════════════════════════════════ */
 let currentTab = 'stats';
 function switchTab(name){
   currentTab = name;
@@ -1205,6 +1445,7 @@ function switchTab(name){
   document.querySelectorAll('.tab-pane').forEach(p => {
     p.classList.toggle('active', p.id === 'pane-' + name);
   });
+
   if (name === 'stats'){
     document.querySelectorAll('#pane-stats .num[data-count]').forEach(el => {
       if (!el.dataset.animated){
@@ -1213,8 +1454,20 @@ function switchTab(name){
       }
     });
   }
+
+  // ★ CHART: เล่นอนิเมชันเมื่อเปิดแท็บ
+  if (name === 'chart'){
+    const wrap = document.getElementById('chartWrap');
+    wrap.classList.remove('animate');
+    // Force reflow เพื่อให้ animation เริ่มใหม่
+    void wrap.offsetWidth;
+    wrap.classList.add('animate');
+  }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ CERT MODAL
+   ═══════════════════════════════════════════════════════════════ */
 function viewCert(id){
   const cert = CERTS[id];
   if (!cert) return;
@@ -1237,6 +1490,9 @@ document.addEventListener('keydown', e => {
   }
 });
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ EQUITY CHART — วาดเส้นกราฟ
+   ═══════════════════════════════════════════════════════════════ */
 function drawChart(){
   const data = CONFIG.chart.data;
   const maxY = CONFIG.chart.maxY;
@@ -1261,8 +1517,20 @@ function drawChart(){
   const baseline = padT + h;
   const areaD = d + ` L ${pts[pts.length-1][0].toFixed(2)},${baseline} L ${pts[0][0].toFixed(2)},${baseline} Z`;
 
-  document.getElementById('equityLine').setAttribute('d', d);
+  const lineEl = document.getElementById('equityLine');
+  lineEl.setAttribute('d', d);
   document.getElementById('equityArea').setAttribute('d', areaD);
+
+  // ★ ตั้งค่า stroke-dasharray ตามความยาวจริงของเส้น เพื่ออนิเมชัน
+  try {
+    const len = lineEl.getTotalLength();
+    lineEl.style.strokeDasharray = len;
+    lineEl.style.strokeDashoffset = len;
+  } catch(e){
+    // fallback ถ้า getTotalLength ไม่ทำงาน
+    lineEl.style.strokeDasharray = 2000;
+    lineEl.style.strokeDashoffset = 2000;
+  }
 
   const last = pts[pts.length - 1];
   document.getElementById('equityDot').setAttribute('cx', last[0]);
@@ -1272,6 +1540,9 @@ function drawChart(){
 }
 drawChart();
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ SHOP
+   ═══════════════════════════════════════════════════════════════ */
 let selectedProductId = null;
 
 function renderProducts(){
@@ -1350,6 +1621,9 @@ function confirmBuy(){
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ DISCORD STATUS
+   ═══════════════════════════════════════════════════════════════ */
 const statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
 let lanyardWs = null;
 let lanyardHeartbeat = null;
@@ -1396,6 +1670,9 @@ function connectLanyard(){
 }
 connectLanyard();
 
+/* ═══════════════════════════════════════════════════════════════
+   🎵 YOUTUBE
+   ═══════════════════════════════════════════════════════════════ */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
@@ -1537,6 +1814,9 @@ function updateUI(){
   });
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ COUNTER ANIMATION
+   ═══════════════════════════════════════════════════════════════ */
 function animateCount(el){
   const raw    = parseFloat(el.dataset.count);
   const prefix = el.dataset.prefix || '';
