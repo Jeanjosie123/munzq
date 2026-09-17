@@ -46,16 +46,14 @@ body{
   padding:44px 16px 60px;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ BG GIF — ชัดขึ้น
-   ═══════════════════════════════════════════════════════════ */
+/* ★ BG GIF — เบลอฟุ้งแบบ background แต่ยังเห็นชัด */
 .bg-gif{
   position:fixed;inset:-15px;z-index:-4;
   background-image:url('https://media.tenor.com/zVwBYAc3fzUAAAAM/bmw-car.gif');
   background-size:cover;background-position:center;
-  filter:blur(3px) brightness(1.05) saturate(115%);
-  -webkit-filter:blur(3px) brightness(1.05) saturate(115%);
-  opacity:.85;
+  filter:blur(10px) brightness(.9) saturate(110%);
+  -webkit-filter:blur(10px) brightness(.9) saturate(110%);
+  opacity:.75;
   pointer-events:none;
   animation:bgPan 24s ease-in-out infinite alternate;
 }
@@ -69,10 +67,10 @@ body{
   position:fixed;inset:0;z-index:-3;pointer-events:none;
   background:
     radial-gradient(ellipse 100% 80% at 50% 30%,
-      rgba(0,0,0,.05) 0%,
-      rgba(0,0,0,.20) 55%,
-      rgba(0,0,0,.45) 100%),
-    linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.15) 100%);
+      rgba(0,0,0,.08) 0%,
+      rgba(0,0,0,.30) 55%,
+      rgba(0,0,0,.55) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.20) 100%);
 }
 
 .aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
@@ -270,9 +268,7 @@ body{
 .sec-title::before{content:"//";color:#fff;font-weight:700}
 .sec-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
-/* ═══════════════════════════════════════════════════════════
-   ★ PERFORMANCE + PROP FIRM — รวม section + tabs (ENGLISH)
-   ═══════════════════════════════════════════════════════════ */
+/* PERFORMANCE + PROP FIRM */
 .perf-section{padding:0;overflow:hidden}
 
 .tabs{
@@ -903,12 +899,10 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
   </header>
 
-  <!-- PERFORMANCE + PROP FIRM -->
   <div class="sec-title reveal" style="animation-delay:.05s">Performance &amp; Prop Firm</div>
 
   <section class="card perf-section reveal" style="animation-delay:.1s">
 
-    <!-- ★ Tabs — ภาษาอังกฤษ -->
     <div class="tabs">
       <button class="tab active" data-tab="stats" onclick="switchTab('stats')">STATS</button>
       <button class="tab" data-tab="certs" onclick="switchTab('certs')">CERTS</button>
@@ -1203,7 +1197,6 @@ function copyDiscord(){
   }
 }
 
-/* ─── TABS ─── */
 let currentTab = 'stats';
 function switchTab(name){
   currentTab = name;
@@ -1223,7 +1216,6 @@ function switchTab(name){
   }
 }
 
-/* ─── CERT MODAL ─── */
 function viewCert(id){
   const cert = CERTS[id];
   if (!cert) return;
@@ -1246,7 +1238,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ─── EQUITY CHART ─── */
 function drawChart(){
   const data = CONFIG.chart.data;
   const maxY = CONFIG.chart.maxY;
@@ -1282,7 +1273,6 @@ function drawChart(){
 }
 drawChart();
 
-/* ─── SHOP ─── */
 let selectedProductId = null;
 
 function renderProducts(){
@@ -1361,7 +1351,6 @@ function confirmBuy(){
   }
 }
 
-/* ─── DISCORD STATUS ─── */
 const statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
 let lanyardWs = null;
 let lanyardHeartbeat = null;
@@ -1408,7 +1397,6 @@ function connectLanyard(){
 }
 connectLanyard();
 
-/* ─── YOUTUBE ─── */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
@@ -1550,7 +1538,6 @@ function updateUI(){
   });
 }
 
-/* ─── COUNT ─── */
 function animateCount(el){
   const raw    = parseFloat(el.dataset.count);
   const prefix = el.dataset.prefix || '';
