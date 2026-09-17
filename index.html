@@ -47,31 +47,24 @@ body{
 }
 
 .bg-gif{
-  position:fixed;
-  inset:-15px;
-  z-index:-4;
+  position:fixed;inset:-15px;z-index:-4;
   background-image:url('https://media.tenor.com/zVwBYAc3fzUAAAAM/bmw-car.gif');
-  background-size:cover;
-  background-position:center;
+  background-size:cover;background-position:center;
   filter:blur(5px) brightness(.85) saturate(105%);
   -webkit-filter:blur(5px) brightness(.85) saturate(105%);
-  opacity:.5;
-  pointer-events:none;
+  opacity:.5;pointer-events:none;
   animation:bgPan 24s ease-in-out infinite alternate;
 }
 @keyframes bgPan{
-  0%   {transform:scale(1.06) translate(0,0)}
-  50%  {transform:scale(1.12) translate(-14px,-8px)}
-  100% {transform:scale(1.06) translate(10px,6px)}
+  0%{transform:scale(1.06) translate(0,0)}
+  50%{transform:scale(1.12) translate(-14px,-8px)}
+  100%{transform:scale(1.06) translate(10px,6px)}
 }
 
 .bg-gif-overlay{
   position:fixed;inset:0;z-index:-3;pointer-events:none;
   background:
-    radial-gradient(ellipse 100% 80% at 50% 30%,
-      rgba(0,0,0,.10) 0%,
-      rgba(0,0,0,.35) 55%,
-      rgba(0,0,0,.65) 100%),
+    radial-gradient(ellipse 100% 80% at 50% 30%,rgba(0,0,0,.10) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.65) 100%),
     linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.25) 100%);
 }
 
@@ -405,55 +398,54 @@ body{
 .song-item.playing .song-eq{display:flex}
 
 /* ═══════════════════════════════════════════════════════════
-   ★ SHOP — 2 columns, ขนาดเท่า stat
+   ★ SHOP — 1 สินค้า · การ์ดขนาดเท่า stat · ปุ่ม Buy อยู่บนการ์ด
    ═══════════════════════════════════════════════════════════ */
-.shop{padding:14px}
+.shop{padding:20px}
 .product-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
 .product-card{
-  padding:12px;
+  padding:16px 14px;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:16px;
-  transition:.25s cubic-bezier(.2,.8,.3,1);
-  position:relative;overflow:hidden;
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
   box-shadow:0 6px 24px -8px rgba(0,0,0,.6);
-  cursor:pointer;
-  display:flex;flex-direction:column;gap:8px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 .product-card:hover{
   transform:translateY(-3px);
   border-color:rgba(255,255,255,.3);
   background:rgba(255,255,255,.03);
-}
-.product-card.selected{
-  border-color:rgba(255,255,255,.7);
-  background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
-  box-shadow:0 14px 34px -14px rgba(255,255,255,.5);
-}
-.product-card.selected::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--green),transparent);
-  border-radius:16px 0 0 16px;
+  box-shadow:0 14px 34px -14px rgba(255,255,255,.35);
 }
 .product-img{
-  width:100%;aspect-ratio:1/1;
+  width:100%;
+  aspect-ratio:1/1;
   border-radius:12px;
-  background-size:cover;background-position:center;
+  background-size:cover;
+  background-position:center;
   background-color:#0a0a0a;
+  border:1px solid rgba(255,255,255,.08);
   position:relative;
-  border:1px solid rgba(255,255,255,.05);
+  overflow:hidden;
 }
 .product-img::after{
-  content:"";position:absolute;inset:0;border-radius:12px;
-  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.4) 100%);
+  content:"";
+  position:absolute;inset:0;border-radius:12px;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.45) 100%);
 }
-.product-info{display:flex;flex-direction:column;gap:4px}
+.product-info{
+  display:flex;flex-direction:column;gap:3px;
+}
 .product-name{
-  font-size:13px;font-weight:600;color:#fff;
+  font-size:12.5px;font-weight:600;color:#fff;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .product-price{
@@ -461,44 +453,30 @@ body{
   font-size:15px;font-weight:800;color:#fff;
   letter-spacing:-.3px;
 }
-
-/* Order button (เดียว) */
-.shop-footer{
-  margin-top:14px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.order-btn{
+.product-buy{
   width:100%;
-  padding:14px 18px;
-  border-radius:14px;
+  padding:10px 12px;
+  border-radius:10px;
   border:1px solid rgba(255,255,255,.15);
   background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
   color:#fff;
   font-family:'JetBrains Mono',monospace;
-  font-size:12.5px;font-weight:700;letter-spacing:.6px;
+  font-size:10.5px;font-weight:700;letter-spacing:.6px;
   cursor:pointer;
-  transition:.28s cubic-bezier(.34,1.56,.64,1);
-  display:flex;align-items:center;justify-content:center;gap:9px;
+  transition:.25s cubic-bezier(.34,1.56,.64,1);
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-top:2px;
 }
-.order-btn:hover{
-  transform:translateY(-2px);
+.product-buy:hover{
   background:rgba(255,255,255,.15);
   border-color:rgba(255,255,255,.5);
-  box-shadow:0 12px 30px -10px rgba(255,255,255,.4);
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px -8px rgba(255,255,255,.4);
 }
-.order-btn:active{transform:translateY(0) scale(.98)}
-.order-btn svg{width:15px;height:15px}
-.order-hint{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  color:var(--muted);
-  text-align:center;
-  letter-spacing:.3px;
-}
+.product-buy:active{transform:scale(.97)}
+.product-buy svg{width:12px;height:12px}
 
-/* YouTube player (ซ่อน) */
+/* YouTube player */
 .yt-hidden{
   position:fixed;bottom:0;left:0;
   width:1px;height:1px;
@@ -681,7 +659,7 @@ footer .dot{color:#fff;margin:0 6px}
   .socials{gap:10px}
   .cert-main-icon{width:48px;height:48px}
   .cert-main-icon svg{width:22px;height:22px}
-  .product-name{font-size:12px}
+  .product-name{font-size:11.5px}
   .product-price{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -806,18 +784,6 @@ footer .dot{color:#fff;margin:0 6px}
 
   <section class="card shop reveal" style="animation-delay:.35s">
     <div class="product-grid" id="productGrid"></div>
-
-    <div class="shop-footer">
-      <button class="order-btn" onclick="orderSelected()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-          <path d="M3 6h18"/>
-          <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        <span id="orderBtnLabel">ORDER VIA DISCORD</span>
-      </button>
-      <div class="order-hint">แตะการ์ดเพื่อเลือกสินค้า · กด Order เพื่อเปิด DM</div>
-    </div>
   </section>
 
   <section class="card rules reveal" style="animation-delay:.4s">
@@ -835,7 +801,6 @@ footer .dot{color:#fff;margin:0 6px}
   </footer>
 </main>
 
-<!-- YouTube player ซ่อน (เล่นเต็มเพลง) -->
 <div class="yt-hidden" aria-hidden="true">
   <div id="ytPlayer"></div>
 </div>
@@ -873,7 +838,7 @@ footer .dot{color:#fff;margin:0 6px}
    ═══════════════════════════════════════════════════════════════ */
 const CONFIG = {
   discordUsername: "munzq",
-  // ★ ใส่ Discord User ID (18 หลัก) → เพื่อให้กด Order แล้วเปิด DM ได้เลย
+  // ★ ใส่ Discord User ID (18 หลัก) → กด Buy แล้วเปิด DM ได้เลย
   discordUserId: "YOUR_DISCORD_USER_ID",
 
   autoplayIndex: 0,
@@ -884,42 +849,25 @@ const CONFIG = {
     {
       title:   "LV Sandals",
       artist:  "EsDeeKid, fakemink, Rico Ace",
-      videoId: "REPLACE_VIDEO_ID_1",     // ← ใส่ YouTube ID เพลง 1
+      videoId: "REPLACE_VIDEO_ID_1",
       cover:   "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02cff4bd68d5d0dd9a0a748045"
     },
     {
       title:   "Flawlëss (feat. Lil Uzi Vert)",
       artist:  "Yeat, Lil Uzi Vert",
-      videoId: "REPLACE_VIDEO_ID_2",     // ← ใส่ YouTube ID เพลง 2
+      videoId: "REPLACE_VIDEO_ID_2",
       cover:   "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c665c7f2be1f6d3214a93a76"
     }
   ],
 
-  // ★★ สินค้าใน Shop ★★
+  // ★★ สินค้า (มีแค่ 1 ชิ้น) ★★
+  // แก้ชื่อ / ราคา / รูปรูป ตรงนี้ได้เลย
   products: [
     {
       id:    "p1",
-      name:  "Signal Group VIP",
-      price: "฿1,500",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
-    },
-    {
-      id:    "p2",
-      name:  "Private Mentorship",
-      price: "฿5,000",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-    },
-    {
-      id:    "p3",
-      name:  "Indicator EA",
-      price: "฿990",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
-    },
-    {
-      id:    "p4",
-      name:  "1-on-1 Session",
-      price: "฿2,500",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+      name:  "ชื่อสินค้าของคุณ",         // ← แก้ตรงนี้
+      price: "฿999",                     // ← แก้ราคา
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"  // ← ใส่รูปรูป
     }
   ]
 };
@@ -967,12 +915,9 @@ function openCertModal(){
   document.body.style.overflow = 'hidden';
 }
 function showCertList(){
-  const title = document.getElementById('modalTitle');
-  const body  = document.getElementById('modalBody');
-  const back  = document.getElementById('modalBack');
-  title.textContent = 'Verified Certificates';
-  back.style.visibility = 'hidden';
-  body.innerHTML = `
+  document.getElementById('modalTitle').textContent = 'Verified Certificates';
+  document.getElementById('modalBack').style.visibility = 'hidden';
+  document.getElementById('modalBody').innerHTML = `
     <div class="cert-list">
       ${CERTS.map(c => `
         <div class="cert-list-item" onclick="viewCert('${c.id}')">
@@ -1015,53 +960,46 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   ★ SHOP — 2 columns + ปุ่มเดียว
+   ★ SHOP — 1 สินค้า · การ์ดขนาดเท่า stat · ปุ่ม Buy บนการ์ด
    ═══════════════════════════════════════════════════════════════ */
-let selectedProduct = null;
-
 function renderProducts(){
   const grid = document.getElementById('productGrid');
+  if (!CONFIG.products || CONFIG.products.length === 0){
+    grid.innerHTML = '<div class="soon-text" style="grid-column:1/-1">soon…</div>';
+    return;
+  }
   grid.innerHTML = CONFIG.products.map(p => `
-    <div class="product-card" data-id="${p.id}" onclick="selectProduct('${p.id}')">
+    <div class="product-card">
       <div class="product-img" style="background-image:url('${p.image}')"></div>
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-price">${p.price}</div>
       </div>
+      <button class="product-buy" onclick="buyProduct('${p.id}')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        Buy Now
+      </button>
     </div>
   `).join('');
 }
 renderProducts();
 
-function selectProduct(id){
-  const cards = document.querySelectorAll('.product-card');
-  const isSame = selectedProduct === id;
-  cards.forEach(c => c.classList.remove('selected'));
-  if (isSame){
-    selectedProduct = null;
-    document.getElementById('orderBtnLabel').textContent = 'ORDER VIA DISCORD';
-  } else {
-    selectedProduct = id;
-    document.querySelector(`.product-card[data-id="${id}"]`).classList.add('selected');
-    const p = CONFIG.products.find(x => x.id === id);
-    document.getElementById('orderBtnLabel').textContent = 'ORDER: ' + p.name.toUpperCase();
-  }
-}
+function buyProduct(id){
+  const p = CONFIG.products.find(x => x.id === id);
+  if (!p) return;
 
-function orderSelected(){
-  const discordId = CONFIG.discordUserId;
+  const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
 
-  let msg = 'สนใจสินค้าในร้าน munzq — ขอรายละเอียด';
-  if (selectedProduct){
-    const p = CONFIG.products.find(x => x.id === selectedProduct);
-    msg = `สนใจซื้อ: ${p.name} (${p.price})`;
-  }
-
-  // คัดลอกข้อความไว้ใน clipboard
+  // คัดลอกข้อความใน clipboard
   if (navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(msg).catch(()=>{});
   }
 
+  const discordId = CONFIG.discordUserId;
   if (discordId && discordId !== "YOUR_DISCORD_USER_ID"){
     showToast('▶ เปิด DM Discord · คัดลอกข้อความแล้ว');
     setTimeout(() => {
@@ -1123,7 +1061,7 @@ function connectLanyard(){
 connectLanyard();
 
 /* ═══════════════════════════════════════════════════════════════
-   🎵 YOUTUBE IFRAME API — เล่นเต็มเพลง
+   🎵 YOUTUBE IFRAME API
    ═══════════════════════════════════════════════════════════════ */
 let ytPlayer = null;
 let ytReady = false;
@@ -1190,7 +1128,6 @@ function onPlayerReady(){
     pendingPlay = null;
     loadAndPlay(idx);
   }
-  // ลอง autoplay หลัง ready
   setTimeout(() => tryAutoplay(), 400);
 }
 
@@ -1205,7 +1142,6 @@ function onPlayerStateChange(e){
   } else if (e.data === YT.PlayerState.ENDED){
     isPlaying = false;
     updateUI();
-    // เล่นเพลงถัดไปอัตโนมัติ
     if (currentIndex >= 0 && currentIndex < CONFIG.songs.length - 1){
       setTimeout(() => loadAndPlay(currentIndex + 1), 800);
     }
@@ -1214,7 +1150,6 @@ function onPlayerStateChange(e){
 
 function onPlayerError(e){
   console.warn('YouTube error:', e.data);
-  showToast('⚠ เล่นเพลงนี้ไม่ได้ (code ' + e.data + ')');
 }
 
 function tryAutoplay(){
@@ -1222,9 +1157,7 @@ function tryAutoplay(){
   autoplayAttempted = true;
   const idx = CONFIG.autoplayIndex || 0;
   const song = CONFIG.songs[idx];
-  if (!ytReady || !ytPlayer || !song.videoId || song.videoId.startsWith('REPLACE_')){
-    return;
-  }
+  if (!ytReady || !ytPlayer || !song.videoId || song.videoId.startsWith('REPLACE_')) return;
   currentIndex = idx;
   ytPlayer.loadVideoById(song.videoId);
   setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
@@ -1237,11 +1170,8 @@ function handleFirstInteraction(){
   userInteracted = true;
   autoplayHint.classList.remove('show');
   if (ytReady && ytPlayer && !isPlaying){
-    if (currentIndex === -1){
-      loadAndPlay(CONFIG.autoplayIndex || 0);
-    } else {
-      try { ytPlayer.playVideo(); } catch(e){}
-    }
+    if (currentIndex === -1) loadAndPlay(CONFIG.autoplayIndex || 0);
+    else { try { ytPlayer.playVideo(); } catch(e){} }
   }
 }
 
@@ -1260,14 +1190,10 @@ function toggleSong(index){
 function loadAndPlay(index){
   const song = CONFIG.songs[index];
   if (!song || !song.videoId || song.videoId.startsWith('REPLACE_')){
-    showToast('⚠ ยังไม่ได้ใส่ YouTube ID ของเพลงนี้');
+    showToast('⚠ ยังไม่ได้ใส่ YouTube ID');
     return;
   }
-  if (!ytReady || !ytPlayer){
-    pendingPlay = index;
-    currentIndex = index;
-    return;
-  }
+  if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
   ytPlayer.loadVideoById(song.videoId);
   setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 300);
