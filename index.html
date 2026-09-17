@@ -94,6 +94,7 @@ body{
 
 .wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 
+/* ★ CARD — โปร่งใสขึ้น เห็น GIF ทะลุ */
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -146,8 +147,7 @@ body{
 }
 .ticker-track span{
   font-family:'JetBrains Mono',monospace;
-,  font-size:11.5px;font-weight255:600;letter-sp,.acing14);
- :.4px;
+  font-size:11.5px;font-weight:600;letter-spacing:.4px;
   display:inline-flex;align-items:center;gap:6px;
   text-shadow:0 1px 4px rgba(0,0,0,.9);
 }
@@ -201,20 +201,6 @@ body{
 }
 .verified-badge svg{width:12px;height:12px}
 
-.view-counter{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 12px;border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;font-weight:600;letter-spacing:.5px;
-  color:var(--muted);margin-bottom:10px;transition:.25s;
-}
-.view-counter:hover{border-color:rgba(255,255,255,.3);color:#fff}
-.view-counter svg{width:14px;height:14px;color:var(--lime2);opacity:.85}
-.view-counter #viewCount{color:#fff;font-weight:700;min-width:20px;text-align:center}
-
 .hero h1{
   font-size:26px;font-weight:700;letter-spacing:.2px;
   background:linear-gradient(100deg,#fff 15%,#d4d4d4 55%,#808080 90%);
@@ -236,7 +222,8 @@ body{
   width:48px;height:48px;border-radius:50%;flex-shrink:0;
   display:grid;place-items:center;color:#fff;text-decoration:none;cursor:pointer;
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255 backdrop-filter:blur(10px) saturate(120%);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(10px) saturate(120%);
   -webkit-backdrop-filter:blur(10px) saturate(120%);
   transition:.28s cubic-bezier(.34,1.56,.64,1);
   position:relative;overflow:visible;
@@ -285,17 +272,30 @@ body{
 .perf-section{padding:0;overflow:hidden}
 
 .tabs{
-  display:flex;gap:4px;padding:14px 14px 0;
-  background:transparent;border-bottom:1px solid var(--border);
+  display:flex;
+  gap:4px;
+  padding:14px 14px 0;
+  background:transparent;
+  border-bottom:1px solid var(--border);
 }
 .tab{
-  flex:1;padding:11px 6px;border:none;background:transparent;
+  flex:1;
+  padding:11px 6px;
+  border:none;
+  background:transparent;
   color:var(--muted);
   font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;font-weight:700;letter-spacing:.8px;
-  cursor:pointer;border-radius:10px 10px 0 0;
-  position:relative;transition:.22s;text-transform:uppercase;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.8px;
+  cursor:pointer;
+  border-radius:10px 10px 0 0;
+  position:relative;
+  transition:.22s;
+  text-transform:uppercase;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .tab:hover{color:#fff;background:rgba(255,255,255,.04)}
 .tab.active{
@@ -303,13 +303,23 @@ body{
   background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
 }
 .tab.active::after{
-  content:"";position:absolute;bottom:-1px;left:12%;right:12%;height:2px;
-  background:#fff;border-radius:2px;box-shadow:0 0 12px rgba(255,255,255,.7);
+  content:"";
+  position:absolute;
+  bottom:-1px;
+  left:12%;
+  right:12%;
+  height:2px;
+  background:#fff;
+  border-radius:2px;
+  box-shadow:0 0 12px rgba(255,255,255,.7);
 }
 
 .tab-pane{display:none;padding:20px}
 .tab-pane.active{display:block;animation:fadeIn .35s cubic-bezier(.2,.8,.3,1)}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .stat{
@@ -377,91 +387,100 @@ body{
 .cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
 
 .chart-wrap{
-  position:relative;width:100%;
+  position:relative;
+  width:100%;
   background:rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.06);
   border-radius:14px;
-  padding:14px 10px 8px;margin-bottom:14px;
+  padding:14px 10px 8px;
+  margin-bottom:14px;
 }
-.chart-svg{width:100%;height:auto;display:block}
-#equityLine{stroke-dasharray:2000;stroke-dashoffset:2000}
-#equityArea{opacity:0;transition:opacity .8s ease .5s}
-#equityDot,#equityDotOuter{opacity:0;transition:opacity .5s ease 1.3s}
-.chart-wrap.animate #equityLine{animation:drawLine 2s cubic-bezier(.4,.0,.2,1) forwards}
-.chart-wrap.animate #equityArea{opacity:1}
-.chart-wrap.animate #equityDot,
-.chart-wrap.animate #equityDotOuter{opacity:1}
-@keyframes drawLine{to{stroke-dashoffset:0}}
-
-.chart-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+.chart-svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.chart-mini{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:4px;
+}
 .chart-mini-item{
-  padding:10px 8px;border-radius:10px;
+  padding:10px 8px;
+  border-radius:10px;
   background:rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.06);
   text-align:center;
 }
 .chart-mini-item .v{
   font-family:'JetBrains Mono',monospace;
-  font-size:13px;font-weight:800;letter-spacing:-.3px;margin-bottom:2px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:-.3px;
+  margin-bottom:2px;
 }
 .chart-mini-item .v.up{color:var(--green)}
 .chart-mini-item .v.dn{color:var(--red)}
 .chart-mini-item .v.nt{color:#fff}
 .chart-mini-item .l{
   font-family:'JetBrains Mono',monospace;
-  font-size:9px;letter-spacing:.6px;color:var(--muted);text-transform:uppercase;
+  font-size:9px;
+  letter-spacing:.6px;
+  color:var(--muted);
+  text-transform:uppercase;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ SHOP — วิธีที่ชัวร์ที่สุด: ใช้ padding + gradient
-   ═══════════════════════════════════════════════════════════ */
 .shop{padding:20px}
-
-/* ★ ใช้ SVG border แทน — ชัวร์ทุกเบราว์เซอร์ */
-.product-item{
+.product-glow{
   position:relative;
-  padding:2px;
   border-radius:16px;
-  background:linear-gradient(135deg,
-    #ff0066,
-    #ffcc00,
-    #00ff99,
-    #00ccff,
-    #6633ff,
-    #ff33cc,
-    #ff0066);
-  background-size:300% 300%;
-  animation:rainbowShift 6s ease infinite;
+  padding:1.5px;
+  background:linear-gradient(90deg,
+    #ff0066, #ffcc00, #00ff99, #00ccff, #6633ff, #ff33cc, #ff0066, #ff0066);
+  background-size:300% 100%;
+  animation:rainbowSlide 4s linear infinite,
+            glowPulseR 2s ease-in-out infinite alternate;
 }
-@keyframes rainbowShift{
+@keyframes rainbowSlide{
   0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  100%{background-position:300% 50%}
 }
-
-.product-inner{
+@keyframes glowPulseR{
+  0%{
+    box-shadow:0 0 10px rgba(255,0,102,.45),
+               0 0 20px rgba(0,204,255,.25),
+               0 0 30px rgba(102,51,255,.15);
+  }
+  100%{
+    box-shadow:0 0 18px rgba(255,0,102,.75),
+               0 0 36px rgba(0,204,255,.45),
+               0 0 54px rgba(102,51,255,.3);
+  }
+}
+.product-row{
+  position:relative;
+  z-index:1;
   display:flex;
   align-items:center;
   gap:14px;
   padding:14px;
-  border-radius:14px;
-  background:#080808;
-  transition:.25s;
+  border-radius:14.5px;
+  background:linear-gradient(135deg,rgba(15,15,15,.85),rgba(5,5,5,.92));
+  transition:.28s cubic-bezier(.2,.8,.3,1);
 }
-.product-item:hover .product-inner{background:#0f0f0f}
-
+.product-glow:hover .product-row{transform:translateY(-2px)}
 .product-thumb{
   width:56px;height:56px;flex-shrink:0;
   border-radius:12px;
+  background-size:cover;background-position:center;
   background-color:#0a0a0a;
-  background-size:cover;
-  background-position:center;
   border:1px solid rgba(255,255,255,.12);
+  position:relative;overflow:hidden;
   display:grid;place-items:center;
-  color:rgba(255,255,255,.4);
 }
-.product-thumb svg{width:24px;height:24px;display:block}
-
+.product-thumb-placeholder{color:rgba(255,255,255,.4)}
+.product-thumb-placeholder svg{width:24px !important;height:24px !important;display:block}
 .product-info{
   flex:1;min-width:0;
   display:flex;flex-direction:column;gap:3px;
@@ -482,14 +501,15 @@ body{
   color:#fff;
   font-family:'JetBrains Mono',monospace;
   font-size:11px;font-weight:700;letter-spacing:.5px;
-  cursor:pointer;flex-shrink:0;white-space:nowrap;
+  cursor:pointer;
   transition:.22s cubic-bezier(.34,1.56,.64,1);
-  display:flex;align-items:center;gap:6px;
+  display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap;
 }
 .product-buy svg{width:12px;height:12px;flex-shrink:0}
 .product-buy:hover{
   background:#fff;color:#000;
-  border-color:#fff;transform:scale(1.05);
+  border-color:#fff;
+  transform:scale(1.05);
 }
 .product-buy:active{transform:scale(.95)}
 
@@ -590,12 +610,11 @@ body{
 }
 
 footer{
-  text-align:center;padding:22px 8px 4px;
+  text-align:center;padding:18px 0 4px;
   font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;color:#666;letter-spacing:.5px;line-height:1.7;
+  font-size:11px;color:#666;letter-spacing:.4px;
 }
-footer .footer-line{display:block}
-footer .footer-brand{color:#aaa;font-weight:600}
+footer .dot{color:#fff;margin:0 6px}
 
 .toast{
   position:fixed;left:50%;bottom:30px;transform:translate(-50%,120px);
@@ -682,6 +701,9 @@ footer .footer-brand{color:#aaa;font-weight:600}
   border:1px solid var(--border);
   image-rendering:auto;
   image-rendering:smooth;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transform:translateZ(0);
 }
 
 .buy-modal{
@@ -812,7 +834,6 @@ footer .footer-brand{color:#aaa;font-weight:600}
   .buy-actions{grid-template-columns:1fr}
   .tab{font-size:9.5px;padding:10px 4px}
   .tab-pane{padding:16px}
-  footer{font-size:9.5px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -826,12 +847,12 @@ footer .footer-brand{color:#aaa;font-weight:600}
 
 <div class="ticker">
   <div class="ticker-track">
-    <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
-    <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
+    <span><b class="sym">XAU/USD</b> <em class="up">2,341.50 ▲ 0.82%</em></span>
+    <span><b class="sym">BTC/USD</b> <em class="up">67,420 ▲ 1.24%</em></span>
+    <span><b class="sym">NAS100</b> <em class="up">18,240 ▲ 0.45%</em></span>
+    <span><b class="sym">XAU/USD</b> <em class="up">2,341.50 ▲ 0.82%</em></span>
+    <span><b class="sym">BTC/USD</b> <em class="up">67,420 ▲ 1.24%</em></span>
+    <span><b class="sym">NAS100</b> <em class="up">18,240 ▲ 0.45%</em></span>
   </div>
 </div>
 
@@ -855,15 +876,6 @@ footer .footer-brand{color:#aaa;font-weight:600}
 
     <h1>mun</h1>
     <div class="handle">@munzq · FX &amp; Trading Prop Firm</div>
-
-    <div class="view-counter" id="viewCounter">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-        <circle cx="12" cy="12" r="3"/>
-      </svg>
-      <span id="viewCount">0</span>
-      <span>views</span>
-    </div>
 
     <p class="bio">beta testing son…</p>
 
@@ -900,22 +912,22 @@ footer .footer-brand{color:#aaa;font-weight:600}
       <div class="stats">
         <div class="stat">
           <div class="lbl-top">Win Rate</div>
-          <div class="num green">68%</div>
+          <div class="num green" data-count="68" data-suffix="%">0%</div>
           <div class="sub">จาก 240 ไม้ล่าสุด</div>
         </div>
         <div class="stat">
           <div class="lbl-top">Risk : Reward</div>
-          <div class="num lime">1:2.4</div>
+          <div class="num lime" data-count="2.4" data-prefix="1:" data-decimals="1">1:0</div>
           <div class="sub">เฉลี่ยต่อไม้</div>
         </div>
         <div class="stat">
           <div class="lbl-top">Profit Factor</div>
-          <div class="num gold">2.1</div>
+          <div class="num gold" data-count="2.1" data-decimals="1">0</div>
           <div class="sub">กำไร ÷ ขาดทุน</div>
         </div>
         <div class="stat">
           <div class="lbl-top">Max Drawdown</div>
-          <div class="num red">4.8%</div>
+          <div class="num red" data-count="4.8" data-suffix="%" data-decimals="1">0%</div>
           <div class="sub">ต่ำสุดที่ยอมรับได้</div>
         </div>
       </div>
@@ -957,8 +969,8 @@ footer .footer-brand{color:#aaa;font-weight:600}
     </div>
 
     <div class="tab-pane" id="pane-chart">
-      <div class="chart-wrap" id="chartWrap">
-        <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet">
+      <div class="chart-wrap">
+        <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet" id="equityChart">
           <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
             <line x1="36" y1="16" x2="308" y2="16"/>
             <line x1="36" y1="46" x2="308" y2="46"/>
@@ -988,8 +1000,8 @@ footer .footer-brand{color:#aaa;font-weight:600}
           <path id="equityArea" fill="url(#areaGrad)"/>
           <path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(0,224,122,.6))"/>
 
-          <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
           <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
+          <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
 
           <g font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#808080" text-anchor="middle">
             <text x="36" y="152">JAN</text>
@@ -1047,8 +1059,7 @@ footer .footer-brand{color:#aaa;font-weight:600}
   </section>
 
   <footer>
-    <span class="footer-line">© 2026 <span class="footer-brand">munzq</span>. All Rights Reserved.</span>
-    <span class="footer-line">Designed &amp; Developed by <span class="footer-brand">munzq</span>.</span>
+    © <span id="year"></span> mun <span class="dot">//</span> Discipline &gt; Prediction
   </footer>
 </main>
 
@@ -1119,13 +1130,11 @@ footer .footer-brand{color:#aaa;font-weight:600}
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-var CONFIG = {
+const CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
   sellingEnabled: false,
   autoplayIndex: 0,
-  counterNamespace: "munzq-bio",
-  counterKey: "views",
 
   songs: [
     {
@@ -1154,35 +1163,31 @@ var CONFIG = {
   }
 };
 
-var CERTS = {
+const CERTS = {
   acg:  { firm:'Alpha Capital Group', image:'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4712' },
   fund: { firm:'The Funded Trader',   image:'funded.jpg' },
   e8:   { firm:'E8 Markets',          image:'e8.jpg' }
 };
 
-/* ═══════════════════════════════════════════════════════════
-   ★ Toast
-   ═══════════════════════════════════════════════════════════ */
-var toastTimer;
+document.getElementById('year').textContent = new Date().getFullYear();
+
+let toastTimer;
 function showToast(msg){
-  var t = document.getElementById('toast');
+  const t = document.getElementById('toast');
   document.getElementById('toastMsg').textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ Copy Discord
-   ═══════════════════════════════════════════════════════════ */
 function copyDiscord(){
-  var user = CONFIG.discordUsername;
-  var done = function(){ showToast('คัดลอก Discord: ' + user + ' แล้ว'); };
+  const user = CONFIG.discordUsername;
+  const done = () => showToast('คัดลอก Discord: ' + user + ' แล้ว');
   if (navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(user).then(done).catch(fallback);
   } else { fallback(); }
   function fallback(){
-    var ta = document.createElement('textarea');
+    const ta = document.createElement('textarea');
     ta.value = user; ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select();
     try { document.execCommand('copy'); done(); }
@@ -1191,135 +1196,27 @@ function copyDiscord(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ VIEW COUNTER
-   ═══════════════════════════════════════════════════════════ */
-function loadViewCount(){
-  var countEl = document.getElementById('viewCount');
-
-  // fallback: localStorage
-  function getLocalFallback(){
-    try {
-      var v = parseInt(localStorage.getItem('munzq_views') || '0', 10);
-      v = v + 1;
-      localStorage.setItem('munzq_views', String(v));
-      return v;
-    } catch(e){ return 1; }
-  }
-
-  var sessionKey = 'munzq_bio_viewed';
-  var alreadyCounted = false;
-  try { alreadyCounted = !!sessionStorage.getItem(sessionKey); } catch(e){}
-
-  var url = alreadyCounted
-    ? 'https://abacus.jasoncameron.dev/get/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey
-    : 'https://abacus.jasoncameron.dev/hit/' + CONFIG.counterNamespace + '/' + CONFIG.counterKey;
-
-  if (!alreadyCounted){
-    try { sessionStorage.setItem(sessionKey, '1'); } catch(e){}
-  }
-
-  var done = false;
-  var timeoutId = setTimeout(function(){
-    if (done) return;
-    done = true;
-    countEl.textContent = getLocalFallback().toLocaleString('en-US');
-  }, 3500);
-
-  fetch(url, { cache: 'no-store' })
-    .then(function(r){ if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
-    .then(function(data){
-      if (done) return;
-      done = true;
-      clearTimeout(timeoutId);
-      if (data && typeof data.value === 'number'){
-        countEl.textContent = data.value.toLocaleString('en-US');
-        try { localStorage.setItem('munzq_views', String(data.value)); } catch(e){}
-      } else {
-        countEl.textContent = getLocalFallback().toLocaleString('en-US');
-      }
-    })
-    .catch(function(){
-      if (done) return;
-      done = true;
-      clearTimeout(timeoutId);
-      countEl.textContent = getLocalFallback().toLocaleString('en-US');
-    });
-}
-
-/* ═══════════════════════════════════════════════════════════
-   ★ TICKER
-   ═══════════════════════════════════════════════════════════ */
-function applyTicker(t, key){
-  if (!t || !t.price) return;
-  var els = document.querySelectorAll('[data-ticker="' + key + '"]');
-  var isUp = t.change >= 0;
-  var arrow = isUp ? '▲' : '▼';
-  var cls = isUp ? 'up' : 'dn';
-  var priceStr;
-  if (key === 'BTC') priceStr = Math.round(t.price).toLocaleString('en-US');
-  else if (key === 'XAU') priceStr = t.price.toFixed(2);
-  else if (key === 'NAS') priceStr = Math.round(t.price).toLocaleString('en-US');
-  else priceStr = String(t.price);
-  for (var i = 0; i < els.length; i++){
-    els[i].className = cls;
-    els[i].textContent = priceStr + ' ' + arrow + ' ' + Math.abs(t.change).toFixed(2) + '%';
-  }
-}
-
-function updateTicker(){
-  fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true', {cache:'no-store'})
-    .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(c){
-      if (c && c.bitcoin && c.bitcoin.usd){
-        applyTicker({ price: c.bitcoin.usd, change: c.bitcoin.usd_24h_change || 0 }, 'BTC');
-      }
-    }).catch(function(){});
-
-  fetch('https://api.gold-api.com/price/XAU', {cache:'no-store'})
-    .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(g){
-      if (g && g.price){ applyTicker({ price: g.price, change: 0 }, 'XAU'); }
-    }).catch(function(){});
-
-  fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5ENDX?interval=1d&range=1d', {cache:'no-store'})
-    .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(n){
-      var result = n && n.chart && n.chart.result && n.chart.result[0];
-      if (result){
-        var price = result.meta.regularMarketPrice;
-        var prev = result.meta.previousClose || result.meta.chartPreviousClose;
-        var change = prev ? ((price - prev) / prev) * 100 : 0;
-        applyTicker({ price: price, change: change }, 'NAS');
-      }
-    }).catch(function(){});
-}
-
-/* ═══════════════════════════════════════════════════════════
-   ★ TABS
-   ═══════════════════════════════════════════════════════════ */
+let currentTab = 'stats';
 function switchTab(name){
-  var tabs = document.querySelectorAll('.tab');
-  for (var i = 0; i < tabs.length; i++){
-    tabs[i].classList.toggle('active', tabs[i].dataset.tab === name);
-  }
-  var panes = document.querySelectorAll('.tab-pane');
-  for (var j = 0; j < panes.length; j++){
-    panes[j].classList.toggle('active', panes[j].id === 'pane-' + name);
-  }
-  if (name === 'chart'){
-    var wrap = document.getElementById('chartWrap');
-    wrap.classList.remove('animate');
-    void wrap.offsetWidth;
-    wrap.classList.add('animate');
+  currentTab = name;
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === name);
+  });
+  document.querySelectorAll('.tab-pane').forEach(p => {
+    p.classList.toggle('active', p.id === 'pane-' + name);
+  });
+  if (name === 'stats'){
+    document.querySelectorAll('#pane-stats .num[data-count]').forEach(el => {
+      if (!el.dataset.animated){
+        el.dataset.animated = '1';
+        animateCount(el);
+      }
+    });
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ CERT MODAL
-   ═══════════════════════════════════════════════════════════ */
 function viewCert(id){
-  var cert = CERTS[id];
+  const cert = CERTS[id];
   if (!cert) return;
   document.getElementById('modalTitle').textContent = cert.firm;
   document.getElementById('modalImg').src = cert.image;
@@ -1331,121 +1228,93 @@ function closeCert(e){
   document.getElementById('certModal').classList.remove('show');
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', function(e){
+document.addEventListener('keydown', e => {
   if (e.key === 'Escape'){
-    var certModal = document.getElementById('certModal');
-    var buyModal = document.getElementById('buyModal');
+    const certModal = document.getElementById('certModal');
+    const buyModal = document.getElementById('buyModal');
     if (buyModal.classList.contains('show')){ closeBuyModal(); return; }
     if (certModal.classList.contains('show')) closeCert();
   }
 });
 
-/* ═══════════════════════════════════════════════════════════
-   ★ EQUITY CHART
-   ═══════════════════════════════════════════════════════════ */
 function drawChart(){
-  var data = CONFIG.chart.data;
-  var maxY = CONFIG.chart.maxY;
-  var W = 320, H = 170;
-  var padL = 36, padR = 12, padT = 16, padB = 34;
-  var w = W - padL - padR;
-  var h = H - padT - padB;
+  const data = CONFIG.chart.data;
+  const maxY = CONFIG.chart.maxY;
+  const W = 320, H = 170;
+  const padL = 36, padR = 12, padT = 16, padB = 34;
+  const w = W - padL - padR;
+  const h = H - padT - padB;
 
-  var pts = [];
-  for (var i = 0; i < data.length; i++){
-    pts.push([
-      padL + (i / (data.length - 1)) * w,
-      padT + h - (data[i] / maxY) * h
-    ]);
+  const pts = data.map((v, i) => [
+    padL + (i / (data.length - 1)) * w,
+    padT + h - (v / maxY) * h
+  ]);
+
+  let d = `M ${pts[0][0].toFixed(2)},${pts[0][1].toFixed(2)}`;
+  for (let i = 0; i < pts.length - 1; i++){
+    const [x1, y1] = pts[i];
+    const [x2, y2] = pts[i + 1];
+    const cx = (x1 + x2) / 2;
+    d += ` C ${cx.toFixed(2)},${y1.toFixed(2)} ${cx.toFixed(2)},${y2.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`;
   }
 
-  var d = 'M ' + pts[0][0].toFixed(2) + ',' + pts[0][1].toFixed(2);
-  for (var i = 0; i < pts.length - 1; i++){
-    var x1 = pts[i][0], y1 = pts[i][1];
-    var x2 = pts[i+1][0], y2 = pts[i+1][1];
-    var cx = (x1 + x2) / 2;
-    d += ' C ' + cx.toFixed(2) + ',' + y1.toFixed(2) + ' ' + cx.toFixed(2) + ',' + y2.toFixed(2) + ' ' + x2.toFixed(2) + ',' + y2.toFixed(2);
-  }
+  const baseline = padT + h;
+  const areaD = d + ` L ${pts[pts.length-1][0].toFixed(2)},${baseline} L ${pts[0][0].toFixed(2)},${baseline} Z`;
 
-  var baseline = padT + h;
-  var areaD = d + ' L ' + pts[pts.length-1][0].toFixed(2) + ',' + baseline + ' L ' + pts[0][0].toFixed(2) + ',' + baseline + ' Z';
-
-  var lineEl = document.getElementById('equityLine');
-  lineEl.setAttribute('d', d);
+  document.getElementById('equityLine').setAttribute('d', d);
   document.getElementById('equityArea').setAttribute('d', areaD);
 
-  try {
-    var len = lineEl.getTotalLength();
-    lineEl.style.strokeDasharray = len;
-    lineEl.style.strokeDashoffset = len;
-  } catch(e){
-    lineEl.style.strokeDasharray = 2000;
-    lineEl.style.strokeDashoffset = 2000;
-  }
-
-  var last = pts[pts.length - 1];
+  const last = pts[pts.length - 1];
   document.getElementById('equityDot').setAttribute('cx', last[0]);
   document.getElementById('equityDot').setAttribute('cy', last[1]);
   document.getElementById('equityDotOuter').setAttribute('cx', last[0]);
   document.getElementById('equityDotOuter').setAttribute('cy', last[1]);
 }
+drawChart();
 
-/* ═══════════════════════════════════════════════════════════
-   ★ SHOP
-   ═══════════════════════════════════════════════════════════ */
-var selectedProductId = null;
+let selectedProductId = null;
 
 function renderProducts(){
-  var list = document.getElementById('productList');
-  if (!list) return;
+  const list = document.getElementById('productList');
   if (!CONFIG.products || CONFIG.products.length === 0){
     list.innerHTML = '<div class="soon-text">soon…</div>';
     return;
   }
-
-  var html = '';
-  for (var i = 0; i < CONFIG.products.length; i++){
-    var p = CONFIG.products[i];
-    var thumbHTML;
-    if (p.image){
-      thumbHTML = '<div class="product-thumb" style="background-image:url(\'' + p.image + '\')"></div>';
-    } else {
-      thumbHTML = '<div class="product-thumb">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
-          '<path d="M21 8v13H3V8"/>' +
-          '<path d="M1 3h22v5H1z"/>' +
-          '<path d="M10 12h4"/>' +
-        '</svg>' +
-      '</div>';
-    }
-
-    html +=
-      '<div class="product-item">' +
-        '<div class="product-inner">' +
-          thumbHTML +
-          '<div class="product-info">' +
-            '<div class="product-name">' + p.name + '</div>' +
-            '<div class="product-price">' + p.price + '</div>' +
-          '</div>' +
-          '<button class="product-buy" onclick="openBuyModal(\'' + p.id + '\')">' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
-              '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
-              '<path d="M3 6h18"/>' +
-              '<path d="M16 10a4 4 0 0 1-8 0"/>' +
-            '</svg>' +
-            'BUY' +
-          '</button>' +
-        '</div>' +
-      '</div>';
-  }
-  list.innerHTML = html;
+  list.innerHTML = CONFIG.products.map(p => {
+    const thumbHTML = p.image
+      ? `<div class="product-thumb" style="background-image:url('${p.image}')"></div>`
+      : `<div class="product-thumb product-thumb-placeholder">
+           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+             <path d="M21 8v13H3V8"/>
+             <path d="M1 3h22v5H1z"/>
+             <path d="M10 12h4"/>
+           </svg>
+         </div>`;
+    return `
+      <div class="product-glow">
+        <div class="product-row">
+          ${thumbHTML}
+          <div class="product-info">
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price}</div>
+          </div>
+          <button class="product-buy" onclick="openBuyModal('${p.id}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <path d="M3 6h18"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            BUY
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
+renderProducts();
 
 function openBuyModal(id){
-  var p = null;
-  for (var i = 0; i < CONFIG.products.length; i++){
-    if (CONFIG.products[i].id === id){ p = CONFIG.products[i]; break; }
-  }
+  const p = CONFIG.products.find(x => x.id === id);
   if (!p) return;
   selectedProductId = id;
   document.getElementById('buyProductName').textContent = p.name;
@@ -1461,57 +1330,50 @@ function closeBuyModal(e){
 function confirmBuy(){
   if (!CONFIG.sellingEnabled){
     showToast('⏳ ยังไม่เปิดขาย · เร็ว ๆ นี้');
-    setTimeout(function(){ closeBuyModal(); }, 800);
+    setTimeout(() => closeBuyModal(), 800);
     return;
   }
-  var p = null;
-  for (var i = 0; i < CONFIG.products.length; i++){
-    if (CONFIG.products[i].id === selectedProductId){ p = CONFIG.products[i]; break; }
-  }
+  const p = CONFIG.products.find(x => x.id === selectedProductId);
   if (!p) return;
-  var msg = 'สนใจซื้อ: ' + p.name + ' (' + p.price + ')';
+  const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
   if (navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(msg).catch(function(){});
+    navigator.clipboard.writeText(msg).catch(()=>{});
   }
-  var discordId = CONFIG.discordUserId;
+  const discordId = CONFIG.discordUserId;
   closeBuyModal();
   if (discordId && discordId !== "YOUR_DISCORD_USER_ID"){
     showToast('▶ เปิด DM Discord · คัดลอกข้อความแล้ว');
-    setTimeout(function(){ window.open('https://discord.com/users/' + discordId, '_blank'); }, 400);
+    setTimeout(() => { window.open(`https://discord.com/users/${discordId}`, '_blank'); }, 400);
   } else {
     showToast('คัดลอกข้อความแล้ว · ทัก Discord: ' + CONFIG.discordUsername);
     copyDiscord();
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ DISCORD STATUS (Lanyard)
-   ═══════════════════════════════════════════════════════════ */
-var statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
-var lanyardWs = null;
-var lanyardHeartbeat = null;
+const statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
+let lanyardWs = null;
+let lanyardHeartbeat = null;
 
 function updateDiscordStatus(status){
-  var dot = document.getElementById('statusDot');
-  if (dot) dot.className = 'status-dot ' + (statusColors[status] || 'offline');
+  document.getElementById('statusDot').className = 'status-dot ' + (statusColors[status] || 'offline');
 }
 
 function connectLanyard(){
   if (!CONFIG.discordUserId || CONFIG.discordUserId === "YOUR_DISCORD_USER_ID") return;
-  fetch('https://api.lanyard.rest/v1/users/' + CONFIG.discordUserId)
-    .then(function(r){ return r.json(); })
-    .then(function(res){ if (res.success && res.data) updateDiscordStatus(res.data.discord_status); })
-    .catch(function(err){ console.warn('Lanyard error:', err); });
+  fetch(`https://api.lanyard.rest/v1/users/${CONFIG.discordUserId}`)
+    .then(r => r.json())
+    .then(res => { if (res.success && res.data) updateDiscordStatus(res.data.discord_status); })
+    .catch(err => console.warn('Lanyard REST error:', err));
 
   lanyardWs = new WebSocket('wss://api.lanyard.rest/socket');
-  lanyardWs.addEventListener('open', function(){
+  lanyardWs.addEventListener('open', () => {
     lanyardWs.send(JSON.stringify({ op: 2, d: { subscribe_to_id: CONFIG.discordUserId } }));
   });
-  lanyardWs.addEventListener('message', function(ev){
-    var msg = JSON.parse(ev.data);
+  lanyardWs.addEventListener('message', (ev) => {
+    const msg = JSON.parse(ev.data);
     if (msg.op === 1){
       clearInterval(lanyardHeartbeat);
-      lanyardHeartbeat = setInterval(function(){
+      lanyardHeartbeat = setInterval(() => {
         if (lanyardWs && lanyardWs.readyState === WebSocket.OPEN){
           lanyardWs.send(JSON.stringify({ op: 3 }));
         }
@@ -1520,65 +1382,69 @@ function connectLanyard(){
     }
     if (msg.op === 0 && msg.d){
       if (msg.t === 'INIT_STATE'){
-        var u = msg.d[CONFIG.discordUserId] || Object.values(msg.d)[0];
+        const u = msg.d[CONFIG.discordUserId] || Object.values(msg.d)[0];
         if (u) updateDiscordStatus(u.discord_status);
       } else if (msg.t === 'PRESENCE_UPDATE'){
         updateDiscordStatus(msg.d.discord_status);
       }
     }
   });
-  lanyardWs.addEventListener('close', function(){
+  lanyardWs.addEventListener('close', () => {
     clearInterval(lanyardHeartbeat);
     setTimeout(connectLanyard, 5000);
   });
 }
+connectLanyard();
 
-/* ═══════════════════════════════════════════════════════════
-   ★ YOUTUBE
-   ═══════════════════════════════════════════════════════════ */
-var ytPlayer = null;
-var ytReady = false;
-var currentIndex = -1;
-var isPlaying = false;
-var pendingPlay = null;
-var autoplayAttempted = false;
-var userInteracted = false;
+let ytPlayer = null;
+let ytReady = false;
+let currentIndex = -1;
+let isPlaying = false;
+let pendingPlay = null;
+let autoplayAttempted = false;
+let userInteracted = false;
+
+const songList = document.getElementById('songList');
+const autoplayHint = document.getElementById('autoplayHint');
 
 function renderSongList(){
-  var songList = document.getElementById('songList');
-  if (!songList) return;
   songList.innerHTML = '';
-  for (var i = 0; i < CONFIG.songs.length; i++){
-    (function(i){
-      var song = CONFIG.songs[i];
-      var item = document.createElement('div');
-      item.className = 'song-item';
-      item.dataset.index = i;
-      item.onclick = function(){ toggleSong(i); };
-      item.style.backgroundImage = 'url(\'' + song.cover + '\')';
-      item.innerHTML =
-        '<div class="song-overlay"></div>' +
-        '<div class="song-info">' +
-          '<div class="song-title">' + song.title + '</div>' +
-          '<div class="song-artist">' + song.artist + '</div>' +
-        '</div>' +
-        '<button class="song-play" aria-label="Play">' +
-          '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l11.1-6.86a1.04 1.04 0 0 0 0-1.76L9.56 4.26A1.04 1.04 0 0 0 8 5.14z"/></svg>' +
-        '</button>' +
-        '<div class="song-eq"><i></i><i></i><i></i></div>';
-      songList.appendChild(item);
-    })(i);
-  }
+  CONFIG.songs.forEach((song, i) => {
+    const item = document.createElement('div');
+    item.className = 'song-item';
+    item.dataset.index = i;
+    item.onclick = () => toggleSong(i);
+    item.style.backgroundImage = `url('${song.cover}')`;
+    item.innerHTML = `
+      <div class="song-overlay"></div>
+      <div class="song-info">
+        <div class="song-title">${song.title}</div>
+        <div class="song-artist">${song.artist}</div>
+      </div>
+      <button class="song-play" aria-label="Play">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l11.1-6.86a1.04 1.04 0 0 0 0-1.76L9.56 4.26A1.04 1.04 0 0 0 8 5.14z"/></svg>
+      </button>
+      <div class="song-eq"><i></i><i></i><i></i></div>
+    `;
+    songList.appendChild(item);
+  });
 }
+renderSongList();
 
 window.onYouTubeIframeAPIReady = function(){
   ytPlayer = new YT.Player('ytPlayer', {
     height: '200', width: '320',
     videoId: '',
     playerVars: {
-      'autoplay': 0, 'controls': 0, 'modestbranding': 1,
-      'playsinline': 1, 'rel': 0, 'iv_load_policy': 3,
-      'fs': 0, 'disablekb': 1, 'origin': window.location.origin
+      'autoplay': 0,
+      'controls': 0,
+      'modestbranding': 1,
+      'playsinline': 1,
+      'rel': 0,
+      'iv_load_policy': 3,
+      'fs': 0,
+      'disablekb': 1,
+      'origin': window.location.origin
     },
     events: {
       'onReady': onPlayerReady,
@@ -1591,24 +1457,23 @@ window.onYouTubeIframeAPIReady = function(){
 function onPlayerReady(){
   ytReady = true;
   if (pendingPlay !== null){
-    var idx = pendingPlay;
+    const idx = pendingPlay;
     pendingPlay = null;
     loadAndPlay(idx);
   }
-  setTimeout(tryAutoplay, 400);
+  setTimeout(() => tryAutoplay(), 400);
 }
 function onPlayerStateChange(e){
   if (e.data === YT.PlayerState.PLAYING){
     isPlaying = true;
-    var hint = document.getElementById('autoplayHint');
-    if (hint) hint.classList.remove('show');
+    autoplayHint.classList.remove('show');
     updateUI();
   } else if (e.data === YT.PlayerState.PAUSED){
     isPlaying = false; updateUI();
   } else if (e.data === YT.PlayerState.ENDED){
     isPlaying = false; updateUI();
     if (currentIndex >= 0 && currentIndex < CONFIG.songs.length - 1){
-      setTimeout(function(){ loadAndPlay(currentIndex + 1); }, 800);
+      setTimeout(() => loadAndPlay(currentIndex + 1), 800);
     }
   }
 }
@@ -1617,47 +1482,43 @@ function onPlayerError(e){ console.warn('YouTube error:', e.data); }
 function tryAutoplay(){
   if (autoplayAttempted) return;
   autoplayAttempted = true;
-  var idx = CONFIG.autoplayIndex || 0;
-  var song = CONFIG.songs[idx];
+  const idx = CONFIG.autoplayIndex || 0;
+  const song = CONFIG.songs[idx];
   if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
-  setTimeout(function(){ if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
+  setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
   updateUI();
-  setTimeout(function(){
-    if (!isPlaying){
-      var hint = document.getElementById('autoplayHint');
-      if (hint) hint.classList.add('show');
-    }
-  }, 1800);
+  setTimeout(() => { if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
 }
 
 function handleFirstInteraction(){
   if (userInteracted) return;
   userInteracted = true;
-  var hint = document.getElementById('autoplayHint');
-  if (hint) hint.classList.remove('show');
+  autoplayHint.classList.remove('show');
   if (ytReady && ytPlayer && !isPlaying){
     if (currentIndex === -1) loadAndPlay(CONFIG.autoplayIndex || 0);
     else { try { ytPlayer.playVideo(); } catch(e){} }
   }
 }
+['click','touchstart','keydown','scroll'].forEach(evt => {
+  document.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
+});
 
 function toggleSong(index){
   userInteracted = true;
-  var hint = document.getElementById('autoplayHint');
-  if (hint) hint.classList.remove('show');
+  autoplayHint.classList.remove('show');
   if (index === currentIndex && isPlaying){ pauseCurrent(); return; }
   if (index === currentIndex && !isPlaying){ resumeCurrent(); return; }
   loadAndPlay(index);
 }
 function loadAndPlay(index){
-  var song = CONFIG.songs[index];
+  const song = CONFIG.songs[index];
   if (!song || !song.videoId){ showToast('⚠ ยังไม่ได้ใส่ YouTube ID'); return; }
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
-  setTimeout(function(){ if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 300);
+  setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 300);
   updateUI();
   showToast('▶ กำลังเล่น: ' + song.title);
 }
@@ -1670,31 +1531,45 @@ function resumeCurrent(){
   isPlaying = true; updateUI();
 }
 function updateUI(){
-  var items = document.querySelectorAll('.song-item');
-  for (var i = 0; i < items.length; i++){
-    items[i].classList.toggle('active', i === currentIndex);
-    items[i].classList.toggle('playing', i === currentIndex && isPlaying);
-  }
+  document.querySelectorAll('.song-item').forEach((el, i) => {
+    el.classList.toggle('active', i === currentIndex);
+    el.classList.toggle('playing', i === currentIndex && isPlaying);
+  });
 }
 
-/* ═══════════════════════════════════════════════════════════
-   ★ INIT — เรียกทันที (ไม่ต้องรอ load)
-   ═══════════════════════════════════════════════════════════ */
-renderSongList();
-renderProducts();
-drawChart();
-loadViewCount();
-updateTicker();
-connectLanyard();
-setInterval(updateTicker, 60000);
+function animateCount(el){
+  const raw    = parseFloat(el.dataset.count);
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const divide = parseFloat(el.dataset.divide || 1);
+  const decimals = parseInt(el.dataset.decimals ?? (raw % 1 !== 0 ? 1 : 0));
+  const target = raw / divide;
+  const dur = 1500, start = performance.now();
+  function frame(now){
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = target * eased;
+    el.textContent = prefix + val.toLocaleString('en-US',{
+      minimumFractionDigits: decimals, maximumFractionDigits: decimals
+    }) + suffix;
+    if (p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
 
-['click','touchstart','keydown','scroll'].forEach(function(evt){
-  document.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
-});
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting && !e.target.dataset.animated){
+      e.target.dataset.animated = '1';
+      animateCount(e.target);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold:.5 });
+document.querySelectorAll('#pane-stats .num[data-count]').forEach(el=>io.observe(el));
 
-window.addEventListener('load', function(){
-  var reveals = document.querySelectorAll('.reveal');
-  for (var i = 0; i < reveals.length; i++){ reveals[i].style.opacity = '1'; }
+window.addEventListener('load', ()=>{
+  document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity = '1'; });
 });
 </script>
 </body>
