@@ -561,14 +561,15 @@ body{
 }
 .product-buy:active{transform:scale(.95)}
 
-/* ===== ★ FOCUS PLAYLIST CUSTOM STYLE (แก้ไขเฉพาะส่วนนี้) ★ ===== */
+/* ===== ★ FOCUS PLAYLIST CUSTOM STYLE (แก้ไขแล้ว) ★ ===== */
 .music{padding:20px}
 .music .song-list {
     display: flex;
     flex-direction: row;
+    justify-content: center; /* ★ จัดกึ่งกลางเสมอ */
     overflow-x: auto;
     gap: 12px;
-    padding: 10px 4px;
+    padding: 10px 16px; /* ★ เพิ่มระยะขอบซ้ายขวา ไม่ให้ชิดขอบเกินไป */
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
@@ -655,6 +656,24 @@ body{
     }
 }
 /* ===== จบส่วน FOCUS PLAYLIST ===== */
+
+/* ===== ★ FIX YOUTUBE PLAYER (ซ่อนไม่ให้โผล่ข้างล่าง) ★ ===== */
+.yt-hidden {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+    overflow: hidden !important;
+}
+.yt-hidden > div {
+    width: 200px;
+    height: 120px;
+}
+/* ===== จบส่วนซ่อน YouTube ===== */
 
 .hint{
   font-size:11px;color:var(--muted);text-align:center;
