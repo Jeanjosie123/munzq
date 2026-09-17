@@ -315,8 +315,8 @@ body{
 .stat:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.03)}
 .stat .lbl-top{
   font-family:'JetBrains Mono',monospace;
-  font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:6px;
+  font-size:10px;font-weight:600;letter-sp0acing:1.4px;text-transform:upp,ercase;
+  color:var(--muted0,.7));margin-bottom:6px;
 }
 .stat .num{
   font-family:'JetBrains Mono',monospace;
@@ -354,7 +354,7 @@ body{
 .song-item:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.3);box-shadow:0 14px 34px -14px rgba(255,255,255,.35)}
 .song-item.active{border-color:rgba(255,255,255,.6);box-shadow:0 14px 34px -14px rgba(255,255,255,.45)}
 .song-item.active .song-overlay{
-  background:linear-gradient(90deg,rgba(255,255,255,.12) 0%,rgba(0,0,0,.7) 35%,rgba(0,0,0,.35) 70%,rgba(0,0,0,.55) 100%);
+  background:linear-gradient(90deg,rgba(255,255,255,.12) 0%,rgba(0, 35%,rgba(0,0,0,.35) 70%,rgba(0,0,0,.55) 100%);
 }
 .song-info{flex:1;min-width:0}
 .song-title{
@@ -398,9 +398,9 @@ body{
 .song-item.playing .song-eq{display:flex}
 
 /* ═══════════════════════════════════════════════════════════
-   ★ SHOP — แนวนอน (แบบปุ่มยาว)
+   ★ SHOP — แนวนอน + ไฟสีรุ้งวิ่งรอบขอบ
    ═══════════════════════════════════════════════════════════ */
-.shop{padding:20px}
+.shop{padding:20px;position:relative}
 .product-row{
   display:flex;
   align-items:center;
@@ -411,20 +411,64 @@ body{
   border:1px solid rgba(255,255,255,.1);
   transition:.28s cubic-bezier(.2,.8,.3,1);
   position:relative;
-  overflow:hidden;
+  z-index:1;
 }
+
+/* ★ ชั้น glow (ฟุ้ง) นอกขอบ */
+.product-row::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:16px;
+  background:conic-gradient(from 0deg,
+    #ff0066 0%,
+    #ffcc00 15%,
+    #00ff99 30%,
+    #00ccff 45%,
+    #6633ff 60%,
+    #ff33cc 75%,
+    #ff0066 100%);
+  filter:blur(10px);
+  opacity:.85;
+  z-index:-1;
+  pointer-events:none;
+  animation:rainbowSpin 4s linear infinite;
+}
+/* ★ ชั้นเส้นคม (ขอบชัด) */
 .product-row::before{
   content:"";
-  position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,#fff,transparent);
+  position:absolute;
+  inset:-1.5px;
+  border-radius:15px;
+  padding:1.5px;
+  background:conic-gradient(from 0deg,
+    #ff0066 0%,
+    #ffcc00 15%,
+    #00ff99 30%,
+    #00ccff 45%,
+    #6633ff 60%,
+    #ff33cc 75%,
+    #ff0066 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
+  z-index:2;
+  animation:rainbowSpin 4s linear infinite;
 }
-.product-row:hover{
-  transform:translateY(-3px);
-  border-color:rgba(255,255,255,.35);
-  background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.01));
-  box-shadow:0 14px 34px -14px rgba(255,255,255,.35);
+
+@keyframes rainbowSpin{
+  to{filter:hue-rotate(360deg)}
 }
-/* Thumbnail (รูปเล็ก) */
+/* blur layer + hue rotate — ต้องแยก keyframe ไม่ให้ทับกัน */
+.product-row::after{
+  animation:rainbowGlow 4s linear infinite;
+}
+@keyframes rainbowGlow{
+  from{filter:blur(10px) hue-rotate(0deg)}
+  to{filter:blur(10px) hue-rotate(360deg)}
+}
+
 .product-thumb{
   width:56px;
   height:56px;
@@ -444,7 +488,7 @@ body{
   color:rgba(255,255,255,.4);
 }
 .product-thumb-placeholder svg{width:22px;height:22px}
-/* Info */
+
 .product-info{
   flex:1;
   min-width:0;
@@ -467,7 +511,6 @@ body{
   color:#c8c8c8;
   letter-spacing:-.3px;
 }
-/* Buy button */
 .product-buy{
   padding:10px 16px;
   border-radius:10px;
@@ -485,6 +528,8 @@ body{
   gap:6px;
   flex-shrink:0;
   white-space:nowrap;
+  position:relative;
+  z-index:3;
 }
 .product-buy svg{width:12px;height:12px}
 .product-buy:hover{
@@ -750,13 +795,16 @@ footer .dot{color:#fff;margin:0 6px}
   <section class="card certs reveal" style="animation-delay:.1s">
     <div class="cert-main-btn" onclick="openCertModal()">
       <div class="cert-main-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="M9 12l2 2 4-4"/>
+        <!-- ★ icon ใหม่: เอกสาร + เหรียญรางวัล -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <circle cx="12" cy="15" r="2.2"/>
+          <path d="M10 17.2 9.2 20l2.8-1.6 2.8 1.6-.8-2.8"/>
         </svg>
       </div>
       <div class="cert-main-info">
-        <div class="cert-main-title">Verified Certificates</div>
+        <div class="cert-main-title">All Certificates Prop Firms</div>
         <div class="cert-main-sub">3 Prop Firms · Click to view</div>
       </div>
       <div class="cert-main-arrow">
@@ -790,20 +838,21 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
   </section>
 
-  <div class="sec-title reveal" style="animation-delay:.25s">Focus Playlist</div>
+  <!-- ★ SHOP ย้ายขึ้นมา — อยู่ก่อน Focus Playlist -->
+  <div class="sec-title reveal" style="animation-delay:.25s">Shop</div>
 
-  <section class="card music glass-more reveal" style="animation-delay:.3s">
+  <section class="card shop reveal" style="animation-delay:.28s">
+    <div id="productList"></div>
+  </section>
+
+  <div class="sec-title reveal" style="animation-delay:.32s">Focus Playlist</div>
+
+  <section class="card music glass-more reveal" style="animation-delay:.35s">
     <div class="song-list" id="songList"></div>
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       EsdeeKids&amp;Yeat · Full Track
     </div>
-  </section>
-
-  <div class="sec-title reveal" style="animation-delay:.32s">Shop</div>
-
-  <section class="card shop reveal" style="animation-delay:.35s">
-    <div id="productList"></div>
   </section>
 
   <section class="card rules reveal" style="animation-delay:.4s">
@@ -836,7 +885,7 @@ footer .dot{color:#fff;margin:0 6px}
       <button class="modal-back" id="modalBack" onclick="certBack(event)" aria-label="Back" style="visibility:hidden">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
-      <div class="title" id="modalTitle">Verified Certificates</div>
+      <div class="title" id="modalTitle">All Certificates</div>
       <button class="modal-close" onclick="closeCert()" aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
@@ -862,30 +911,31 @@ const CONFIG = {
 
   autoplayIndex: 0,
 
-  // ★★ YouTube videoId ของ 2 เพลง ★★
+  // ★★ YouTube videoId + startAt (วินาทีที่เริ่มเล่น) ★★
   songs: [
     {
       title:   "LV Sandals",
       artist:  "EsDeeKid, fakemink, Rico Ace",
       videoId: "K6QjQeKfmUs",
+      startAt: 0,                             // เริ่มที่ 0:00
       cover:   "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02cff4bd68d5d0dd9a0a748045"
     },
     {
       title:   "Flawlëss (feat. Lil Uzi Vert)",
       artist:  "Yeat, Lil Uzi Vert",
       videoId: "NzXGXMgdGOI",
+      startAt: 42,                            // ★ เริ่มที่ 0:42
       cover:   "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c665c7f2be1f6d3214a93a76"
     }
   ],
 
   // ★★ สินค้า (แนวนอน) ★★
-  // ใส่ image: "" ไว้ก่อน → จะแสดง placeholder ไอคอนกล่อง
   products: [
     {
       id:    "p1",
       name:  "ไม่รู้เลยก๊า",
       price: "฿999",
-      image: ""   // ← ใส่ URL รูปทีหลังได้
+      image: ""
     }
   ]
 };
@@ -933,7 +983,7 @@ function openCertModal(){
   document.body.style.overflow = 'hidden';
 }
 function showCertList(){
-  document.getElementById('modalTitle').textContent = 'Verified Certificates';
+  document.getElementById('modalTitle').textContent = 'All Certificates';
   document.getElementById('modalBack').style.visibility = 'hidden';
   document.getElementById('modalBody').innerHTML = `
     <div class="cert-list">
@@ -978,7 +1028,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   ★ SHOP — แนวนอน
+   ★ SHOP
    ═══════════════════════════════════════════════════════════════ */
 function renderProducts(){
   const list = document.getElementById('productList');
@@ -987,7 +1037,6 @@ function renderProducts(){
     return;
   }
   list.innerHTML = CONFIG.products.map(p => {
-    // thumbnail: ถ้ามีรูปใช้รูป, ถ้าไม่มีใช้ไอคอนกล่อง
     const thumbHTML = p.image
       ? `<div class="product-thumb" style="background-image:url('${p.image}')"></div>`
       : `<div class="product-thumb product-thumb-placeholder">
@@ -1021,19 +1070,14 @@ renderProducts();
 function buyProduct(id){
   const p = CONFIG.products.find(x => x.id === id);
   if (!p) return;
-
   const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
-
   if (navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(msg).catch(()=>{});
   }
-
   const discordId = CONFIG.discordUserId;
   if (discordId && discordId !== "YOUR_DISCORD_USER_ID"){
     showToast('▶ เปิด DM Discord · คัดลอกข้อความแล้ว');
-    setTimeout(() => {
-      window.open(`https://discord.com/users/${discordId}`, '_blank');
-    }, 400);
+    setTimeout(() => { window.open(`https://discord.com/users/${discordId}`, '_blank'); }, 400);
   } else {
     showToast('คัดลอกข้อความแล้ว · ทัก Discord: ' + CONFIG.discordUsername);
     copyDiscord();
@@ -1188,7 +1232,10 @@ function tryAutoplay(){
   const song = CONFIG.songs[idx];
   if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
-  ytPlayer.loadVideoById(song.videoId);
+  ytPlayer.loadVideoById({
+    videoId: song.videoId,
+    startSeconds: song.startAt || 0
+  });
   setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
   updateUI();
   setTimeout(() => { if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
@@ -1224,7 +1271,11 @@ function loadAndPlay(index){
   }
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
-  ytPlayer.loadVideoById(song.videoId);
+  // ★ ส่ง startSeconds — เพลงที่ 2 จะเริ่มที่ 0:42 ทันที
+  ytPlayer.loadVideoById({
+    videoId: song.videoId,
+    startSeconds: song.startAt || 0
+  });
   setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 300);
   updateUI();
   showToast('▶ กำลังเล่น: ' + song.title);
