@@ -288,67 +288,55 @@ body{
 .sec-title::before{content:"//";color:#fff;font-weight:700}
 .sec-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
-.certs{padding:20px;display:flex;flex-direction:column;gap:12px}
-.cert-card{
+/* ═══════════════════════════════════════════════════════════
+   ★ CERT MAIN BUTTON (1 ปุ่ม — เปิด modal)
+   ═══════════════════════════════════════════════════════════ */
+.certs{padding:20px}
+.cert-main-btn{
   display:flex;gap:14px;align-items:center;
-  padding:14px;border-radius:14px;
-  background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.003));
-  border:1px solid rgba(255,255,255,.1);
-  backdrop-filter:blur(10px) saturate(120%);
-  -webkit-backdrop-filter:blur(10px) saturate(120%);
-  position:relative;overflow:hidden;
-  transition:.28s cubic-bezier(.2,.8,.3,1);
+  padding:18px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.005));
+  border:1px solid rgba(255,255,255,.12);
   cursor:pointer;
+  transition:.28s cubic-bezier(.2,.8,.3,1);
+  position:relative;overflow:hidden;
 }
-.cert-card:hover{
+.cert-main-btn::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--green),transparent);
+}
+.cert-main-btn:hover{
   transform:translateY(-3px);
   border-color:rgba(255,255,255,.4);
-  box-shadow:0 14px 34px -14px rgba(255,255,255,.3);
+  box-shadow:0 14px 34px -14px rgba(255,255,255,.35);
   background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.015));
 }
-.cert-card::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,#fff,transparent);
-}
-.cert-card.passed::before{background:linear-gradient(180deg,var(--green),transparent)}
-.cert-card.live::before{background:linear-gradient(180deg,#fff,transparent);animation:blink 2s ease-in-out infinite}
-@keyframes blink{50%{opacity:.35}}
-.cert-logo{
-  width:52px;height:52px;flex-shrink:0;border-radius:12px;
-  background:linear-gradient(135deg,rgba(20,20,20,.85),rgba(0,0,0,.9));
-  border:1px solid rgba(255,255,255,.25);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+.cert-main-icon{
+  width:56px;height:56px;flex-shrink:0;border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.2);
   display:grid;place-items:center;
-  font-family:'JetBrains Mono',monospace;
-  font-size:12px;font-weight:800;letter-spacing:.5px;
-  color:#fff;overflow:hidden;
+  color:#fff;
 }
-.cert-logo img{width:100%;height:100%;object-fit:contain;padding:6px}
-.cert-info{flex:1;min-width:0}
-.cert-firm{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;font-weight:700;letter-spacing:1.6px;
-  color:#fff;text-transform:uppercase;margin-bottom:3px;
+.cert-main-icon svg{width:26px;height:26px}
+.cert-main-info{flex:1;min-width:0}
+.cert-main-title{
+  font-size:15px;font-weight:600;color:#fff;margin-bottom:3px;
 }
-.cert-name{
-  font-size:14.5px;font-weight:600;color:#fff;
-  margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.cert-meta{
+.cert-main-sub{
   font-family:'JetBrains Mono',monospace;
   font-size:11px;color:var(--muted);letter-spacing:.3px;
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
-.cert-meta .verified{color:var(--green);display:inline-flex;align-items:center;gap:3px}
-.cert-meta .verified svg{width:11px;height:11px}
-.cert-action{
-  flex-shrink:0;width:34px;height:34px;border-radius:9px;
+.cert-main-arrow{
+  width:38px;height:38px;flex-shrink:0;border-radius:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);
   display:grid;place-items:center;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);
   color:#fff;transition:.22s;
 }
-.cert-card:hover .cert-action{background:#fff;color:#000;transform:scale(1.08)}
-.cert-action svg{width:15px;height:15px}
+.cert-main-arrow svg{width:16px;height:16px}
+.cert-main-btn:hover .cert-main-arrow{
+  background:#fff;color:#000;transform:scale(1.08) translateX(3px);
+}
 
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .stat{
@@ -466,6 +454,68 @@ body{
 .song-item.playing .song-play{display:none}
 .song-item.playing .song-eq{display:flex}
 
+/* ═══════════════════════════════════════════════════════════
+   ★ SHOP SECTION
+   ═══════════════════════════════════════════════════════════ */
+.shop{padding:20px}
+.product-grid{display:flex;flex-direction:column;gap:12px}
+.product-card{
+  border-radius:16px;overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.003));
+  border:1px solid rgba(255,255,255,.1);
+  transition:.28s cubic-bezier(.2,.8,.3,1);
+  position:relative;
+}
+.product-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,255,255,.35);
+  box-shadow:0 14px 34px -14px rgba(255,255,255,.35);
+}
+.product-img{
+  width:100%;height:140px;
+  background-size:cover;background-position:center;
+  background-color:#0a0a0a;
+  position:relative;
+}
+.product-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.75) 100%);
+}
+.product-body{
+  padding:14px 16px 16px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.product-name{
+  font-size:15px;font-weight:600;color:#fff;
+}
+.product-desc{
+  font-size:12px;color:var(--muted);font-weight:300;
+  line-height:1.5;
+}
+.product-bottom{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:4px;
+}
+.product-price{
+  font-family:'JetBrains Mono',monospace;
+  font-size:16px;font-weight:800;
+  color:#fff;
+}
+.product-buy{
+  padding:10px 18px;border-radius:10px;border:none;
+  background:linear-gradient(140deg,#ffffff,#d0d0d0);
+  color:#000;font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;font-weight:700;letter-spacing:.5px;
+  cursor:pointer;transition:.25s cubic-bezier(.34,1.56,.64,1);
+  display:flex;align-items:center;gap:6px;
+}
+.product-buy:hover{
+  transform:scale(1.05);
+  box-shadow:0 6px 20px -4px rgba(255,255,255,.7);
+}
+.product-buy:active{transform:scale(.95)}
+.product-buy svg{width:13px;height:13px}
+
 .spotify-hidden{
   position:fixed;
   bottom:0;left:0;
@@ -489,18 +539,6 @@ body{
 }
 .rules h3 svg{width:17px;height:17px;color:#fff}
 .rule-list{display:flex;flex-direction:column;gap:10px}
-.rule{
-  display:flex;gap:11px;align-items:flex-start;
-  font-size:13px;line-height:1.6;color:#b8b8b8;font-weight:300;
-}
-.rule .num-badge{
-  flex-shrink:0;width:24px;height:24px;border-radius:7px;
-  display:grid;place-items:center;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;font-weight:800;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
-  color:#fff;margin-top:1px;
-}
 .soon-text{
   font-family:'JetBrains Mono',monospace;
   font-size:14px;
@@ -533,7 +571,6 @@ footer .dot{color:#fff;margin:0 6px}
 .toast.show{transform:translate(-50%,0);opacity:1}
 .toast svg{width:15px;height:15px;color:#fff}
 
-/* ★ Autoplay hint — แสดงตอนเบราว์เซอร์บล็อก autoplay */
 .autoplay-hint{
   position:fixed;
   bottom:24px;
@@ -573,6 +610,9 @@ footer .dot{color:#fff;margin:0 6px}
   50%{opacity:1;transform:scale(1.15)}
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ★ MODAL (ใช้ร่วมกันทั้ง cert list + cert detail)
+   ═══════════════════════════════════════════════════════════ */
 .modal{
   position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.85);
@@ -600,22 +640,72 @@ footer .dot{color:#fff;margin:0 6px}
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 18px;border-bottom:1px solid var(--border);
   background:rgba(255,255,255,.02);
+  gap:10px;
 }
 .modal-head .title{
+  flex:1;
   font-family:'JetBrains Mono',monospace;
   font-size:12px;font-weight:700;letter-spacing:1.4px;
   color:#fff;text-transform:uppercase;
+  text-align:center;
 }
+.modal-back,
 .modal-close{
-  width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+  width:32px;height:32px;flex-shrink:0;border-radius:8px;border:1px solid var(--border);
   background:transparent;color:var(--text);cursor:pointer;
   display:grid;place-items:center;transition:.2s;
 }
+.modal-back:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
 .modal-close:hover{background:var(--red);border-color:var(--red);color:#fff}
-.modal-close svg{width:15px;height:15px}
+.modal-back svg,.modal-close svg{width:15px;height:15px}
 .modal-body{padding:18px;overflow-y:auto;text-align:center}
 
-.modal-body img{
+/* ─── CERT LIST ─── */
+.cert-list{display:flex;flex-direction:column;gap:10px}
+.cert-list-item{
+  display:flex;gap:12px;align-items:center;
+  padding:14px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.003));
+  border:1px solid rgba(255,255,255,.1);
+  cursor:pointer;
+  transition:.22s cubic-bezier(.2,.8,.3,1);
+  text-align:left;
+}
+.cert-list-item:hover{
+  transform:translateX(4px);
+  border-color:rgba(255,255,255,.35);
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.015));
+}
+.cert-list-logo{
+  width:48px;height:48px;flex-shrink:0;border-radius:10px;
+  background:linear-gradient(135deg,rgba(20,20,20,.85),rgba(0,0,0,.9));
+  border:1px solid rgba(255,255,255,.25);
+  display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:800;letter-spacing:.5px;
+  color:#fff;
+}
+.cert-list-info{flex:1;min-width:0}
+.cert-list-firm{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;font-weight:700;letter-spacing:1.4px;
+  color:#fff;text-transform:uppercase;margin-bottom:3px;
+}
+.cert-list-name{
+  font-size:14px;font-weight:600;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.cert-list-arrow{
+  width:32px;height:32px;flex-shrink:0;border-radius:8px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);
+  display:grid;place-items:center;
+  color:#fff;transition:.22s;
+}
+.cert-list-arrow svg{width:13px;height:13px}
+.cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
+
+/* ─── CERT DETAIL ─── */
+.cert-detail-img{
   display:block;margin:0 auto;
   max-width:100%;height:auto;
   border-radius:10px;
@@ -633,7 +723,6 @@ footer .dot{color:#fff;margin:0 6px}
 @media(max-width:400px){
   .hero h1{font-size:22px}
   .stat .num{font-size:19px}
-  .cert-card{flex-wrap:wrap}
   .song-item{min-height:120px;padding:18px 14px}
   .song-title{font-size:14px}
   .song-play,.song-eq{width:46px;height:46px}
@@ -641,6 +730,8 @@ footer .dot{color:#fff;margin:0 6px}
   .btn{width:44px;height:44px}
   .btn svg{width:17px;height:17px}
   .socials{gap:10px}
+  .cert-main-icon{width:48px;height:48px}
+  .cert-main-icon svg{width:22px;height:22px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -712,59 +803,23 @@ footer .dot{color:#fff;margin:0 6px}
 
   <div class="sec-title reveal" style="animation-delay:.05s">Prop Firm Verified</div>
 
+  <!-- ★ CERT MAIN BUTTON (1 ปุ่ม) -->
   <section class="card certs reveal" style="animation-delay:.1s">
-
-    <div class="cert-card passed" data-cert="https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4712" onclick="openCert(this)">
-      <div class="cert-logo">ACG</div>
-      <div class="cert-info">
-        <div class="cert-firm">Alpha Capital Group</div>
-        <div class="cert-name">$50K Challenge Passed</div>
-        <div class="cert-meta">
-          <span>dec 2024</span>
-          <span class="verified">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Verified
-          </span>
-        </div>
+    <div class="cert-main-btn" onclick="openCertModal()">
+      <div class="cert-main-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
       </div>
-      <div class="cert-action">
+      <div class="cert-main-info">
+        <div class="cert-main-title">Verified Certificates</div>
+        <div class="cert-main-sub">3 Prop Firms · Click to view</div>
+      </div>
+      <div class="cert-main-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </div>
     </div>
-
-    <div class="cert-card live" data-cert="funded.jpg" onclick="openCert(this)">
-      <div class="cert-logo">FUND</div>
-      <div class="cert-info">
-        <div class="cert-firm">The Funded Trader</div>
-        <div class="cert-name">$200K Funded Account</div>
-        <div class="cert-meta">
-          <span>พ.ค. 2026</span>
-          <span style="color:#fff">● LIVE</span>
-        </div>
-      </div>
-      <div class="cert-action">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
-    </div>
-
-    <div class="cert-card" data-cert="e8.jpg" onclick="openCert(this)">
-      <div class="cert-logo">E8</div>
-      <div class="cert-info">
-        <div class="cert-firm">E8 Markets</div>
-        <div class="cert-name">$50K Evaluation Passed</div>
-        <div class="cert-meta">
-          <span>มี.ค. 2026</span>
-          <span class="verified">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Verified
-          </span>
-        </div>
-      </div>
-      <div class="cert-action">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </div>
-    </div>
-
   </section>
 
   <div class="sec-title reveal" style="animation-delay:.15s">Performance</div>
@@ -802,7 +857,14 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
   </section>
 
-  <section class="card rules reveal" style="animation-delay:.35s">
+  <div class="sec-title reveal" style="animation-delay:.32s">Shop</div>
+
+  <!-- ★ SHOP SECTION -->
+  <section class="card shop reveal" style="animation-delay:.35s">
+    <div class="product-grid" id="productGrid"></div>
+  </section>
+
+  <section class="card rules reveal" style="animation-delay:.4s">
     <h3>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       idk is the rules bro 😭
@@ -827,17 +889,19 @@ footer .dot{color:#fff;margin:0 6px}
   <span>แตะที่ไหนก็ได้เพื่อเล่นเพลง</span>
 </div>
 
+<!-- ★ MODAL (Certificates) -->
 <div class="modal" id="certModal" onclick="closeCert(event)">
   <div class="modal-inner">
     <div class="modal-head">
-      <div class="title" id="modalTitle">Certificate</div>
+      <button class="modal-back" id="modalBack" onclick="certBack(event)" aria-label="Back" style="visibility:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="title" id="modalTitle">Verified Certificates</div>
       <button class="modal-close" onclick="closeCert()" aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <div class="modal-body">
-      <img id="modalImg" src="" alt="Certificate" />
-    </div>
+    <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
@@ -854,9 +918,10 @@ footer .dot{color:#fff;margin:0 6px}
    ═══════════════════════════════════════════════════════════════ */
 const CONFIG = {
   discordUsername: "munzq",
+  // ★ ใส่ Discord User ID (18 หลัก) → เพื่อให้กดซื้อแล้วเปิด DM ได้
+  //    ถ้าไม่ใส่ จะคัดลอก username แทน
   discordUserId: "YOUR_DISCORD_USER_ID",
 
-  // ★ index เพลงที่จะ autoplay (0 = เพลงแรก)
   autoplayIndex: 0,
 
   songs: [
@@ -872,8 +937,51 @@ const CONFIG = {
       trackId: "1a019wP7IdYLexwbmfZPm3",
       cover:   "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c665c7f2be1f6d3214a93a76"
     }
+  ],
+
+  // ★★ เพิ่ม/แก้สินค้าที่นี่ ★★
+  products: [
+    {
+      id:    "p1",
+      name:  "Signal Group VIP",
+      desc:  "เข้ากลุ่มสัญญาณ 1 เดือน · Forex + Gold",
+      price: "฿1,500",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+    },
+    {
+      id:    "p2",
+      name:  "Private Mentorship",
+      desc:  "สอนตัวต่อตัว 1-on-1 · 4 ครั้ง/เดือน",
+      price: "฿5,000",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+    }
   ]
 };
+
+/* ★ Certificates list (สำหรับ modal) */
+const CERTS = [
+  {
+    id:    'acg',
+    logo:  'ACG',
+    firm:  'Alpha Capital Group',
+    name:  '$50K Challenge Passed',
+    image: 'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4712'
+  },
+  {
+    id:    'fund',
+    logo:  'FUND',
+    firm:  'The Funded Trader',
+    name:  '$200K Funded Account',
+    image: 'funded.jpg'
+  },
+  {
+    id:    'e8',
+    logo:  'E8',
+    firm:  'E8 Markets',
+    name:  '$50K Evaluation Passed',
+    image: 'e8.jpg'
+  }
+];
 /* ═══════════════════════════════════════════════════════════════ */
 
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -884,7 +992,7 @@ function showToast(msg){
   document.getElementById('toastMsg').textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
 }
 
 function copyDiscord(){
@@ -900,6 +1008,131 @@ function copyDiscord(){
     try { document.execCommand('copy'); done(); }
     catch(e){ showToast('Discord: ' + user); }
     document.body.removeChild(ta);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ★ CERT MODAL — List / Detail
+   ═══════════════════════════════════════════════════════════════ */
+function openCertModal(){
+  showCertList();
+  document.getElementById('certModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function showCertList(){
+  const title = document.getElementById('modalTitle');
+  const body  = document.getElementById('modalBody');
+  const back  = document.getElementById('modalBack');
+
+  title.textContent = 'Verified Certificates';
+  back.style.visibility = 'hidden';
+
+  body.innerHTML = `
+    <div class="cert-list">
+      ${CERTS.map(c => `
+        <div class="cert-list-item" onclick="viewCert('${c.id}')">
+          <div class="cert-list-logo">${c.logo}</div>
+          <div class="cert-list-info">
+            <div class="cert-list-firm">${c.firm}</div>
+            <div class="cert-list-name">${c.name}</div>
+          </div>
+          <div class="cert-list-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function viewCert(id){
+  const cert = CERTS.find(c => c.id === id);
+  if (!cert) return;
+
+  const title = document.getElementById('modalTitle');
+  const body  = document.getElementById('modalBody');
+  const back  = document.getElementById('modalBack');
+
+  title.textContent = cert.firm;
+  back.style.visibility = 'visible';
+
+  body.innerHTML = `<img class="cert-detail-img" src="${cert.image}" alt="${cert.firm}">`;
+}
+
+function certBack(e){
+  if (e) e.stopPropagation();
+  showCertList();
+}
+
+function closeCert(e){
+  if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.modal-close')) return;
+  document.getElementById('certModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    const modal = document.getElementById('certModal');
+    if (modal.classList.contains('show')){
+      // ถ้าอยู่ใน detail view → กลับไป list
+      const back = document.getElementById('modalBack');
+      if (back.style.visibility === 'visible'){
+        showCertList();
+      } else {
+        closeCert();
+      }
+    }
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   ★ SHOP — Render + Buy
+   ═══════════════════════════════════════════════════════════════ */
+function renderProducts(){
+  const grid = document.getElementById('productGrid');
+  if (!CONFIG.products || CONFIG.products.length === 0){
+    grid.innerHTML = '<div class="soon-text">soon…</div>';
+    return;
+  }
+  grid.innerHTML = CONFIG.products.map(p => `
+    <div class="product-card">
+      <div class="product-img" style="background-image:url('${p.image}')"></div>
+      <div class="product-body">
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-bottom">
+          <div class="product-price">${p.price}</div>
+          <button class="product-buy" onclick="buyProduct('${p.id}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+renderProducts();
+
+function buyProduct(id){
+  const p = CONFIG.products.find(x => x.id === id);
+  if (!p) return;
+
+  const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
+  const discordId = CONFIG.discordUserId;
+
+  // ★ คัดลอกข้อความไว้ใน clipboard (เผื่อลูกค้าอยาก paste ใน DM)
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(msg).catch(()=>{});
+  }
+
+  if (discordId && discordId !== "YOUR_DISCORD_USER_ID"){
+    showToast('▶ กำลังเปิด Discord DM…');
+    setTimeout(() => {
+      window.open(`https://discord.com/users/${discordId}`, '_blank');
+    }, 400);
+  } else {
+    // ★ ถ้าไม่มี Discord User ID → คัดลอก username ให้ทัก
+    copyDiscord();
   }
 }
 
@@ -1025,16 +1258,13 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
       const playing = !e.data.isPaused && !e.data.isBuffering;
       isPlaying = playing;
       updateUI();
-      // ★ ถ้าเพลงเล่นสำเร็จ → ซ่อน hint
       if (playing){
         autoplayHint.classList.remove('show');
       }
     });
 
-    // ★ พยายาม autoplay ทันทีที่พร้อม
     setTimeout(() => tryAutoplay(), 300);
 
-    // ★ ถ้ามีคำสั่ง play ค้างอยู่ (ผู้ใช้คลิกก่อน API พร้อม)
     if (pendingPlay !== null){
       const idx = pendingPlay;
       pendingPlay = null;
@@ -1044,7 +1274,6 @@ window.onSpotifyIframeApiReady = (IFrameAPI) => {
   IFrameAPI.createController(element, options, callback);
 };
 
-/* ★ ลองเล่นเพลงอัตโนมัติ */
 function tryAutoplay(){
   if (autoplayAttempted) return;
   autoplayAttempted = true;
@@ -1071,7 +1300,6 @@ function tryAutoplay(){
 
   updateUI();
 
-  // ★ ถ้า 1.5 วิแล้วยังไม่เล่น → แสดง hint ว่าต้องแตะก่อน
   setTimeout(() => {
     if (!isPlaying){
       autoplayHint.classList.add('show');
@@ -1079,7 +1307,6 @@ function tryAutoplay(){
   }, 1500);
 }
 
-/* ★ ผู้ใช้ interact ครั้งแรก → เล่นเพลง + ซ่อน hint */
 function handleFirstInteraction(){
   if (userInteracted) return;
   userInteracted = true;
@@ -1087,7 +1314,6 @@ function handleFirstInteraction(){
   autoplayHint.classList.remove('show');
 
   if (spotifyController && !isPlaying){
-    // ★ ถ้ายังไม่เล่น → สั่งเล่นเพลง autoplayIndex
     if (currentIndex === -1){
       loadAndPlay(CONFIG.autoplayIndex || 0);
     } else {
@@ -1096,12 +1322,10 @@ function handleFirstInteraction(){
   }
 }
 
-// ★ ฟัง event ทุกอย่างที่จะ trigger user gesture
 ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
   document.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
 });
 
-/* ★ ถ้าเบราว์เซอร์อนุญาต autoplay → ลองเลย */
 window.addEventListener('load', () => {
   setTimeout(() => tryAutoplay(), 500);
 });
@@ -1149,27 +1373,7 @@ function updateUI(){
   });
 }
 
-function openCert(card){
-  const file = card.dataset.cert;
-  if (!file){ showToast('⚠ ยังไม่ได้ใส่ไฟล์ใบเซอร์'); return; }
-  const title = card.querySelector('.cert-firm')?.textContent || 'Certificate';
-  const name  = card.querySelector('.cert-name')?.textContent || '';
-  document.getElementById('modalTitle').textContent = title + ' — ' + name;
-
-  const img = document.getElementById('modalImg');
-  img.src = '';
-  img.src = file;
-
-  document.getElementById('certModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeCert(e){
-  if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.modal-close')) return;
-  document.getElementById('certModal').classList.remove('show');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCert(); });
-
+/* ── ตัวเลขวิ่ง ── */
 function animateCount(el){
   const raw    = parseFloat(el.dataset.count);
   const prefix = el.dataset.prefix || '';
