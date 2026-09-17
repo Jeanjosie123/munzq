@@ -263,7 +263,6 @@ body{
 .sec-title::before{content:"//";color:#fff;font-weight:700}
 .sec-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
-/* CERT MAIN BUTTON */
 .certs{padding:20px}
 .cert-main-btn{
   display:flex;gap:14px;align-items:center;
@@ -397,13 +396,8 @@ body{
 .song-item.playing .song-play{display:none}
 .song-item.playing .song-eq{display:flex}
 
-/* ═══════════════════════════════════════════════════════════
-   ★ SHOP — แนวนอน + ไฟรุ้ง
-   ใช้ wrapper ครอบ · ไม่แตะ layout ของ product-row
-   ═══════════════════════════════════════════════════════════ */
+/* SHOP */
 .shop{padding:20px}
-
-/* ★ Wrapper ทำหน้าที่เป็นขอบรุ้ง + glow */
 .product-glow{
   position:relative;
   border-radius:16px;
@@ -430,8 +424,6 @@ body{
                0 0 54px rgba(102,51,255,.3);
   }
 }
-
-/* ★ การ์ดจริง — พื้นหลังทึบ ให้เหลือแค่ขอบรุ้ง */
 .product-row{
   position:relative;
   z-index:1;
@@ -443,81 +435,47 @@ body{
   background:linear-gradient(135deg,rgba(15,15,15,.96),rgba(8,8,8,.98));
   transition:.28s cubic-bezier(.2,.8,.3,1);
 }
-.product-glow:hover .product-row{
-  transform:translateY(-2px);
-}
+.product-glow:hover .product-row{transform:translateY(-2px)}
 
-/* Thumbnail */
 .product-thumb{
-  width:56px;
-  height:56px;
-  flex-shrink:0;
+  width:56px;height:56px;flex-shrink:0;
   border-radius:12px;
-  background-size:cover;
-  background-position:center;
+  background-size:cover;background-position:center;
   background-color:#0a0a0a;
   border:1px solid rgba(255,255,255,.12);
-  position:relative;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
+  position:relative;overflow:hidden;
+  display:grid;place-items:center;
 }
-.product-thumb-placeholder{
-  color:rgba(255,255,255,.4);
-}
-.product-thumb-placeholder svg{
-  width:24px !important;
-  height:24px !important;
-  display:block;
-}
+.product-thumb-placeholder{color:rgba(255,255,255,.4)}
+.product-thumb-placeholder svg{width:24px !important;height:24px !important;display:block}
 
-/* Info */
 .product-info{
-  flex:1;
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  gap:3px;
+  flex:1;min-width:0;
+  display:flex;flex-direction:column;gap:3px;
 }
 .product-name{
-  font-size:14.5px;
-  font-weight:600;
-  color:#fff;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:14.5px;font-weight:600;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .product-price{
   font-family:'JetBrains Mono',monospace;
-  font-size:13px;
-  font-weight:700;
-  color:#c8c8c8;
+  font-size:13px;font-weight:700;color:#c8c8c8;
   letter-spacing:-.3px;
 }
-
-/* Buy button */
 .product-buy{
-  padding:10px 16px;
-  border-radius:10px;
+  padding:10px 16px;border-radius:10px;
   border:1px solid rgba(255,255,255,.2);
   background:rgba(255,255,255,.06);
   color:#fff;
   font-family:'JetBrains Mono',monospace;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.5px;
+  font-size:11px;font-weight:700;letter-spacing:.5px;
   cursor:pointer;
   transition:.22s cubic-bezier(.34,1.56,.64,1);
-  display:flex;
-  align-items:center;
-  gap:6px;
-  flex-shrink:0;
-  white-space:nowrap;
+  display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap;
 }
 .product-buy svg{width:12px;height:12px;flex-shrink:0}
 .product-buy:hover{
-  background:#fff;
-  color:#000;
+  background:#fff;color:#000;
   border-color:#fff;
   transform:scale(1.05);
 }
@@ -596,6 +554,7 @@ footer .dot{color:#fff;margin:0 6px}
 .autoplay-hint svg{width:13px;height:13px;animation:pulseHint 1.6s ease-in-out infinite}
 @keyframes pulseHint{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
 
+/* MODAL (cert) */
 .modal{
   position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.85);
@@ -691,6 +650,154 @@ footer .dot{color:#fff;margin:0 6px}
   transform:translateZ(0);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   ★ BUY CONFIRM MODAL
+   ═══════════════════════════════════════════════════════════ */
+.buy-modal{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(16px) saturate(120%);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+.buy-modal.show{opacity:1;visibility:visible;pointer-events:auto}
+
+.buy-inner{
+  max-width:400px;width:100%;
+  background:rgba(10,10,10,.96);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;
+  overflow:hidden;
+  backdrop-filter:blur(32px) saturate(120%);
+  -webkit-backdrop-filter:blur(32px) saturate(120%);
+  display:flex;flex-direction:column;
+  transform:scale(.85) translateY(20px);
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.9),0 0 40px -10px rgba(255,255,255,.15);
+}
+.buy-modal.show .buy-inner{transform:scale(1) translateY(0)}
+
+.buy-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+}
+.buy-head .title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:700;letter-spacing:1.4px;
+  color:#fff;text-transform:uppercase;
+}
+.buy-close{
+  width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+  background:transparent;color:var(--text);cursor:pointer;
+  display:grid;place-items:center;transition:.2s;
+}
+.buy-close:hover{background:var(--red);border-color:var(--red);color:#fff}
+.buy-close svg{width:15px;height:15px}
+
+.buy-body{
+  padding:24px 20px 20px;
+  display:flex;flex-direction:column;align-items:center;
+  gap:16px;
+  text-align:center;
+}
+
+.buy-icon{
+  width:64px;height:64px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.18);
+  display:grid;place-items:center;
+  color:#fff;
+  animation:buyIconPulse 2s ease-in-out infinite;
+}
+.buy-icon svg{width:30px;height:30px}
+@keyframes buyIconPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.15)}
+  50%{box-shadow:0 0 0 10px rgba(255,255,255,0)}
+}
+
+.buy-message{
+  font-size:14px;
+  line-height:1.7;
+  color:#b8b8b8;
+  font-weight:300;
+}
+.buy-message strong{
+  color:#fff;
+  font-weight:600;
+  display:block;
+  font-size:15px;
+  margin-bottom:4px;
+}
+.buy-message .price{
+  font-family:'JetBrains Mono',monospace;
+  color:var(--green);
+  font-weight:700;
+  font-size:15px;
+}
+
+.buy-note{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:8px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  letter-spacing:.3px;
+  width:100%;
+}
+
+.buy-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  width:100%;
+  margin-top:4px;
+}
+
+.buy-btn{
+  padding:13px 16px;
+  border-radius:12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.6px;
+  cursor:pointer;
+  transition:.22s cubic-bezier(.34,1.56,.64,1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:1px solid transparent;
+}
+.buy-btn svg{width:14px;height:14px}
+.buy-btn:active{transform:scale(.96)}
+
+.buy-btn.confirm{
+  background:linear-gradient(135deg,#ffffff,#d0d0d0);
+  color:#000;
+  border-color:#fff;
+}
+.buy-btn.confirm:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px -10px rgba(255,255,255,.7);
+}
+
+.buy-btn.cancel{
+  background:transparent;
+  color:#fff;
+  border-color:rgba(255,255,255,.2);
+}
+.buy-btn.cancel:hover{
+  background:rgba(255,59,92,.12);
+  border-color:rgba(255,59,92,.5);
+  color:#ff8ca3;
+  transform:translateY(-2px);
+}
+
 .reveal{opacity:0;transform:translateY(22px);animation:reveal .7s cubic-bezier(.2,.8,.3,1) forwards}
 @keyframes reveal{to{opacity:1;transform:none}}
 
@@ -709,6 +816,7 @@ footer .dot{color:#fff;margin:0 6px}
   .product-name{font-size:13.5px}
   .product-price{font-size:12px}
   .product-buy{padding:9px 13px;font-size:10.5px}
+  .buy-actions{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -778,7 +886,6 @@ footer .dot{color:#fff;margin:0 6px}
   <section class="card certs reveal" style="animation-delay:.1s">
     <div class="cert-main-btn" onclick="openCertModal()">
       <div class="cert-main-icon">
-        <!-- ★ ไอคอนใหม่: เอกสาร + เหรียญรางวัล (ไม่ใช่โล่) -->
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
           <polyline points="14 2 14 8 20 8"/>
@@ -821,7 +928,6 @@ footer .dot{color:#fff;margin:0 6px}
     </div>
   </section>
 
-  <!-- ★ SHOP ย้ายขึ้นมาก่อน Focus Playlist -->
   <div class="sec-title reveal" style="animation-delay:.25s">Shop</div>
 
   <section class="card shop reveal" style="animation-delay:.28s">
@@ -862,6 +968,7 @@ footer .dot{color:#fff;margin:0 6px}
   <span>แตะที่ไหนก็ได้เพื่อเล่นเพลง</span>
 </div>
 
+<!-- CERT MODAL -->
 <div class="modal" id="certModal" onclick="closeCert(event)">
   <div class="modal-inner">
     <div class="modal-head">
@@ -874,6 +981,51 @@ footer .dot{color:#fff;margin:0 6px}
       </button>
     </div>
     <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ★ BUY CONFIRM MODAL -->
+<div class="buy-modal" id="buyModal" onclick="closeBuyModal(event)">
+  <div class="buy-inner">
+    <div class="buy-head">
+      <div class="title">Confirm Purchase</div>
+      <button class="buy-close" onclick="closeBuyModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="buy-body">
+      <div class="buy-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+      </div>
+
+      <div class="buy-message">
+        <strong id="buyProductName">ไม่รู้เลยก๊า</strong>
+        ต้องการยืนยันการซื้อสินค้านี้หรือไม่?
+        <div style="margin-top:6px">
+          ราคา <span class="price" id="buyProductPrice">฿999</span>
+        </div>
+      </div>
+
+      <div class="buy-note">
+        ⓘ ยังไม่เปิดขาย — ของจะมาเร็ว ๆ นี้
+      </div>
+
+      <div class="buy-actions">
+        <button class="buy-btn cancel" onclick="closeBuyModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          Cancel
+        </button>
+        <button class="buy-btn confirm" onclick="confirmBuy()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Confirm
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -892,9 +1044,11 @@ const CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
 
+  // ★ ปิดการซื้อไว้ก่อน (ยังไม่ขาย) — true = เปิดขาย
+  sellingEnabled: false,
+
   autoplayIndex: 0,
 
-  // ★★ YouTube videoId + startAt (วินาทีที่เริ่มเล่น) ★★
   songs: [
     {
       title:   "LV Sandals",
@@ -907,7 +1061,7 @@ const CONFIG = {
       title:   "Flawlëss (feat. Lil Uzi Vert)",
       artist:  "Yeat, Lil Uzi Vert",
       videoId: "NzXGXMgdGOI",
-      startAt: 42,          // ★ เริ่มที่ 0:42
+      startAt: 42,
       cover:   "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c665c7f2be1f6d3214a93a76"
     }
   ],
@@ -1000,8 +1154,10 @@ function closeCert(e){
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape'){
-    const modal = document.getElementById('certModal');
-    if (modal.classList.contains('show')){
+    const certModal = document.getElementById('certModal');
+    const buyModal = document.getElementById('buyModal');
+    if (buyModal.classList.contains('show')){ closeBuyModal(); return; }
+    if (certModal.classList.contains('show')){
       const back = document.getElementById('modalBack');
       if (back.style.visibility === 'visible') showCertList();
       else closeCert();
@@ -1010,8 +1166,10 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   ★ SHOP — แนวนอน · มี wrapper product-glow สำหรับไฟรุ้ง
+   ★ SHOP
    ═══════════════════════════════════════════════════════════════ */
+let selectedProductId = null;
+
 function renderProducts(){
   const list = document.getElementById('productList');
   if (!CONFIG.products || CONFIG.products.length === 0){
@@ -1019,7 +1177,6 @@ function renderProducts(){
     return;
   }
   list.innerHTML = CONFIG.products.map(p => {
-    // thumbnail
     const thumbHTML = p.image
       ? `<div class="product-thumb" style="background-image:url('${p.image}')"></div>`
       : `<div class="product-thumb product-thumb-placeholder">
@@ -1038,7 +1195,7 @@ function renderProducts(){
             <div class="product-name">${p.name}</div>
             <div class="product-price">${p.price}</div>
           </div>
-          <button class="product-buy" onclick="buyProduct('${p.id}')">
+          <button class="product-buy" onclick="openBuyModal('${p.id}')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
               <path d="M3 6h18"/>
@@ -1053,14 +1210,45 @@ function renderProducts(){
 }
 renderProducts();
 
-function buyProduct(id){
+/* ★ เปิด modal ยืนยัน */
+function openBuyModal(id){
   const p = CONFIG.products.find(x => x.id === id);
   if (!p) return;
+  selectedProductId = id;
+
+  document.getElementById('buyProductName').textContent = p.name;
+  document.getElementById('buyProductPrice').textContent = p.price;
+
+  document.getElementById('buyModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ★ ปิด modal */
+function closeBuyModal(e){
+  if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.buy-close')) return;
+  document.getElementById('buyModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+/* ★ กดยืนยัน */
+function confirmBuy(){
+  if (!CONFIG.sellingEnabled){
+    showToast('⏳ ยังไม่เปิดขาย · เร็ว ๆ นี้');
+    setTimeout(() => closeBuyModal(), 800);
+    return;
+  }
+
+  const p = CONFIG.products.find(x => x.id === selectedProductId);
+  if (!p) return;
+
   const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
   if (navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(msg).catch(()=>{});
   }
+
   const discordId = CONFIG.discordUserId;
+  closeBuyModal();
+
   if (discordId && discordId !== "YOUR_DISCORD_USER_ID"){
     showToast('▶ เปิด DM Discord · คัดลอกข้อความแล้ว');
     setTimeout(() => { window.open(`https://discord.com/users/${discordId}`, '_blank'); }, 400);
@@ -1257,7 +1445,6 @@ function loadAndPlay(index){
   }
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
-  // ★ startAt → เพลงที่ 2 เริ่มที่ 0:42
   ytPlayer.loadVideoById({
     videoId: song.videoId,
     startSeconds: song.startAt || 0
