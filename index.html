@@ -398,83 +398,102 @@ body{
 .song-item.playing .song-eq{display:flex}
 
 /* ═══════════════════════════════════════════════════════════
-   ★ SHOP — 1 สินค้า · การ์ดขนาดเท่า stat · ปุ่ม Buy อยู่บนการ์ด
+   ★ SHOP — แนวนอน (แบบปุ่มยาว)
    ═══════════════════════════════════════════════════════════ */
 .shop{padding:20px}
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.product-card{
-  padding:16px 14px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  transition:.25s;
+.product-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.003));
+  border:1px solid rgba(255,255,255,.1);
+  transition:.28s cubic-bezier(.2,.8,.3,1);
   position:relative;
   overflow:hidden;
-  box-shadow:0 6px 24px -8px rgba(0,0,0,.6);
-  display:flex;
-  flex-direction:column;
-  gap:10px;
 }
-.product-card:hover{
+.product-row::before{
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,#fff,transparent);
+}
+.product-row:hover{
   transform:translateY(-3px);
-  border-color:rgba(255,255,255,.3);
-  background:rgba(255,255,255,.03);
+  border-color:rgba(255,255,255,.35);
+  background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.01));
   box-shadow:0 14px 34px -14px rgba(255,255,255,.35);
 }
-.product-img{
-  width:100%;
-  aspect-ratio:1/1;
+/* Thumbnail (รูปเล็ก) */
+.product-thumb{
+  width:56px;
+  height:56px;
+  flex-shrink:0;
   border-radius:12px;
   background-size:cover;
   background-position:center;
   background-color:#0a0a0a;
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
   position:relative;
   overflow:hidden;
 }
-.product-img::after{
-  content:"";
-  position:absolute;inset:0;border-radius:12px;
-  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.45) 100%);
+.product-thumb-placeholder{
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  color:rgba(255,255,255,.4);
 }
+.product-thumb-placeholder svg{width:22px;height:22px}
+/* Info */
 .product-info{
-  display:flex;flex-direction:column;gap:3px;
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
 }
 .product-name{
-  font-size:12.5px;font-weight:600;color:#fff;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-size:14.5px;
+  font-weight:600;
+  color:#fff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .product-price{
   font-family:'JetBrains Mono',monospace;
-  font-size:15px;font-weight:800;color:#fff;
+  font-size:13px;
+  font-weight:700;
+  color:#c8c8c8;
   letter-spacing:-.3px;
 }
+/* Buy button */
 .product-buy{
-  width:100%;
-  padding:10px 12px;
+  padding:10px 16px;
   border-radius:10px;
-  border:1px solid rgba(255,255,255,.15);
-  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.06);
   color:#fff;
   font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;font-weight:700;letter-spacing:.6px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
   cursor:pointer;
-  transition:.25s cubic-bezier(.34,1.56,.64,1);
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  margin-top:2px;
+  transition:.22s cubic-bezier(.34,1.56,.64,1);
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+  white-space:nowrap;
 }
-.product-buy:hover{
-  background:rgba(255,255,255,.15);
-  border-color:rgba(255,255,255,.5);
-  transform:translateY(-1px);
-  box-shadow:0 8px 20px -8px rgba(255,255,255,.4);
-}
-.product-buy:active{transform:scale(.97)}
 .product-buy svg{width:12px;height:12px}
+.product-buy:hover{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+  transform:scale(1.05);
+}
+.product-buy:active{transform:scale(.95)}
 
 /* YouTube player */
 .yt-hidden{
@@ -659,8 +678,9 @@ footer .dot{color:#fff;margin:0 6px}
   .socials{gap:10px}
   .cert-main-icon{width:48px;height:48px}
   .cert-main-icon svg{width:22px;height:22px}
-  .product-name{font-size:11.5px}
-  .product-price{font-size:14px}
+  .product-name{font-size:13.5px}
+  .product-price{font-size:12px}
+  .product-buy{padding:9px 13px;font-size:10.5px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -783,7 +803,7 @@ footer .dot{color:#fff;margin:0 6px}
   <div class="sec-title reveal" style="animation-delay:.32s">Shop</div>
 
   <section class="card shop reveal" style="animation-delay:.35s">
-    <div class="product-grid" id="productGrid"></div>
+    <div id="productList"></div>
   </section>
 
   <section class="card rules reveal" style="animation-delay:.4s">
@@ -838,36 +858,34 @@ footer .dot{color:#fff;margin:0 6px}
    ═══════════════════════════════════════════════════════════════ */
 const CONFIG = {
   discordUsername: "munzq",
-  // ★ ใส่ Discord User ID (18 หลัก) → กด Buy แล้วเปิด DM ได้เลย
   discordUserId: "YOUR_DISCORD_USER_ID",
 
   autoplayIndex: 0,
 
-  // ★★ YouTube videoId (เล่นเต็มเพลง) ★★
-  // วิธีเอา: เปิด YouTube → copy จาก URL: youtube.com/watch?v=XXXXXXXXXXX
+  // ★★ YouTube videoId ของ 2 เพลง ★★
   songs: [
     {
       title:   "LV Sandals",
       artist:  "EsDeeKid, fakemink, Rico Ace",
-      videoId: "REPLACE_VIDEO_ID_1",
+      videoId: "K6QjQeKfmUs",
       cover:   "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02cff4bd68d5d0dd9a0a748045"
     },
     {
       title:   "Flawlëss (feat. Lil Uzi Vert)",
       artist:  "Yeat, Lil Uzi Vert",
-      videoId: "REPLACE_VIDEO_ID_2",
+      videoId: "NzXGXMgdGOI",
       cover:   "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c665c7f2be1f6d3214a93a76"
     }
   ],
 
-  // ★★ สินค้า (มีแค่ 1 ชิ้น) ★★
-  // แก้ชื่อ / ราคา / รูปรูป ตรงนี้ได้เลย
+  // ★★ สินค้า (แนวนอน) ★★
+  // ใส่ image: "" ไว้ก่อน → จะแสดง placeholder ไอคอนกล่อง
   products: [
     {
       id:    "p1",
-      name:  "ชื่อสินค้าของคุณ",         // ← แก้ตรงนี้
-      price: "฿999",                     // ← แก้ราคา
-      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"  // ← ใส่รูปรูป
+      name:  "ไม่รู้เลยก๊า",
+      price: "฿999",
+      image: ""   // ← ใส่ URL รูปทีหลังได้
     }
   ]
 };
@@ -960,31 +978,43 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   ★ SHOP — 1 สินค้า · การ์ดขนาดเท่า stat · ปุ่ม Buy บนการ์ด
+   ★ SHOP — แนวนอน
    ═══════════════════════════════════════════════════════════════ */
 function renderProducts(){
-  const grid = document.getElementById('productGrid');
+  const list = document.getElementById('productList');
   if (!CONFIG.products || CONFIG.products.length === 0){
-    grid.innerHTML = '<div class="soon-text" style="grid-column:1/-1">soon…</div>';
+    list.innerHTML = '<div class="soon-text">soon…</div>';
     return;
   }
-  grid.innerHTML = CONFIG.products.map(p => `
-    <div class="product-card">
-      <div class="product-img" style="background-image:url('${p.image}')"></div>
-      <div class="product-info">
-        <div class="product-name">${p.name}</div>
-        <div class="product-price">${p.price}</div>
+  list.innerHTML = CONFIG.products.map(p => {
+    // thumbnail: ถ้ามีรูปใช้รูป, ถ้าไม่มีใช้ไอคอนกล่อง
+    const thumbHTML = p.image
+      ? `<div class="product-thumb" style="background-image:url('${p.image}')"></div>`
+      : `<div class="product-thumb product-thumb-placeholder">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+             <path d="M21 8v13H3V8"/>
+             <path d="M1 3h22v5H1z"/>
+             <path d="M10 12h4"/>
+           </svg>
+         </div>`;
+    return `
+      <div class="product-row">
+        ${thumbHTML}
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price">${p.price}</div>
+        </div>
+        <button class="product-buy" onclick="buyProduct('${p.id}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          BUY
+        </button>
       </div>
-      <button class="product-buy" onclick="buyProduct('${p.id}')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-          <path d="M3 6h18"/>
-          <path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        Buy Now
-      </button>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 renderProducts();
 
@@ -994,7 +1024,6 @@ function buyProduct(id){
 
   const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
 
-  // คัดลอกข้อความใน clipboard
   if (navigator.clipboard && window.isSecureContext){
     navigator.clipboard.writeText(msg).catch(()=>{});
   }
@@ -1157,7 +1186,7 @@ function tryAutoplay(){
   autoplayAttempted = true;
   const idx = CONFIG.autoplayIndex || 0;
   const song = CONFIG.songs[idx];
-  if (!ytReady || !ytPlayer || !song.videoId || song.videoId.startsWith('REPLACE_')) return;
+  if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
   ytPlayer.loadVideoById(song.videoId);
   setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
@@ -1189,7 +1218,7 @@ function toggleSong(index){
 
 function loadAndPlay(index){
   const song = CONFIG.songs[index];
-  if (!song || !song.videoId || song.videoId.startsWith('REPLACE_')){
+  if (!song || !song.videoId){
     showToast('⚠ ยังไม่ได้ใส่ YouTube ID');
     return;
   }
