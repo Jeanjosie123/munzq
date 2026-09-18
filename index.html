@@ -46,7 +46,6 @@ body{
   padding:44px 16px 60px;
 }
 
-/* ★ ลด GPU: เอา animation bgPan ออก + ลด blur เป็น 8px ★ */
 .bg-gif{
   position:fixed;inset:0;z-index:-4;
   background-image:url('https://media.tenor.com/zVwBYAc3fzUAAAAM/bmw-car.gif');
@@ -68,7 +67,6 @@ body{
     linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.55) 100%);
 }
 
-/* ★ ลด blur aurora เป็น 90px + เพิ่ม will-change ★ */
 .aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
 .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;will-change:transform;transform:translateZ(0)}
 .aurora span:nth-child(1){width:520px;height:520px;background:#ffffff;top:-180px;left:-140px;opacity:.02}
@@ -86,7 +84,6 @@ body{
 
 .wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 
-/* ★ เพิ่ม contain:paint เพื่อจำกัด repaint ★ */
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -707,7 +704,6 @@ body{
 }
 .music .song-item.active .song-overlay { background: rgba(0,0,0,0); }
 
-/* ★ ลดความถี่ animation borderSpin จาก 3s → 4s และลด padding ★ */
 @keyframes borderSpin{ to{ --border-angle: 360deg; } }
 @property --border-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
 
@@ -774,6 +770,62 @@ body{
     50% { transform: scaleY(1); }
 }
 
+/* ★ Volume Control ★ */
+.music-volume{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:8px 16px 0;
+  padding:10px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+}
+.music-volume .vol-icon{
+  width:16px;height:16px;
+  color:var(--muted);
+  flex-shrink:0;
+  transition:color .2s;
+}
+.music-volume:hover .vol-icon{color:#fff}
+.music-volume input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  flex:1;
+  height:4px;
+  border-radius:2px;
+  background:rgba(255,255,255,.1);
+  outline:none;
+  cursor:pointer;
+}
+.music-volume input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#fff;
+  cursor:pointer;
+  box-shadow:0 0 8px rgba(255,255,255,.5);
+  transition:transform .2s;
+}
+.music-volume input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.music-volume input[type="range"]::-moz-range-thumb{
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#fff;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 0 8px rgba(255,255,255,.5);
+}
+.music-volume #volumeValue{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+  min-width:28px;
+  text-align:right;
+}
+
 @media (max-width: 400px) {
     .music .song-item {
         width: 72px !important;
@@ -790,6 +842,8 @@ body{
         gap: 2px !important;
     }
     .music .song-item .song-eq i { width: 2.5px; }
+    .music-volume{margin:6px 10px 0;padding:8px 12px;gap:8px}
+    .music-volume #volumeValue{font-size:10px;min-width:24px}
 }
 
 .yt-hidden {
@@ -1062,6 +1116,46 @@ footer{
   border:1px solid rgba(255,255,255,.08);
   letter-spacing:.3px;width:100%;
 }
+
+/* ★ Buy Form (textarea) ★ */
+.buy-form{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  text-align:left;
+}
+.buy-form label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.2px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.buy-form textarea{
+  width:100%;
+  min-height:100px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
+  font-family:'Kanit','Inter',sans-serif;
+  font-size:13.5px;
+  line-height:1.6;
+  outline:none;
+  resize:vertical;
+  transition:border-color .2s, background .2s;
+}
+.buy-form textarea::placeholder{
+  color:#555;
+}
+.buy-form textarea:focus{
+  border-color:rgba(255,255,255,.4);
+  background:rgba(255,255,255,.05);
+}
+
 .buy-actions{
   display:grid;grid-template-columns:1fr 1fr;
   gap:10px;width:100%;margin-top:4px;
@@ -1083,6 +1177,12 @@ footer{
 .buy-btn.confirm:hover{
   transform:translateY(-2px);
   box-shadow:0 10px 26px -10px rgba(255,255,255,.7);
+}
+.buy-btn.confirm:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none !important;
+  box-shadow:none !important;
 }
 .buy-btn.cancel{
   background:transparent;color:#fff;
@@ -1336,6 +1436,18 @@ footer{
 
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
+
+    <!-- ★ Volume Control ★ -->
+    <div class="music-volume">
+      <svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+      <input type="range" id="volumeSlider" min="0" max="100" value="50" aria-label="Volume">
+      <span id="volumeValue">50</span>
+    </div>
+
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       Altare &amp; Ariana Grande &amp; Justine Skye · Full Track
@@ -1404,15 +1516,23 @@ footer{
         <div id="buyProductDesc" style="margin-top:10px; font-size:13px; line-height:1.6; color:#ccc;"></div>
         <div style="margin-top:12px">ราคา <span class="price" id="buyProductPrice">free</span></div>
       </div>
-      <div class="buy-note">ⓘ ข้อมูลการติดต่อ</div>
+
+      <!-- ★ Buy Form (textarea) ★ -->
+      <div class="buy-form" id="buyForm">
+        <label>ข้อความของคุณ</label>
+        <textarea id="buyMessageInput" placeholder="พิมพ์คำถามหรือสิ่งที่อยากให้ดูดวง..."></textarea>
+      </div>
+
+      <div class="buy-note">ⓘ ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
+
       <div class="buy-actions">
         <button class="buy-btn cancel" onclick="closeBuyModal()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-          Close
+          ปิด
         </button>
-        <button class="buy-btn confirm" onclick="copyDiscord()">
+        <button class="buy-btn confirm" id="buySubmitBtn" onclick="submitBuyMessage()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
-          Copy Discord
+          ส่ง
         </button>
       </div>
     </div>
@@ -1433,6 +1553,7 @@ const CONFIG = {
   sellingEnabled: false,
   counterNamespace: "munzq-bio",
   counterKey: "views",
+  webhookUrl: "https://discord.com/api/webhooks/1550581723438260314/r-aSOnSk6__RjvMVOhCLCyr0P0KpZjYZeLMBfXDFMm1Jj7beZoBWl_Dl35-D00gEaKjq",
 
   songs: [
     {
@@ -1454,7 +1575,7 @@ const CONFIG = {
     {
       title:   "Collide (Solo Version)",
       artist:  "Justine Skye",
-      videoId: "Bfolf_L5wp0",
+      videoId: "Bvfolf_L5wp0".replace('v',''),
       startAt: 27,
       cover:   "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg",
       glow:    "#6A5ACD"
@@ -1477,6 +1598,9 @@ const CONFIG = {
     maxY: 200
   }
 };
+
+/* ★ เพิ่ม videoId สำหรับเพลงที่ 3 ★ */
+CONFIG.songs[2].videoId = "Bfolf_L5wp0";
 
 const STATS_INFO = {
   winrate: {
@@ -1887,7 +2011,7 @@ function renderProducts(){
               <path d="M3 6h18"/>
               <path d="M16 10a4 4 0 0 1-8 0"/>
             </svg>
-            BUY
+            ส่ง
           </button>
         </div>
       </div>
@@ -1903,13 +2027,65 @@ function openBuyModal(id){
   document.getElementById('buyProductName').textContent = p.name;
   document.getElementById('buyProductPrice').textContent = p.price;
   document.getElementById('buyProductDesc').textContent = p.description || "ต้องการยืนยันการซื้อสินค้านี้หรือไม่?";
+  document.getElementById('buyMessageInput').value = '';
   document.getElementById('buyModal').classList.add('show');
   document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    document.getElementById('buyMessageInput').focus();
+  }, 400);
 }
 function closeBuyModal(e){
   if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.buy-close')) return;
   document.getElementById('buyModal').classList.remove('show');
   document.body.style.overflow = '';
+}
+
+/* ★ ส่งข้อความผ่าน Discord Webhook ★ */
+function submitBuyMessage(){
+  const input = document.getElementById('buyMessageInput');
+  const btn = document.getElementById('buySubmitBtn');
+  const msg = input.value.trim();
+
+  if (!msg){
+    showToast('⚠ กรุณาพิมพ์ข้อความก่อนส่ง');
+    input.focus();
+    return;
+  }
+
+  btn.disabled = true;
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = 'กำลังส่ง...';
+
+  const payload = {
+    username: 'munzq.vercel.app',
+    embeds: [{
+      title: '🔮 คำขอรับดูดวงใหม่',
+      description: msg,
+      color: 0x6A5ACD,
+      timestamp: new Date().toISOString(),
+      footer: { text: 'munzq.vercel.app • รับดูดวงฟรี' }
+    }]
+  };
+
+  fetch(CONFIG.webhookUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    showToast('✓ ส่งข้อความสำเร็จ! รอการติดต่อกลับ');
+    input.value = '';
+    setTimeout(() => closeBuyModal(), 1200);
+  })
+  .catch((err) => {
+    console.warn('Webhook error:', err);
+    showToast('✗ ส่งไม่สำเร็จ กรุณาลองใหม่');
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+  });
 }
 function confirmBuy(){}
 
@@ -1969,6 +2145,17 @@ let userInteracted = false;
 
 const songList = document.getElementById('songList');
 const autoplayHint = document.getElementById('autoplayHint');
+const volumeSlider = document.getElementById('volumeSlider');
+const volumeValue = document.getElementById('volumeValue');
+
+/* ★ Volume Control Logic ★ */
+volumeSlider.addEventListener('input', (e) => {
+  const v = parseInt(e.target.value, 10);
+  volumeValue.textContent = v;
+  if (ytPlayer && ytPlayer.setVolume){
+    try { ytPlayer.setVolume(v); } catch(err){}
+  }
+});
 
 function renderSongList(){
   songList.innerHTML = '';
@@ -2024,6 +2211,10 @@ window.onYouTubeIframeAPIReady = function(){
 
 function onPlayerReady(){
   ytReady = true;
+  /* ★ ตั้งค่า Volume เริ่มต้น ★ */
+  if (ytPlayer && ytPlayer.setVolume){
+    try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
+  }
   if (pendingPlay !== null){
     const idx = pendingPlay;
     pendingPlay = null;
@@ -2055,7 +2246,12 @@ function tryAutoplay(){
   if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
-  setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 400);
+  setTimeout(() => {
+    if (ytPlayer && ytPlayer.setVolume){
+      try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
+    }
+    if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+  }, 400);
   updateUI();
   setTimeout(() => { if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
 }
@@ -2088,7 +2284,12 @@ function loadAndPlay(index){
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
-  setTimeout(() => { if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo(); }, 300);
+  setTimeout(() => {
+    if (ytPlayer && ytPlayer.setVolume){
+      try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
+    }
+    if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+  }, 300);
   updateUI();
   showToast('▶ กำลังเล่น: ' + song.title);
 }
