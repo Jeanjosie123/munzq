@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>munz</title>
+<title>munzq</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -118,9 +118,10 @@ body{
   -webkit-backdrop-filter:blur(20px) saturate(120%);
 }
 
+/* ★ Ticker - fixed seamless loop ★ */
 .ticker{
   position:fixed;top:0;left:0;right:0;z-index:100;height:34px;
-  overflow:hidden;white-space:nowrap;pointer-events:none;
+  overflow:hidden;pointer-events:none;
   will-change:transform;transform:translateZ(0);
 }
 .ticker::before{
@@ -133,21 +134,30 @@ body{
   z-index:-1;
 }
 .ticker-track{
-  display:inline-flex;gap:34px;
-  animation:scroll 22s linear infinite;
-  padding-left:100%;line-height:34px;position:relative;
+  display:inline-flex;
+  white-space:nowrap;
+  line-height:34px;
+  animation:tickerScroll 40s linear infinite;
   will-change:transform;
+  padding-left:100vw;
 }
-.ticker-track span{
+.ticker-track .ticker-seg{
+  display:inline-flex;
+  flex-shrink:0;
+}
+.ticker-track .ticker-seg > span{
   font-family:'JetBrains Mono',monospace;
   font-size:11.5px;font-weight:600;letter-spacing:.4px;
   display:inline-flex;align-items:center;gap:6px;
   text-shadow:0 1px 4px rgba(0,0,0,.9);
+  margin-right:34px;
 }
 .ticker-track .sym{color:var(--muted)}
 .ticker-track .up{color:var(--green)}
 .ticker-track .dn{color:var(--red)}
-@keyframes scroll{to{transform:translateX(-100%)}}
+@keyframes tickerScroll{
+  to{transform:translateX(-50%)}
+}
 
 .hero{padding:30px 22px 24px;text-align:center;position:relative;}
 
@@ -735,6 +745,7 @@ body{
     animation: borderSpin 4s linear infinite;
 }
 
+/* ★ Equalizer - slower, smoother ★ */
 .music .song-item .song-eq {
     position: absolute;
     bottom: 6px;
@@ -759,14 +770,15 @@ body{
     width: 3px;
     background: #fff;
     border-radius: 2px;
-    animation: eq .9s ease-in-out infinite;
+    animation: eq 1.6s ease-in-out infinite;
+    transform-origin: bottom center;
 }
-.music .song-item .song-eq i:nth-child(1) { height: 40%; animation-delay: 0s; }
-.music .song-item .song-eq i:nth-child(2) { height: 90%; animation-delay: 0.15s; }
-.music .song-item .song-eq i:nth-child(3) { height: 60%; animation-delay: 0.3s; }
+.music .song-item .song-eq i:nth-child(1) { height: 50%; animation-delay: 0s; }
+.music .song-item .song-eq i:nth-child(2) { height: 80%; animation-delay: 0.4s; }
+.music .song-item .song-eq i:nth-child(3) { height: 65%; animation-delay: 0.8s; }
 
 @keyframes eq {
-    0%, 100% { transform: scaleY(0.4); }
+    0%, 100% { transform: scaleY(0.6); }
     50% { transform: scaleY(1); }
 }
 
@@ -808,7 +820,7 @@ body{
   display:block;
 }
 .music-vol-btn .vol-label{
-  min-width:24px;
+  min-width:32px;
   text-align:center;
 }
 .music-vol-btn.muted{
@@ -1292,11 +1304,19 @@ footer{
 <div class="bg-gif" aria-hidden="true"></div>
 <div class="bg-gif-overlay" aria-hidden="true"></div>
 
+<!-- ★ Ticker - fixed: content duplicated for seamless loop ★ -->
 <div class="ticker">
   <div class="ticker-track" id="tickerTrack">
-    <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
-    <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
-    <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
+    <div class="ticker-seg">
+      <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
+      <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
+      <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
+    </div>
+    <div class="ticker-seg" aria-hidden="true">
+      <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
+      <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
+      <span><b class="sym">NAS100</b> <em class="up" data-ticker="NAS">18,240 ▲ 0.45%</em></span>
+    </div>
   </div>
 </div>
 
@@ -1500,7 +1520,7 @@ footer{
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
 
-    <!-- ★ Volume Toggle (เปิด/ปิด เท่านั้น) ★ -->
+    <!-- ★ Volume Toggle ★ -->
     <div class="music-volume">
       <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()" aria-label="Toggle sound">
         <svg id="volIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1513,7 +1533,7 @@ footer{
           <line x1="22" y1="9" x2="16" y2="15"/>
           <line x1="16" y1="9" x2="22" y2="15"/>
         </svg>
-        <span class="vol-label" id="volLabel">ON</span>
+        <span class="vol-label" id="volLabel">เปิด</span>
       </button>
     </div>
 
@@ -1586,7 +1606,6 @@ footer{
         <div style="margin-top:10px">ราคา <span class="price" id="buyProductPrice">free</span></div>
       </div>
 
-      <!-- ★ Queue Status ★ -->
       <div class="queue-status">
         <div class="queue-box live">
           <div class="q-lbl">กำลังดูดวง</div>
@@ -1598,7 +1617,6 @@ footer{
         </div>
       </div>
 
-      <!-- ★ Form: Discord / Reading type / Message ★ -->
       <div class="buy-form" id="buyForm">
         <div class="form-row">
           <label>Discord ของคุณ <span class="req">*</span></label>
@@ -1699,9 +1717,8 @@ const CONFIG = {
   }
 };
 
-/* ===== Queue Config ===== */
 const QUEUE_MAX = 20;
-const QUEUE_LIVE_BASE = 3; // จำนวนคน "กำลังดูดวง" ที่โชว์ (สมมติ)
+const QUEUE_LIVE_BASE = 3;
 
 const STATS_INFO = {
   winrate: {
@@ -1810,7 +1827,6 @@ function closeStatsModal(e){
   document.body.style.overflow = '';
 }
 
-/* ★ Queue Counter ★ */
 function getQueueKey(){ return 'munzq_queue_count'; }
 function getQueueCount(){
   try {
@@ -2164,7 +2180,6 @@ function closeBuyModal(e){
   document.body.style.overflow = '';
 }
 
-/* ★ ส่งข้อความผ่าน Discord Webhook ★ */
 function submitBuyMessage(){
   const inputDiscord = document.getElementById('inputDiscord');
   const inputType = document.getElementById('inputType');
@@ -2217,13 +2232,12 @@ function submitBuyMessage(){
   })
   .then(r => {
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    // ★ เพิ่มคิว: ถ้าถึง 20/20 ให้ reset
     let c = getQueueCount();
     c = c + 1;
     if (c >= QUEUE_MAX) c = 0;
     setQueueCount(c);
     updateQueueUI();
-    showToast('✓ ส่งข้อความสำเร็จ! รอการติดต่อกลับ');
+    showToast('ส่งแล้ว รอติดต่อกลับน้า');
     inputDiscord.value = '';
     inputType.value = '';
     inputMessage.value = '';
@@ -2231,7 +2245,7 @@ function submitBuyMessage(){
   })
   .catch((err) => {
     console.warn('Webhook error:', err);
-    showToast('✗ ส่งไม่สำเร็จ กรุณาลองใหม่');
+    showToast('ส่งไม่ได้ ลองใหม่อีกทีนะ');
   })
   .finally(() => {
     btn.disabled = false;
@@ -2286,6 +2300,7 @@ function connectLanyard(){
 }
 connectLanyard();
 
+/* ★ YouTube Player ★ */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
@@ -2302,22 +2317,21 @@ const volIconOn = document.getElementById('volIconOn');
 const volIconOff = document.getElementById('volIconOff');
 const volLabel = document.getElementById('volLabel');
 
-/* ★ Toggle Mute ★ */
 function toggleMute(){
   isMuted = !isMuted;
   applyMuteState();
   if (isMuted){
     volIconOn.style.display = 'none';
     volIconOff.style.display = 'block';
-    volLabel.textContent = 'OFF';
+    volLabel.textContent = 'ปิด';
     musicVolBtn.classList.add('muted');
-    showToast('🔇 ปิดเสียง');
+    showToast('ปิดเสียงแล้ว');
   } else {
     volIconOn.style.display = 'block';
     volIconOff.style.display = 'none';
-    volLabel.textContent = 'ON';
+    volLabel.textContent = 'เปิด';
     musicVolBtn.classList.remove('muted');
-    showToast('🔊 เปิดเสียง');
+    showToast('เปิดเสียงแล้ว');
   }
 }
 function applyMuteState(){
@@ -2327,7 +2341,7 @@ function applyMuteState(){
       if (ytPlayer.mute) ytPlayer.mute();
     } else {
       if (ytPlayer.unMute) ytPlayer.unMute();
-      ytPlayer.setVolume(50);
+      ytPlayer.setVolume(60);
     }
   } catch(e){}
 }
@@ -2418,25 +2432,29 @@ function tryAutoplay(){
   const song = CONFIG.songs[idx];
   if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
-  ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
+  try {
+    ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
+  } catch(e){}
   setTimeout(() => {
     applyMuteState();
-    if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+    try { ytPlayer.playVideo(); } catch(e){}
   }, 400);
   updateUI();
   setTimeout(() => { if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
 }
 
+/* ★ แก้ first interaction ให้ force load ใหม่ ★ */
 function handleFirstInteraction(){
   if (isPlaying) return;
-  userInteracted = true;
   autoplayHint.classList.remove('show');
   if (!ytReady || !ytPlayer) return;
+  userInteracted = true;
+  // โหลดเพลงใหม่เสมอตอน user คลิกครั้งแรก (force play ด้วย user gesture)
   if (currentIndex === -1){
     loadAndPlay(Math.floor(Math.random() * CONFIG.songs.length));
   } else {
-    try { ytPlayer.playVideo(); } catch(e){}
-    setTimeout(applyMuteState, 200);
+    // reload เพลงเดิมเพื่อให้ YouTube ยอมให้เล่นด้วย user gesture
+    loadAndPlay(currentIndex);
   }
 }
 ['click','touchstart','touchend','keydown'].forEach(evt => {
@@ -2455,13 +2473,15 @@ function loadAndPlay(index){
   if (!song || !song.videoId){ showToast('⚠ ยังไม่ได้ใส่ YouTube ID'); return; }
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
-  ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
+  try {
+    ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
+  } catch(e){}
   setTimeout(() => {
     applyMuteState();
-    if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+    try { ytPlayer.playVideo(); } catch(e){}
   }, 300);
   updateUI();
-  showToast('▶ กำลังเล่น: ' + song.title);
+  showToast('กำลังเล่น: ' + song.title);
 }
 function pauseCurrent(){
   if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
