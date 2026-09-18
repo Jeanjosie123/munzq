@@ -118,44 +118,44 @@ body{
   -webkit-backdrop-filter:blur(20px) saturate(120%);
 }
 
-/* ★ Ticker - fixed seamless loop ★ */
+/* ★★ TICKER - FIXED: seamless, no padding-left, translate -50% ★★ */
 .ticker{
   position:fixed;top:0;left:0;right:0;z-index:100;height:34px;
   overflow:hidden;pointer-events:none;
-  will-change:transform;transform:translateZ(0);
 }
 .ticker::before{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.6) 70%,rgba(0,0,0,.3) 100%);
   border-bottom:1px solid rgba(255,255,255,.05);
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
   mask-image:linear-gradient(180deg,#000 30%,transparent 100%);
   -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100%);
   z-index:-1;
 }
 .ticker-track{
-  display:inline-flex;
-  white-space:nowrap;
-  line-height:34px;
-  animation:tickerScroll 40s linear infinite;
+  display:flex;
+  width:max-content;
+  animation:tickerScroll 90s linear infinite;
   will-change:transform;
-  padding-left:100vw;
 }
-.ticker-track .ticker-seg{
-  display:inline-flex;
+.ticker-seg{
+  display:flex;
   flex-shrink:0;
 }
-.ticker-track .ticker-seg > span{
+.ticker-seg > span{
+  flex-shrink:0;
+  padding-right:40px;
+  line-height:34px;
   font-family:'JetBrains Mono',monospace;
   font-size:11.5px;font-weight:600;letter-spacing:.4px;
   display:inline-flex;align-items:center;gap:6px;
   text-shadow:0 1px 4px rgba(0,0,0,.9);
-  margin-right:34px;
+  white-space:nowrap;
 }
-.ticker-track .sym{color:var(--muted)}
-.ticker-track .up{color:var(--green)}
-.ticker-track .dn{color:var(--red)}
+.ticker-seg .sym{color:var(--muted)}
+.ticker-seg .up{color:var(--green)}
+.ticker-seg .dn{color:var(--red)}
 @keyframes tickerScroll{
+  from{transform:translateX(0)}
   to{transform:translateX(-50%)}
 }
 
@@ -745,7 +745,7 @@ body{
     animation: borderSpin 4s linear infinite;
 }
 
-/* ★ Equalizer - slower, smoother ★ */
+/* ★★ Equalizer - SLOWER, smoother (2.5s) ★★ */
 .music .song-item .song-eq {
     position: absolute;
     bottom: 6px;
@@ -770,19 +770,19 @@ body{
     width: 3px;
     background: #fff;
     border-radius: 2px;
-    animation: eq 1.6s ease-in-out infinite;
+    animation: eq 2.5s ease-in-out infinite;
     transform-origin: bottom center;
 }
-.music .song-item .song-eq i:nth-child(1) { height: 50%; animation-delay: 0s; }
-.music .song-item .song-eq i:nth-child(2) { height: 80%; animation-delay: 0.4s; }
-.music .song-item .song-eq i:nth-child(3) { height: 65%; animation-delay: 0.8s; }
+.music .song-item .song-eq i:nth-child(1) { height: 55%; animation-delay: 0s; }
+.music .song-item .song-eq i:nth-child(2) { height: 85%; animation-delay: 0.8s; }
+.music .song-item .song-eq i:nth-child(3) { height: 65%; animation-delay: 1.6s; }
 
 @keyframes eq {
-    0%, 100% { transform: scaleY(0.6); }
+    0%, 100% { transform: scaleY(0.5); }
     50% { transform: scaleY(1); }
 }
 
-/* ★ Volume Toggle - มินิมอล เล็ก ★ */
+/* ★★ Volume Toggle - text only, no emoji ★★ */
 .music-volume{
   display:flex;
   justify-content:center;
@@ -792,20 +792,21 @@ body{
 .music-vol-btn{
   display:inline-flex;
   align-items:center;
-  gap:7px;
-  padding:6px 14px;
+  justify-content:center;
+  padding:6px 18px;
   border-radius:999px;
   background:rgba(255,255,255,.04);
   border:1px solid var(--border);
   color:var(--muted);
   font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;
+  font-size:11px;
   font-weight:700;
-  letter-spacing:.6px;
+  letter-spacing:.8px;
   cursor:pointer;
   transition:.22s cubic-bezier(.34,1.56,.64,1);
   user-select:none;
   -webkit-user-select:none;
+  min-width:70px;
 }
 .music-vol-btn:hover{
   border-color:rgba(255,255,255,.3);
@@ -813,16 +814,6 @@ body{
   background:rgba(255,255,255,.06);
 }
 .music-vol-btn:active{transform:scale(.96)}
-.music-vol-btn svg{
-  width:13px;
-  height:13px;
-  flex:0 0 13px;
-  display:block;
-}
-.music-vol-btn .vol-label{
-  min-width:32px;
-  text-align:center;
-}
 .music-vol-btn.muted{
   color:#ff6b8a;
   border-color:rgba(255,107,138,.4);
@@ -849,8 +840,7 @@ body{
         gap: 2px !important;
     }
     .music .song-item .song-eq i { width: 2.5px; }
-    .music-vol-btn{font-size:9.5px;padding:5px 12px}
-    .music-vol-btn svg{width:12px;height:12px;flex-basis:12px}
+    .music-vol-btn{font-size:10px;padding:5px 14px;min-width:62px}
 }
 
 .yt-hidden {
@@ -1092,7 +1082,6 @@ footer{
   gap:14px;text-align:center;
 }
 
-/* ★ Queue Status ★ */
 .queue-status{
   width:100%;
   display:grid;
@@ -1143,7 +1132,6 @@ footer{
   margin-left:2px;
 }
 
-/* ★ Buy Form fields ★ */
 .buy-form{
   width:100%;
   display:flex;
@@ -1275,10 +1263,6 @@ footer{
 @media(max-width:400px){
   .hero h1{font-size:22px}
   .stat .num{font-size:19px}
-  .song-item{min-height:120px;padding:18px 14px}
-  .song-title{font-size:14px}
-  .song-play,.song-eq{width:46px;height:46px}
-  .song-eq{padding-bottom:13px}
   .btn{width:44px;height:44px}
   .btn svg{width:17px;height:17px}
   .socials{gap:10px}
@@ -1304,9 +1288,9 @@ footer{
 <div class="bg-gif" aria-hidden="true"></div>
 <div class="bg-gif-overlay" aria-hidden="true"></div>
 
-<!-- ★ Ticker - fixed: content duplicated for seamless loop ★ -->
+<!-- ★ Ticker - 2 identical segments, seamless loop ★ -->
 <div class="ticker">
-  <div class="ticker-track" id="tickerTrack">
+  <div class="ticker-track">
     <div class="ticker-seg">
       <span><b class="sym">XAU/USD</b> <em class="up" data-ticker="XAU">2,341.50 ▲ 0.82%</em></span>
       <span><b class="sym">BTC/USD</b> <em class="up" data-ticker="BTC">67,420 ▲ 1.24%</em></span>
@@ -1520,21 +1504,9 @@ footer{
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
 
-    <!-- ★ Volume Toggle ★ -->
+    <!-- ★ Volume Toggle - text only ★ -->
     <div class="music-volume">
-      <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()" aria-label="Toggle sound">
-        <svg id="volIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M11 5 6 9H2v6h4l5 4V5z"/>
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-        </svg>
-        <svg id="volIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-          <path d="M11 5 6 9H2v6h4l5 4V5z"/>
-          <line x1="22" y1="9" x2="16" y2="15"/>
-          <line x1="16" y1="9" x2="22" y2="15"/>
-        </svg>
-        <span class="vol-label" id="volLabel">เปิด</span>
-      </button>
+      <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()" aria-label="Toggle sound">เปิดเสียง</button>
     </div>
 
     <div class="hint">
@@ -1626,13 +1598,13 @@ footer{
           <label>รูปแบบดวงที่ต้องการดู <span class="req">*</span></label>
           <select id="inputType">
             <option value="">-- เลือกรูปแบบ --</option>
-            <option value="ไพ่ทาโร่">🔮 ไพ่ทาโร่</option>
-            <option value="โหราศาสตร์ไทย">⭐ โหราศาสตร์ไทย</option>
-            <option value="Birth Chart">🌌 Birth Chart (ดวงกำเนิด)</option>
-            <option value="ดวงความรัก">💕 ดวงความรัก</option>
-            <option value="ดวงการงาน/การเงิน">💼 ดวงการงาน / การเงิน</option>
-            <option value="ดูดวงทั่วไป">🎴 ดูดวงทั่วไป</option>
-            <option value="อื่น ๆ">✏️ อื่น ๆ</option>
+            <option value="ไพ่ทาโร่">ไพ่ทาโร่</option>
+            <option value="โหราศาสตร์ไทย">โหราศาสตร์ไทย</option>
+            <option value="Birth Chart">Birth Chart (ดวงกำเนิด)</option>
+            <option value="ดวงความรัก">ดวงความรัก</option>
+            <option value="ดวงการงาน/การเงิน">ดวงการงาน / การเงิน</option>
+            <option value="ดูดวงทั่วไป">ดูดวงทั่วไป</option>
+            <option value="อื่น ๆ">อื่น ๆ</option>
           </select>
         </div>
         <div class="form-row">
@@ -1641,7 +1613,7 @@ footer{
         </div>
       </div>
 
-      <div class="buy-note">ⓘ ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
+      <div class="buy-note">ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
 
       <div class="buy-actions">
         <button class="buy-btn cancel" onclick="closeBuyModal()">
@@ -1674,30 +1646,9 @@ const CONFIG = {
   webhookUrl: "https://discord.com/api/webhooks/1550581723438260314/r-aSOnSk6__RjvMVOhCLCyr0P0KpZjYZeLMBfXDFMm1Jj7beZoBWl_Dl35-D00gEaKjq",
 
   songs: [
-    {
-      title:   "bye (Altare Remix)",
-      artist:  "Ariana Grande, Altare",
-      videoId: "agneRtEe-t8",
-      startAt: 15,
-      cover:   "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg",
-      glow:    "#c5f82a"
-    },
-    {
-      title:   "hate that i made you love me",
-      artist:  "Ariana Grande",
-      videoId: "v1t4MTqdfyI",
-      startAt: 26,
-      cover:   "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg",
-      glow:    "#f0b232"
-    },
-    {
-      title:   "Collide (Solo Version)",
-      artist:  "Justine Skye",
-      videoId: "Bfolf_L5wp0",
-      startAt: 27,
-      cover:   "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg",
-      glow:    "#6A5ACD"
-    }
+    { title: "bye (Altare Remix)", artist: "Ariana Grande, Altare", videoId: "agneRtEe-t8", startAt: 15, cover: "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg", glow: "#c5f82a" },
+    { title: "hate that i made you love me", artist: "Ariana Grande", videoId: "v1t4MTqdfyI", startAt: 26, cover: "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg", glow: "#f0b232" },
+    { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" }
   ],
 
   products: [
@@ -1707,7 +1658,7 @@ const CONFIG = {
       price: "free",
       image: "",
       bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
-      description: "🔮รับดูดวง โหราศาสตร์,ไพ่ทาโร่,birthchart ดูฟรีนะครับหรือสามารถโดเนทตามศรัทธา เปิดรับตลอดแต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
+      description: "รับดูดวง โหราศาสตร์, ไพ่ทาโร่, birthchart ดูฟรีนะครับ หรือสามารถโดเนทตามศรัทธา เปิดรับตลอด แต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
     }
   ],
 
@@ -1724,60 +1675,22 @@ const STATS_INFO = {
   winrate: {
     title: 'WIN RATE',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>',
-    body: `
-      <p>อัตราการชนะ คือเปอร์เซ็นต์ของจำนวนไม้ที่ทำกำไร เมื่อเทียบกับจำนวนไม้ทั้งหมดที่เทรด</p>
-      <span class="formula">(ไม้ชนะ ÷ ไม้ทั้งหมด) × 100</span>
-      <p>ยิ่งค่าสูง ยิ่งแสดงถึงความแม่นยำในการเข้าเทรด แต่ต้องดูร่วมกับ Risk:Reward ด้วย เพราะ Win Rate ต่ำแต่ RR สูงก็ยังทำกำไรได้</p>
-      <div class="stats-value-example">
-        <span class="badge bad">&lt; 40% ต่ำ</span>
-        <span class="badge mid">40-55% ปานกลาง</span>
-        <span class="badge good">&gt; 55% ดี</span>
-      </div>
-    `
+    body: '<p>อัตราการชนะ คือเปอร์เซ็นต์ของจำนวนไม้ที่ทำกำไร เมื่อเทียบกับจำนวนไม้ทั้งหมดที่เทรด</p><span class="formula">(ไม้ชนะ ÷ ไม้ทั้งหมด) × 100</span><p>ยิ่งค่าสูง ยิ่งแสดงถึงความแม่นยำในการเข้าเทรด แต่ต้องดูร่วมกับ Risk:Reward ด้วย เพราะ Win Rate ต่ำแต่ RR สูงก็ยังทำกำไรได้</p><div class="stats-value-example"><span class="badge bad">&lt; 40% ต่ำ</span><span class="badge mid">40-55% ปานกลาง</span><span class="badge good">&gt; 55% ดี</span></div>'
   },
   rr: {
     title: 'RISK : REWARD',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
-    body: `
-      <p>อัตราส่วนระหว่างความเสี่ยงต่อผลตอบแทนที่คาดหวัง</p>
-      <span class="formula">1 : X → เสี่ยง 1 บาท หวังกำไร X บาท</span>
-      <p>ค่าที่ดีควรอยู่ที่ <b style="color:#fff">1:1.5</b> ขึ้นไป ยิ่งสูงยิ่งดี เพราะแม้ Win Rate ต่ำก็ยังทำกำไรได้ในระยะยาว</p>
-      <div class="stats-value-example">
-        <span class="badge bad">&lt; 1:1 แย่</span>
-        <span class="badge mid">1:1 - 1:2 พอใช้</span>
-        <span class="badge good">&gt; 1:2 ดีมาก</span>
-      </div>
-    `
+    body: '<p>อัตราส่วนระหว่างความเสี่ยงต่อผลตอบแทนที่คาดหวัง</p><span class="formula">1 : X → เสี่ยง 1 บาท หวังกำไร X บาท</span><p>ค่าที่ดีควรอยู่ที่ <b style="color:#fff">1:1.5</b> ขึ้นไป ยิ่งสูงยิ่งดี เพราะแม้ Win Rate ต่ำก็ยังทำกำไรได้ในระยะยาว</p><div class="stats-value-example"><span class="badge bad">&lt; 1:1 แย่</span><span class="badge mid">1:1 - 1:2 พอใช้</span><span class="badge good">&gt; 1:2 ดีมาก</span></div>'
   },
   pf: {
     title: 'PROFIT FACTOR',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
-    body: `
-      <p>อัตราส่วนกำไรรวมต่อขาดทุนรวม แสดงถึงประสิทธิภาพโดยรวมของกลยุทธ์</p>
-      <span class="formula">กำไรรวม ÷ ขาดทุนรวม</span>
-      <p>ถ้าค่ามากกว่า 1 = กำไร, ถ้ามากกว่า 2 = ดีเยี่ยม ถ้าต่ำกว่า 1 = ขาดทุน</p>
-      <div class="stats-value-example">
-        <span class="badge bad">&lt; 1 ขาดทุน</span>
-        <span class="badge mid">1 - 1.5 พอใช้</span>
-        <span class="badge good">1.5 - 2 ดี</span>
-        <span class="badge good">&gt; 2 ดีเยี่ยม</span>
-      </div>
-    `
+    body: '<p>อัตราส่วนกำไรรวมต่อขาดทุนรวม แสดงถึงประสิทธิภาพโดยรวมของกลยุทธ์</p><span class="formula">กำไรรวม ÷ ขาดทุนรวม</span><p>ถ้าค่ามากกว่า 1 = กำไร, ถ้ามากกว่า 2 = ดีเยี่ยม ถ้าต่ำกว่า 1 = ขาดทุน</p><div class="stats-value-example"><span class="badge bad">&lt; 1 ขาดทุน</span><span class="badge mid">1 - 1.5 พอใช้</span><span class="badge good">1.5 - 2 ดี</span><span class="badge good">&gt; 2 ดีเยี่ยม</span></div>'
   },
   dd: {
     title: 'MAX DRAWDOWN',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8"/><path d="M14 17h7v-7"/></svg>',
-    body: `
-      <p>การขาดทุนสูงสุดของพอร์ต คือผลต่างระหว่างจุดสูงสุดของพอร์ต กับจุดต่ำสุดหลังจากนั้น</p>
-      <span class="formula">(Peak - Trough) ÷ Peak × 100</span>
-      <p>เป็นตัวชี้วัดความเสี่ยงที่สำคัญมาก ยิ่งค่าน้อยยิ่งดี เพราะหมายถึงพอร์ตมีความผันผวนต่ำ</p>
-      <div class="stats-value-example">
-        <span class="badge good">&lt; 5% ดีมาก</span>
-        <span class="badge mid">5-10% ยอมรับได้</span>
-        <span class="badge bad">10-20% เสี่ยง</span>
-        <span class="badge bad">&gt; 20% อันตราย</span>
-      </div>
-    `
+    body: '<p>การขาดทุนสูงสุดของพอร์ต คือผลต่างระหว่างจุดสูงสุดของพอร์ต กับจุดต่ำสุดหลังจากนั้น</p><span class="formula">(Peak - Trough) ÷ Peak × 100</span><p>เป็นตัวชี้วัดความเสี่ยงที่สำคัญมาก ยิ่งค่าน้อยยิ่งดี เพราะหมายถึงพอร์ตมีความผันผวนต่ำ</p><div class="stats-value-example"><span class="badge good">&lt; 5% ดีมาก</span><span class="badge mid">5-10% ยอมรับได้</span><span class="badge bad">10-20% เสี่ยง</span><span class="badge bad">&gt; 20% อันตราย</span></div>'
   }
 };
 
@@ -2011,16 +1924,16 @@ function drawChart(){
     padT + h - (v / maxY) * h
   ]);
 
-  let d = `M ${pts[0][0].toFixed(2)},${pts[0][1].toFixed(2)}`;
+  let d = 'M ' + pts[0][0].toFixed(2) + ',' + pts[0][1].toFixed(2);
   for (let i = 0; i < pts.length - 1; i++){
-    const [x1, y1] = pts[i];
-    const [x2, y2] = pts[i + 1];
+    const x1 = pts[i][0], y1 = pts[i][1];
+    const x2 = pts[i + 1][0], y2 = pts[i + 1][1];
     const cx = (x1 + x2) / 2;
-    d += ` C ${cx.toFixed(2)},${y1.toFixed(2)} ${cx.toFixed(2)},${y2.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`;
+    d += ' C ' + cx.toFixed(2) + ',' + y1.toFixed(2) + ' ' + cx.toFixed(2) + ',' + y2.toFixed(2) + ' ' + x2.toFixed(2) + ',' + y2.toFixed(2);
   }
 
   const baseline = padT + h;
-  const areaD = d + ` L ${pts[pts.length-1][0].toFixed(2)},${baseline} L ${pts[0][0].toFixed(2)},${baseline} Z`;
+  const areaD = d + ' L ' + pts[pts.length-1][0].toFixed(2) + ',' + baseline + ' L ' + pts[0][0].toFixed(2) + ',' + baseline + ' Z';
 
   const lineEl = document.getElementById('equityLine');
   lineEl.setAttribute('d', d);
@@ -2090,11 +2003,7 @@ function showChartTooltip(index){
   const diffClass = diff >= 0 ? 'up' : 'dn';
   const diffSign = diff >= 0 ? '+' : '';
 
-  tooltip.innerHTML = `
-    <div class="ct-month">${MONTHS[index]}</div>
-    <div class="ct-value">${data[index]}%</div>
-    <div class="ct-diff ${diffClass}">${diffSign}${diff}% MoM</div>
-  `;
+  tooltip.innerHTML = '<div class="ct-month">' + MONTHS[index] + '</div><div class="ct-value">' + data[index] + '%</div><div class="ct-diff ' + diffClass + '">' + diffSign + diff + '% MoM</div>';
 
   tooltip.style.left = tooltipX + 'px';
   tooltip.style.top = tooltipY + 'px';
@@ -2117,42 +2026,26 @@ function renderProducts(){
   }
   list.innerHTML = CONFIG.products.map(p => {
     const thumbHTML = p.image
-      ? `<div class="product-thumb" style="background-image:url('${p.image}')"></div>`
-      : `<div class="product-thumb product-thumb-placeholder">
-           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-             <circle cx="12" cy="9.5" r="7"/>
-             <path d="M7 20h10"/>
-             <path d="M9 16.5v3.5M15 16.5v3.5"/>
-             <circle cx="9.5" cy="7.5" r="1" fill="currentColor" stroke="none" opacity="0.7"/>
-             <circle cx="14.5" cy="9" r="0.8" fill="currentColor" stroke="none" opacity="0.7"/>
-             <circle cx="11" cy="12" r="0.7" fill="currentColor" stroke="none" opacity="0.7"/>
-             <path d="M5 3l0.6 -1.2 0.6 1.2" stroke-width="1.2"/>
-             <path d="M19 3l0.6 -1.2 0.6 1.2" stroke-width="1.2"/>
-             <path d="M12 1l0.5 -1 0.5 1" stroke-width="1.2"/>
-           </svg>
-         </div>`;
-    const bgHTML = p.bgImage ? `<div class="product-bg" style="background-image:url('${p.bgImage}')"></div>` : '';
-    
-    return `
-      <div class="product-glow">
-        <div class="product-row">
-          ${bgHTML}
-          ${thumbHTML}
-          <div class="product-info">
-            <div class="product-name">${p.name}</div>
-            <div class="product-price">${p.price}</div>
-          </div>
-          <button class="product-buy" onclick="openBuyModal('${p.id}')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-              <path d="M3 6h18"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-            ส่ง
-          </button>
-        </div>
-      </div>
-    `;
+      ? '<div class="product-thumb" style="background-image:url(\'' + p.image + '\')"></div>'
+      : '<div class="product-thumb product-thumb-placeholder">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
+        '<circle cx="12" cy="9.5" r="7"/>' +
+        '<path d="M7 20h10"/>' +
+        '<path d="M9 16.5v3.5M15 16.5v3.5"/>' +
+        '<circle cx="9.5" cy="7.5" r="1" fill="currentColor" stroke="none" opacity="0.7"/>' +
+        '<circle cx="14.5" cy="9" r="0.8" fill="currentColor" stroke="none" opacity="0.7"/>' +
+        '<circle cx="11" cy="12" r="0.7" fill="currentColor" stroke="none" opacity="0.7"/>' +
+        '<path d="M5 3l0.6 -1.2 0.6 1.2" stroke-width="1.2"/>' +
+        '<path d="M19 3l0.6 -1.2 0.6 1.2" stroke-width="1.2"/>' +
+        '<path d="M12 1l0.5 -1 0.5 1" stroke-width="1.2"/>' +
+        '</svg></div>';
+    const bgHTML = p.bgImage ? '<div class="product-bg" style="background-image:url(\'' + p.bgImage + '\')"></div>' : '';
+    return '<div class="product-glow"><div class="product-row">' + bgHTML + thumbHTML +
+      '<div class="product-info"><div class="product-name">' + p.name + '</div><div class="product-price">' + p.price + '</div></div>' +
+      '<button class="product-buy" onclick="openBuyModal(\'' + p.id + '\')">' +
+      '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>' +
+      'ส่ง</button></div></div>';
   }).join('');
 }
 renderProducts();
@@ -2163,7 +2056,7 @@ function openBuyModal(id){
   selectedProductId = id;
   document.getElementById('buyProductName').textContent = p.name;
   document.getElementById('buyProductPrice').textContent = p.price;
-  document.getElementById('buyProductDesc').textContent = p.description || "ต้องการยืนยันการซื้อสินค้านี้หรือไม่?";
+  document.getElementById('buyProductDesc').textContent = p.description || '';
   document.getElementById('inputDiscord').value = '';
   document.getElementById('inputType').value = '';
   document.getElementById('inputMessage').value = '';
@@ -2191,17 +2084,17 @@ function submitBuyMessage(){
   const messageVal = inputMessage.value.trim();
 
   if (!discordVal){
-    showToast('⚠ กรุณากรอก Discord ของคุณ');
+    showToast('กรุณากรอก Discord ของคุณ');
     inputDiscord.focus();
     return;
   }
   if (!typeVal){
-    showToast('⚠ กรุณาเลือกรูปแบบดวง');
+    showToast('กรุณาเลือกรูปแบบดวง');
     inputType.focus();
     return;
   }
   if (!messageVal){
-    showToast('⚠ กรุณาพิมพ์คำถามของคุณ');
+    showToast('กรุณาพิมพ์คำถามของคุณ');
     inputMessage.focus();
     return;
   }
@@ -2213,13 +2106,13 @@ function submitBuyMessage(){
   const payload = {
     username: 'munzq.vercel.app',
     embeds: [{
-      title: '🔮 คำขอรับดูดวงใหม่',
+      title: 'คำขอรับดูดวงใหม่',
       color: 0x6A5ACD,
       timestamp: new Date().toISOString(),
       fields: [
-        { name: '👤 Discord', value: discordVal, inline: true },
-        { name: '🎴 รูปแบบดวง', value: typeVal, inline: true },
-        { name: '❓ คำถาม / สิ่งที่ต้องการดู', value: messageVal, inline: false }
+        { name: 'Discord', value: discordVal, inline: true },
+        { name: 'รูปแบบดวง', value: typeVal, inline: true },
+        { name: 'คำถาม / สิ่งที่ต้องการดู', value: messageVal, inline: false }
       ],
       footer: { text: 'munzq.vercel.app • รับดูดวงฟรี' }
     }]
@@ -2264,7 +2157,7 @@ function updateDiscordStatus(status){
 
 function connectLanyard(){
   if (!CONFIG.discordUserId || CONFIG.discordUserId === "YOUR_DISCORD_USER_ID") return;
-  fetch(`https://api.lanyard.rest/v1/users/${CONFIG.discordUserId}`)
+  fetch('https://api.lanyard.rest/v1/users/' + CONFIG.discordUserId)
     .then(r => r.json())
     .then(res => { if (res.success && res.data) updateDiscordStatus(res.data.discord_status); })
     .catch(err => console.warn('Lanyard REST error:', err));
@@ -2300,7 +2193,6 @@ function connectLanyard(){
 }
 connectLanyard();
 
-/* ★ YouTube Player ★ */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
@@ -2313,23 +2205,16 @@ let isMuted = false;
 const songList = document.getElementById('songList');
 const autoplayHint = document.getElementById('autoplayHint');
 const musicVolBtn = document.getElementById('musicVolBtn');
-const volIconOn = document.getElementById('volIconOn');
-const volIconOff = document.getElementById('volIconOff');
-const volLabel = document.getElementById('volLabel');
 
 function toggleMute(){
   isMuted = !isMuted;
   applyMuteState();
   if (isMuted){
-    volIconOn.style.display = 'none';
-    volIconOff.style.display = 'block';
-    volLabel.textContent = 'ปิด';
+    musicVolBtn.textContent = 'ปิดเสียง';
     musicVolBtn.classList.add('muted');
     showToast('ปิดเสียงแล้ว');
   } else {
-    volIconOn.style.display = 'block';
-    volIconOff.style.display = 'none';
-    volLabel.textContent = 'เปิด';
+    musicVolBtn.textContent = 'เปิดเสียง';
     musicVolBtn.classList.remove('muted');
     showToast('เปิดเสียงแล้ว');
   }
@@ -2353,205 +2238,5 @@ function renderSongList(){
     item.className = 'song-item';
     item.dataset.index = i;
     item.onclick = () => toggleSong(i);
-    item.style.backgroundImage = `url('${song.cover}')`;
+    item.style.backgroundImage = "url('" + song.cover + "')";
     if (song.glow){
-      item.style.setProperty('--song-glow', song.glow);
-    }
-    item.title = `${song.title} - ${song.artist}`;
-    
-    item.innerHTML = `
-      <div class="song-overlay"></div>
-      <div class="song-info">
-        <div class="song-title">${song.title}</div>
-        <div class="song-artist">${song.artist}</div>
-      </div>
-      <button class="song-play" aria-label="Play">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l11.1-6.86a1.04 1.04 0 0 0 0-1.76L9.56 4.26A1.04 1.04 0 0 0 8 5.14z"/></svg>
-      </button>
-      <div class="song-eq"><i></i><i></i><i></i></div>
-    `;
-    songList.appendChild(item);
-  });
-}
-renderSongList();
-
-window.onYouTubeIframeAPIReady = function(){
-  ytPlayer = new YT.Player('ytPlayer', {
-    height: '200', width: '320',
-    videoId: '',
-    playerVars: {
-      'autoplay': 0,
-      'controls': 0,
-      'modestbranding': 1,
-      'playsinline': 1,
-      'rel': 0,
-      'iv_load_policy': 3,
-      'fs': 0,
-      'disablekb': 1,
-      'origin': window.location.origin
-    },
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange,
-      'onError': onPlayerError
-    }
-  });
-};
-
-function onPlayerReady(){
-  ytReady = true;
-  applyMuteState();
-  if (pendingPlay !== null){
-    const idx = pendingPlay;
-    pendingPlay = null;
-    loadAndPlay(idx);
-  }
-  setTimeout(() => tryAutoplay(), 400);
-}
-function onPlayerStateChange(e){
-  if (e.data === YT.PlayerState.PLAYING){
-    isPlaying = true;
-    autoplayHint.classList.remove('show');
-    updateUI();
-    applyMuteState();
-  } else if (e.data === YT.PlayerState.PAUSED){
-    isPlaying = false; updateUI();
-  } else if (e.data === YT.PlayerState.ENDED){
-    isPlaying = false; updateUI();
-    if (currentIndex >= 0 && currentIndex < CONFIG.songs.length - 1){
-      setTimeout(() => loadAndPlay(currentIndex + 1), 800);
-    }
-  }
-}
-function onPlayerError(e){ console.warn('YouTube error:', e.data); }
-
-function tryAutoplay(){
-  if (autoplayAttempted) return;
-  autoplayAttempted = true;
-  const idx = Math.floor(Math.random() * CONFIG.songs.length);
-  const song = CONFIG.songs[idx];
-  if (!ytReady || !ytPlayer || !song.videoId) return;
-  currentIndex = idx;
-  try {
-    ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
-  } catch(e){}
-  setTimeout(() => {
-    applyMuteState();
-    try { ytPlayer.playVideo(); } catch(e){}
-  }, 400);
-  updateUI();
-  setTimeout(() => { if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
-}
-
-/* ★ แก้ first interaction ให้ force load ใหม่ ★ */
-function handleFirstInteraction(){
-  if (isPlaying) return;
-  autoplayHint.classList.remove('show');
-  if (!ytReady || !ytPlayer) return;
-  userInteracted = true;
-  // โหลดเพลงใหม่เสมอตอน user คลิกครั้งแรก (force play ด้วย user gesture)
-  if (currentIndex === -1){
-    loadAndPlay(Math.floor(Math.random() * CONFIG.songs.length));
-  } else {
-    // reload เพลงเดิมเพื่อให้ YouTube ยอมให้เล่นด้วย user gesture
-    loadAndPlay(currentIndex);
-  }
-}
-['click','touchstart','touchend','keydown'].forEach(evt => {
-  document.addEventListener(evt, handleFirstInteraction, { passive: true });
-});
-
-function toggleSong(index){
-  userInteracted = true;
-  autoplayHint.classList.remove('show');
-  if (index === currentIndex && isPlaying){ pauseCurrent(); return; }
-  if (index === currentIndex && !isPlaying){ resumeCurrent(); return; }
-  loadAndPlay(index);
-}
-function loadAndPlay(index){
-  const song = CONFIG.songs[index];
-  if (!song || !song.videoId){ showToast('⚠ ยังไม่ได้ใส่ YouTube ID'); return; }
-  if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
-  currentIndex = index;
-  try {
-    ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
-  } catch(e){}
-  setTimeout(() => {
-    applyMuteState();
-    try { ytPlayer.playVideo(); } catch(e){}
-  }, 300);
-  updateUI();
-  showToast('กำลังเล่น: ' + song.title);
-}
-function pauseCurrent(){
-  if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
-  isPlaying = false; updateUI();
-}
-function resumeCurrent(){
-  if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
-  isPlaying = true; updateUI();
-  setTimeout(applyMuteState, 200);
-}
-function updateUI(){
-  document.querySelectorAll('.song-item').forEach((el, i) => {
-    el.classList.toggle('active', i === currentIndex);
-    el.classList.toggle('playing', i === currentIndex && isPlaying);
-  });
-}
-
-function animateCount(el){
-  const raw    = parseFloat(el.dataset.count);
-  const prefix = el.dataset.prefix || '';
-  const suffix = el.dataset.suffix || '';
-  const divide = parseFloat(el.dataset.divide || 1);
-  const decimals = parseInt(el.dataset.decimals ?? (raw % 1 !== 0 ? 1 : 0));
-  const target = raw / divide;
-  const dur = 1500, start = performance.now();
-  function frame(now){
-    const p = Math.min((now - start) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    const val = target * eased;
-    el.textContent = prefix + val.toLocaleString('en-US',{
-      minimumFractionDigits: decimals, maximumFractionDigits: decimals
-    }) + suffix;
-    if (p < 1) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if (e.isIntersecting && !e.target.dataset.animated){
-      e.target.dataset.animated = '1';
-      animateCount(e.target);
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold:.5 });
-document.querySelectorAll('#pane-stats .num[data-count]').forEach(el=>io.observe(el));
-
-document.querySelectorAll('.stat').forEach(el => {
-  el.addEventListener('click', () => openStatsModal(el.dataset.stat));
-});
-
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.chart-hit-area') && !e.target.closest('.chart-tooltip')) {
-    hideChartTooltip();
-  }
-});
-
-window.addEventListener('load', ()=>{
-  document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity = '1'; });
-  setTimeout(() => {
-    document.querySelectorAll('#pane-stats .num[data-count]').forEach(el => {
-      if (!el.dataset.animated){
-        el.dataset.animated = '1';
-        animateCount(el);
-      }
-    });
-  }, 300);
-  updateQueueUI();
-});
-</script>
-</body>
-</html>
