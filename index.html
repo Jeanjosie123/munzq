@@ -100,14 +100,17 @@ body{
 .card::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:
-    linear-gradient(160deg,rgba(255,255,255,.04) 0%,transparent 40%),
-    radial-gradient(circle at 100% 0%,rgba(255,255,255,.015),transparent 50%);
-  opacity:.6;
+    linear-gradient(%160deg,rgba(255,);
+255,255,.04) 0%,transparent 40%),
+    radial-gradient(circle at 100%  0%,rgba(255,255,255,.015 z),transparent 50%);
+  opacity:.6-index;
 }
 .card::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  padding:1px;
-  background:linear-gradient(160deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.02) 30%,transparent 60%);
+  content:-:"";position:absolute;inset1:0;border-radius:inherit;;
+pointer-events:none;
+  padding:}
+1px;
+  background:linear-gradient(.t160deg,rgba(255,255,icker255,.14) 0%,rgba(255-track,255,255,.02) 30%,transparent 60%);
   -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;
   opacity:.6;
@@ -129,10 +132,7 @@ body{
   border-bottom:1px solid rgba(255,255,255,.05);
   backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
   mask-image:linear-gradient(180deg,#000 30%,transparent 100%);
-  -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100%);
-  z-index:-1;
-}
-.ticker-track{
+  -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100{
   display:inline-flex;gap:34px;
   animation:scroll 22s linear infinite;
   padding-left:100%;line-height:34px;position:relative;
@@ -1117,7 +1117,6 @@ footer{
   letter-spacing:.3px;width:100%;
 }
 
-/* ★ Buy Form (textarea) ★ */
 .buy-form{
   width:100%;
   display:flex;
@@ -1437,7 +1436,6 @@ footer{
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
 
-    <!-- ★ Volume Control ★ -->
     <div class="music-volume">
       <svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M11 5 6 9H2v6h4l5 4V5z"/>
@@ -1517,7 +1515,6 @@ footer{
         <div style="margin-top:12px">ราคา <span class="price" id="buyProductPrice">free</span></div>
       </div>
 
-      <!-- ★ Buy Form (textarea) ★ -->
       <div class="buy-form" id="buyForm">
         <label>ข้อความของคุณ</label>
         <textarea id="buyMessageInput" placeholder="พิมพ์คำถามหรือสิ่งที่อยากให้ดูดวง..."></textarea>
@@ -1575,7 +1572,7 @@ const CONFIG = {
     {
       title:   "Collide (Solo Version)",
       artist:  "Justine Skye",
-      videoId: "Bvfolf_L5wp0".replace('v',''),
+      videoId: "Bfolf_L5wp0",
       startAt: 27,
       cover:   "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg",
       glow:    "#6A5ACD"
@@ -1598,9 +1595,6 @@ const CONFIG = {
     maxY: 200
   }
 };
-
-/* ★ เพิ่ม videoId สำหรับเพลงที่ 3 ★ */
-CONFIG.songs[2].videoId = "Bfolf_L5wp0";
 
 const STATS_INFO = {
   winrate: {
@@ -2040,7 +2034,6 @@ function closeBuyModal(e){
   document.body.style.overflow = '';
 }
 
-/* ★ ส่งข้อความผ่าน Discord Webhook ★ */
 function submitBuyMessage(){
   const input = document.getElementById('buyMessageInput');
   const btn = document.getElementById('buySubmitBtn');
@@ -2135,6 +2128,9 @@ function connectLanyard(){
 }
 connectLanyard();
 
+/* ============================================================
+   ★ YOUTUBE PLAYER + VOLUME CONTROL (แก้ให้ทำงานได้จริง) ★
+   ============================================================ */
 let ytPlayer = null;
 let ytReady = false;
 let currentIndex = -1;
@@ -2142,20 +2138,33 @@ let isPlaying = false;
 let pendingPlay = null;
 let autoplayAttempted = false;
 let userInteracted = false;
+let currentVolume = 50; // ★ เก็บค่า Volume ไว้ใช้ซ้ำ
 
 const songList = document.getElementById('songList');
 const autoplayHint = document.getElementById('autoplayHint');
 const volumeSlider = document.getElementById('volumeSlider');
 const volumeValue = document.getElementById('volumeValue');
 
-/* ★ Volume Control Logic ★ */
-volumeSlider.addEventListener('input', (e) => {
-  const v = parseInt(e.target.value, 10);
-  volumeValue.textContent = v;
-  if (ytPlayer && ytPlayer.setVolume){
-    try { ytPlayer.setVolume(v); } catch(err){}
-  }
-});
+/* ★ ตั้งค่าเริ่มต้นจาก HTML (value="50") ★ */
+currentVolume = parseInt(volumeSlider.value, 10) || 50;
+
+/* ★ ฟังก์ชัน applyVolume - เรียกทุกที่ที่ต้องใช้ ★ */
+function applyVolume(){
+  if (!ytPlayer || typeof ytPlayer.setVolume !== 'function') return;
+  try {
+    if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
+    ytPlayer.setVolume(currentVolume);
+  } catch(e){}
+}
+
+/* ★ Slider event - ทั้ง input และ change ★ */
+function onVolumeChange(e){
+  currentVolume = parseInt(e.target.value, 10);
+  volumeValue.textContent = currentVolume;
+  applyVolume();
+}
+volumeSlider.addEventListener('input', onVolumeChange);
+volumeSlider.addEventListener('change', onVolumeChange);
 
 function renderSongList(){
   songList.innerHTML = '';
@@ -2211,10 +2220,10 @@ window.onYouTubeIframeAPIReady = function(){
 
 function onPlayerReady(){
   ytReady = true;
-  /* ★ ตั้งค่า Volume เริ่มต้น ★ */
-  if (ytPlayer && ytPlayer.setVolume){
-    try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
-  }
+  /* ★ Apply Volume หลังพร้อม 100ms ★ */
+  setTimeout(() => applyVolume(), 100);
+  setTimeout(() => applyVolume(), 500);
+
   if (pendingPlay !== null){
     const idx = pendingPlay;
     pendingPlay = null;
@@ -2227,6 +2236,9 @@ function onPlayerStateChange(e){
     isPlaying = true;
     autoplayHint.classList.remove('show');
     updateUI();
+    /* ★ Apply Volume ทุกครั้งที่เริ่มเล่น ★ */
+    applyVolume();
+    setTimeout(() => applyVolume(), 300);
   } else if (e.data === YT.PlayerState.PAUSED){
     isPlaying = false; updateUI();
   } else if (e.data === YT.PlayerState.ENDED){
@@ -2246,12 +2258,18 @@ function tryAutoplay(){
   if (!ytReady || !ytPlayer || !song.videoId) return;
   currentIndex = idx;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
+
+  /* ★ Apply Volume หลายจังหวะ เพราะ YouTube มัก reset ★ */
+  setTimeout(() => applyVolume(), 100);
+  setTimeout(() => applyVolume(), 400);
+  setTimeout(() => applyVolume(), 900);
+  setTimeout(() => applyVolume(), 1600);
+
   setTimeout(() => {
-    if (ytPlayer && ytPlayer.setVolume){
-      try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
-    }
     if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+    applyVolume();
   }, 400);
+
   updateUI();
   setTimeout(() => { if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
 }
@@ -2265,6 +2283,7 @@ function handleFirstInteraction(){
     loadAndPlay(Math.floor(Math.random() * CONFIG.songs.length));
   } else {
     try { ytPlayer.playVideo(); } catch(e){}
+    setTimeout(() => applyVolume(), 200);
   }
 }
 ['click','touchstart','touchend','keydown'].forEach(evt => {
@@ -2278,18 +2297,23 @@ function toggleSong(index){
   if (index === currentIndex && !isPlaying){ resumeCurrent(); return; }
   loadAndPlay(index);
 }
+
 function loadAndPlay(index){
   const song = CONFIG.songs[index];
   if (!song || !song.videoId){ showToast('⚠ ยังไม่ได้ใส่ YouTube ID'); return; }
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
+
+  /* ★ Apply Volume หลายจังหวะ ★ */
+  setTimeout(() => applyVolume(), 100);
   setTimeout(() => {
-    if (ytPlayer && ytPlayer.setVolume){
-      try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
-    }
+    applyVolume();
     if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   }, 300);
+  setTimeout(() => applyVolume(), 800);
+  setTimeout(() => applyVolume(), 1500);
+
   updateUI();
   showToast('▶ กำลังเล่น: ' + song.title);
 }
@@ -2300,6 +2324,7 @@ function pauseCurrent(){
 function resumeCurrent(){
   if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   isPlaying = true; updateUI();
+  setTimeout(() => applyVolume(), 200);
 }
 function updateUI(){
   document.querySelectorAll('.song-item').forEach((el, i) => {
