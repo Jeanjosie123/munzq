@@ -160,19 +160,10 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .music .song-item .song-eq i:nth-child(2){height:90%;animation-delay:.15s}
 .music .song-item .song-eq i:nth-child(3){height:60%;animation-delay:.3s}
 @keyframes eq{0%,100%{transform:scaleY(0.4)}50%{transform:scaleY(1)}}
-.music-volume{display:flex;align-items:center;gap:10px;margin:8px 16px 0;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);height:44px;overflow:hidden}
-.music-volume .vol-icon{width:16px !important;height:16px !important;min-width:16px !important;max-width:16px !important;min-height:16px !important;max-height:16px !important;flex:0 0 16px !important;color:var(--muted);display:block;transition:color .2s}
-.music-volume:hover .vol-icon{color:#fff}
-.music-volume input[type="range"]{-webkit-appearance:none;appearance:none;flex:1 1 auto;min-width:0;height:4px;border-radius:2px;background:rgba(255,255,255,.1);outline:none;cursor:pointer}
-.music-volume input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 0 8px rgba(255,255,255,.5)}
-.music-volume input[type="range"]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;border:none}
-.music-volume #volumeValue{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;min-width:28px;flex:0 0 auto;text-align:right}
 @media (max-width:400px){
   .music .song-item{width:72px;height:72px;min-height:72px;border-radius:16px;margin-left:-12px}
   .music .song-item .song-eq{width:26px;height:26px;padding-bottom:5px;bottom:5px;gap:2px}
   .music .song-item .song-eq i{width:2.5px}
-  .music-volume{margin:6px 10px 0;padding:8px 12px;gap:8px;height:40px}
-  .music-volume #volumeValue{font-size:10px;min-width:24px}
 }
 .yt-hidden{position:absolute !important;top:-9999px !important;left:-9999px !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none !important;z-index:-9999 !important;overflow:hidden !important}
 .yt-hidden > div{width:200px;height:120px}
@@ -450,17 +441,6 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
 
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
-
-    <div class="music-volume">
-      <svg class="vol-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;min-width:16px;max-width:16px;min-height:16px;max-height:16px;flex:0 0 16px;display:block">
-        <path d="M11 5 6 9H2v6h4l5 4V5z"/>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-      </svg>
-      <input type="range" id="volumeSlider" min="0" max="100" value="50" aria-label="Volume">
-      <span id="volumeValue">50</span>
-    </div>
-
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       Altare &amp; Ariana Grande &amp; Justine Skye · Full Track
@@ -574,6 +554,9 @@ var CONFIG = {
   }],
   chart: { data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180], maxY: 200 }
 };
+
+/* ★★ ตั้งค่าเสียงเริ่มต้น 30% (แก้ตรงนี้ได้) ★★ */
+var DEFAULT_VOLUME = 30;
 
 var STATS_INFO = {
   winrate: {
@@ -988,48 +971,18 @@ var currentIndex = -1;
 var isPlaying = false;
 var pendingPlay = null;
 var autoplayAttempted = false;
-var currentVolume = 50;
-var volumeCheckTimer = null;
 
 var songList = document.getElementById('songList');
 var autoplayHint = document.getElementById('autoplayHint');
-var volumeSlider = document.getElementById('volumeSlider');
-var volumeValue = document.getElementById('volumeValue');
 
-currentVolume = parseInt(volumeSlider.value, 10) || 50;
-
-/* ★ applyVolume - เพิ่ม mute() เมื่อ 0 + unMute() เมื่อ >0 ★ */
+/* ★ applyVolume - บังคับเสียงเป็น DEFAULT_VOLUME ทุกครั้ง ★ */
 function applyVolume() {
   if (!ytPlayer || typeof ytPlayer.setVolume !== 'function') return;
   try {
-    if (currentVolume <= 0) {
-      if (typeof ytPlayer.mute === 'function') ytPlayer.mute();
-    } else {
-      if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
-      ytPlayer.setVolume(currentVolume);
-    }
+    if (typeof ytPlayer.unMute === 'function') ytPlayer.unMute();
+    ytPlayer.setVolume(DEFAULT_VOLUME);
   } catch(e) {}
 }
-
-function startVolumeCheck() {
-  if (volumeCheckTimer) return;
-  volumeCheckTimer = setInterval(function() {
-    if (isPlaying) applyVolume();
-  }, 2000);
-}
-function stopVolumeCheck() {
-  if (volumeCheckTimer) { clearInterval(volumeCheckTimer); volumeCheckTimer = null; }
-}
-
-function onVolumeChange(e) {
-  currentVolume = parseInt(e.target.value, 10);
-  volumeValue.textContent = currentVolume;
-  applyVolume();
-  if (currentVolume > 0 && isPlaying) startVolumeCheck();
-  if (currentVolume <= 0) stopVolumeCheck();
-}
-volumeSlider.addEventListener('input', onVolumeChange);
-volumeSlider.addEventListener('change', onVolumeChange);
 
 function renderSongList() {
   songList.innerHTML = '';
@@ -1087,11 +1040,10 @@ function onPlayerStateChange(e) {
     applyVolume();
     setTimeout(applyVolume, 300);
     setTimeout(applyVolume, 1000);
-    if (currentVolume > 0) startVolumeCheck();
   } else if (e.data === YT.PlayerState.PAUSED) {
-    isPlaying = false; updateUI(); stopVolumeCheck();
+    isPlaying = false; updateUI();
   } else if (e.data === YT.PlayerState.ENDED) {
-    isPlaying = false; updateUI(); stopVolumeCheck();
+    isPlaying = false; updateUI();
     if (currentIndex >= 0 && currentIndex < CONFIG.songs.length - 1) {
       setTimeout(function() { loadAndPlay(currentIndex + 1); }, 800);
     }
@@ -1159,13 +1111,12 @@ function loadAndPlay(index) {
 }
 function pauseCurrent() {
   if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
-  isPlaying = false; updateUI(); stopVolumeCheck();
+  isPlaying = false; updateUI();
 }
 function resumeCurrent() {
   if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   isPlaying = true; updateUI();
   setTimeout(applyVolume, 200);
-  if (currentVolume > 0) startVolumeCheck();
 }
 function updateUI() {
   document.querySelectorAll('.song-item').forEach(function(el, i) {
