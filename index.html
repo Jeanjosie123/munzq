@@ -354,13 +354,29 @@ body{
   border-radius:16px;
   transition:.25s;position:relative;overflow:hidden;
   box-shadow:0 6px 24px -8px rgba(0,0,0,.7);
+  cursor:pointer;
 }
-.stat:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.05)}
+.stat:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.06)}
+.stat:active{transform:translateY(-1px) scale(.98)}
 .stat .lbl-top{
   font-family:'JetBrains Mono',monospace;
   font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
   color:var(--muted);margin-bottom:6px;
+  display:flex;align-items:center;justify-content:space-between;
 }
+.stat .lbl-top .info-dot{
+  font-size:9px;
+  width:14px;height:14px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);
+  color:#888;
+  font-weight:700;
+  opacity:.6;
+  transition:.2s;
+}
+.stat:hover .info-dot{opacity:1;background:rgba(255,255,255,.15);color:#fff}
 .stat .num{
   font-family:'JetBrains Mono',monospace;
   font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;
@@ -424,6 +440,80 @@ body{
   width:100%;
   height:auto;
   display:block;
+}
+
+/* ★ Tooltip สำหรับกราฟ ★ */
+.chart-tooltip{
+  position: absolute;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(8,8,8,.98);
+  border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -100%) translateY(-12px);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 30;
+  white-space: nowrap;
+  box-shadow: 0 10px 28px -10px rgba(0,0,0,.95), 0 0 20px -6px rgba(0,224,122,.35);
+  text-align: center;
+  line-height: 1.4;
+}
+.chart-tooltip.show { opacity: 1; }
+.chart-tooltip .ct-month {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #888;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+.chart-tooltip .ct-value {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.3px;
+}
+.chart-tooltip .ct-diff {
+  font-size: 9.5px;
+  font-weight: 600;
+  margin-top: 2px;
+  letter-spacing: .3px;
+}
+.chart-tooltip .ct-diff.up { color: var(--green); }
+.chart-tooltip .ct-diff.dn { color: var(--red); }
+.chart-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(255,255,255,.25);
+}
+.chart-hint-text {
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 1px;
+  color: #555;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.chart-hit-area {
+  fill: transparent;
+  cursor: pointer;
+}
+.chart-hit-area:hover {
+  fill: rgba(0,224,122,.08);
 }
 
 #equityLine{
@@ -520,7 +610,6 @@ body{
 }
 .product-glow:hover .product-row{transform:translateY(-2px)}
 
-/* ★ เพิ่ม CSS สำหรับ Background GIF ★ */
 .product-bg {
     position: absolute;
     inset: 0;
@@ -547,8 +636,8 @@ body{
   position:relative;overflow:hidden;
   display:grid;place-items:center;
 }
-.product-thumb-placeholder{color:rgba(255,255,255,.4)}
-.product-thumb-placeholder svg{width:24px !important;height:24px !important;display:block}
+.product-thumb-placeholder{color:rgba(255,255,255,.85)}
+.product-thumb-placeholder svg{width:32px !important;height:32px !important;display:block; filter: drop-shadow(0 0 6px rgba(180,140,255,.6));}
 .product-info{
   flex:1;min-width:0;
   display:flex;flex-direction:column;gap:3px;
@@ -834,6 +923,84 @@ footer{
   image-rendering:smooth;
 }
 
+/* ★ Stats Info Modal ★ */
+.stats-modal{
+  position:fixed;inset:0;z-index:310;
+  background:rgba(0,0,0,.92);
+  backdrop-filter:blur(16px) saturate(120%);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+.stats-modal.show{opacity:1;visibility:visible;pointer-events:auto}
+.stats-inner{
+  max-width:420px;width:100%;
+  background:rgba(5,5,5,.98);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:18px;overflow:hidden;
+  backdrop-filter:blur(32px) saturate(120%);
+  -webkit-backdrop-filter:blur(32px) saturate(120%);
+  display:flex;flex-direction:column;
+  transform:scale(.85) translateY(20px);
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.95),0 0 40px -10px rgba(255,255,255,.15);
+}
+.stats-modal.show .stats-inner{transform:scale(1) translateY(0)}
+.stats-head{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 18px;border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+}
+.stats-head-icon{
+  width:36px;height:36px;flex-shrink:0;border-radius:10px;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.18);
+  display:grid;place-items:center;color:#fff;
+}
+.stats-head-icon svg{width:18px;height:18px}
+.stats-head-title{
+  flex:1;font-family:'JetBrains Mono',monospace;
+  font-size:13px;font-weight:700;letter-spacing:1px;
+  color:#fff;text-transform:uppercase;
+}
+.stats-close{
+  width:32px;height:32px;border-radius:8px;border:1px solid var(--border);
+  background:transparent;color:var(--text);cursor:pointer;
+  display:grid;place-items:center;transition:.2s;flex-shrink:0;
+}
+.stats-close:hover{background:var(--red);border-color:var(--red);color:#fff}
+.stats-close svg{width:15px;height:15px}
+.stats-body{
+  padding:20px;
+  font-size:13.5px;line-height:1.8;color:#b8b8b8;font-weight:300;
+  text-align:left;
+}
+.stats-body .formula{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  color:var(--green);
+  background:rgba(0,224,122,.06);
+  border:1px solid rgba(0,224,122,.2);
+  padding:8px 12px;
+  border-radius:8px;
+  margin:10px 0;
+  letter-spacing:.3px;
+}
+.stats-body .stats-value-example{
+  display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;
+}
+.stats-body .badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;
+  padding:4px 9px;border-radius:6px;
+  letter-spacing:.5px;
+}
+.stats-body .badge.good{background:rgba(0,224,122,.12);color:var(--green);border:1px solid rgba(0,224,122,.3)}
+.stats-body .badge.mid{background:rgba(240,178,50,.12);color:var(--yellow);border:1px solid rgba(240,178,50,.3)}
+.stats-body .badge.bad{background:rgba(255,59,92,.12);color:var(--red);border:1px solid rgba(255,59,92,.3)}
+
 .buy-modal{
   position:fixed;inset:0;z-index:300;
   background:rgba(0,0,0,.92);
@@ -964,6 +1131,9 @@ footer{
   .tab-pane{padding:16px}
   .view-counter{top:12px;right:12px;padding:4px 9px;font-size:10px}
   .view-counter svg{width:11px;height:11px}
+  .chart-tooltip{padding:6px 10px;font-size:9px}
+  .chart-tooltip .ct-value{font-size:12px}
+  .stats-body{padding:16px;font-size:13px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -1046,23 +1216,23 @@ footer{
 
     <div class="tab-pane active" id="pane-stats">
       <div class="stats">
-        <div class="stat">
-          <div class="lbl-top">Win Rate</div>
+        <div class="stat" data-stat="winrate">
+          <div class="lbl-top">Win Rate <span class="info-dot">i</span></div>
           <div class="num green" data-count="68" data-suffix="%">0%</div>
           <div class="sub">จาก 240 ไม้ล่าสุด</div>
         </div>
-        <div class="stat">
-          <div class="lbl-top">Risk : Reward</div>
+        <div class="stat" data-stat="rr">
+          <div class="lbl-top">Risk : Reward <span class="info-dot">i</span></div>
           <div class="num lime" data-count="2.4" data-prefix="1:" data-decimals="1">1:0</div>
           <div class="sub">เฉลี่ยต่อไม้</div>
         </div>
-        <div class="stat">
-          <div class="lbl-top">Profit Factor</div>
+        <div class="stat" data-stat="pf">
+          <div class="lbl-top">Profit Factor <span class="info-dot">i</span></div>
           <div class="num gold" data-count="2.1" data-decimals="1">0</div>
           <div class="sub">กำไร ÷ ขาดทุน</div>
         </div>
-        <div class="stat">
-          <div class="lbl-top">Max Drawdown</div>
+        <div class="stat" data-stat="dd">
+          <div class="lbl-top">Max Drawdown <span class="info-dot">i</span></div>
           <div class="num red" data-count="4.8" data-suffix="%" data-decimals="1">0%</div>
           <div class="sub">ต่ำสุดที่ยอมรับได้</div>
         </div>
@@ -1136,6 +1306,8 @@ footer{
           <path id="equityArea" fill="url(#areaGrad)"/>
           <path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 6px rgba(0,224,122,.6))"/>
 
+          <g id="chartHitAreas"></g>
+
           <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
           <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
 
@@ -1148,6 +1320,8 @@ footer{
             <text x="306" y="152">DEC</text>
           </g>
         </svg>
+        <div class="chart-tooltip" id="chartTooltip"></div>
+        <div class="chart-hint-text">TAP MONTH</div>
       </div>
 
       <div class="chart-mini">
@@ -1209,6 +1383,20 @@ footer{
     <div class="modal-body">
       <img id="modalImg" class="cert-detail-img" src="" alt="Certificate">
     </div>
+  </div>
+</div>
+
+<!-- ★ Stats Info Modal ★ -->
+<div class="stats-modal" id="statsModal" onclick="closeStatsModal(event)">
+  <div class="stats-inner">
+    <div class="stats-head">
+      <div class="stats-head-icon" id="statsModalIcon"></div>
+      <div class="stats-head-title" id="statsModalTitle">STATS</div>
+      <button class="stats-close" onclick="closeStatsModal()" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="stats-body" id="statsModalBody"></div>
   </div>
 </div>
 
@@ -1294,7 +1482,7 @@ const CONFIG = {
     {
       id: "p1",
       name: "รับดูดวงโหราศาสตร์ไทย",
-      price: "free", // ★ เปลี่ยนเป็น Free แล้ว ★
+      price: "free",
       image: "",
       bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
       description: "🔮รับดูดวง โหราศาสตร์,ไพ่ทาโร่,birthchart ดูฟรีนะครับหรือสามารถโดเนทตามศรัทธา เปิดรับตลอดแต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ discord : @munzq"
@@ -1304,6 +1492,68 @@ const CONFIG = {
   chart: {
     data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180],
     maxY: 200
+  }
+};
+
+/* ★ ข้อมูลอธิบาย Stat แต่ละตัว ★ */
+const STATS_INFO = {
+  winrate: {
+    title: 'WIN RATE',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>',
+    body: `
+      <p>อัตราการชนะ คือเปอร์เซ็นต์ของจำนวนไม้ที่ทำกำไร เมื่อเทียบกับจำนวนไม้ทั้งหมดที่เทรด</p>
+      <span class="formula">(ไม้ชนะ ÷ ไม้ทั้งหมด) × 100</span>
+      <p>ยิ่งค่าสูง ยิ่งแสดงถึงความแม่นยำในการเข้าเทรด แต่ต้องดูร่วมกับ Risk:Reward ด้วย เพราะ Win Rate ต่ำแต่ RR สูงก็ยังทำกำไรได้</p>
+      <div class="stats-value-example">
+        <span class="badge bad">&lt; 40% ต่ำ</span>
+        <span class="badge mid">40-55% ปานกลาง</span>
+        <span class="badge good">&gt; 55% ดี</span>
+      </div>
+    `
+  },
+  rr: {
+    title: 'RISK : REWARD',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
+    body: `
+      <p>อัตราส่วนระหว่างความเสี่ยงต่อผลตอบแทนที่คาดหวัง</p>
+      <span class="formula">1 : X → เสี่ยง 1 บาท หวังกำไร X บาท</span>
+      <p>ค่าที่ดีควรอยู่ที่ <b style="color:#fff">1:1.5</b> ขึ้นไป ยิ่งสูงยิ่งดี เพราะแม้ Win Rate ต่ำก็ยังทำกำไรได้ในระยะยาว</p>
+      <div class="stats-value-example">
+        <span class="badge bad">&lt; 1:1 แย่</span>
+        <span class="badge mid">1:1 - 1:2 พอใช้</span>
+        <span class="badge good">&gt; 1:2 ดีมาก</span>
+      </div>
+    `
+  },
+  pf: {
+    title: 'PROFIT FACTOR',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+    body: `
+      <p>อัตราส่วนกำไรรวมต่อขาดทุนรวม แสดงถึงประสิทธิภาพโดยรวมของกลยุทธ์</p>
+      <span class="formula">กำไรรวม ÷ ขาดทุนรวม</span>
+      <p>ถ้าค่ามากกว่า 1 = กำไร, ถ้ามากกว่า 2 = ดีเยี่ยม ถ้าต่ำกว่า 1 = ขาดทุน</p>
+      <div class="stats-value-example">
+        <span class="badge bad">&lt; 1 ขาดทุน</span>
+        <span class="badge mid">1 - 1.5 พอใช้</span>
+        <span class="badge good">1.5 - 2 ดี</span>
+        <span class="badge good">&gt; 2 ดีเยี่ยม</span>
+      </div>
+    `
+  },
+  dd: {
+    title: 'MAX DRAWDOWN',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8"/><path d="M14 17h7v-7"/></svg>',
+    body: `
+      <p>การขาดทุนสูงสุดของพอร์ต คือผลต่างระหว่างจุดสูงสุดของพอร์ต กับจุดต่ำสุดหลังจากนั้น</p>
+      <span class="formula">(Peak - Trough) ÷ Peak × 100</span>
+      <p>เป็นตัวชี้วัดความเสี่ยงที่สำคัญมาก ยิ่งค่าน้อยยิ่งดี เพราะหมายถึงพอร์ตมีความผันผวนต่ำ</p>
+      <div class="stats-value-example">
+        <span class="badge good">&lt; 5% ดีมาก</span>
+        <span class="badge mid">5-10% ยอมรับได้</span>
+        <span class="badge bad">10-20% เสี่ยง</span>
+        <span class="badge bad">&gt; 20% อันตราย</span>
+      </div>
+    `
   }
 };
 
@@ -1336,6 +1586,22 @@ function copyDiscord(){
     catch(e){ showToast('Discord: ' + user); }
     document.body.removeChild(ta);
   }
+}
+
+/* ★ Stats Modal ★ */
+function openStatsModal(key){
+  const info = STATS_INFO[key];
+  if (!info) return;
+  document.getElementById('statsModalTitle').textContent = info.title;
+  document.getElementById('statsModalIcon').innerHTML = info.icon;
+  document.getElementById('statsModalBody').innerHTML = info.body;
+  document.getElementById('statsModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeStatsModal(e){
+  if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.stats-close')) return;
+  document.getElementById('statsModal').classList.remove('show');
+  document.body.style.overflow = '';
 }
 
 /* ★ VIEW COUNTER */
@@ -1463,6 +1729,7 @@ function switchTab(name){
     wrap.classList.remove('animate');
     void wrap.offsetWidth;
     wrap.classList.add('animate');
+    hideChartTooltip();
   }
 }
 
@@ -1483,8 +1750,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape'){
     const certModal = document.getElementById('certModal');
     const buyModal = document.getElementById('buyModal');
+    const statsModal = document.getElementById('statsModal');
+    if (statsModal.classList.contains('show')){ closeStatsModal(); return; }
     if (buyModal.classList.contains('show')){ closeBuyModal(); return; }
     if (certModal.classList.contains('show')) closeCert();
+    hideChartTooltip();
   }
 });
 
@@ -1530,8 +1800,74 @@ function drawChart(){
   document.getElementById('equityDot').setAttribute('cy', last[1]);
   document.getElementById('equityDotOuter').setAttribute('cx', last[0]);
   document.getElementById('equityDotOuter').setAttribute('cy', last[1]);
+
+  // ★ สร้าง Hit Area สำหรับกดดูแต่ละเดือน ★
+  const hitGroup = document.getElementById('chartHitAreas');
+  hitGroup.innerHTML = '';
+  pts.forEach((p, i) => {
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', p[0]);
+    c.setAttribute('cy', p[1]);
+    c.setAttribute('r', 14);
+    c.setAttribute('class', 'chart-hit-area');
+    c.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      showChartTooltip(i);
+    });
+    c.addEventListener('mouseenter', () => showChartTooltip(i));
+    hitGroup.appendChild(c);
+  });
 }
 drawChart();
+
+/* ★ Chart Tooltip ★ */
+const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+let chartTooltipTimer = null;
+
+function showChartTooltip(index){
+  const data = CONFIG.chart.data;
+  const maxY = CONFIG.chart.maxY;
+  const W = 320, H = 170;
+  const padL = 36, padR = 12, padT = 16, padB = 34;
+  const w = W - padL - padR;
+  const h = H - padT - padB;
+
+  const px = padL + (index / (data.length - 1)) * w;
+  const py = padT + h - (data[index] / maxY) * h;
+
+  const svg = document.getElementById('equityChart');
+  const wrap = document.getElementById('chartWrap');
+  const svgRect = svg.getBoundingClientRect();
+  const wrapRect = wrap.getBoundingClientRect();
+
+  const scaleX = svgRect.width / W;
+  const scaleY = svgRect.height / H;
+
+  const tooltipX = (svgRect.left - wrapRect.left) + px * scaleX;
+  const tooltipY = (svgRect.top - wrapRect.top) + py * scaleY;
+
+  const tooltip = document.getElementById('chartTooltip');
+  const prevValue = index > 0 ? data[index - 1] : 0;
+  const diff = data[index] - prevValue;
+  const diffClass = diff >= 0 ? 'up' : 'dn';
+  const diffSign = diff >= 0 ? '+' : '';
+
+  tooltip.innerHTML = `
+    <div class="ct-month">${MONTHS[index]}</div>
+    <div class="ct-value">${data[index]}%</div>
+    <div class="ct-diff ${diffClass}">${diffSign}${diff}% MoM</div>
+  `;
+
+  tooltip.style.left = tooltipX + 'px';
+  tooltip.style.top = tooltipY + 'px';
+  tooltip.classList.add('show');
+
+  clearTimeout(chartTooltipTimer);
+  chartTooltipTimer = setTimeout(() => hideChartTooltip(), 4500);
+}
+function hideChartTooltip(){
+  document.getElementById('chartTooltip').classList.remove('show');
+}
 
 let selectedProductId = null;
 
@@ -1545,13 +1881,19 @@ function renderProducts(){
     const thumbHTML = p.image
       ? `<div class="product-thumb" style="background-image:url('${p.image}')"></div>`
       : `<div class="product-thumb product-thumb-placeholder">
-           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-             <path d="M21 8v13H3V8"/>
-             <path d="M1 3h22v5H1z"/>
-             <path d="M10 12h4"/>
+           <!-- ★ ไอคอนลูกแก้วดูดวง ★ -->
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+             <circle cx="12" cy="9.5" r="7"/>
+             <path d="M7 20h10"/>
+             <path d="M9 16.5v3.5M15 16.5v3.5"/>
+             <circle cx="9.5" cy="7.5" r="1" fill="currentColor" stroke="none" opacity="0.7"/>
+             <circle cx="14.5" cy="9" r="0.8" fill="currentColor" stroke="none" opacity="0.7"/>
+             <circle cx="11" cy="12" r="0.7" fill="currentColor" stroke="none" opacity="0.7"/>
+             <path d="M5 3l0.6 -1.2 0.6 1.2" stroke-width="1.2"/>
+             <path d="M19 3l0.6 -1.2 0.6 1.2" stroke-width="1.2"/>
+             <path d="M12 1l0.5 -1 0.5 1" stroke-width="1.2"/>
            </svg>
          </div>`;
-    // ★ สร้าง div สำหรับพื้นหลัง GIF ★
     const bgHTML = p.bgImage ? `<div class="product-bg" style="background-image:url('${p.bgImage}')"></div>` : '';
     
     return `
@@ -1584,7 +1926,6 @@ function openBuyModal(id){
   selectedProductId = id;
   document.getElementById('buyProductName').textContent = p.name;
   document.getElementById('buyProductPrice').textContent = p.price;
-  // ★ อัปเดตรายละเอียดสินค้า ★
   document.getElementById('buyProductDesc').textContent = p.description || "ต้องการยืนยันการซื้อสินค้านี้หรือไม่?";
   document.getElementById('buyModal').classList.add('show');
   document.body.style.overflow = 'hidden';
@@ -1594,9 +1935,7 @@ function closeBuyModal(e){
   document.getElementById('buyModal').classList.remove('show');
   document.body.style.overflow = '';
 }
-function confirmBuy(){
-  // ไม่ได้ใช้แล้ว因为在ตัวอย่างนี้เปลี่ยนปุ่มเป็น Copy Discord แทน
-}
+function confirmBuy(){}
 
 const statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
 let lanyardWs = null;
@@ -1820,6 +2159,18 @@ const io = new IntersectionObserver((entries)=>{
   });
 }, { threshold:.5 });
 document.querySelectorAll('#pane-stats .num[data-count]').forEach(el=>io.observe(el));
+
+/* ★ Stats คลิกได้ ★ */
+document.querySelectorAll('.stat').forEach(el => {
+  el.addEventListener('click', () => openStatsModal(el.dataset.stat));
+});
+
+/* ★ คลิกที่อื่นเพื่อปิด Tooltip ★ */
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.chart-hit-area') && !e.target.closest('.chart-tooltip')) {
+    hideChartTooltip();
+  }
+});
 
 window.addEventListener('load', ()=>{
   document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity = '1'; });
