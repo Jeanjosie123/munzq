@@ -516,8 +516,28 @@ body{
   border-radius:14.5px;
   background:linear-gradient(135deg,rgba(15,15,15,.85),rgba(5,5,5,.92));
   transition:.28s cubic-bezier(.2,.8,.3,1);
+  overflow: hidden;
 }
 .product-glow:hover .product-row{transform:translateY(-2px)}
+
+/* ★ เพิ่ม CSS สำหรับ Background GIF ★ */
+.product-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.4);
+    opacity: 0.8;
+    border-radius: 14.5px;
+    pointer-events: none;
+}
+
+.product-thumb, .product-info, .product-buy {
+    position: relative;
+    z-index: 2;
+}
+
 .product-thumb{
   width:56px;height:56px;flex-shrink:0;
   border-radius:12px;
@@ -585,7 +605,7 @@ body{
     border-radius: 20px;
     border: 2px solid #ffffff;
     padding: 0;
-    margin-left: -14px; /* ทำให้ซ้อนกัน */
+    margin-left: -14px;
     position: relative;
     overflow: hidden;
     background-size: cover;
@@ -596,14 +616,10 @@ body{
     z-index: 1;
     isolation: isolate;
 }
-.music .song-item:first-child {
-    margin-left: 0;
-}
-/* เอียงสลับซ้าย-ขวา */
+.music .song-item:first-child { margin-left: 0; }
 .music .song-item:nth-child(odd) { transform: rotate(-6deg); }
 .music .song-item:nth-child(even) { transform: rotate(6deg); }
 
-/* ตอนเอาเมาส์ชี้ ให้ตั้งตรงและเด้งขึ้น */
 .music .song-item:hover {
     transform: rotate(0deg) translateY(-8px) scale(1.15);
     z-index: 10;
@@ -611,18 +627,13 @@ body{
     border-color: #ffffff;
 }
 .music .song-item .song-info,
-.music .song-item .song-play {
-    display: none !important;
-}
+.music .song-item .song-play { display: none !important; }
 .music .song-item .song-overlay {
     background: rgba(0,0,0,0.3);
     transition: background .3s;
 }
-.music .song-item.active .song-overlay {
-    background: rgba(0,0,0,0);
-}
+.music .song-item.active .song-overlay { background: rgba(0,0,0,0); }
 
-/* ★ แสงวิ่งรอบขอบ (เฉพาะเพลงที่กำลังเล่น) ★ */
 @keyframes borderSpin{ to{ --border-angle: 360deg; } }
 @property --border-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
 
@@ -654,7 +665,6 @@ body{
     animation: borderSpin 3s linear infinite;
 }
 
-/* ★ คลื่นเสียง (เฉพาะเพลงที่กำลังเล่น) ★ */
 .music .song-item .song-eq {
     position: absolute;
     bottom: 6px;
@@ -674,9 +684,7 @@ body{
     z-index: 15;
     box-shadow: 0 0 10px var(--song-glow, #00e07a);
 }
-.music .song-item.playing .song-eq {
-    display: flex;
-}
+.music .song-item.playing .song-eq { display: flex; }
 .music .song-item .song-eq i {
     width: 3px;
     background: #fff;
@@ -709,9 +717,7 @@ body{
     }
     .music .song-item .song-eq i { width: 2.5px; }
 }
-/* ===== จบส่วน FOCUS PLAYLIST ===== */
 
-/* ===== ★ FIX YOUTUBE PLAYER (ซ่อนไม่ให้โผล่ข้างล่าง) ★ ===== */
 .yt-hidden {
     position: absolute !important;
     top: -9999px !important;
@@ -727,7 +733,6 @@ body{
     width: 200px;
     height: 120px;
 }
-/* ===== จบส่วนซ่อน YouTube ===== */
 
 .hint{
   font-size:11px;color:var(--muted);text-align:center;
@@ -1210,7 +1215,7 @@ footer{
 <div class="buy-modal" id="buyModal" onclick="closeBuyModal(event)">
   <div class="buy-inner">
     <div class="buy-head">
-      <div class="title">Confirm Purchase</div>
+      <div class="title">Product Details</div>
       <button class="buy-close" onclick="closeBuyModal()" aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
@@ -1225,18 +1230,19 @@ footer{
       </div>
       <div class="buy-message">
         <strong id="buyProductName">ไม่รู้เลยก๊า</strong>
-        ต้องการยืนยันการซื้อสินค้านี้หรือไม่?
-        <div style="margin-top:6px">ราคา <span class="price" id="buyProductPrice">฿999</span></div>
+        <!-- ★ เพิ่ม div สำหรับแสดงรายละเอียดสินค้า ★ -->
+        <div id="buyProductDesc" style="margin-top:10px; font-size:13px; line-height:1.6; color:#ccc;"></div>
+        <div style="margin-top:12px">ราคา <span class="price" id="buyProductPrice">฿999</span></div>
       </div>
-      <div class="buy-note">ⓘ ยังไม่เปิดขาย — ของจะมาเร็ว ๆ นี้</div>
+      <div class="buy-note">ⓘ ข้อมูลการติดต่อ</div>
       <div class="buy-actions">
         <button class="buy-btn cancel" onclick="closeBuyModal()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-          Cancel
+          Close
         </button>
-        <button class="buy-btn confirm" onclick="confirmBuy()">
+        <button class="buy-btn confirm" onclick="copyDiscord()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
-          Confirm
+          Copy Discord
         </button>
       </div>
     </div>
@@ -1263,30 +1269,38 @@ const CONFIG = {
       title:   "bye (Altare Remix)",
       artist:  "Ariana Grande, Altare",
       videoId: "agneRtEe-t8",
-      startAt: 15,           // ★ เริ่มที่ 0:15
+      startAt: 15,
       cover:   "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg",
-      glow:    "#c5f82a"    // สีเขียวมะนาวจากปก
+      glow:    "#c5f82a"
     },
     {
       title:   "hate that i made you love me",
       artist:  "Ariana Grande",
       videoId: "v1t4MTqdfyI",
-      startAt: 26,           // ★ เริ่มที่ 0:26
+      startAt: 26,
       cover:   "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg",
-      glow:    "#f0b232"    // ★ สีเหลืองจากโทนภาพปก
+      glow:    "#f0b232"
     },
     {
       title:   "Collide (Solo Version)",
       artist:  "Justine Skye",
       videoId: "Bfolf_L5wp0",
-      startAt: 27,           // ★ เริ่มที่ 0:27
+      startAt: 27,
       cover:   "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg",
-      glow:    "#6A5ACD"    // ★ สีม่วงอมฟ้า
+      glow:    "#6A5ACD"
     }
   ],
 
+  // ★ อัปเดตข้อมูลสินค้าโดยเพิ่ม bgImage และ description ★
   products: [
-    { id:"p1", name:"ไม่รู้เลยก๊า", price:"฿999", image:"" }
+    {
+      id: "p1",
+      name: "ไม่รู้เลยก๊า",
+      price: "฿999",
+      image: "",
+      bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
+      description: "รับดูดวง โหราศาสตร์ ไพ่ทาโร่ ผสมกับการดูบุคลิกภาพ ดูฟรีนะครับหรือโดเนทตามศรัทธา จะรับดูหรือไม่ แล้วแต่ช่วงครับ discord : @munzq"
+    }
   ],
 
   chart: {
@@ -1539,9 +1553,13 @@ function renderProducts(){
              <path d="M10 12h4"/>
            </svg>
          </div>`;
+    // ★ สร้าง div สำหรับพื้นหลัง GIF ★
+    const bgHTML = p.bgImage ? `<div class="product-bg" style="background-image:url('${p.bgImage}')"></div>` : '';
+    
     return `
       <div class="product-glow">
         <div class="product-row">
+          ${bgHTML}
           ${thumbHTML}
           <div class="product-info">
             <div class="product-name">${p.name}</div>
@@ -1568,6 +1586,8 @@ function openBuyModal(id){
   selectedProductId = id;
   document.getElementById('buyProductName').textContent = p.name;
   document.getElementById('buyProductPrice').textContent = p.price;
+  // ★ อัปเดตรายละเอียดสินค้า ★
+  document.getElementById('buyProductDesc').textContent = p.description || "ต้องการยืนยันการซื้อสินค้านี้หรือไม่?";
   document.getElementById('buyModal').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
@@ -1577,26 +1597,7 @@ function closeBuyModal(e){
   document.body.style.overflow = '';
 }
 function confirmBuy(){
-  if (!CONFIG.sellingEnabled){
-    showToast('⏳ ยังไม่เปิดขาย · เร็ว ๆ นี้');
-    setTimeout(() => closeBuyModal(), 800);
-    return;
-  }
-  const p = CONFIG.products.find(x => x.id === selectedProductId);
-  if (!p) return;
-  const msg = `สนใจซื้อ: ${p.name} (${p.price})`;
-  if (navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(msg).catch(()=>{});
-  }
-  const discordId = CONFIG.discordUserId;
-  closeBuyModal();
-  if (discordId && discordId !== "YOUR_DISCORD_USER_ID"){
-    showToast('▶ เปิด DM Discord · คัดลอกข้อความแล้ว');
-    setTimeout(() => { window.open(`https://discord.com/users/${discordId}`, '_blank'); }, 400);
-  } else {
-    showToast('คัดลอกข้อความแล้ว · ทัก Discord: ' + CONFIG.discordUsername);
-    copyDiscord();
-  }
+  // ไม่ได้ใช้แล้ว因为在ตัวอย่างนี้เปลี่ยนปุ่มเป็น Copy Discord แทน
 }
 
 const statusColors = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
@@ -1664,11 +1665,9 @@ function renderSongList(){
     item.dataset.index = i;
     item.onclick = () => toggleSong(i);
     item.style.backgroundImage = `url('${song.cover}')`;
-    // ★ ตั้งค่าสี glow ตามเพลง
     if (song.glow){
       item.style.setProperty('--song-glow', song.glow);
     }
-    // ★ เพิ่ม title เพื่อให้เวลาเอาเมาส์ไปชี้แล้วเห็นชื่อเพลง
     item.title = `${song.title} - ${song.artist}`;
     
     item.innerHTML = `
@@ -1735,7 +1734,6 @@ function onPlayerStateChange(e){
 }
 function onPlayerError(e){ console.warn('YouTube error:', e.data); }
 
-/* ★ สุ่มเพลงตอนเปิดเว็บ */
 function tryAutoplay(){
   if (autoplayAttempted) return;
   autoplayAttempted = true;
@@ -1816,7 +1814,7 @@ function animateCount(el){
 
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
-    if (e.isIntersecting && !e.target.dataset.animated){
+    if (e.isIntersecting && !e.dataset.animated){
       e.target.dataset.animated = '1';
       animateCount(e.target);
       io.unobserve(e.target);
