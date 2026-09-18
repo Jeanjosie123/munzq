@@ -770,60 +770,55 @@ body{
     50% { transform: scaleY(1); }
 }
 
-/* ★ Volume Control ★ */
+/* ★ Volume Toggle - มินิมอล เล็ก ★ */
 .music-volume{
   display:flex;
+  justify-content:center;
   align-items:center;
-  gap:10px;
-  margin:8px 16px 0;
-  padding:10px 14px;
-  border-radius:12px;
-  background:rgba(255,255,255,.03);
+  margin:10px auto 0;
+}
+.music-vol-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
   border:1px solid var(--border);
-}
-.music-volume .vol-icon{
-  width:16px;height:16px;
   color:var(--muted);
-  flex-shrink:0;
-  transition:color .2s;
-}
-.music-volume:hover .vol-icon{color:#fff}
-.music-volume input[type="range"]{
-  -webkit-appearance:none;
-  appearance:none;
-  flex:1;
-  height:4px;
-  border-radius:2px;
-  background:rgba(255,255,255,.1);
-  outline:none;
-  cursor:pointer;
-}
-.music-volume input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  appearance:none;
-  width:14px;height:14px;
-  border-radius:50%;
-  background:#fff;
-  cursor:pointer;
-  box-shadow:0 0 8px rgba(255,255,255,.5);
-  transition:transform .2s;
-}
-.music-volume input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.music-volume input[type="range"]::-moz-range-thumb{
-  width:14px;height:14px;
-  border-radius:50%;
-  background:#fff;
-  cursor:pointer;
-  border:none;
-  box-shadow:0 0 8px rgba(255,255,255,.5);
-}
-.music-volume #volumeValue{
   font-family:'JetBrains Mono',monospace;
-  font-size:11px;
+  font-size:10.5px;
   font-weight:700;
+  letter-spacing:.6px;
+  cursor:pointer;
+  transition:.22s cubic-bezier(.34,1.56,.64,1);
+  user-select:none;
+  -webkit-user-select:none;
+}
+.music-vol-btn:hover{
+  border-color:rgba(255,255,255,.3);
   color:#fff;
-  min-width:28px;
-  text-align:right;
+  background:rgba(255,255,255,.06);
+}
+.music-vol-btn:active{transform:scale(.96)}
+.music-vol-btn svg{
+  width:13px;
+  height:13px;
+  flex:0 0 13px;
+  display:block;
+}
+.music-vol-btn .vol-label{
+  min-width:24px;
+  text-align:center;
+}
+.music-vol-btn.muted{
+  color:#ff6b8a;
+  border-color:rgba(255,107,138,.4);
+  background:rgba(255,107,138,.08);
+}
+.music-vol-btn.muted:hover{
+  color:#ff8ca3;
+  border-color:rgba(255,140,163,.6);
 }
 
 @media (max-width: 400px) {
@@ -842,8 +837,8 @@ body{
         gap: 2px !important;
     }
     .music .song-item .song-eq i { width: 2.5px; }
-    .music-volume{margin:6px 10px 0;padding:8px 12px;gap:8px}
-    .music-volume #volumeValue{font-size:10px;min-width:24px}
+    .music-vol-btn{font-size:9.5px;padding:5px 12px}
+    .music-vol-btn svg{width:12px;height:12px;flex-basis:12px}
 }
 
 .yt-hidden {
@@ -1080,22 +1075,130 @@ footer{
 .buy-close:hover{background:var(--red);border-color:var(--red);color:#fff}
 .buy-close svg{width:15px;height:15px}
 .buy-body{
-  padding:24px 20px 20px;
+  padding:20px 20px 20px;
   display:flex;flex-direction:column;align-items:center;
-  gap:16px;text-align:center;
+  gap:14px;text-align:center;
 }
-.buy-icon{
-  width:64px;height:64px;border-radius:16px;
-  background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.18);
-  display:grid;place-items:center;color:#fff;
-  animation:buyIconPulse 2s ease-in-out infinite;
+
+/* ★ Queue Status ★ */
+.queue-status{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
 }
-.buy-icon svg{width:30px;height:30px}
-@keyframes buyIconPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.15)}
-  50%{box-shadow:0 0 0 10px rgba(255,255,255,0)}
+.queue-box{
+  padding:10px 12px;
+  border-radius:10px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  text-align:left;
 }
+.queue-box .q-lbl{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.queue-box .q-lbl::before{
+  content:"";
+  width:6px;height:6px;border-radius:50%;
+  display:inline-block;
+}
+.queue-box.live .q-lbl::before{background:var(--green);box-shadow:0 0 8px var(--green);animation:qPulse 1.6s ease-in-out infinite}
+.queue-box.free .q-lbl::before{background:#00b4ff;box-shadow:0 0 8px #00b4ff}
+@keyframes qPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.queue-box .q-val{
+  font-family:'JetBrains Mono',monospace;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:-.3px;
+}
+.queue-box.live .q-val{color:var(--green)}
+.queue-box.free .q-val{color:#00b4ff}
+.queue-box .q-val small{
+  font-size:10px;
+  font-weight:600;
+  color:var(--muted);
+  margin-left:2px;
+}
+
+/* ★ Buy Form fields ★ */
+.buy-form{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  text-align:left;
+}
+.buy-form .form-row{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.buy-form label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;
+  font-weight:700;
+  letter-spacing:1.2px;
+  color:var(--muted);
+  text-transform:uppercase;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.buy-form label .req{color:var(--red)}
+.buy-form input[type="text"],
+.buy-form select,
+.buy-form textarea{
+  width:100%;
+  padding:11px 12px;
+  border-radius:10px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
+  font-family:'Kanit','Inter',sans-serif;
+  font-size:13px;
+  line-height:1.5;
+  outline:none;
+  transition:border-color .2s, background .2s;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.buy-form input[type="text"]:focus,
+.buy-form select:focus,
+.buy-form textarea:focus{
+  border-color:rgba(255,255,255,.4);
+  background:rgba(255,255,255,.05);
+}
+.buy-form input::placeholder,
+.buy-form textarea::placeholder{color:#555}
+.buy-form select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  background-size:14px;
+  padding-right:34px;
+  cursor:pointer;
+}
+.buy-form select option{
+  background:#0a0a0a;
+  color:#fff;
+}
+.buy-form textarea{
+  min-height:80px;
+  resize:vertical;
+  font-family:'Kanit','Inter',sans-serif;
+}
+
 .buy-message{
   font-size:14px;line-height:1.7;
   color:#b8b8b8;font-weight:300;
@@ -1116,52 +1219,12 @@ footer{
   border:1px solid rgba(255,255,255,.08);
   letter-spacing:.3px;width:100%;
 }
-
-/* ★ Buy Form (textarea) ★ */
-.buy-form{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  text-align:left;
-}
-.buy-form label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:1.2px;
-  color:var(--muted);
-  text-transform:uppercase;
-}
-.buy-form textarea{
-  width:100%;
-  min-height:100px;
-  padding:12px 14px;
-  border-radius:12px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.12);
-  color:#fff;
-  font-family:'Kanit','Inter',sans-serif;
-  font-size:13.5px;
-  line-height:1.6;
-  outline:none;
-  resize:vertical;
-  transition:border-color .2s, background .2s;
-}
-.buy-form textarea::placeholder{
-  color:#555;
-}
-.buy-form textarea:focus{
-  border-color:rgba(255,255,255,.4);
-  background:rgba(255,255,255,.05);
-}
-
 .buy-actions{
   display:grid;grid-template-columns:1fr 1fr;
   gap:10px;width:100%;margin-top:4px;
 }
 .buy-btn{
-  padding:13px 16px;border-radius:12px;
+  padding:12px 16px;border-radius:12px;
   font-family:'JetBrains Mono',monospace;
   font-size:11.5px;font-weight:700;letter-spacing:.6px;
   cursor:pointer;transition:.22s cubic-bezier(.34,1.56,.64,1);
@@ -1437,15 +1500,21 @@ footer{
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
 
-    <!-- ★ Volume Control ★ -->
+    <!-- ★ Volume Toggle (เปิด/ปิด เท่านั้น) ★ -->
     <div class="music-volume">
-      <svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M11 5 6 9H2v6h4l5 4V5z"/>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-      </svg>
-      <input type="range" id="volumeSlider" min="0" max="100" value="50" aria-label="Volume">
-      <span id="volumeValue">50</span>
+      <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()" aria-label="Toggle sound">
+        <svg id="volIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        </svg>
+        <svg id="volIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M11 5 6 9H2v6h4l5 4V5z"/>
+          <line x1="22" y1="9" x2="16" y2="15"/>
+          <line x1="16" y1="9" x2="22" y2="15"/>
+        </svg>
+        <span class="vol-label" id="volLabel">ON</span>
+      </button>
     </div>
 
     <div class="hint">
@@ -1513,14 +1582,45 @@ footer{
       </div>
       <div class="buy-message">
         <strong id="buyProductName">รับดูดวงโหราศาสตร์/ทาโร่</strong>
-        <div id="buyProductDesc" style="margin-top:10px; font-size:13px; line-height:1.6; color:#ccc;"></div>
-        <div style="margin-top:12px">ราคา <span class="price" id="buyProductPrice">free</span></div>
+        <div id="buyProductDesc" style="margin-top:8px; font-size:12.5px; line-height:1.6; color:#aaa;"></div>
+        <div style="margin-top:10px">ราคา <span class="price" id="buyProductPrice">free</span></div>
       </div>
 
-      <!-- ★ Buy Form (textarea) ★ -->
+      <!-- ★ Queue Status ★ -->
+      <div class="queue-status">
+        <div class="queue-box live">
+          <div class="q-lbl">กำลังดูดวง</div>
+          <div class="q-val"><span id="qLiveCount">0</span><small>คน</small></div>
+        </div>
+        <div class="queue-box free">
+          <div class="q-lbl">คิวว่าง</div>
+          <div class="q-val"><span id="qFreeCount">20</span><small>/20</small></div>
+        </div>
+      </div>
+
+      <!-- ★ Form: Discord / Reading type / Message ★ -->
       <div class="buy-form" id="buyForm">
-        <label>ข้อความของคุณ</label>
-        <textarea id="buyMessageInput" placeholder="พิมพ์คำถามหรือสิ่งที่อยากให้ดูดวง..."></textarea>
+        <div class="form-row">
+          <label>Discord ของคุณ <span class="req">*</span></label>
+          <input type="text" id="inputDiscord" placeholder="@username" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="form-row">
+          <label>รูปแบบดวงที่ต้องการดู <span class="req">*</span></label>
+          <select id="inputType">
+            <option value="">-- เลือกรูปแบบ --</option>
+            <option value="ไพ่ทาโร่">🔮 ไพ่ทาโร่</option>
+            <option value="โหราศาสตร์ไทย">⭐ โหราศาสตร์ไทย</option>
+            <option value="Birth Chart">🌌 Birth Chart (ดวงกำเนิด)</option>
+            <option value="ดวงความรัก">💕 ดวงความรัก</option>
+            <option value="ดวงการงาน/การเงิน">💼 ดวงการงาน / การเงิน</option>
+            <option value="ดูดวงทั่วไป">🎴 ดูดวงทั่วไป</option>
+            <option value="อื่น ๆ">✏️ อื่น ๆ</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>คำถาม / สิ่งที่ต้องการดู <span class="req">*</span></label>
+          <textarea id="inputMessage" placeholder="พิมพ์คำถามหรือสิ่งที่อยากให้ดูดวง..."></textarea>
+        </div>
       </div>
 
       <div class="buy-note">ⓘ ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
@@ -1575,7 +1675,7 @@ const CONFIG = {
     {
       title:   "Collide (Solo Version)",
       artist:  "Justine Skye",
-      videoId: "Bvfolf_L5wp0".replace('v',''),
+      videoId: "Bfolf_L5wp0",
       startAt: 27,
       cover:   "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg",
       glow:    "#6A5ACD"
@@ -1589,7 +1689,7 @@ const CONFIG = {
       price: "free",
       image: "",
       bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
-      description: "🔮รับดูดวง โหราศาสตร์,ไพ่ทาโร่,birthchart ดูฟรีนะครับหรือสามารถโดเนทตามศรัทธา เปิดรับตลอดแต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ discord : @munzq"
+      description: "🔮รับดูดวง โหราศาสตร์,ไพ่ทาโร่,birthchart ดูฟรีนะครับหรือสามารถโดเนทตามศรัทธา เปิดรับตลอดแต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
     }
   ],
 
@@ -1599,8 +1699,9 @@ const CONFIG = {
   }
 };
 
-/* ★ เพิ่ม videoId สำหรับเพลงที่ 3 ★ */
-CONFIG.songs[2].videoId = "Bfolf_L5wp0";
+/* ===== Queue Config ===== */
+const QUEUE_MAX = 20;
+const QUEUE_LIVE_BASE = 3; // จำนวนคน "กำลังดูดวง" ที่โชว์ (สมมติ)
 
 const STATS_INFO = {
   winrate: {
@@ -1707,6 +1808,26 @@ function closeStatsModal(e){
   if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.stats-close')) return;
   document.getElementById('statsModal').classList.remove('show');
   document.body.style.overflow = '';
+}
+
+/* ★ Queue Counter ★ */
+function getQueueKey(){ return 'munzq_queue_count'; }
+function getQueueCount(){
+  try {
+    let v = parseInt(localStorage.getItem(getQueueKey()) || '0', 10);
+    if (isNaN(v) || v < 0) v = 0;
+    return v;
+  } catch(e){ return 0; }
+}
+function setQueueCount(v){
+  try { localStorage.setItem(getQueueKey(), String(v)); } catch(e){}
+}
+function updateQueueUI(){
+  const count = getQueueCount();
+  const liveEl = document.getElementById('qLiveCount');
+  const freeEl = document.getElementById('qFreeCount');
+  if (liveEl) liveEl.textContent = String(QUEUE_LIVE_BASE + count);
+  if (freeEl) freeEl.textContent = String(Math.max(0, QUEUE_MAX - count));
 }
 
 function loadViewCount(){
@@ -2027,11 +2148,14 @@ function openBuyModal(id){
   document.getElementById('buyProductName').textContent = p.name;
   document.getElementById('buyProductPrice').textContent = p.price;
   document.getElementById('buyProductDesc').textContent = p.description || "ต้องการยืนยันการซื้อสินค้านี้หรือไม่?";
-  document.getElementById('buyMessageInput').value = '';
+  document.getElementById('inputDiscord').value = '';
+  document.getElementById('inputType').value = '';
+  document.getElementById('inputMessage').value = '';
+  updateQueueUI();
   document.getElementById('buyModal').classList.add('show');
   document.body.style.overflow = 'hidden';
   setTimeout(() => {
-    document.getElementById('buyMessageInput').focus();
+    document.getElementById('inputDiscord').focus();
   }, 400);
 }
 function closeBuyModal(e){
@@ -2042,13 +2166,28 @@ function closeBuyModal(e){
 
 /* ★ ส่งข้อความผ่าน Discord Webhook ★ */
 function submitBuyMessage(){
-  const input = document.getElementById('buyMessageInput');
+  const inputDiscord = document.getElementById('inputDiscord');
+  const inputType = document.getElementById('inputType');
+  const inputMessage = document.getElementById('inputMessage');
   const btn = document.getElementById('buySubmitBtn');
-  const msg = input.value.trim();
 
-  if (!msg){
-    showToast('⚠ กรุณาพิมพ์ข้อความก่อนส่ง');
-    input.focus();
+  const discordVal = inputDiscord.value.trim();
+  const typeVal = inputType.value;
+  const messageVal = inputMessage.value.trim();
+
+  if (!discordVal){
+    showToast('⚠ กรุณากรอก Discord ของคุณ');
+    inputDiscord.focus();
+    return;
+  }
+  if (!typeVal){
+    showToast('⚠ กรุณาเลือกรูปแบบดวง');
+    inputType.focus();
+    return;
+  }
+  if (!messageVal){
+    showToast('⚠ กรุณาพิมพ์คำถามของคุณ');
+    inputMessage.focus();
     return;
   }
 
@@ -2060,9 +2199,13 @@ function submitBuyMessage(){
     username: 'munzq.vercel.app',
     embeds: [{
       title: '🔮 คำขอรับดูดวงใหม่',
-      description: msg,
       color: 0x6A5ACD,
       timestamp: new Date().toISOString(),
+      fields: [
+        { name: '👤 Discord', value: discordVal, inline: true },
+        { name: '🎴 รูปแบบดวง', value: typeVal, inline: true },
+        { name: '❓ คำถาม / สิ่งที่ต้องการดู', value: messageVal, inline: false }
+      ],
       footer: { text: 'munzq.vercel.app • รับดูดวงฟรี' }
     }]
   };
@@ -2074,8 +2217,16 @@ function submitBuyMessage(){
   })
   .then(r => {
     if (!r.ok) throw new Error('HTTP ' + r.status);
+    // ★ เพิ่มคิว: ถ้าถึง 20/20 ให้ reset
+    let c = getQueueCount();
+    c = c + 1;
+    if (c >= QUEUE_MAX) c = 0;
+    setQueueCount(c);
+    updateQueueUI();
     showToast('✓ ส่งข้อความสำเร็จ! รอการติดต่อกลับ');
-    input.value = '';
+    inputDiscord.value = '';
+    inputType.value = '';
+    inputMessage.value = '';
     setTimeout(() => closeBuyModal(), 1200);
   })
   .catch((err) => {
@@ -2142,20 +2293,44 @@ let isPlaying = false;
 let pendingPlay = null;
 let autoplayAttempted = false;
 let userInteracted = false;
+let isMuted = false;
 
 const songList = document.getElementById('songList');
 const autoplayHint = document.getElementById('autoplayHint');
-const volumeSlider = document.getElementById('volumeSlider');
-const volumeValue = document.getElementById('volumeValue');
+const musicVolBtn = document.getElementById('musicVolBtn');
+const volIconOn = document.getElementById('volIconOn');
+const volIconOff = document.getElementById('volIconOff');
+const volLabel = document.getElementById('volLabel');
 
-/* ★ Volume Control Logic ★ */
-volumeSlider.addEventListener('input', (e) => {
-  const v = parseInt(e.target.value, 10);
-  volumeValue.textContent = v;
-  if (ytPlayer && ytPlayer.setVolume){
-    try { ytPlayer.setVolume(v); } catch(err){}
+/* ★ Toggle Mute ★ */
+function toggleMute(){
+  isMuted = !isMuted;
+  applyMuteState();
+  if (isMuted){
+    volIconOn.style.display = 'none';
+    volIconOff.style.display = 'block';
+    volLabel.textContent = 'OFF';
+    musicVolBtn.classList.add('muted');
+    showToast('🔇 ปิดเสียง');
+  } else {
+    volIconOn.style.display = 'block';
+    volIconOff.style.display = 'none';
+    volLabel.textContent = 'ON';
+    musicVolBtn.classList.remove('muted');
+    showToast('🔊 เปิดเสียง');
   }
-});
+}
+function applyMuteState(){
+  if (!ytPlayer || !ytPlayer.setVolume) return;
+  try {
+    if (isMuted){
+      if (ytPlayer.mute) ytPlayer.mute();
+    } else {
+      if (ytPlayer.unMute) ytPlayer.unMute();
+      ytPlayer.setVolume(50);
+    }
+  } catch(e){}
+}
 
 function renderSongList(){
   songList.innerHTML = '';
@@ -2211,10 +2386,7 @@ window.onYouTubeIframeAPIReady = function(){
 
 function onPlayerReady(){
   ytReady = true;
-  /* ★ ตั้งค่า Volume เริ่มต้น ★ */
-  if (ytPlayer && ytPlayer.setVolume){
-    try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
-  }
+  applyMuteState();
   if (pendingPlay !== null){
     const idx = pendingPlay;
     pendingPlay = null;
@@ -2227,6 +2399,7 @@ function onPlayerStateChange(e){
     isPlaying = true;
     autoplayHint.classList.remove('show');
     updateUI();
+    applyMuteState();
   } else if (e.data === YT.PlayerState.PAUSED){
     isPlaying = false; updateUI();
   } else if (e.data === YT.PlayerState.ENDED){
@@ -2247,9 +2420,7 @@ function tryAutoplay(){
   currentIndex = idx;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
   setTimeout(() => {
-    if (ytPlayer && ytPlayer.setVolume){
-      try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
-    }
+    applyMuteState();
     if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   }, 400);
   updateUI();
@@ -2265,6 +2436,7 @@ function handleFirstInteraction(){
     loadAndPlay(Math.floor(Math.random() * CONFIG.songs.length));
   } else {
     try { ytPlayer.playVideo(); } catch(e){}
+    setTimeout(applyMuteState, 200);
   }
 }
 ['click','touchstart','touchend','keydown'].forEach(evt => {
@@ -2285,9 +2457,7 @@ function loadAndPlay(index){
   currentIndex = index;
   ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 });
   setTimeout(() => {
-    if (ytPlayer && ytPlayer.setVolume){
-      try { ytPlayer.setVolume(parseInt(volumeSlider.value, 10)); } catch(e){}
-    }
+    applyMuteState();
     if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   }, 300);
   updateUI();
@@ -2300,6 +2470,7 @@ function pauseCurrent(){
 function resumeCurrent(){
   if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   isPlaying = true; updateUI();
+  setTimeout(applyMuteState, 200);
 }
 function updateUI(){
   document.querySelectorAll('.song-item').forEach((el, i) => {
@@ -2359,6 +2530,7 @@ window.addEventListener('load', ()=>{
       }
     });
   }, 300);
+  updateQueueUI();
 });
 </script>
 </body>
