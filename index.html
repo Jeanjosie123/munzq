@@ -1230,9 +1230,8 @@ footer{
       </div>
       <div class="buy-message">
         <strong id="buyProductName">รับดูดวงโหราศาสตร์/ทาโร่</strong>
-        <!-- ★ เพิ่ม div สำหรับแสดงรายละเอียดสินค้า ★ -->
         <div id="buyProductDesc" style="margin-top:10px; font-size:13px; line-height:1.6; color:#ccc;"></div>
-        <div style="margin-top:12px">ราคา <span class="price" id="buyProductPrice">ฟรี!</span></div>
+        <div style="margin-top:12px">ราคา <span class="price" id="buyProductPrice">Free</span></div>
       </div>
       <div class="buy-note">ⓘ ข้อมูลการติดต่อ</div>
       <div class="buy-actions">
@@ -1291,12 +1290,11 @@ const CONFIG = {
     }
   ],
 
-  // ★ อัปเดตข้อมูลสินค้าโดยเพิ่ม bgImage และ description ★
   products: [
     {
       id: "p1",
       name: "รับดูดวง",
-      price: "ฟรี!",
+      price: "Free", // ★ เปลี่ยนเป็น Free แล้ว ★
       image: "",
       bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
       description: "รับดูดวง โหราศาสตร์ ไพ่ทาโร่ ผสมกับการดูบุคลิกภาพ ดูฟรีนะครับหรือโดเนทตามศรัทธา จะรับดูหรือไม่ แล้วแต่ช่วงครับ discord : @munzq"
@@ -1825,6 +1823,15 @@ document.querySelectorAll('#pane-stats .num[data-count]').forEach(el=>io.observe
 
 window.addEventListener('load', ()=>{
   document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity = '1'; });
+  // ★ บังคับให้ตัวเลข Stats เริ่มวิ่งทันทีเมื่อโหลดหน้าเว็บ ★
+  setTimeout(() => {
+    document.querySelectorAll('#pane-stats .num[data-count]').forEach(el => {
+      if (!el.dataset.animated){
+        el.dataset.animated = '1';
+        animateCount(el);
+      }
+    });
+  }, 300);
 });
 </script>
 </body>
