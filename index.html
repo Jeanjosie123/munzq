@@ -150,16 +150,88 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .music .song-item .song-eq i:nth-child(2){height:85%;animation-delay:.8s}
 .music .song-item .song-eq i:nth-child(3){height:65%;animation-delay:1.6s}
 @keyframes eq{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
-.music-volume{display:flex;justify-content:center;align-items:center;margin:10px auto 0}
-.music-vol-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 18px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.8px;cursor:pointer;transition:.22s;user-select:none;min-width:80px}
+
+/* ★ Volume Control - Toggle + Slider ★ */
+.music-volume{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:14px 20px 0;
+  padding:10px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+}
+.music-vol-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  color:var(--muted);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.5px;
+  cursor:pointer;
+  transition:.22s;
+  user-select:none;
+  flex-shrink:0;
+  min-width:76px;
+}
 .music-vol-btn:hover{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.06)}
 .music-vol-btn:active{transform:scale(.96)}
 .music-vol-btn.muted{color:#ff6b8a;border-color:rgba(255,107,138,.4);background:rgba(255,107,138,.08)}
+.music-vol-slider{
+  -webkit-appearance:none;
+  appearance:none;
+  flex:1;
+  height:4px;
+  border-radius:2px;
+  background:rgba(255,255,255,.15);
+  outline:none;
+  cursor:pointer;
+  min-width:0;
+}
+.music-vol-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#fff;
+  cursor:pointer;
+  box-shadow:0 0 8px rgba(255,255,255,.5);
+  transition:transform .15s;
+}
+.music-vol-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.music-vol-slider::-moz-range-thumb{
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#fff;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 0 8px rgba(255,255,255,.5);
+}
+.music-vol-value{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+  min-width:30px;
+  text-align:right;
+  flex-shrink:0;
+}
 @media (max-width:400px){
   .music .song-item{width:72px;height:72px;min-height:72px;border-radius:16px;margin-left:-12px}
   .music .song-item .song-eq{width:26px;height:26px;padding-bottom:5px;bottom:5px;gap:2px}
   .music .song-item .song-eq i{width:2.5px}
-  .music-vol-btn{font-size:10px;padding:5px 14px;min-width:70px}
+  .music-volume{margin:12px 12px 0;padding:8px 10px;gap:8px}
+  .music-vol-btn{font-size:9.5px;padding:5px 10px;min-width:66px}
+  .music-vol-slider::-webkit-slider-thumb{width:12px;height:12px}
+  .music-vol-value{font-size:10px;min-width:26px}
 }
 .yt-hidden{position:absolute!important;top:-9999px!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;z-index:-9999!important;overflow:hidden!important}
 .yt-hidden>div{width:200px;height:120px}
@@ -397,6 +469,8 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
     <div class="song-list" id="songList"></div>
     <div class="music-volume">
       <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()">เปิดเสียง</button>
+      <input type="range" class="music-vol-slider" id="volSlider" min="0" max="100" value="40" step="1" aria-label="Volume">
+      <span class="music-vol-value" id="volValue">40</span>
     </div>
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
@@ -446,7 +520,7 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       </div>
       <div class="buy-message">
-        <strong id="buyProductName">รับดูดวงโหราศาสตร์/ทาโร่</strong>
+        <strong id="buyProductName">🔮 รับดูดวงโหราศาสตร์/ทาโร่</strong>
         <div id="buyProductDesc" style="margin-top:8px;font-size:12.5px;line-height:1.6;color:#aaa;"></div>
         <div style="margin-top:10px">ราคา <span class="price" id="buyProductPrice">free</span></div>
       </div>
@@ -456,28 +530,28 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
       </div>
       <div class="buy-form">
         <div class="form-row">
-          <label>Discord ของคุณ <span class="req">*</span></label>
+          <label>👤 Discord ของคุณ <span class="req">*</span></label>
           <input type="text" id="inputDiscord" placeholder="@username" autocomplete="off">
         </div>
         <div class="form-row">
-          <label>รูปแบบดวงที่ต้องการดู <span class="req">*</span></label>
+          <label>🎴 รูปแบบดวงที่ต้องการดู <span class="req">*</span></label>
           <select id="inputType">
             <option value="">-- เลือกรูปแบบ --</option>
-            <option value="ไพ่ทาโร่">ไพ่ทาโร่</option>
-            <option value="โหราศาสตร์ไทย">โหราศาสตร์ไทย</option>
-            <option value="Birth Chart">Birth Chart (ดวงกำเนิด)</option>
-            <option value="ดวงความรัก">ดวงความรัก</option>
-            <option value="ดวงการงาน/การเงิน">ดวงการงาน / การเงิน</option>
-            <option value="ดูดวงทั่วไป">ดูดวงทั่วไป</option>
-            <option value="อื่น ๆ">อื่น ๆ</option>
+            <option value="🔮 ไพ่ทาโร่">🔮 ไพ่ทาโร่</option>
+            <option value="⭐ โหราศาสตร์ไทย">⭐ โหราศาสตร์ไทย</option>
+            <option value="🌌 Birth Chart (ดวงกำเนิด)">🌌 Birth Chart (ดวงกำเนิด)</option>
+            <option value="💕 ดวงความรัก">💕 ดวงความรัก</option>
+            <option value="💼 ดวงการงาน / การเงิน">💼 ดวงการงาน / การเงิน</option>
+            <option value="🎴 ดูดวงทั่วไป">🎴 ดูดวงทั่วไป</option>
+            <option value="✏️ อื่น ๆ">✏️ อื่น ๆ</option>
           </select>
         </div>
         <div class="form-row">
-          <label>คำถาม / สิ่งที่ต้องการดู <span class="req">*</span></label>
+          <label>❓ คำถาม / สิ่งที่ต้องการดู <span class="req">*</span></label>
           <textarea id="inputMessage" placeholder="พิมพ์คำถามหรือสิ่งที่อยากให้ดูดวง..."></textarea>
         </div>
       </div>
-      <div class="buy-note">ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
+      <div class="buy-note">ⓘ ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
       <div class="buy-actions">
         <button class="buy-btn cancel" onclick="closeBuyModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>ปิด</button>
         <button class="buy-btn confirm" id="buySubmitBtn" onclick="submitBuyMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>ส่ง</button>
@@ -507,13 +581,14 @@ var CONFIG = {
   products: [{
     id: "p1", name: "รับดูดวงโหราศาสตร์ไทย", price: "free", image: "",
     bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
-    description: "รับดูดวง โหราศาสตร์, ไพ่ทาโร่, birthchart ดูฟรีนะครับ หรือสามารถโดเนทตามศรัทธา เปิดรับตลอด แต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
+    description: "🔮 รับดูดวง โหราศาสตร์, ไพ่ทาโร่, birthchart ดูฟรีนะครับ หรือสามารถโดเนทตามศรัทธา เปิดรับตลอด แต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
   }],
   chart: { data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180], maxY: 200 }
 };
 
 var QUEUE_MAX = 20;
 var QUEUE_LIVE_BASE = 3;
+var DEFAULT_VOLUME = 40;
 
 var STATS_INFO = {
   winrate: {
@@ -840,7 +915,7 @@ renderProducts();
 function openBuyModal(id){
   var p = CONFIG.products.find(function(x){ return x.id === id; });
   if (!p) return;
-  document.getElementById('buyProductName').textContent = p.name;
+  document.getElementById('buyProductName').textContent = '🔮 ' + p.name;
   document.getElementById('buyProductPrice').textContent = p.price;
   document.getElementById('buyProductDesc').textContent = p.description || '';
   document.getElementById('inputDiscord').value = '';
@@ -865,26 +940,45 @@ function submitBuyMessage(){
   var discordVal = inputDiscord.value.trim();
   var typeVal = inputType.value;
   var messageVal = inputMessage.value.trim();
-  if (!discordVal){ showToast('กรุณากรอก Discord ของคุณ'); inputDiscord.focus(); return; }
-  if (!typeVal){ showToast('กรุณาเลือกรูปแบบดวง'); inputType.focus(); return; }
-  if (!messageVal){ showToast('กรุณาพิมพ์คำถามของคุณ'); inputMessage.focus(); return; }
+  if (!discordVal){ showToast('⚠ กรุณากรอก Discord ของคุณ'); inputDiscord.focus(); return; }
+  if (!typeVal){ showToast('⚠ กรุณาเลือกรูปแบบดวง'); inputType.focus(); return; }
+  if (!messageVal){ showToast('⚠ กรุณาพิมพ์คำถามของคุณ'); inputMessage.focus(); return; }
   btn.disabled = true;
   var originalHTML = btn.innerHTML;
   btn.innerHTML = 'กำลังส่ง...';
+
   var payload = {
     username: 'munzq.vercel.app',
+    avatar_url: 'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4667',
     embeds: [{
-      title: 'คำขอรับดูดวงใหม่',
+      title: '🔮 มีคำขอรับดูดวงใหม่เข้ามา!',
+      description: '```รายละเอียดคำขอรับดูดวง```',
       color: 0x6A5ACD,
       timestamp: new Date().toISOString(),
       fields: [
-        { name: 'Discord', value: discordVal, inline: true },
-        { name: 'รูปแบบดวง', value: typeVal, inline: true },
-        { name: 'คำถาม', value: messageVal, inline: false }
+        {
+          name: '👤 Discord ของผู้ขอ',
+          value: '`' + discordVal + '`\n> กดเพื่อคัดลอก',
+          inline: true
+        },
+        {
+          name: '🎴 รูปแบบดวง',
+          value: '**' + typeVal + '**',
+          inline: true
+        },
+        {
+          name: '❓ คำถาม / สิ่งที่ต้องการดู',
+          value: messageVal.length > 1000 ? messageVal.substring(0, 1000) + '...' : messageVal,
+          inline: false
+        }
       ],
-      footer: { text: 'munzq.vercel.app' }
+      footer: {
+        text: 'munzq.vercel.app • รับดูดวงฟรี',
+        icon_url: 'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4667'
+      }
     }]
   };
+
   fetch(CONFIG.webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -895,14 +989,14 @@ function submitBuyMessage(){
     if (c >= QUEUE_MAX) c = 0;
     setQueueCount(c);
     updateQueueUI();
-    showToast('ส่งแล้ว รอติดต่อกลับน้า');
+    showToast('✓ ส่งแล้ว รอติดต่อกลับน้า');
     inputDiscord.value = '';
     inputType.value = '';
     inputMessage.value = '';
     setTimeout(function(){ closeBuyModal(); }, 1200);
   }).catch(function(err){
     console.warn('Webhook error:', err);
-    showToast('ส่งไม่ได้ ลองใหม่อีกทีนะ');
+    showToast('✗ ส่งไม่ได้ ลองใหม่อีกทีนะ');
   })['finally'](function(){
     btn.disabled = false;
     btn.innerHTML = originalHTML;
@@ -960,14 +1054,39 @@ var isPlaying = false;
 var pendingPlay = null;
 var autoplayAttempted = false;
 var isMuted = false;
+var currentVolume = 40;
 
 var songList = document.getElementById('songList');
 var autoplayHint = document.getElementById('autoplayHint');
 var musicVolBtn = document.getElementById('musicVolBtn');
+var volSlider = document.getElementById('volSlider');
+var volValue = document.getElementById('volValue');
+
+try {
+  var savedVol = parseInt(localStorage.getItem('munzq_vol') || '40', 10);
+  if (!isNaN(savedVol) && savedVol >= 0 && savedVol <= 100){
+    currentVolume = savedVol;
+  }
+} catch(e){}
+volSlider.value = currentVolume;
+volValue.textContent = currentVolume;
+
+/* ★ applyVolume - บังคับเสียงตาม currentVolume ★ */
+function applyVolume(){
+  if (!ytPlayer || typeof ytPlayer.setVolume !== 'function') return;
+  try {
+    if (isMuted || currentVolume <= 0){
+      if (ytPlayer.mute) ytPlayer.mute();
+    } else {
+      if (ytPlayer.unMute) ytPlayer.unMute();
+      ytPlayer.setVolume(currentVolume);
+    }
+  } catch(e){}
+}
 
 function toggleMute(){
   isMuted = !isMuted;
-  applyMuteState();
+  applyVolume();
   if (isMuted){
     musicVolBtn.textContent = 'ปิดเสียง';
     musicVolBtn.classList.add('muted');
@@ -978,17 +1097,24 @@ function toggleMute(){
     showToast('เปิดเสียงแล้ว');
   }
 }
-function applyMuteState(){
-  if (!ytPlayer || !ytPlayer.setVolume) return;
-  try {
-    if (isMuted){
-      if (ytPlayer.mute) ytPlayer.mute();
-    } else {
-      if (ytPlayer.unMute) ytPlayer.unMute();
-      ytPlayer.setVolume(60);
-    }
-  } catch(e){}
-}
+
+volSlider.addEventListener('input', function(e){
+  currentVolume = parseInt(e.target.value, 10);
+  volValue.textContent = currentVolume;
+  try { localStorage.setItem('munzq_vol', String(currentVolume)); } catch(e){}
+  if (currentVolume > 0 && isMuted){
+    isMuted = false;
+    musicVolBtn.textContent = 'เปิดเสียง';
+    musicVolBtn.classList.remove('muted');
+  }
+  if (currentVolume === 0){
+    isMuted = true;
+    musicVolBtn.textContent = 'ปิดเสียง';
+    musicVolBtn.classList.add('muted');
+  }
+  applyVolume();
+});
+volSlider.addEventListener('change', applyVolume);
 
 function renderSongList(){
   songList.innerHTML = '';
@@ -1026,7 +1152,7 @@ window.onYouTubeIframeAPIReady = function(){
 
 function onPlayerReady(){
   ytReady = true;
-  applyMuteState();
+  applyVolume();
   if (pendingPlay !== null){
     var idx = pendingPlay;
     pendingPlay = null;
@@ -1039,7 +1165,9 @@ function onPlayerStateChange(e){
     isPlaying = true;
     autoplayHint.classList.remove('show');
     updateUI();
-    applyMuteState();
+    applyVolume();
+    setTimeout(applyVolume, 300);
+    setTimeout(applyVolume, 1000);
   } else if (e.data === YT.PlayerState.PAUSED){
     isPlaying = false; updateUI();
   } else if (e.data === YT.PlayerState.ENDED){
@@ -1060,9 +1188,11 @@ function tryAutoplay(){
   currentIndex = idx;
   try { ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 }); } catch(e){}
   setTimeout(function(){
-    applyMuteState();
+    applyVolume();
     try { ytPlayer.playVideo(); } catch(e){}
   }, 400);
+  setTimeout(applyVolume, 900);
+  setTimeout(applyVolume, 1600);
   updateUI();
   setTimeout(function(){ if (!isPlaying) autoplayHint.classList.add('show'); }, 1800);
 }
@@ -1089,16 +1219,18 @@ function toggleSong(index){
 }
 function loadAndPlay(index){
   var song = CONFIG.songs[index];
-  if (!song || !song.videoId){ showToast('ยังไม่ได้ใส่ YouTube ID'); return; }
+  if (!song || !song.videoId){ showToast('⚠ ยังไม่ได้ใส่ YouTube ID'); return; }
   if (!ytReady || !ytPlayer){ pendingPlay = index; currentIndex = index; return; }
   currentIndex = index;
   try { ytPlayer.loadVideoById({ videoId: song.videoId, startSeconds: song.startAt || 0 }); } catch(e){}
   setTimeout(function(){
-    applyMuteState();
+    applyVolume();
     try { ytPlayer.playVideo(); } catch(e){}
   }, 300);
+  setTimeout(applyVolume, 800);
+  setTimeout(applyVolume, 1500);
   updateUI();
-  showToast('กำลังเล่น: ' + song.title);
+  showToast('▶ กำลังเล่น: ' + song.title);
 }
 function pauseCurrent(){
   if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
@@ -1107,7 +1239,7 @@ function pauseCurrent(){
 function resumeCurrent(){
   if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
   isPlaying = true; updateUI();
-  setTimeout(applyMuteState, 200);
+  setTimeout(applyVolume, 200);
 }
 function updateUI(){
   document.querySelectorAll('.song-item').forEach(function(el, i){
