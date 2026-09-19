@@ -10,7 +10,7 @@
 :root{--bg:#000;--card:rgba(8,8,8,.55);--border:rgba(255,255,255,.10);--green:#00e07a;--red:#ff3b5c;--yellow:#f0b232;--text:#fff;--muted:#808080}
 html{scroll-behavior:smooth}
 body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;padding:44px 16px 60px}
-.bg-gif{position:fixed;inset:0;z-index:-4;background-image:url('https://media.tenor.com/zVwBYAc3fzUAAAAM/bmw-car.gif');background-size:cover;background-position:center;filter:blur(8px) brightness(.65);opacity:.75;pointer-events:none}
+.bg-gif{position:fixed;inset:0;z-index:-4;background-image:url('https://i.makeagif.com/media/10-22-2023/qfXpOp.gif');background-size:cover;background-position:center;filter:blur(8px) brightness(.65);opacity:.75;pointer-events:none}
 .bg-gif-overlay{position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(ellipse 100% 80% at 50% 30%,rgba(0,0,0,.2) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.75) 100%),linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.55) 100%)}
 .aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
 .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
@@ -36,7 +36,7 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .view-counter svg{width:13px;height:13px;flex:0 0 13px}
 .view-counter #viewCount{color:#fff;font-weight:700;min-width:18px;text-align:center}
 .avatar-ring{width:118px;height:118px;margin:0 auto 16px;position:relative}
-.avatar-ring::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(from 0deg,#fff,#a3a3a3,#404040,#fff);animation:spin 5s linear infinite}
+.avatar-ring::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(from 0deg,#4fc3f7,#ffffff,#4fc3f7,#ffffff,#4fc3f7);animation:spin 5s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .avatar{position:absolute;inset:0;border-radius:50%;background:linear-gradient(150deg,#1a1a1a,#000);display:grid;place-items:center;color:#fff;border:4px solid var(--bg);z-index:2;overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
@@ -135,8 +135,7 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .music .song-item:nth-child(odd){transform:rotate(-6deg)}
 .music .song-item:nth-child(even){transform:rotate(6deg)}
 .music .song-item:hover{transform:rotate(0deg) translateY(-8px) scale(1.15);z-index:10;box-shadow:0 12px 28px -8px rgba(255,255,255,.6);border-color:#fff}
-.music .song-item .song-info,
-.music .song-item .song-play{display:none !important}
+.music .song-item .song-info,.music .song-item .song-play{display:none !important}
 .music .song-item .song-overlay{background:rgba(0,0,0,.3);transition:background .3s}
 .music .song-item.active .song-overlay{background:rgba(0,0,0,0)}
 @keyframes borderSpin{to{--border-angle:360deg}}
@@ -150,89 +149,16 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .music .song-item .song-eq i:nth-child(2){height:85%;animation-delay:.8s}
 .music .song-item .song-eq i:nth-child(3){height:65%;animation-delay:1.6s}
 @keyframes eq{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
-
-/* ★ Volume Control - Toggle + Slider ★ */
-.music-volume{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin:14px 20px 0;
-  padding:10px 14px;
-  border-radius:14px;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--border);
-}
-.music-vol-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:6px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border);
-  color:var(--muted);
-  font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;
-  font-weight:700;
-  letter-spacing:.5px;
-  cursor:pointer;
-  transition:.22s;
-  user-select:none;
-  flex-shrink:0;
-  min-width:76px;
-}
+.music-volume{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 20px 0;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.music-vol-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:.22s;user-select:none;flex-shrink:0;min-width:76px}
 .music-vol-btn:hover{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.06)}
 .music-vol-btn:active{transform:scale(.96)}
 .music-vol-btn.muted{color:#ff6b8a;border-color:rgba(255,107,138,.4);background:rgba(255,107,138,.08)}
-.music-vol-slider{
-  -webkit-appearance:none;
-  appearance:none;
-  flex:1;
-  height:4px;
-  border-radius:2px;
-  background:rgba(255,255,255,.15);
-  outline:none;
-  cursor:pointer;
-  min-width:0;
-}
-.music-vol-slider::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  appearance:none;
-  width:14px;height:14px;
-  border-radius:50%;
-  background:#fff;
-  cursor:pointer;
-  box-shadow:0 0 8px rgba(255,255,255,.5);
-  transition:transform .15s;
-}
+.music-vol-slider{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.15);outline:none;cursor:pointer;min-width:0}
+.music-vol-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 0 8px rgba(255,255,255,.5);transition:transform .15s}
 .music-vol-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.music-vol-slider::-moz-range-thumb{
-  width:14px;height:14px;
-  border-radius:50%;
-  background:#fff;
-  cursor:pointer;
-  border:none;
-  box-shadow:0 0 8px rgba(255,255,255,.5);
-}
-.music-vol-value{
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;
-  font-weight:700;
-  color:#fff;
-  min-width:30px;
-  text-align:right;
-  flex-shrink:0;
-}
-@media (max-width:400px){
-  .music .song-item{width:72px;height:72px;min-height:72px;border-radius:16px;margin-left:-12px}
-  .music .song-item .song-eq{width:26px;height:26px;padding-bottom:5px;bottom:5px;gap:2px}
-  .music .song-item .song-eq i{width:2.5px}
-  .music-volume{margin:12px 12px 0;padding:8px 10px;gap:8px}
-  .music-vol-btn{font-size:9.5px;padding:5px 10px;min-width:66px}
-  .music-vol-slider::-webkit-slider-thumb{width:12px;height:12px}
-  .music-vol-value{font-size:10px;min-width:26px}
-}
+.music-vol-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;border:none;box-shadow:0 0 8px rgba(255,255,255,.5)}
+.music-vol-value{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;min-width:30px;text-align:right;flex-shrink:0}
 .yt-hidden{position:absolute!important;top:-9999px!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;z-index:-9999!important;overflow:hidden!important}
 .yt-hidden>div{width:200px;height:120px}
 .hint{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;font-weight:300;display:flex;align-items:center;justify-content:center;gap:5px}
@@ -254,6 +180,10 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
 .stats-inner{max-width:420px;width:100%}
 .buy-inner{max-width:400px;width:100%;max-height:92vh;overflow-y:auto}
 .modal.show .modal-inner,.stats-modal.show .stats-inner,.buy-modal.show .buy-inner{transform:scale(1) translateY(0)}
+.modal-inner,.stats-inner,.buy-inner{position:relative;background:linear-gradient(180deg,rgba(14,14,14,.98),rgba(4,4,4,.99));box-shadow:0 24px 60px -20px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.05),0 0 70px -24px rgba(255,255,255,.28)}
+.modal-inner::before,.stats-inner::before,.buy-inner::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;padding:1px;background:linear-gradient(160deg,rgba(255,255,255,.42),rgba(255,255,255,.06) 35%,transparent 65%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:5}
+.modal-head,.stats-head,.buy-head{position:relative}
+.modal-head::after,.stats-head::after,.buy-head::after{content:"";position:absolute;bottom:-1px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);pointer-events:none}
 .modal-head,.stats-head,.buy-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02);flex-shrink:0}
 .modal-head .title{flex:1;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;text-align:center}
 .stats-head-title,.buy-head .title{flex:1;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;text-transform:uppercase}
@@ -291,14 +221,85 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
 .buy-form .form-row{display:flex;flex-direction:column;gap:5px}
 .buy-form label{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:1.2px;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:5px}
 .buy-form label .req{color:var(--red)}
-.buy-form input[type="text"],.buy-form select,.buy-form textarea{width:100%;padding:11px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Kanit','Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
-.buy-form input[type="text"]:focus,.buy-form select:focus,.buy-form textarea:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05)}
+.buy-form input[type="text"],.buy-form input[type="date"],.buy-form input[type="time"],.buy-form select,.buy-form textarea{width:100%;padding:11px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Kanit','Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;appearance:none}
+.buy-form input[type="text"]:focus,.buy-form input[type="date"]:focus,.buy-form input[type="time"]:focus,.buy-form select:focus,.buy-form textarea:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05)}
 .buy-form input::placeholder,.buy-form textarea::placeholder{color:#555}
+.buy-form input[type="date"],.buy-form input[type="time"]{color-scheme:dark}
+.buy-form input[type="date"]::-webkit-calendar-picker-indicator,
+.buy-form input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.55;cursor:pointer;transition:opacity .2s}
+.buy-form input[type="date"]::-webkit-calendar-picker-indicator:hover,
+.buy-form input[type="time"]::-webkit-calendar-picker-indicator:hover{opacity:1}
 .buy-form select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:14px;padding-right:34px;cursor:pointer}
 .buy-form select option{background:#0a0a0a;color:#fff}
 .buy-form textarea{min-height:80px;resize:vertical}
+.birth-fields{display:none;flex-direction:column;gap:10px;padding:14px 12px 12px;border-radius:14px;background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 0 24px -12px rgba(255,255,255,.25);animation:birthReveal .38s cubic-bezier(.34,1.4,.64,1)}
+.birth-fields.show{display:flex}
+@keyframes birthReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.birth-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;text-align:center;padding-bottom:6px;border-bottom:1px dashed rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;gap:8px}
+.birth-title::before,.birth-title::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5))}
+.birth-title::after{background:linear-gradient(270deg,transparent,rgba(255,255,255,.5))}
+.tarot-fields{display:none;flex-direction:column;gap:12px;padding:14px 12px 14px;border-radius:14px;background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 0 24px -12px rgba(255,255,255,.25);animation:birthReveal .38s cubic-bezier(.34,1.4,.64,1)}
+.tarot-fields.show{display:flex}
+.tarot-hint{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-align:center;letter-spacing:.6px}
+.tarot-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tarot-card{aspect-ratio:2/3;border-radius:8px;cursor:pointer;position:relative;perspective:700px;transition:transform .3s,opacity .3s}
+.tarot-card:hover{transform:translateY(-3px)}
+.tarot-card.disabled{pointer-events:none;opacity:.28;transform:scale(.95)}
+.tarot-card-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,.2,.2,1);border-radius:8px}
+.tarot-card.flipped .tarot-card-inner{transform:rotateY(180deg)}
+.tarot-card-front,.tarot-card-back{position:absolute;inset:0;border-radius:8px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;overflow:hidden}
+.tarot-card-back{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.25), transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.1), transparent 38%),
+    repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,255,255,.06) 0deg 15deg, transparent 15deg 30deg),
+    linear-gradient(135deg,#1a1a1a 0%,#0a0a0a 50%,#1a1a1a 100%);
+  border:1.5px solid rgba(255,255,255,.5);
+  position:relative;
+  box-shadow:
+    inset 0 0 0 2px rgba(0,0,0,.9),
+    inset 0 0 0 3px rgba(255,255,255,.2),
+    inset 0 0 18px rgba(255,255,255,.1);
+}
+.tarot-card-back::before{content:"✦";font-size:20px;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.8),0 0 16px rgba(255,255,255,.4);z-index:1}
+.tarot-card-back::after{content:"";position:absolute;inset:3px;border-radius:4px;border:1px dashed rgba(255,255,255,.3);pointer-events:none}
+.tarot-card-front{
+  transform:rotateY(180deg);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255,255,255,.15), transparent 68%),
+    linear-gradient(160deg,#1a1a1a 0%,#0a0a0a 100%);
+  border:1.5px solid rgba(255,255,255,.6);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  color:#fff;
+  padding:5px 3px 4px;
+  text-align:center;
+  box-shadow:
+    inset 0 0 0 2px rgba(0,0,0,.9),
+    inset 0 0 0 3px rgba(255,255,255,.25),
+    inset 0 0 16px rgba(255,255,255,.15);
+  position:relative;
+  overflow:hidden;
+}
+.tarot-card-front::before{content:"";position:absolute;inset:3px;border-radius:4px;border:1px dashed rgba(255,255,255,.25);pointer-events:none}
+.tarot-card-front .tc-num{font-family:'JetBrains Mono',monospace;font-size:6.5px;font-weight:700;letter-spacing:1px;color:#fff;line-height:1;text-shadow:0 0 6px rgba(255,255,255,.6)}
+.tarot-card-front .tc-symbol{font-size:22px;line-height:1;filter:drop-shadow(0 0 8px rgba(255,255,255,.6))}
+.tarot-card-front .tc-name{font-family:'JetBrains Mono',monospace;font-size:5.5px;font-weight:700;letter-spacing:.2px;color:#fff;line-height:1.1;padding:0 1px;text-transform:uppercase}
+.tarot-result{padding:16px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.14);display:none;text-align:center;box-shadow:inset 0 0 30px -10px rgba(255,255,255,.15)}
+.tarot-result.show{display:block;animation:tarotReveal .55s cubic-bezier(.2,1,.3,1)}
+@keyframes tarotReveal{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.tarot-result .tr-symbol{font-size:30px;margin-bottom:4px;filter:drop-shadow(0 0 12px rgba(255,255,255,.5))}
+.tarot-result .tr-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:2px}
+.tarot-result .tr-sub{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.tarot-result .tr-mean{font-size:12.5px;line-height:1.75;color:#c8c8c8;text-align:left;white-space:pre-line}
+.tarot-reset{margin-top:10px;width:100%;padding:10px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:.2s;display:none}
+.tarot-reset.show{display:block}
+.tarot-reset:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3)}
 .buy-note{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);width:100%}
 .buy-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:4px}
+.buy-actions.single{grid-template-columns:1fr}
 .buy-btn{padding:12px 16px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.6px;cursor:pointer;transition:.22s;display:flex;align-items:center;justify-content:center;gap:7px;border:1px solid transparent}
 .buy-btn svg{width:14px;height:14px;flex:0 0 14px}
 .buy-btn.confirm{background:linear-gradient(135deg,#fff,#d0d0d0);color:#000;border-color:#fff}
@@ -319,6 +320,17 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
   .tab{font-size:9.5px;padding:10px 4px}
   .tab-pane{padding:16px}
   .view-counter{top:12px;right:12px;padding:4px 9px;font-size:10px}
+  .tarot-cards{gap:5px}
+  .tarot-card-front .tc-symbol{font-size:18px}
+  .tarot-card-front .tc-num{font-size:5.5px}
+  .tarot-card-front .tc-name{font-size:4.8px}
+  .music-volume{margin:12px 12px 0;padding:8px 10px;gap:8px}
+  .music-vol-btn{font-size:9.5px;padding:5px 10px;min-width:66px}
+  .music-vol-slider::-webkit-slider-thumb{width:12px;height:12px}
+  .music-vol-value{font-size:10px;min-width:26px}
+  .music .song-item{width:72px;height:72px;min-height:72px;border-radius:16px;margin-left:-12px}
+  .music .song-item .song-eq{width:26px;height:26px;padding-bottom:5px;bottom:5px;gap:2px}
+  .music .song-item .song-eq i{width:2.5px}
 }
 </style>
 </head>
@@ -357,7 +369,7 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
       Verified Trader
     </div>
     <div class="avatar-ring">
-      <div class="avatar"><img src="https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4667" alt="Profile"></div>
+      <div class="avatar"><img src="https://res.cloudinary.com/grd8fnpn/image/upload/f_auto,q_auto/IMG_4817" alt="Profile"></div>
       <div class="status-dot online" id="statusDot"></div>
     </div>
     <h1>mun</h1>
@@ -468,7 +480,7 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
   <section class="card music glass-more reveal" style="animation-delay:.3s">
     <div class="song-list" id="songList"></div>
     <div class="music-volume">
-      <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()">เปิดเสียง</button>
+      <button class="music-vol-btn" id="musicVolBtn" type="button" onclick="toggleMute()">ON</button>
       <input type="range" class="music-vol-slider" id="volSlider" min="0" max="100" value="40" step="1" aria-label="Volume">
       <span class="music-vol-value" id="volValue">40</span>
     </div>
@@ -520,16 +532,16 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       </div>
       <div class="buy-message">
-        <strong id="buyProductName">🔮 รับดูดวงโหราศาสตร์/ทาโร่</strong>
+        <strong id="buyProductName">🔮 รับดูดวงฟรี</strong>
         <div id="buyProductDesc" style="margin-top:8px;font-size:12.5px;line-height:1.6;color:#aaa;"></div>
-        <div style="margin-top:10px">ราคา <span class="price" id="buyProductPrice">free</span></div>
+        <div style="margin-top:10px">ราคา <span class="price" id="buyProductPrice">ฟรี</span></div>
       </div>
       <div class="queue-status">
         <div class="queue-box live"><div class="q-lbl">กำลังดูดวง</div><div class="q-val"><span id="qLiveCount">0</span><small>คน</small></div></div>
         <div class="queue-box free"><div class="q-lbl">คิวว่าง</div><div class="q-val"><span id="qFreeCount">20</span><small>/20</small></div></div>
       </div>
       <div class="buy-form">
-        <div class="form-row">
+        <div class="form-row hide-on-tarot">
           <label>👤 Discord ของคุณ <span class="req">*</span></label>
           <input type="text" id="inputDiscord" placeholder="@username" autocomplete="off">
         </div>
@@ -537,22 +549,64 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
           <label>🎴 รูปแบบดวงที่ต้องการดู <span class="req">*</span></label>
           <select id="inputType">
             <option value="">-- เลือกรูปแบบ --</option>
-            <option value="🔮 ไพ่ทาโร่">🔮 ไพ่ทาโร่</option>
+            <option value="🔮 ไพ่ยิปซี">🔮 ไพ่ยิปซี</option>
             <option value="⭐ โหราศาสตร์ไทย">⭐ โหราศาสตร์ไทย</option>
             <option value="🌌 Birth Chart (ดวงกำเนิด)">🌌 Birth Chart (ดวงกำเนิด)</option>
-            <option value="💕 ดวงความรัก">💕 ดวงความรัก</option>
-            <option value="💼 ดวงการงาน / การเงิน">💼 ดวงการงาน / การเงิน</option>
             <option value="🎴 ดูดวงทั่วไป">🎴 ดูดวงทั่วไป</option>
-            <option value="✏️ อื่น ๆ">✏️ อื่น ๆ</option>
           </select>
         </div>
-        <div class="form-row">
+
+        <div class="birth-fields" id="birthFields">
+          <div class="birth-title">✦ ข้อมูลดวงกำเนิด ✦</div>
+          <div class="form-row">
+            <label>🎂 วันเดือนปีเกิด <span class="req">*</span></label>
+            <input type="date" id="inputBirthDate">
+          </div>
+          <div class="form-row">
+            <label>🕐 เวลาเกิด <span class="req">*</span></label>
+            <input type="time" id="inputBirthTime">
+          </div>
+          <div class="form-row">
+            <label>📍 จังหวัดที่เกิด <span class="req">*</span></label>
+            <select id="inputBirthProvince" onchange="populateDistricts('birth')">
+              <option value="">-- เลือกจังหวัด --</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>🏙️ เขต / อำเภอที่เกิด <span class="req">*</span></label>
+            <select id="inputBirthDistrict">
+              <option value="">-- เลือกเขต/อำเภอ --</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>🏠 จังหวัดปัจจุบัน <span class="req">*</span></label>
+            <select id="inputCurrentProvince" onchange="populateDistricts('current')">
+              <option value="">-- เลือกจังหวัด --</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>🏘️ เขต / อำเภอปัจจุบัน <span class="req">*</span></label>
+            <select id="inputCurrentDistrict">
+              <option value="">-- เลือกเขต/อำเภอ --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tarot-fields" id="tarotFields">
+          <div class="birth-title">✦ เปิดไพ่ยิปซีของคุณ ✦</div>
+          <div class="tarot-hint" id="tarotHint">✦ แตะไพ่ 1 ใบจาก 10 ใบ เพื่อดูคำทำนาย ✦</div>
+          <div class="tarot-cards" id="tarotCards"></div>
+          <div class="tarot-result" id="tarotResult"></div>
+          <button type="button" class="tarot-reset" id="tarotReset" onclick="resetTarot()">🔄 เลือกไพ่ใหม่</button>
+        </div>
+
+        <div class="form-row hide-on-tarot">
           <label>❓ คำถาม / สิ่งที่ต้องการดู <span class="req">*</span></label>
           <textarea id="inputMessage" placeholder="พิมพ์คำถามหรือสิ่งที่อยากให้ดูดวง..."></textarea>
         </div>
       </div>
-      <div class="buy-note">ⓘ ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
-      <div class="buy-actions">
+      <div class="buy-note hide-on-tarot">ⓘ ข้อความจะถูกส่งไปยัง Discord ของเจ้าของ</div>
+      <div class="buy-actions" id="buyActions">
         <button class="buy-btn cancel" onclick="closeBuyModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>ปิด</button>
         <button class="buy-btn confirm" id="buySubmitBtn" onclick="submitBuyMessage()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>ส่ง</button>
       </div>
@@ -567,6 +621,199 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
+var THAI_DISTRICTS={
+"กรุงเทพมหานคร":["เขตพระนคร","เขตดุสิต","เขตหนองจอก","เขตบางรัก","เขตบางเขน","เขตบางกะปิ","เขตปทุมวัน","เขตป้อมปราบศัตรูพ่าย","เขตพระโขนง","เขตมีนบุรี","เขตลาดกระบัง","เขตยานนาวา","เขตสัมพันธวงศ์","เขตพญาไท","เขตธนบุรี","เขตบางกอกใหญ่","เขตห้วยขวาง","เขตคลองสาน","เขตตลิ่งชัน","เขตบางกอกน้อย","เขตบางขุนเทียน","เขตภาษีเจริญ","เขตหนองแขม","เขตราษฎร์บูรณะ","เขตบางพลัด","เขตดินแดง","เขตบึงกุ่ม","เขตสาทร","เขตบางซื่อ","เขตจตุจักร","เขตบางคอแหลม","เขตประเวศ","เขตคลองเตย","เขตสวนหลวง","เขตจอมทอง","เขตดอนเมือง","เขตราชเทวี","เขตลาดพร้าว","เขตวัฒนา","เขตบางแค","เขตหลักสี่","เขตสายไหม","เขตคันนายาว","เขตสะพานสูง","เขตวังทองหลาง","เขตคลองสามวา","เขตบางนา","เขตทวีวัฒนา","เขตทุ่งครุ","เขตบางบอน"],
+"กระบี่":["เมืองกระบี่","เขาพนม","เกาะลันตา","คลองท่อม","ปลายพระยา","ลำทับ","เหนือคลอง","อ่าวลึก"],
+"กาญจนบุรี":["เมืองกาญจนบุรี","ไทรโยค","บ่อพลอย","ศรีสวัสดิ์","ทองผาภูมิ","สังขละบุรี","พนมทวน","เลาขวัญ","ด่านมะขามเตี้ย","หนองปรือ","ห้วยกระเจา"],
+"กาฬสินธุ์":["เมืองกาฬสินธุ์","นามน","กมลาไสย","ร่องคำ","กุฉินารายณ์","เขาวง","ยางตลาด","ห้วยเม็ก","สหัสขันธ์","คำม่วง","ท่าคันโท","หนองกุงศรี","สมเด็จ","ห้วยผึ้ง","สามชัย","นาคู","ดอนจาน","ฆ้องชัย"],
+"กำแพงเพชร":["เมืองกำแพงเพชร","ไทรงาม","คลองลาน","ขาณุวรลักษบุรี","คลองขลุง","พรานกระต่าย","ลานกระบือ","ทรายทองวัฒนา","ปางศิลาทอง","บึงสามัคคี","โกสัมพีนคร"],
+"ขอนแก่น":["เมืองขอนแก่น","บ้านฝาง","พระยืน","หนองเรือ","ชุมแพ","สีชมพู","น้ำพอง","อุบลรัตน์","กระนวน","บ้านไผ่","เปือยน้อย","พล","แวงใหญ่","แวงน้อย","หนองสองห้อง","ภูเวียง","มัญจาคีรี","ชนบท","เขาสวนกวาง","ภูผาม่าน","ซำสูง","โคกโพธิ์ไชย","หนองนาคำ","บ้านแฮด","โนนศิลา","เวียงเก่า"],
+"จันทบุรี":["เมืองจันทบุรี","ขลุง","ท่าใหม่","โป่งน้ำร้อน","มะขาม","แหลมสิงห์","สอยดาว","แก่งหางแมว","นายายอาม","เขาคิชฌกูฏ"],
+"ฉะเชิงเทรา":["เมืองฉะเชิงเทรา","บางคล้า","บางน้ำเปรี้ยว","บางปะกง","บ้านโพธิ์","พนมสารคาม","ราชสาส์น","สนามชัยเขต","แปลงยาว","ท่าตะเกียบ","คลองเขื่อน"],
+"ชลบุรี":["เมืองชลบุรี","บ้านบึง","หนองใหญ่","บางละมุง","พานทอง","พนัสนิคม","ศรีราชา","เกาะสีชัง","สัตหีบ","บ่อทอง","เกาะจันทร์"],
+"ชัยนาท":["เมืองชัยนาท","มโนรมย์","วัดสิงห์","สรรพยา","สรรคบุรี","หันคา","หนองมะโมง","เนินขาม"],
+"ชัยภูมิ":["เมืองชัยภูมิ","บ้านเขว้า","คอนสวรรค์","เกษตรสมบูรณ์","หนองบัวแดง","จัตุรัส","บำเหน็จณรงค์","หนองบัวระเหว","เทพสถิต","ภูเขียว","บ้านแท่น","แก้งคร้อ","คอนสาร","ภักดีชุมพล","เนินสง่า","ซับใหญ่"],
+"ชุมพร":["เมืองชุมพร","ท่าแซะ","ปะทิว","หลังสวน","ละแม","พะโต๊ะ","สวี","ทุ่งตะโก"],
+"เชียงราย":["เมืองเชียงราย","เวียงชัย","เชียงของ","เทิง","พาน","ป่าแดด","เชียงแสน","แม่จัน","เชียงคำ","แม่สาย","แม่สรวย","เวียงป่าเป้า","พญาเม็งราย","เวียงแก่น","ขุนตาล","แม่ฟ้าหลวง","แม่ลาว","เวียงเชียงรุ้ง","ดอยหลวง"],
+"เชียงใหม่":["เมืองเชียงใหม่","จอมทอง","แม่แจ่ม","เชียงดาว","ดอยสะเก็ด","แม่แตง","แม่ริม","สะเมิง","ฝาง","แม่อาย","พร้าว","สันป่าตอง","สันกำแพง","สันทราย","หางดง","ฮอด","ดอยเต่า","อมก๋อย","สารภี","เวียงแหง","ไชยปราการ","แม่วาง","แม่ออน","ดอยหล่อ","กัลยาณิวัฒนา"],
+"ตรัง":["เมืองตรัง","กันตัง","ย่านตาขาว","ปะเหลียน","สิกา","ห้วยยอด","วังวิเศษ","นาโยง","รัษฎา","หาดสำราญ"],
+"ตราด":["เมืองตราด","คลองใหญ่","เขาสมิง","บ่อไร่","แหลมงอบ","เกาะกูด","เกาะช้าง"],
+"ตาก":["เมืองตาก","บ้านตาก","สามเงา","แม่ระมาด","ท่าสองยาง","แม่สอด","พบพระ","อุ้มผาง","วังเจ้า"],
+"นครนายก":["เมืองนครนายก","ปากพลี","บ้านนา","องครักษ์"],
+"นครปฐม":["เมืองนครปฐม","กำแพงแสน","นครชัยศรี","ดอนตูม","บางเลน","สามพราน","พุทธมณฑล"],
+"นครพนม":["เมืองนครพนม","ปลาปาก","ท่าอุเทน","บ้านแพง","ธาตุพนม","เรณูนคร","นาแก","ศรีสงคราม","นาหว้า","โพนสวรรค์","นาวัง","บ้านม่วง"],
+"นครราชสีมา":["เมืองนครราชสีมา","ครบุรี","เสิงสาง","คง","บ้านเหลื่อม","จักราช","โชคชัย","ด่านขุนทด","โนนไทย","โนนสูง","ขามสะแกแสง","บัวใหญ่","ประทาย","ปักธงชัย","พิมาย","ห้วยแถลง","ชุมพวง","สูงเนิน","ขามทะเลสอ","สีคิ้ว","ปากช่อง","หนองบุญมาก","แก้งสนามนาง","โนนแดง","วังน้ำเขียว","เทพารักษ์","เมืองยาง","พระทองคำ","ลำทะเมนชัย","บัวลาย","สีดา","โพธิ์ไทร"],
+"นครศรีธรรมราช":["เมืองนครศรีธรรมราช","พรหมคีรี","ลานสกา","ฉวาง","พิปูน","เชียรใหญ่","ชะอวด","ท่าศาลา","ทุ่งสง","นาบอน","ทุ่งใหญ่","ปากพนัง","ร่อนพิบูลย์","สิชล","ขนอม","หัวไทร","บางขัน","ถ้ำพรรณรา","จุฬาภรณ์","พระพรหม","นบพิตำ","ช้างกลาง","เฉลิมพระเกียรติ"],
+"นครสวรรค์":["เมืองนครสวรรค์","โกรกพระ","ชุมแสง","หนองบัว","บรรพตพิสัย","เก้าเลี้ยว","ตาคลี","ท่าตะโก","ไพศาลี","พยุหะคีรี","ลาดยาว","ตากฟ้า","แม่วงก์","แม่เปิน","ชุมตาบง"],
+"นนทบุรี":["เมืองนนทบุรี","บางกรวย","บางใหญ่","บางบัวทอง","ไทรน้อย","ปากเกร็ด"],
+"นราธิวาส":["เมืองนราธิวาส","ตากใบ","บาเจาะ","ยี่งอ","ระแงะ","รือเสาะ","ศรีสาคร","แว้ง","สุคิริน","สุไหงโก-ลก","สุไหงปาดี","จะแนะ","เจาะไอร้อง"],
+"น่าน":["เมืองน่าน","แม่จริม","บ้านหลวง","นาน้อย","ปัว","ท่าวังผา","เวียงสา","ทุ่งช้าง","เชียงกลาง","นาหมื่น","สันติสุข","บ่อเกลือ","สองแคว","ภูเพียง","เฉลิมพระเกียรติ"],
+"บึงกาฬ":["เมืองบึงกาฬ","เซกา","โซ่พิสัย","พรเจริญ","ศรีวิไล","บุ่งคล้า","บึงโขงหลง","ปากคาด"],
+"บุรีรัมย์":["เมืองบุรีรัมย์","คูเมือง","กระสัง","นางรอง","หนองกี่","ละหานทราย","ประโคนชัย","บ้านกรวด","พุทไธสง","ลำปลายมาศ","สตึก","ปะคำ","นาโพธิ์","หนองหงส์","พลับพลาชัย","ห้วยราช","โนนสุวรรณ","ชำนิ","บ้านใหม่ไชยพจน์","โนนดินแดง","บ้านด่าน","แคนดง","เฉลิมพระเกียรติ"],
+"ปทุมธานี":["เมืองปทุมธานี","คลองหลวง","ธัญบุรี","หนองเสือ","ลาดหลุมแก้ว","ลำลูกกา","สามโคก"],
+"ประจวบคีรีขันธ์":["เมืองประจวบคีรีขันธ์","กุยบุรี","ทับสะแก","บางสะพาน","บางสะพานน้อย","ปราณบุรี","หัวหิน","สามร้อยยอด"],
+"ปราจีนบุรี":["เมืองปราจีนบุรี","กบินทร์บุรี","นาดี","บ้านสร้าง","ประจันตคาม","ศรีมหาโพธิ","ศรีมโหสถ"],
+"ปัตตานี":["เมืองปัตตานี","โคกโพธิ์","หนองจิก","ปะนาเระ","มายอ","ทุ่งยางแดง","สายบุรี","ไม้แก่น","ยะหริ่ง","ยะรัง","กะพ้อ","แม่ลาน"],
+"พระนครศรีอยุธยา":["พระนครศรีอยุธยา","ท่าเรือ","นครหลวง","บางไทร","บางบาล","บางปะอิน","บางปะหัน","ผักไห่","ภาชี","ลาดบัวหลวง","วังน้อย","เสนา","บางซ้าย","อุทัย","มหาราช","บ้านแพรก"],
+"พังงา":["เมืองพังงา","เกาะยาว","กะปง","ตะกั่วทุ่ง","ตะกั่วป่า","คุระบุรี","ทับปุด","ท้ายเหมือง"],
+"พัทลุง":["เมืองพัทลุง","กงหรา","เขาชัยสน","ตะโหมด","ควนขนุน","ปากพะยูน","ศรีบรรพต","ป่าบอน","บางแก้ว","ป่าพยอม","ศรีนครินทร์"],
+"พิจิตร":["เมืองพิจิตร","วังทรายพูน","โพธิ์ประทับช้าง","ตะพานหิน","บางมูลนาก","โพทะเล","สามง่าม","ทับคล้อ","สากเหล็ก","บึงนาราง","ดงเจริญ","วชิรบารมี"],
+"พิษณุโลก":["เมืองพิษณุโลก","นครไทย","ชาติตระการ","บางระกำ","บางกระทุ่ม","พรหมพิราม","วัดโบสถ์","วังทอง","เนินมะปราง"],
+"เพชรบุรี":["เมืองเพชรบุรี","เขาย้อย","หนองหญ้าปล้อง","ชะอำ","ท่ายาง","บ้านลาด","บ้านแหลม","แก่งกระจาน"],
+"เพชรบูรณ์":["เมืองเพชรบูรณ์","ชนแดน","หล่มสัก","หล่มเก่า","วิเชียรบุรี","ศรีเทพ","หนองไผ่","บึงสามพัน","น้ำหนาว","วังโป่ง","เขาค้อ"],
+"แพร่":["เมืองแพร่","ร้องกวาง","ลอง","สูงเม่น","เด่นชัย","สอง","วังชิ้น","หนองม่วงไข่"],
+"พะเยา":["เมืองพะเยา","จุน","เชียงคำ","เชียงม่วน","ดอกคำใต้","ปง","แม่ใจ","ภูซาง","ภูกามยาว"],
+"ภูเก็ต":["เมืองภูเก็ต","กะทู้","ถลาง"],
+"มหาสารคาม":["เมืองมหาสารคาม","แกดำ","โกสุมพิสัย","กันทรวิชัย","เชียงยืน","บรบือ","นาเชือก","พยัคฆภูมิพิสัย","วาปีปทุม","นาดูน","ยางสีสุราช","กุดรัง","ชื่นชม"],
+"มุกดาหาร":["เมืองมุกดาหาร","นิคมคำสร้อย","ดอนตาล","ดงหลวง","คำชะอี","หว้านใหญ่","หนองสูง"],
+"แม่ฮ่องสอน":["เมืองแม่ฮ่องสอน","ขุนยวม","ปาย","แม่สะเรียง","แม่ลาน้อย","สบเมย","ปางมะผ้า"],
+"ยโสธร":["เมืองยโสธร","ทรายมูล","กุดชุม","คำเขื่อนแก้ว","ป่าติ้ว","มหาชนะชัย","ค้อวัง","เลิงนกทา","ไทยเจริญ"],
+"ยะลา":["เมืองยะลา","เบตง","บันนังสตา","ธารโต","ยะหา","รามัน","กาบัง","กรงปินัง"],
+"ร้อยเอ็ด":["เมืองร้อยเอ็ด","เกษตรวิสัย","ปทุมรัตต์","จตุรพักตรพิมาน","ธวัชบุรี","พนมไพร","โพนทอง","โพธิ์ชัย","หนองพอก","เสลภูมิ","สุวรรณภูมิ","เมืองสรวง","โพนทราย","อาจสามารถ","เมยวดี","ศรีสมเด็จ","จังหาร","เชียงขวัญ","หนองฮี","พระธาตุ"],
+"ระนอง":["เมืองระนอง","ละอุ่น","กะเปอร์","กระบุรี","สุขสำราญ"],
+"ระยอง":["เมืองระยอง","บ้านฉาง","แกลง","วังจันทร์","บ้านค่าย","ปลวกแดง","เขาชะเมา","นิคมพัฒนา"],
+"ราชบุรี":["เมืองราชบุรี","จอมบึง","สวนผึ้ง","ดำเนินสะดวก","บ้านโป่ง","บางแพ","โพธาราม","ปากท่อ","วัดเพลง","บ้านคา"],
+"ลพบุรี":["เมืองลพบุรี","พัฒนานิคม","โคกสำโรง","ชัยบาดาล","ท่าวุ้ง","บ้านหมี่","ท่าหลวง","สระโบสถ์","โคกเจริญ","หนองม่วง","บ้านใหม่","ลำสนธิ"],
+"ลำปาง":["เมืองลำปาง","แม่เมาะ","เกาะคา","เสริมงาม","งาว","แจ้ห่ม","วังเหนือ","เถิน","แม่พริก","แม่ทะ","สบปราบ","ห้างฉัตร","เมืองปาน"],
+"ลำพูน":["เมืองลำพูน","แม่ทา","บ้านโฮ่ง","ลี้","ทุ่งหัวช้าง","ป่าซาง","บ้านธิ","เวียงหนองล่อง"],
+"เลย":["เมืองเลย","นาด้วง","เชียงคาน","ปากชม","ด่านซ้าย","นาแห้ว","ภูเรือ","ท่าลี่","วังสะพุง","ภูกระดึง","ภูหลวง","ผาขาว","เอราวัณ","หนองหิน"],
+"ศรีสะเกษ":["เมืองศรีสะเกษ","ยางชุมน้อย","กันทรารมณ์","จุฬาภรณ์","ขุขันธ์","ไพรบึง","ปรางค์กู่","ขุนหาญ","ราษีไศล","อุทุมพรพิสัย","บึงบูรพ์","ห้วยทับทัน","โนนคูณ","ศรีรัตนะ","น้ำเกลี้ยง","วังหิน","ภูสิงห์","เมืองจันทร์","เบญจลักษ์","พยุห์","โพธิ์ศรีสุวรรณ","ศิลาลาด"],
+"สกลนคร":["เมืองสกลนคร","กุสุมาลย์","กุดบาก","พรรณานิคม","พังโคน","วาริชภูมิ","นิคมน้ำอูน","วานรนิวาส","คำตากล้า","บ้านม่วง","อากาศอำนวย","สว่างแดนดิน","ส่องดาว","เต่างอย","โคกศรีสุพรรณ","เจริญศิลป์","โพนนาแก้ว","ภูพาน"],
+"สงขลา":["เมืองสงขลา","สทิงพระ","จะนะ","นาทวี","เทพา","สะบ้าย้อย","ระโนด","กระแสสินธุ์","รัตภูมิ","สะเดา","หาดใหญ่","นาหม่อม","ควนเนียง","บางกล่ำ","สิงหนคร","คลองหอยโข่ง"],
+"สตูล":["เมืองสตูล","ควนโดน","ควนกาหลง","ท่าแพ","ละงู","ทุ่งหว้า","มะนัง"],
+"สมุทรปราการ":["เมืองสมุทรปราการ","บางบ่อ","บางพลี","พระประแดง","พระสมุทรเจดีย์","บางเสาธง"],
+"สมุทรสงคราม":["เมืองสมุทรสงคราม","บางคนที","อัมพวา"],
+"สมุทรสาคร":["เมืองสมุทรสาคร","กระทุ่มแบน","บ้านแพ้ว"],
+"สระแก้ว":["เมืองสระแก้ว","คลองหาด","ตาพระยา","วังน้ำเย็น","วัฒนานคร","อรัญประเทศ","เขาฉกรรจ์","โคกสูง","วังสมบูรณ์"],
+"สระบุรี":["เมืองสระบุรี","แก่งคอย","หนองแค","วิหารแดง","หนองแซง","บ้านหมอ","ดอนพุด","หนองโดน","พระพุทธบาท","เสาไห้","มวกเหล็ก","วังม่วง","เฉลิมพระเกียรติ"],
+"สิงห์บุรี":["เมืองสิงห์บุรี","บางระจัน","ค่ายบางระจัน","พรหมบุรี","ท่าช้าง","อินทร์บุรี"],
+"สุโขทัย":["เมืองสุโขทัย","บ้านด่านลานหอย","คีรีมาศ","กงไกรลาศ","ศรีสัชนาลัย","ศรีสำโรง","สวรรคโลก","ศรีนคร","ทุ่งเสลี่ยม"],
+"สุพรรณบุรี":["เมืองสุพรรณบุรี","เดิมบางนางบวช","ด่านช้าง","บางปลาม้า","ศรีประจันต์","ดอนเจดีย์","สองพี่น้อง","สามชุก","อู่ทอง","หนองหญ้าไซ"],
+"สุราษฎร์ธานี":["เมืองสุราษฎร์ธานี","กาญจนดิษฐ์","ดอนสัก","เกาะสมุย","เกาะพะงัน","ไชยา","ท่าชนะ","คีรีรัฐนิคม","บ้านตาขุน","พนม","ท่าฉาง","บ้านนาสาร","บ้านนาเดิม","เคียนซา","เวียงสระ","พระแสง","พุนพิน","ชัยบุรี","วิภาวดี"],
+"สุรินทร์":["เมืองสุรินทร์","ชุมพลบุรี","ท่าตูม","จอมพระ","ปราสาท","กาบเชิง","รัตนบุรี","สนม","ศีขรภูมิ","สังขะ","ลำดวน","สำโรงทาบ","บัวเชด","พนมดงรัก","เขวาสินรินทร์","โนนนารายณ์","ศรีณรงค์"],
+"หนองคาย":["เมืองหนองคาย","ท่าบ่อ","โพนพิสัย","ศรีเชียงใหม่","สังคม","สระใคร","เฝ้าไร่","รัตนวาปี","โพธิ์ตาก"],
+"หนองบัวลำภู":["เมืองหนองบัวลำภู","นากลาง","โนนสัง","ศรีบุญเรือง","สุวรรณคูหา","นาวัง"],
+"อ่างทอง":["เมืองอ่างทอง","ไชโย","ป่าโมก","โพธิ์ทอง","แสวงหา","วิเศษชัยชาญ","สามโก้"],
+"อำนาจเจริญ":["เมืองอำนาจเจริญ","ชานุมาน","ปทุมราชวงศา","พนา","เสนางคนิคม","หัวตะพาน","ลืออำนาจ"],
+"อุดรธานี":["เมืองอุดรธานี","กุดจับ","หนองวัวซอ","กุมภวาปี","โนนสะอาด","หนองหาน","ทุ่งฝน","ไชยวาน","ศรีธาตุ","วังสามหมอ","บ้านดุง","บ้านผือ","น้ำโสม","เพ็ญ","สร้างคอม","หนองแสง","นายูง","พิบูลย์รักษ์","กู่แก้ว","ประจักษ์ศิลปาคม"],
+"อุตรดิตถ์":["เมืองอุตรดิตถ์","ตรอน","ท่าปลา","น้ำปาด","ฟากท่า","บ้านโคก","พิชัย","ลับแล","ทองแสนขัน"],
+"อุทัยธานี":["เมืองอุทัยธานี","ทัพทัน","สว่างอารมณ์","หนองฉาง","หนองขาหย่าง","บ้านไร่","ลานสัก","ห้วยคต"],
+"อุบลราชธานี":["เมืองอุบลราชธานี","ศรีเมืองใหม่","โขงเจียม","เขื่องใน","เขมราฐ","เดชอุดม","นาจะหลวย","น้ำยืน","บุณฑริก","ตระการพืชผล","กุดข้าวปุ้น","ม่วงสามสิบ","วารินชำราบ","พิบูลมังสาหาร","ตาลสุม","โพธิ์ไทร","สำโรง","ดอนมดแดง","สิรินธร","ทุ่งศรีอุดม","นาเยีย","นาตาล","เหล่าเสือโก้ก","สว่างวีระวงศ์","น้ำขุ่น"]
+};
+
+var TAROT_CARDS=[
+{num:"0",symbol:"🃏",name:"THE FOOL",meaning:
+`ไพ่ THE FOOL (หมายเลข 0) เป็นไพ่แห่งการเริ่มต้นครั้งใหม่ เป็นสัญลักษณ์ของการก้าวออกจาก Comfort Zone อย่างกล้าหาญ ไพ่ใบนี้บอกว่าคุณกำลังจะได้พบกับประสบการณ์ใหม่ที่ยังไม่เคยเจอมาก่อน ความไร้เดียงสาและความกล้าที่จะเชื่อในสัญชาตญาณของตัวเองคือพลังสำคัญ อย่างไรก็ตาม ต้องระวังการตัดสินใจที่ประมาทหรือไม่รอบคอบ เพราะการก้าวกระโดดครั้งนี้อาจมีจุดที่ต้องระวัง
+
+💕 ความรัก — หัวใจของคุณกำลังเปิดรับความรักครั้งใหม่ หรือความสัมพันธ์ที่กำลังเริ่มต้นในบทที่สดใหม่ อาจเป็นคนที่เข้ามาโดยไม่คาดคิดจากที่ไหน และทำให้คุณรู้สึกมีชีวิตชีวาอีกครั้ง หากมีคู่แล้ว ไพ่บอกให้ลองทำสิ่งใหม่ๆ ร่วมกัน เพื่อจุดประกายความสัมพันธ์ให้กลับมามีความตื่นเต้น ระวังการตกหลุมรักอย่างประมาท
+
+💼 การงาน — โอกาสใหม่ที่ท้าทาย งานใหม่ โปรเจกต์ใหม่ หรือเส้นทางอาชีพที่ต้องเริ่มจากศูนย์ คุณอาจรู้สึกตื่นเต้นปนกลัว แต่ไพ่ยืนยันว่าให้ก้าวต่อไปด้วยหัวใจที่เปิดกว้าง อย่ายึดติดกับความผิดพลาดในอดีต เพราะบทใหม่กำลังรออยู่ข้างหน้า
+
+💰 การเงิน — เตือนให้มีความระมัดระวังก่อนลงทุนอะไรใหม่ การเสี่ยงอาจให้ผลตอบแทนสูง แต่ต้องศึกษาข้อมูลให้รอบคอบก่อนตัดสินใจ เป็นช่วงที่ควรทดลองสิ่งใหม่ทางการเงิน แต่ต้องไม่ประมาทจนเกินไป
+
+🌿 สุขภาพ — นำพลังงานใหม่ๆ ให้กับร่างกาย เป็นโอกาสดีที่จะเริ่มต้นดูแลสุขภาพด้วยวิธีใหม่ๆ ไม่ว่าจะเป็นการออกกำลังกายแบบใหม่ การกินที่ต่างจากเดิม หรือการทำกิจกรรมที่ทำให้จิตใจแจ่มใส แต่ระวังอุบัติเหตุจากการประมาท`
+},
+{num:"I",symbol:"🎩",name:"THE MAGICIAN",meaning:
+`ไพ่ THE MAGICIAN (หมายเลข I) เป็นไพ่แห่งพลังสร้างสรรค์ ความสามารถ และการลงมือทำ คุณมีทุกเครื่องมือที่จำเป็นอยู่ในมือแล้ว เพียงแค่ต้องลงมือใช้มัน ไพ่ใบนี้นำมาซึ่งความสำเร็จที่เกิดจากทักษะ ความตั้งใจ และสมาธิที่จดจ่อ บ่งบอกว่าคุณกำลังอยู่ในช่วงที่ความคิดสร้างสรรค์และไหวพริบเฉียบคม สามารถเปลี่ยนความฝันให้กลายเป็นความจริงได้
+
+💕 ความรัก — คุณมีเสน่ห์ดึงดูดคนรอบข้างได้ดี เป็นช่วงที่ความสัมพันธ์ก้าวหน้าอย่างรวดเร็ว ควรใช้คำพูดและสื่อสารด้วยความจริงใจ เพราะพลังแห่งคำพูดของคุณมีผลอย่างมากต่อความรักครั้งนี้ หากมีคนที่แอบชอบ ถึงเวลาที่ควรแสดงออกอย่างชัดเจน
+
+💼 การงาน — ความสามารถและทักษะของคุณจะได้รับการยอมรับ ได้รับโอกาสใหม่ที่ทำให้ได้ใช้พรสวรรค์ที่มี อย่ากลัวที่จะเสนอไอเดีย เพราะความคิดสร้างสรรค์ของคุณจะนำพาความสำเร็จมาให้ เป็นช่วงที่ดีสำหรับการเริ่มโปรเจกต์ใหม่
+
+💰 การเงิน — การเงินจะดีขึ้นจากการใช้ความสามารถและไหวพริบ มีโอกาสจากรายได้เสริมที่ใช้ทักษะส่วนตัว ควรกล้าลงทุนในสิ่งที่ถนัด แต่ยังคงมีสติในการจัดการ
+
+🌿 สุขภาพ — ร่างกายมีพลังงานดี จิตใจปลอดโปร่ง เหมาะที่จะฝึกสมาธิและการหายใจ เพราะการควบคุมจิตใจจะส่งผลดีต่อสุขภาพกายด้วย`
+},
+{num:"II",symbol:"🌙",name:"THE HIGH PRIESTESS",meaning:
+`ไพ่ THE HIGH PRIESTESS (หมายเลข II) เป็นไพ่แห่งสัญชาตญาณ จิตใต้สำนึก และความลับที่ยังไม่เปิดเผย ไพ่ใบนี้บอกว่าคุณมีคำตอบอยู่ในใจแล้ว เพียงแต่ต้องกล้าฟังเสียงภายในของตัวเอง ความเงียบสงบและการใคร่ครวญจะนำมาซึ่งความเข้าใจที่ลึกซึ้งกว่าการคิดด้วยเหตุผลเพียงอย่างเดียว
+
+💕 ความรัก — มีความสัมพันธ์ที่ยังไม่เปิดเผย หรือมีคนที่แอบรู้สึกกับคุณอยู่ ควรใช้สัญชาตญาณในการอ่านใจอีกฝ่าย อย่ารีบร้อนตัดสินใจ เพราะ有些事情ต้องใช้เวลาเปิดเผยตัวเอง ความลับในความรักกำลังจะค่อยๆ ถูกเปิด
+
+💼 การงาน — มีข้อมูลหรือความจริงบางอย่างที่ยังไม่เปิดเผยในที่ทำงาน ควรฟังเสียงภายในก่อนตัดสินใจอะไรสำคัญ อย่าเพิ่งเชื่อสิ่งที่เห็นจากภายนอกทั้งหมด เพราะยังมีรายละเอียดที่ซ่อนอยู่
+
+💰 การเงิน — ต้องรอบคอบและใช้สัญชาตญาณในการตัดสินใจทางการเงิน มีเกณฑ์ที่ต้องศึกษาก่อนลงทุน ไม่ควรหลงเชื่อคำโฆษณาหรือคนรอบข้างโดยไม่ตรวจสอบข้อมูลด้วยตัวเอง
+
+🌿 สุขภาพ — เกี่ยวกับจิตใจและอารมณ์เป็นหลัก ควรพักผ่อนให้เพียงพอ ทำสมาธิ หรือหากิจกรรมที่สงบเงียบ การดูแลสุขภาพจิตจะส่งผลต่อสุขภาพกาย`
+},
+{num:"III",symbol:"👑",name:"THE EMPRESS",meaning:
+`ไพ่ THE EMPRESS (หมายเลข III) เป็นไพ่แห่งความอุดมสมบูรณ์ ความสำเร็จ และความรักที่ล้นเหลือ ไพ่ใบนี้นำมาซึ่งช่วงเวลาที่ดีที่สุดในชีวิต ทั้งด้านวัตถุและจิตใจ บ่งบอกถึงความอ่อนโยน การดูแลเอาใจใส่ และความคิดสร้างสรรค์ที่กำลังเบ่งบาน ทุกอย่างรอบตัวคุณกำลังเติบโตและเจริญรุ่งเรือง
+
+💕 ความรัก — ความรักกำลังเบ่งบานอย่างสวยงาม มีคนรักที่ดูแลอย่างดี ความสัมพันธ์มั่นคงและอบอุ่น เหมาะแก่การวางแผนอนาคตร่วมกัน หากโสด มีแนวโน้มได้พบคนที่พร้อมจะดูแลคุณอย่างจริงใจ
+
+💼 การงาน — การงานเจริญก้าวหน้า ได้รับผลตอบแทนที่คุ้มค่า ความคิดสร้างสรรค์ได้รับการสนับสนุน เป็นช่วงที่ดีสำหรับการเริ่มโครงการที่ต้องใช้จินตนาการ
+
+💰 การเงิน — การเงินมั่งคั่ง มีโชคด้านทรัพย์สิน อาจมีรายได้พิเศษเข้ามาแบบไม่คาดคิด เป็นช่วงที่เหมาะแก่การออมและการลงทุนระยะยาว
+
+🌿 สุขภาพ — สุขภาพดี มีความสมบูรณ์แข็งแรงทั้งกายและใจ ควรดูแลโภชนาการและการพักผ่อนให้สมดุล`
+},
+{num:"IV",symbol:"🏛️",name:"THE EMPEROR",meaning:
+`ไพ่ THE EMPEROR (หมายเลข IV) เป็นไพ่แห่งความมั่นคง อำนาจ และความเป็นผู้นำ ไพ่ใบนี้บอกว่าคุณกำลังเข้าสู่ช่วงที่ต้องใช้อำนาจและความรับผิดชอบอย่างชาญฉลาด เป็นสัญลักษณ์ของพ่อ ผู้มีอำนาจ หรือผู้ที่คอยปกป้องดูแลผู้อื่น ความมีระเบียบวินัยและโครงสร้างที่ชัดเจนจะนำมาซึ่งความสำเร็จที่ยั่งยืน
+
+💕 ความรัก — ความสัมพันธ์ที่มั่นคง อบอุ่น และมีความรับผิดชอบ อาจมีเรื่องการวางแผนอนาคตอย่างจริงจัง เช่น การแต่งงาน หรือการซื้อบ้านอยู่ด้วยกัน ความสัมพันธ์นี้ตั้งอยู่บนพื้นฐานของความไว้ใจซึ่งกันและกัน
+
+💼 การงาน — ได้รับตำแหน่งหรือความรับผิดชอบมากขึ้น การงานมั่นคง มีระบบระเบียบที่ชัดเจน เป็นช่วงที่เหมาะสมกับการวางแผนระยะยาวและสร้างรากฐานที่แข็งแรง
+
+💰 การเงิน — การเงินมั่นคง มีการวางแผนที่ดี ควรจัดระเบียบการเงินให้เป็นระบบและมีวินัย อย่าลงทุนแบบโลดโผน เพราะความมั่นคงคือกุญแจสำคัญ
+
+🌿 สุขภาพ — สุขภาพแข็งแรง แต่ควรหลีกเลี่ยงความเครียดจากงาน ควรจัดตารางเวลาพักผ่อนและออกกำลังกายให้เป็นระบบ`
+},
+{num:"VI",symbol:"💕",name:"THE LOVERS",meaning:
+`ไพ่ THE LOVERS (หมายเลข VI) เป็นไพ่แห่งความรัก ทางเลือก และความสัมพันธ์ที่กลมกลืน เป็นช่วงเวลาแห่งการตัดสินใจเรื่องสำคัญในชีวิต ไพ่ใบนี้สื่อถึงความรักที่แท้จริง การเลือกที่ต้องใช้ทั้งหัวใจและเหตุผล และการรวมเป็นหนึ่งกับสิ่งที่เป็นเนื้อคู่ของเรา
+
+💕 ความรัก — พบรักแท้ ความสัมพันธ์ที่ลงตัวและกลมกลืน หรือมีทางเลือกในความรักที่ต้องตัดสินใจ อาจมีคนสองคนเข้ามาในเวลาเดียวกัน หรือมีความสัมพันธ์ที่ต้องตัดสินใจว่าจะเดินหน้าหรือถอยหลัง
+
+💼 การงาน — ต้องตัดสินใจเลือกทางเดินในอาชีพ อาจมี 2 ทางเลือกที่สำคัญ ควรปรึกษาคนที่ไว้ใจและใช้สัญชาตญาณของตัวเอง การทำงานเป็นทีมจะนำความสำเร็จมาให้
+
+💰 การเงิน — มีโอกาสร่วมทุนหรือทำธุรกิจกับคนที่รัก เป็นช่วงที่การตัดสินใจทางการเงินควรปรึกษาคนใกล้ชิด ไม่ควรตัดสินใจคนเดียว
+
+🌿 สุขภาพ — สุขภาพดี ความสัมพันธ์ที่ดีส่งผลต่อสุขภาพจิตอย่างมาก ควรใช้เวลากับคนที่รักเพื่อเติมพลังบวก`
+},
+{num:"VII",symbol:"🏇",name:"THE CHARIOT",meaning:
+`ไพ่ THE CHARIOT (หมายเลข VII) เป็นไพ่แห่งชัยชนะ ความมุ่งมั่น และการควบคุมทิศทางชีวิต ไพ่ใบนี้บอกว่าคุณกำลังเผชิญกับอุปสรรคที่จะผ่านไปได้ด้วยความตั้งใจที่แน่วแน่ เป็นสัญลักษณ์ของการเอาชนะอุปสรรคด้วยจิตใจที่แข็งแกร่ง และการควบคุมทิศทางของตัวเองอย่างชาญฉลาด
+
+💕 ความรัก — ความสัมพันธ์ไปได้ดีหากมีความตั้งใจและอดทน อาจมีอุปสรรคจากคนรอบข้างหรือระยะทาง แต่จะผ่านไปได้หากทั้งสองฝ่ายมุ่งมั่นด้วยกัน
+
+💼 การงาน — จะประสบความสำเร็จในโครงการที่ทุ่มเท ทำงานเป็นทีมจะได้ผลลัพธ์ที่ดี เป็นช่วงที่ต้องมุ่งมั่นและไม่ยอมแพ้ต่ออุปสรรค
+
+💰 การเงิน — การเงินดีขึ้นจากการทำงานหนักอย่างต่อเนื่อง รายได้เพิ่มจากการลงแรงที่ผ่านมา ควรใช้ความมุ่งมั่นต่อไปอย่าหยุดกลางทาง
+
+🌿 สุขภาพ — สุขภาพแข็งแรง มีพลังในการทำกิจกรรม แต่ควรระวังความเครียดสะสมจากการทำงานหนัก ควรพักผ่อนให้เพียงพอ`
+},
+{num:"VIII",symbol:"🦁",name:"STRENGTH",meaning:
+`ไพ่ STRENGTH (หมายเลข VIII) เป็นไพ่แห่งความกล้าหาญ ความอดทน และการเอาชนะด้วยความอ่อนโยน ไพ่ใบนี้บอกว่าคุณมีความแข็งแกร่งภายในที่ลึกซึ้งกว่าที่คุณคิด การควบคุมอารมณ์และความปรารถนาด้วยสติปัญญาคือพลังที่แท้จริง ไม่ใช่การใช้อำนาจหรือความรุนแรง
+
+💕 ความรัก — ความรักที่ต้องใช้ความอดทนและความเข้าใจ แต่จะนำไปสู่ความสัมพันธ์ที่ยั่งยืน การเข้าใจและยอมรับในข้อบกพร่องของกันและกันคือกุญแจสำคัญ
+
+💼 การงาน — เผชิญกับความท้าทายที่ต้องใช้ความอดทน แต่จะผ่านไปได้ด้วยดี อย่าใช้อารมณ์ในการตัดสินใจ เพราะความสงบและสติคือพลังของคุณ
+
+💰 การเงิน — ความมั่งคั่งที่ค่อยๆ สะสม ใช้ความพยายามอย่างต่อเนื่อง ไม่ต้องรีบร้อน เงินทองจะมาหาคุณเองหากมีความอดทน
+
+🌿 สุขภาพ — สุขภาพต้องใช้เวลาในการฟื้นฟู ควรอดทนและดูแลต่อเนื่อง ไม่ควรหักโหมจนเกินไป`
+},
+{num:"XVII",symbol:"⭐",name:"THE STAR",meaning:
+`ไพ่ THE STAR (หมายเลข XVII) เป็นไพ่แห่งความหวัง แรงบันดาลใจ และการเยียวยา ไพ่ใบนี้บอกว่าชีวิตกำลังเข้าสู่ช่วงที่สดใส หลังจากผ่านพ้นช่วงเวลาที่ยากลำบาก เป็นสัญลักษณ์ของการฟื้นฟู ความเชื่อมั่น และความศรัทธาในจักรวาล ความปรารถนาของคุณกำลังจะสมหวัง
+
+💕 ความรัก — ความรักที่บริสุทธิ์และจริงใจ กำลังจะสมหวังในสิ่งที่หวังไว้ อาจได้พบคนที่เข้ามาในชีวิตอย่างคาดไม่ถึงและเป็นคนที่ทำให้คุณรู้สึกมีพลัง
+
+💼 การงาน — การงานมีเกณฑ์ที่ดี ได้รับการสนับสนุนจากผู้ใหญ่หรือคนรอบข้าง โอกาสใหม่กำลังจะมาถึง จงเชื่อมั่นในเส้นทางของตัวเอง
+
+💰 การเงิน — การเงินดีขึ้นตามความคาดหวัง มีโชคจากสิ่งเหนือความคาดหมาย อาจมีรายได้พิเศษเข้ามาแบบไม่ตั้งตัว
+
+🌿 สุขภาพ — สุขภาพดีขึ้น ควรพักผ่อนและปล่อยวางความเครียด เป็นช่วงเวลาที่เหมาะแก่การฟื้นฟูทั้งกายและใจ`
+},
+{num:"XIX",symbol:"☀️",name:"THE SUN",meaning:
+`ไพ่ THE SUN (หมายเลข XIX) เป็นไพ่แห่งความสุข ความสำเร็จ และความสมบูรณ์แบบ เป็นไพ่ที่ดีที่สุดในสำรับ เป็นสัญลักษณ์ของช่วงเวลาที่ดีที่สุดในชีวิต ทุกอย่างรอบตัวคุณกำลังเจริญรุ่งเรือง มีพลังบวกและความสุขที่ล้นเหลือ
+
+💕 ความรัก — ความรักที่อบอุ่น เปิดเผย ไม่มีอะไรต้องปิดบัง ความสัมพันธ์มั่นคงและเต็มไปด้วยความสุข เป็นช่วงเวลาที่ดีที่สุดของความรัก
+
+💼 การงาน — ประสบความสำเร็จอย่างงดงาม ได้รับการยอมรับจากทุกคน อาจได้รับรางวัลหรือเลื่อนตำแหน่ง ความพยายามที่ผ่านมาทั้งหมดกำลังออกดอกออกผล
+
+💰 การเงิน — มั่งคั่ง มีรายได้เพิ่มขึ้น มีโชคลาภจากหลายทาง เป็นช่วงที่การเงินรุ่งเรืองที่สุด
+
+🌿 สุขภาพ — สุขภาพสมบูรณ์แข็งแรง มีความสุขสดใส พลังชีวิตเต็มเปี่ยม เหมาะแก่การทำกิจกรรมกลางแจ้ง`
+}
+];
+
 var CONFIG = {
   discordUsername: "munzq",
   discordUserId: "YOUR_DISCORD_USER_ID",
@@ -579,9 +826,9 @@ var CONFIG = {
     { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" }
   ],
   products: [{
-    id: "p1", name: "รับดูดวงโหราศาสตร์ไทย", price: "free", image: "",
+    id: "p1", name: "รับดูดวงฟรี", price: "ฟรี", image: "",
     bgImage: "https://i.pinimg.com/originals/dd/98/f6/dd98f672c0c09e3c5f95d5100e653f38.gif",
-    description: "🔮 รับดูดวง โหราศาสตร์, ไพ่ทาโร่, birthchart ดูฟรีนะครับ หรือสามารถโดเนทตามศรัทธา เปิดรับตลอด แต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
+    description: "🔮 รับดูดวง โหราศาสตร์, ไพ่ยิปซี, birthchart ดูฟรีนะครับ หรือสามารถโดเนทตามศรัทธา เปิดรับตลอด แต่จะรับดูหรือไม่ แล้วแต่ช่วงครับ"
   }],
   chart: { data: [0, 8, 22, 18, 35, 52, 48, 75, 98, 118, 142, 180], maxY: 200 }
 };
@@ -589,6 +836,86 @@ var CONFIG = {
 var QUEUE_MAX = 20;
 var QUEUE_LIVE_BASE = 3;
 var DEFAULT_VOLUME = 40;
+var BIRTH_TYPES = ['⭐ โหราศาสตร์ไทย', '🌌 Birth Chart (ดวงกำเนิด)'];
+var TAROT_TYPE = '🔮 ไพ่ยิปซี';
+
+var tarotPicked = false;
+
+function populateProvinces(){
+  var opts = '<option value="">-- เลือกจังหวัด --</option>';
+  Object.keys(THAI_DISTRICTS).forEach(function(p){ opts += '<option>' + p + '</option>'; });
+  var bp = document.getElementById('inputBirthProvince');
+  var cp = document.getElementById('inputCurrentProvince');
+  if (bp) bp.innerHTML = opts;
+  if (cp) cp.innerHTML = opts;
+}
+function populateDistricts(type){
+  var provEl = type==='birth' ? document.getElementById('inputBirthProvince') : document.getElementById('inputCurrentProvince');
+  var distEl = type==='birth' ? document.getElementById('inputBirthDistrict') : document.getElementById('inputCurrentDistrict');
+  var prov = provEl.value;
+  var list = THAI_DISTRICTS[prov] || [];
+  var html = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+  list.forEach(function(d){ html += '<option>' + d + '</option>'; });
+  distEl.innerHTML = html;
+}
+
+function renderTarotCards(){
+  var wrap = document.getElementById('tarotCards');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  for (var i = 0; i < 10; i++){
+    var card = document.createElement('div');
+    card.className = 'tarot-card';
+    card.dataset.index = i;
+    card.innerHTML = '<div class="tarot-card-inner">' +
+      '<div class="tarot-card-back"></div>' +
+      '<div class="tarot-card-front">' +
+        '<div class="tc-num">?</div>' +
+        '<div class="tc-symbol">✦</div>' +
+        '<div class="tc-name">???</div>' +
+      '</div>' +
+      '</div>';
+    card.addEventListener('click', (function(idx, el){
+      return function(){ pickTarotCard(idx, el); };
+    })(i, card));
+    wrap.appendChild(card);
+  }
+}
+function pickTarotCard(idx, cardEl){
+  if (tarotPicked) return;
+  tarotPicked = true;
+  var card = TAROT_CARDS[idx];
+  var front = cardEl.querySelector('.tarot-card-front');
+  front.innerHTML = 
+    '<div class="tc-num">' + card.num + '</div>' +
+    '<div class="tc-symbol">' + card.symbol + '</div>' +
+    '<div class="tc-name">' + card.name + '</div>';
+  cardEl.classList.add('flipped');
+  document.querySelectorAll('.tarot-card').forEach(function(el){
+    if (el !== cardEl) el.classList.add('disabled');
+  });
+  setTimeout(function(){
+    var res = document.getElementById('tarotResult');
+    res.innerHTML = 
+      '<div class="tr-symbol">' + card.symbol + '</div>' +
+      '<div class="tr-name">' + card.name + '</div>' +
+      '<div class="tr-sub">MAJOR ARCANA · NO. ' + card.num + '</div>' +
+      '<div class="tr-mean">' + card.meaning + '</div>';
+    res.classList.add('show');
+    document.getElementById('tarotReset').classList.add('show');
+    document.getElementById('tarotHint').textContent = '✦ ไพ่ของคุณคือ ' + card.name + ' ✦';
+  }, 700);
+}
+function resetTarot(){
+  tarotPicked = false;
+  var res = document.getElementById('tarotResult');
+  if (res) res.classList.remove('show');
+  var rb = document.getElementById('tarotReset');
+  if (rb) rb.classList.remove('show');
+  var h = document.getElementById('tarotHint');
+  if (h) h.textContent = '✦ แตะไพ่ 1 ใบจาก 10 ใบ เพื่อดูคำทำนาย ✦';
+  renderTarotCards();
+}
 
 var STATS_INFO = {
   winrate: {
@@ -912,6 +1239,34 @@ function renderProducts(){
 }
 renderProducts();
 
+function toggleTypeFields(){
+  var v = document.getElementById('inputType').value;
+  var needsBirth = BIRTH_TYPES.indexOf(v) !== -1;
+  var needsTarot = v === TAROT_TYPE;
+  document.getElementById('birthFields').classList.toggle('show', needsBirth);
+  var tf = document.getElementById('tarotFields');
+  tf.classList.toggle('show', needsTarot);
+
+  document.querySelectorAll('.hide-on-tarot').forEach(function(el){
+    el.style.display = needsTarot ? 'none' : '';
+  });
+  var submitBtn = document.getElementById('buySubmitBtn');
+  if (submitBtn) submitBtn.style.display = needsTarot ? 'none' : '';
+  var actions = document.getElementById('buyActions');
+  if (actions) actions.classList.toggle('single', needsTarot);
+  var queueEl = document.querySelector('.queue-status');
+  if (queueEl) queueEl.style.display = needsTarot ? 'none' : '';
+
+  if (needsTarot){
+    if (!document.getElementById('tarotCards').children.length){
+      renderTarotCards();
+    }
+  } else {
+    resetTarot();
+  }
+}
+document.getElementById('inputType').addEventListener('change', toggleTypeFields);
+
 function openBuyModal(id){
   var p = CONFIG.products.find(function(x){ return x.id === id; });
   if (!p) return;
@@ -921,10 +1276,22 @@ function openBuyModal(id){
   document.getElementById('inputDiscord').value = '';
   document.getElementById('inputType').value = '';
   document.getElementById('inputMessage').value = '';
+  document.getElementById('inputBirthDate').value = '';
+  document.getElementById('inputBirthTime').value = '';
+  document.getElementById('inputBirthProvince').value = '';
+  document.getElementById('inputBirthDistrict').innerHTML = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+  document.getElementById('inputCurrentProvince').value = '';
+  document.getElementById('inputCurrentDistrict').innerHTML = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+  resetTarot();
+  populateProvinces();
+  toggleTypeFields();
   updateQueueUI();
   document.getElementById('buyModal').classList.add('show');
   document.body.style.overflow = 'hidden';
-  setTimeout(function(){ document.getElementById('inputDiscord').focus(); }, 400);
+  setTimeout(function(){ 
+    var d = document.getElementById('inputDiscord');
+    if (d && d.offsetParent !== null) d.focus();
+  }, 400);
 }
 function closeBuyModal(e){
   if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.buy-close')) return;
@@ -942,39 +1309,64 @@ function submitBuyMessage(){
   var messageVal = inputMessage.value.trim();
   if (!discordVal){ showToast('⚠ กรุณากรอก Discord ของคุณ'); inputDiscord.focus(); return; }
   if (!typeVal){ showToast('⚠ กรุณาเลือกรูปแบบดวง'); inputType.focus(); return; }
+
+  var needsBirth = BIRTH_TYPES.indexOf(typeVal) !== -1;
+  var birthDateEl = document.getElementById('inputBirthDate');
+  var birthTimeEl = document.getElementById('inputBirthTime');
+  var birthProvEl = document.getElementById('inputBirthProvince');
+  var birthDistEl = document.getElementById('inputBirthDistrict');
+  var curProvEl = document.getElementById('inputCurrentProvince');
+  var curDistEl = document.getElementById('inputCurrentDistrict');
+
+  if (needsBirth){
+    if (!birthDateEl.value){ showToast('⚠ กรุณาเลือกวันเดือนปีเกิด'); birthDateEl.focus(); return; }
+    if (!birthTimeEl.value){ showToast('⚠ กรุณาเลือกเวลาเกิด'); birthTimeEl.focus(); return; }
+    if (!birthProvEl.value){ showToast('⚠ กรุณาเลือกจังหวัดที่เกิด'); birthProvEl.focus(); return; }
+    if (!birthDistEl.value){ showToast('⚠ กรุณาเลือกเขต/อำเภอที่เกิด'); birthDistEl.focus(); return; }
+    if (!curProvEl.value){ showToast('⚠ กรุณาเลือกจังหวัดปัจจุบัน'); curProvEl.focus(); return; }
+    if (!curDistEl.value){ showToast('⚠ กรุณาเลือกเขต/อำเภอปัจจุบัน'); curDistEl.focus(); return; }
+  }
   if (!messageVal){ showToast('⚠ กรุณาพิมพ์คำถามของคุณ'); inputMessage.focus(); return; }
+
   btn.disabled = true;
   var originalHTML = btn.innerHTML;
   btn.innerHTML = 'กำลังส่ง...';
 
+  var fields = [
+    { name: '👤 Discord ของผู้ขอ', value: '`' + discordVal + '`\n> กดเพื่อคัดลอก', inline: true },
+    { name: '🎴 รูปแบบดวง', value: '**' + typeVal + '**', inline: true }
+  ];
+
+  if (needsBirth){
+    var birthDateFmt = birthDateEl.value.split('-').reverse().join('/');
+    fields.push(
+      { name: '🎂 วันเดือนปีเกิด', value: '`' + birthDateFmt + '`', inline: true },
+      { name: '🕐 เวลาเกิด', value: '`' + birthTimeEl.value + '`', inline: true },
+      { name: '📍 จังหวัดที่เกิด', value: '`' + birthProvEl.value + '`', inline: true },
+      { name: '🏙️ เขต/อำเภอที่เกิด', value: '`' + birthDistEl.value + '`', inline: true },
+      { name: '🏠 จังหวัดปัจจุบัน', value: '`' + curProvEl.value + '`', inline: true },
+      { name: '🏘️ เขต/อำเภอปัจจุบัน', value: '`' + curDistEl.value + '`', inline: true }
+    );
+  }
+
+  fields.push({
+    name: '❓ คำถาม / สิ่งที่ต้องการดู',
+    value: messageVal.length > 1000 ? messageVal.substring(0, 1000) + '...' : messageVal,
+    inline: false
+  });
+
   var payload = {
     username: 'munzq.vercel.app',
-    avatar_url: 'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4667',
+    avatar_url: 'https://res.cloudinary.com/grd8fnpn/image/upload/f_auto,q_auto/IMG_4817',
     embeds: [{
       title: '🔮 มีคำขอรับดูดวงใหม่เข้ามา!',
       description: '```รายละเอียดคำขอรับดูดวง```',
       color: 0x6A5ACD,
       timestamp: new Date().toISOString(),
-      fields: [
-        {
-          name: '👤 Discord ของผู้ขอ',
-          value: '`' + discordVal + '`\n> กดเพื่อคัดลอก',
-          inline: true
-        },
-        {
-          name: '🎴 รูปแบบดวง',
-          value: '**' + typeVal + '**',
-          inline: true
-        },
-        {
-          name: '❓ คำถาม / สิ่งที่ต้องการดู',
-          value: messageVal.length > 1000 ? messageVal.substring(0, 1000) + '...' : messageVal,
-          inline: false
-        }
-      ],
+      fields: fields,
       footer: {
         text: 'munzq.vercel.app • รับดูดวงฟรี',
-        icon_url: 'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4667'
+        icon_url: 'https://res.cloudinary.com/grd8fnpn/image/upload/f_auto,q_auto/IMG_4817'
       }
     }]
   };
@@ -993,6 +1385,14 @@ function submitBuyMessage(){
     inputDiscord.value = '';
     inputType.value = '';
     inputMessage.value = '';
+    birthDateEl.value = '';
+    birthTimeEl.value = '';
+    birthProvEl.value = '';
+    birthDistEl.innerHTML = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+    curProvEl.value = '';
+    curDistEl.innerHTML = '<option value="">-- เลือกเขต/อำเภอ --</option>';
+    resetTarot();
+    toggleTypeFields();
     setTimeout(function(){ closeBuyModal(); }, 1200);
   }).catch(function(err){
     console.warn('Webhook error:', err);
@@ -1046,7 +1446,6 @@ function connectLanyard(){
 }
 connectLanyard();
 
-/* YouTube Player */
 var ytPlayer = null;
 var ytReady = false;
 var currentIndex = -1;
@@ -1071,7 +1470,6 @@ try {
 volSlider.value = currentVolume;
 volValue.textContent = currentVolume;
 
-/* ★ applyVolume - บังคับเสียงตาม currentVolume ★ */
 function applyVolume(){
   if (!ytPlayer || typeof ytPlayer.setVolume !== 'function') return;
   try {
@@ -1088,13 +1486,13 @@ function toggleMute(){
   isMuted = !isMuted;
   applyVolume();
   if (isMuted){
-    musicVolBtn.textContent = 'ปิดเสียง';
+    musicVolBtn.textContent = 'OFF';
     musicVolBtn.classList.add('muted');
-    showToast('ปิดเสียงแล้ว');
+    showToast('เสียง: OFF');
   } else {
-    musicVolBtn.textContent = 'เปิดเสียง';
+    musicVolBtn.textContent = 'ON';
     musicVolBtn.classList.remove('muted');
-    showToast('เปิดเสียงแล้ว');
+    showToast('เสียง: ON');
   }
 }
 
@@ -1104,12 +1502,12 @@ volSlider.addEventListener('input', function(e){
   try { localStorage.setItem('munzq_vol', String(currentVolume)); } catch(e){}
   if (currentVolume > 0 && isMuted){
     isMuted = false;
-    musicVolBtn.textContent = 'เปิดเสียง';
+    musicVolBtn.textContent = 'ON';
     musicVolBtn.classList.remove('muted');
   }
   if (currentVolume === 0){
     isMuted = true;
-    musicVolBtn.textContent = 'ปิดเสียง';
+    musicVolBtn.textContent = 'OFF';
     musicVolBtn.classList.add('muted');
   }
   applyVolume();
@@ -1286,6 +1684,7 @@ window.addEventListener('load', function(){
     });
   }, 300);
   updateQueueUI();
+  populateProvinces();
 });
 </script>
 </body>
