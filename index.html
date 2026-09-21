@@ -172,60 +172,23 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .sec-title{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin:8px 4px 0}
 .sec-title::before{content:"//";color:#fff}
 .sec-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
-.perf-section{padding:0;overflow:hidden}
-.tabs{display:flex;gap:4px;padding:14px 14px 0;border-bottom:1px solid var(--border)}
-.tab{flex:1;padding:11px 6px;border:none;background:transparent;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.8px;cursor:pointer;border-radius:10px 10px 0 0;position:relative;transition:.22s;text-transform:uppercase}
-.tab.active{color:#fff;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02))}
-.tab.active::after{content:"";position:absolute;bottom:-1px;left:12%;right:12%;height:2px;background:#fff;border-radius:2px}
-.tab-pane{display:none;padding:20px}
-.tab-pane.active{display:block}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.stat{padding:16px 14px;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:16px;transition:.25s;position:relative;cursor:pointer}
-.stat:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.06)}
-.stat:active{transform:translateY(-1px) scale(.98)}
-.stat .lbl-top{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
-.stat .lbl-top .info-dot{font-size:9px;width:14px;height:14px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#888;font-weight:700;opacity:.6}
-.stat .num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;margin-bottom:4px}
-.stat .num.lime{color:#fff}
-.stat .num.green{color:var(--green)}
-.stat .num.gold{color:#c8c8c8}
-.stat .num.red{color:var(--red)}
-.stat .sub{font-size:10.5px;color:var(--muted);font-weight:300}
-.cert-list{display:flex;flex-direction:column;gap:10px}
-.cert-list-item{display:flex;gap:12px;align-items:center;padding:14px;border-radius:12px;background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:.22s;text-align:left}
-.cert-list-item:hover{transform:translateX(4px);border-color:rgba(255,255,255,.35)}
-.cert-list-logo{width:48px;height:48px;flex:0 0 48px;border-radius:10px;background:linear-gradient(135deg,#1a1a1a,#000);border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:#fff}
-.cert-list-info{flex:1;min-width:0}
-.cert-list-firm{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:1.4px;color:#fff;text-transform:uppercase;margin-bottom:3px}
-.cert-list-name{font-size:14px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cert-list-arrow{width:32px;height:32px;flex:0 0 32px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;color:#fff;transition:.22s}
-.cert-list-arrow svg{width:13px;height:13px;flex:0 0 13px}
-.cert-list-item:hover .cert-list-arrow{background:#fff;color:#000}
-.chart-wrap{position:relative;width:100%;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px 10px 8px;margin-bottom:14px}
-.chart-svg{width:100%;height:auto;display:block}
-.chart-tooltip{position:absolute;padding:8px 12px;border-radius:10px;background:rgba(8,8,8,.98);border:1px solid rgba(255,255,255,.25);font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;pointer-events:none;opacity:0;transform:translate(-50%,-100%) translateY(-12px);transition:opacity .25s;z-index:30;white-space:nowrap;box-shadow:0 10px 28px -10px rgba(0,0,0,.95);text-align:center}
-.chart-tooltip.show{opacity:1}
-.chart-tooltip .ct-month{font-size:9px;font-weight:700;letter-spacing:1.5px;color:#888;margin-bottom:2px;text-transform:uppercase}
-.chart-tooltip .ct-value{font-size:14px;font-weight:800;color:#fff}
-.chart-tooltip .ct-diff{font-size:9.5px;font-weight:600;margin-top:2px}
-.chart-tooltip .ct-diff.up{color:var(--green)}
-.chart-tooltip .ct-diff.dn{color:var(--red)}
-.chart-hint-text{position:absolute;bottom:8px;right:14px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1px;color:#555;text-transform:uppercase;pointer-events:none}
-.chart-hit-area{fill:transparent;cursor:pointer}
-.chart-hit-area:hover{fill:rgba(0,224,122,.08)}
-#equityLine{stroke-dasharray:2500;stroke-dashoffset:2500}
-#equityArea{opacity:0;transition:opacity .9s ease .6s}
-#equityDot,#equityDotOuter{opacity:0;transition:opacity .5s ease 1.4s}
-.chart-wrap.animate #equityLine{animation:drawLine 2.2s forwards}
-.chart-wrap.animate #equityArea,#chart-wrap.animate #equityDot,#chart-wrap.animate #equityDotOuter{opacity:1}
-@keyframes drawLine{to{stroke-dashoffset:0}}
-.chart-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
-.chart-mini-item{padding:10px 8px;border-radius:10px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.06);text-align:center}
-.chart-mini-item .v{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:800;margin-bottom:2px}
-.chart-mini-item .v.up{color:var(--green)}
-.chart-mini-item .v.dn{color:var(--red)}
-.chart-mini-item .v.nt{color:#fff}
-.chart-mini-item .l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.6px;color:var(--muted);text-transform:uppercase}
+.perf-section{padding:0;overflow:hidden;background:linear-gradient(180deg,rgba(8,15,24,.42),rgba(5,5,5,.2))}
+.tabs{display:flex;gap:6px;padding:10px;margin:10px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.025)}
+.tab{flex:1;padding:10px 6px;border:0;background:transparent;color:#666;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;border-radius:9px;position:relative;transition:.24s;text-transform:uppercase}
+.tab:hover{color:#b8b8b8}.tab:active{transform:scale(.97)}
+.tab.active{color:#fff;background:rgba(255,255,255,.065);box-shadow:inset 0 1px rgba(255,255,255,.06)}
+.tab.active::after{content:"";position:absolute;bottom:4px;left:50%;width:15px;height:2px;transform:translateX(-50%);background:#49a9ff;border-radius:999px;box-shadow:0 0 10px rgba(73,169,255,.65)}
+.tab-pane{display:none;padding:12px 18px 20px}.tab-pane.active{display:block;animation:perfIn .35s ease both}@keyframes perfIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.stats-intro{margin-bottom:10px;padding:4px 2px 8px}.stats-intro strong{display:block;font-size:13px;font-weight:500;color:#eee;margin-bottom:3px}.stats-intro span{display:block;font-size:10.5px;line-height:1.6;color:#666;font-weight:300}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.stat{padding:15px 14px;min-height:112px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.075);border-radius:15px;transition:.25s;position:relative;cursor:pointer;overflow:hidden}
+.stat::before{content:"";position:absolute;top:0;left:14px;right:14px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent)}
+.stat:hover{transform:translateY(-2px);border-color:rgba(73,169,255,.24);background:linear-gradient(145deg,rgba(73,169,255,.05),rgba(255,255,255,.01));box-shadow:0 12px 28px -22px rgba(73,169,255,.9)}.stat:active{transform:scale(.985)}
+.stat .lbl-top{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;color:#6d6d6d;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}.stat .lbl-top .info-dot{font-size:8px;width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);color:#777;font-weight:700}.stat .num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800;margin-bottom:6px;letter-spacing:-.6px}.stat .num.lime,.stat .num.gold{color:#f2f2f2}.stat .num.green{color:#58b4ff}.stat .num.red{color:#ff7189}.stat .sub{font-size:10px;color:#666;font-weight:300;line-height:1.45}
+.cert-list{display:flex;flex-direction:column}.cert-list-item{display:flex;gap:13px;align-items:center;padding:15px;border-radius:15px;background:radial-gradient(circle at 0 0,rgba(73,169,255,.075),transparent 45%),rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);cursor:pointer;transition:.25s;text-align:left}.cert-list-item:hover{transform:translateY(-2px);border-color:rgba(73,169,255,.25);background:radial-gradient(circle at 0 0,rgba(73,169,255,.12),transparent 48%),rgba(255,255,255,.025)}.cert-list-item:active{transform:scale(.985)}
+.cert-list-logo{width:50px;height:50px;flex:0 0 50px;border-radius:13px;background:linear-gradient(145deg,rgba(73,169,255,.16),rgba(73,169,255,.025));border:1px solid rgba(73,169,255,.22);display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:#9bd1ff}.cert-list-info{flex:1;min-width:0}.cert-list-firm{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:1.25px;color:#707070;text-transform:uppercase;margin-bottom:4px}.cert-list-name{font-size:13.5px;font-weight:500;color:#eee;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cert-list-status{display:flex;align-items:center;gap:5px;margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:8px;color:#68baff}.cert-list-status::before{content:"";width:5px;height:5px;border-radius:50%;background:#49a9ff;box-shadow:0 0 8px rgba(73,169,255,.8)}.cert-list-arrow{width:32px;height:32px;flex:0 0 32px;border-radius:9px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#777;transition:.22s}.cert-list-arrow svg{width:13px;height:13px}.cert-list-item:hover .cert-list-arrow{color:#fff;background:rgba(73,169,255,.12);border-color:rgba(73,169,255,.24);transform:translateX(2px)}
+.cert-meta{margin-top:12px;padding:12px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);text-align:left}.cert-meta-title{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1.3px;color:#666;text-transform:uppercase;margin-bottom:8px}.cert-meta-row{display:flex;gap:8px;align-items:center}.cert-code{flex:1;padding:9px 10px;border-radius:8px;background:#050505;border:1px solid rgba(255,255,255,.08);font-family:'JetBrains Mono',monospace;font-size:10px;color:#eee;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cert-action{padding:9px 11px;border-radius:8px;border:1px solid rgba(73,169,255,.24);background:rgba(73,169,255,.09);color:#8ac9ff;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-decoration:none;cursor:pointer;transition:.2s}.cert-action:hover{background:#49a9ff;color:#000}.cert-note{margin-top:8px;font-size:9.5px;line-height:1.55;color:#666}.cert-note b{color:#ddd;font-family:'JetBrains Mono',monospace}
+.chart-wrap{position:relative;width:100%;background:radial-gradient(circle at 50% 110%,rgba(52,161,255,.10),transparent 55%),rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.065);border-radius:16px;padding:14px 10px 8px;margin-bottom:12px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}.chart-svg{width:100%;height:auto;display:block;overflow:visible}.chart-tooltip{position:absolute;min-width:82px;padding:8px 10px;border-radius:10px;background:rgba(5,8,12,.95);border:1px solid rgba(73,169,255,.28);font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;pointer-events:none;opacity:0;transform:translate(-50%,-100%) translateY(-12px) scale(.96);transition:opacity .16s,transform .16s;z-index:30;white-space:nowrap;box-shadow:0 12px 28px -12px #000;text-align:center}.chart-tooltip.show{opacity:1;transform:translate(-50%,-100%) translateY(-12px) scale(1)}.chart-tooltip .ct-month{font-size:8px;font-weight:700;letter-spacing:1.4px;color:#777;margin-bottom:2px}.chart-tooltip .ct-value{font-size:14px;font-weight:800;color:#fff}.chart-tooltip .ct-diff{font-size:8.5px;font-weight:600;margin-top:2px}.chart-tooltip .ct-diff.up{color:#58b4ff}.chart-tooltip .ct-diff.dn{color:#ff7189}.chart-hint-text{position:absolute;bottom:8px;right:13px;font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:1px;color:#4f4f4f;text-transform:uppercase;pointer-events:none}.chart-hit-area{fill:transparent;cursor:crosshair}.chart-guide{opacity:0;transition:opacity .15s}.chart-wrap.interacting .chart-guide{opacity:1}#equityLine{stroke-dasharray:2500;stroke-dashoffset:2500;filter:drop-shadow(0 0 4px rgba(73,169,255,.25));transition:filter .2s}#equityArea{opacity:0;transition:opacity .9s ease .5s}#equityDot,#equityDotOuter{opacity:0;transition:opacity .16s,cx .1s ease-out,cy .1s ease-out}.chart-wrap.animate #equityLine{animation:drawLine 1.8s cubic-bezier(.2,.8,.2,1) forwards}.chart-wrap.animate #equityArea{opacity:1}.chart-wrap.interacting #equityLine{stroke:url(#rainbowLine)!important;filter:drop-shadow(0 0 6px rgba(94,175,255,.45))}.chart-wrap.interacting #equityArea{fill:url(#rainbowArea)!important}.chart-wrap.interacting #equityDot,.chart-wrap.interacting #equityDotOuter{opacity:1}@keyframes rainbowShift{to{transform:translateX(100%)}}@keyframes drawLine{to{stroke-dashoffset:0}}.chart-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:4px}.chart-mini-item{padding:10px 7px;border-radius:11px;background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.06);text-align:center}.chart-mini-item .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;margin-bottom:2px}.chart-mini-item .v.up{color:#58b4ff}.chart-mini-item .v.dn{color:#ff7189}.chart-mini-item .v.nt{color:#fff}.chart-mini-item .l{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.6px;color:#666;text-transform:uppercase}
 .product-glow{position:relative;border-radius:16px;padding:1.5px;background:linear-gradient(90deg,#ff0066,#ffcc00,#00ff99,#00ccff,#6633ff,#ff33cc,#ff0066);background-size:300% 100%;animation:rainbowSlide 6s linear infinite}
 @keyframes rainbowSlide{0%{background-position:0% 50%}100%{background-position:300% 50%}}
 .product-row{position:relative;z-index:1;display:flex;align-items:center;gap:14px;padding:14px;border-radius:14.5px;background:linear-gradient(135deg,rgba(15,15,15,.85),rgba(5,5,5,.92));overflow:hidden}
@@ -532,82 +495,42 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
       <button class="tab" data-tab="chart" onclick="switchTab('chart')">CHART</button>
     </div>
     <div class="tab-pane active" id="pane-stats">
+      <div class="stats-intro"><strong>Trading performance</strong><span>ผมดูตัวเลขพวกนี้ร่วมกันมากกว่าตัดสินจากค่าเดียว เพราะสิ่งที่สำคัญจริง ๆ คือความสม่ำเสมอและการคุมความเสี่ยงในระยะยาว</span></div>
       <div class="stats">
-        <div class="stat" data-stat="winrate">
-          <div class="lbl-top">Win Rate <span class="info-dot">i</span></div>
-          <div class="num green" data-count="68" data-suffix="%">0%</div>
-          <div class="sub">จาก 240 ไม้ล่าสุด</div>
-        </div>
-        <div class="stat" data-stat="rr">
-          <div class="lbl-top">Risk : Reward <span class="info-dot">i</span></div>
-          <div class="num lime" data-count="2.4" data-prefix="1:" data-decimals="1">1:0</div>
-          <div class="sub">เฉลี่ยต่อไม้</div>
-        </div>
-        <div class="stat" data-stat="pf">
-          <div class="lbl-top">Profit Factor <span class="info-dot">i</span></div>
-          <div class="num gold" data-count="2.1" data-decimals="1">0</div>
-          <div class="sub">กำไร ÷ ขาดทุน</div>
-        </div>
-        <div class="stat" data-stat="dd">
-          <div class="lbl-top">Max Drawdown <span class="info-dot">i</span></div>
-          <div class="num red" data-count="4.8" data-suffix="%" data-decimals="1">0%</div>
-          <div class="sub">ต่ำสุดที่ยอมรับได้</div>
-        </div>
+        <div class="stat" data-stat="winrate"><div class="lbl-top">Win Rate <span class="info-dot">i</span></div><div class="num green" data-count="68" data-suffix="%">0%</div><div class="sub">240 trades · closed positions</div></div>
+        <div class="stat" data-stat="rr"><div class="lbl-top">Risk : Reward <span class="info-dot">i</span></div><div class="num lime" data-count="2.4" data-prefix="1:" data-decimals="1">1:0</div><div class="sub">average reward per risk</div></div>
+        <div class="stat" data-stat="pf"><div class="lbl-top">Profit Factor <span class="info-dot">i</span></div><div class="num gold" data-count="2.1" data-decimals="1">0</div><div class="sub">gross profit ÷ gross loss</div></div>
+        <div class="stat" data-stat="dd"><div class="lbl-top">Max Drawdown <span class="info-dot">i</span></div><div class="num red" data-count="4.8" data-suffix="%" data-decimals="1">0%</div><div class="sub">largest peak-to-trough decline</div></div>
       </div>
     </div>
     <div class="tab-pane" id="pane-certs">
       <div class="cert-list">
         <div class="cert-list-item" onclick="viewCert('acg')">
           <div class="cert-list-logo">ACG</div>
-          <div class="cert-list-info"><div class="cert-list-firm">Alpha Capital Group</div><div class="cert-list-name">$50K Challenge Passed</div></div>
-          <div class="cert-list-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-        <div class="cert-list-item" onclick="viewCert('fund')">
-          <div class="cert-list-logo">FUND</div>
-          <div class="cert-list-info"><div class="cert-list-firm">The Funded Trader</div><div class="cert-list-name">$200K Funded Account</div></div>
-          <div class="cert-list-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-        <div class="cert-list-item" onclick="viewCert('e8')">
-          <div class="cert-list-logo">E8</div>
-          <div class="cert-list-info"><div class="cert-list-firm">E8 Markets</div><div class="cert-list-name">$50K Evaluation Passed</div></div>
+          <div class="cert-list-info"><div class="cert-list-firm">Alpha Capital Group</div><div class="cert-list-name">$50K Challenge Passed</div><div class="cert-list-status">Certificate available</div></div>
           <div class="cert-list-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </div>
     </div>
     <div class="tab-pane" id="pane-chart">
-      <div class="chart-wrap" id="chartWrap">
+      <div class="chart-wrap animate" id="chartWrap">
         <svg class="chart-svg" viewBox="0 0 320 170" preserveAspectRatio="xMidYMid meet" id="equityChart">
-          <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
-            <line x1="36" y1="16" x2="308" y2="16"/><line x1="36" y1="46" x2="308" y2="46"/>
-            <line x1="36" y1="76" x2="308" y2="76"/><line x1="36" y1="106" x2="308" y2="106"/>
-            <line x1="36" y1="136" x2="308" y2="136"/>
-          </g>
-          <g font-family="'JetBrains Mono',monospace" font-size="8" fill="#808080" text-anchor="end">
-            <text x="30" y="19">200%</text><text x="30" y="49">150%</text><text x="30" y="79">100%</text>
-            <text x="30" y="109">50%</text><text x="30" y="139">0%</text>
-          </g>
+          <g stroke="rgba(255,255,255,.055)" stroke-width="1" fill="none"><line x1="36" y1="16" x2="308" y2="16"/><line x1="36" y1="46" x2="308" y2="46"/><line x1="36" y1="76" x2="308" y2="76"/><line x1="36" y1="106" x2="308" y2="106"/><line x1="36" y1="136" x2="308" y2="136"/></g>
+          <g font-family="'JetBrains Mono',monospace" font-size="8" fill="#666" text-anchor="end"><text x="30" y="19">200%</text><text x="30" y="49">150%</text><text x="30" y="79">100%</text><text x="30" y="109">50%</text><text x="30" y="139">0%</text></g>
           <defs>
-            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00e07a" stop-opacity=".45"/><stop offset="100%" stop-color="#00e07a" stop-opacity="0"/></linearGradient>
-            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#00e07a"/><stop offset="100%" stop-color="#a8ffe0"/></linearGradient>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#49a9ff" stop-opacity=".34"/><stop offset="100%" stop-color="#49a9ff" stop-opacity="0"/></linearGradient>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#268dff"/><stop offset="55%" stop-color="#55baff"/><stop offset="100%" stop-color="#a4ddff"/></linearGradient>
+            <linearGradient id="rainbowLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff4d6d"/><stop offset="18%" stop-color="#ffb84d"/><stop offset="36%" stop-color="#fff45c"/><stop offset="54%" stop-color="#55e89b"/><stop offset="72%" stop-color="#4db8ff"/><stop offset="88%" stop-color="#8b6cff"/><stop offset="100%" stop-color="#ff63d8"/></linearGradient>
+            <linearGradient id="rainbowArea" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ff4d6d" stop-opacity=".12"/><stop offset="33%" stop-color="#ffe45c" stop-opacity=".12"/><stop offset="66%" stop-color="#4db8ff" stop-opacity=".12"/><stop offset="100%" stop-color="#ff63d8" stop-opacity=".12"/></linearGradient>
           </defs>
-          <path id="equityArea" fill="url(#areaGrad)"/>
-          <path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <g id="chartHitAreas"></g>
-          <circle id="equityDotOuter" r="7" fill="#00e07a" fill-opacity=".25"/>
-          <circle id="equityDot" r="3.5" fill="#fff" stroke="#00e07a" stroke-width="2"/>
-          <g font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#808080" text-anchor="middle">
-            <text x="36" y="152">JAN</text><text x="90" y="152">MAR</text><text x="144" y="152">MAY</text>
-            <text x="198" y="152">JUL</text><text x="252" y="152">SEP</text><text x="306" y="152">DEC</text>
-          </g>
+          <path id="equityArea" fill="url(#areaGrad)"/><path id="equityLine" fill="none" stroke="url(#lineGrad)" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+          <line id="chartGuide" class="chart-guide" x1="36" y1="16" x2="36" y2="136" stroke="rgba(255,255,255,.22)" stroke-width="1" stroke-dasharray="3 4"/>
+          <g id="chartHitAreas"></g><circle id="equityDotOuter" r="8" fill="#49a9ff" fill-opacity=".18"/><circle id="equityDot" r="3.5" fill="#fff" stroke="#49a9ff" stroke-width="2"/>
+          <g font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#666" text-anchor="middle"><text x="36" y="152">JAN</text><text x="90" y="152">MAR</text><text x="144" y="152">MAY</text><text x="198" y="152">JUL</text><text x="252" y="152">SEP</text><text x="306" y="152">DEC</text></g>
         </svg>
-        <div class="chart-tooltip" id="chartTooltip"></div>
-        <div class="chart-hint-text">TAP MONTH</div>
+        <div class="chart-tooltip" id="chartTooltip"></div><div class="chart-hint-text">HOLD / DRAG</div>
       </div>
-      <div class="chart-mini">
-        <div class="chart-mini-item"><div class="v up">+180%</div><div class="l">Total Return</div></div>
-        <div class="chart-mini-item"><div class="v dn">-4.8%</div><div class="l">Max DD</div></div>
-        <div class="chart-mini-item"><div class="v nt">2.1</div><div class="l">Sharpe</div></div>
-      </div>
+      <div class="chart-mini"><div class="chart-mini-item"><div class="v up">+180%</div><div class="l">Total Return</div></div><div class="chart-mini-item"><div class="v dn">-4.8%</div><div class="l">Max DD</div></div><div class="chart-mini-item"><div class="v nt">2.1</div><div class="l">Sharpe</div></div></div>
     </div>
   </section>
 
@@ -641,7 +564,7 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
       <div class="title" id="modalTitle">Certificate</div>
       <button class="modal-close" onclick="closeCert()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
-    <div class="modal-body"><img id="modalImg" class="cert-detail-img" src="" alt="Certificate"></div>
+    <div class="modal-body"><img id="modalImg" class="cert-detail-img" src="" alt="Certificate"><div class="cert-meta" id="certMeta"><div class="cert-meta-title">Alpha Capital Group</div><div class="cert-meta-row"><div class="cert-code" id="certDiscount">YOUR_CODE</div><button class="cert-action" type="button" onclick="copyCertCode()">COPY CODE</button><a class="cert-action" id="certLink" href="https://alphacapitalgroup.uk/" target="_blank" rel="noopener">VISIT ACG</a></div><div class="cert-note">Discount code: <b id="certDiscountText">YOUR_CODE</b> · เปลี่ยน <b>YOUR_CODE</b> ในตัวแปร CERTS เป็นโค้ดส่วนลดของคุณได้ทันที</div></div></div>
   </div>
 </div>
 
@@ -1072,32 +995,14 @@ function resetTarot(){
 }
 
 var STATS_INFO = {
-  winrate: {
-    title: 'WIN RATE',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>',
-    body: '<p>อัตราการชนะ คือเปอร์เซ็นต์ของจำนวนไม้ที่ทำกำไร เมื่อเทียบกับจำนวนไม้ทั้งหมดที่เทรด</p><span class="formula">(ไม้ชนะ ÷ ไม้ทั้งหมด) × 100</span><p>ยิ่งค่าสูง ยิ่งแสดงถึงความแม่นยำในการเข้าเทรด แต่ต้องดูร่วมกับ Risk:Reward ด้วย</p><div class="stats-value-example"><span class="badge bad">&lt; 40% ต่ำ</span><span class="badge mid">40-55% ปานกลาง</span><span class="badge good">&gt; 55% ดี</span></div>'
-  },
-  rr: {
-    title: 'RISK : REWARD',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>',
-    body: '<p>อัตราส่วนระหว่างความเสี่ยงต่อผลตอบแทนที่คาดหวัง</p><span class="formula">1 : X → เสี่ยง 1 บาท หวังกำไร X บาท</span><p>ค่าที่ดีควรอยู่ที่ 1:1.5 ขึ้นไป ยิ่งสูงยิ่งดี เพราะแม้ Win Rate ต่ำก็ยังทำกำไรได้</p><div class="stats-value-example"><span class="badge bad">&lt; 1:1 แย่</span><span class="badge mid">1:1 - 1:2 พอใช้</span><span class="badge good">&gt; 1:2 ดีมาก</span></div>'
-  },
-  pf: {
-    title: 'PROFIT FACTOR',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
-    body: '<p>อัตราส่วนกำไรรวมต่อขาดทุนรวม แสดงถึงประสิทธิภาพโดยรวมของกลยุทธ์</p><span class="formula">กำไรรวม ÷ ขาดทุนรวม</span><p>ถ้าค่ามากกว่า 1 = กำไร, ถ้ามากกว่า 2 = ดีเยี่ยม</p><div class="stats-value-example"><span class="badge bad">&lt; 1 ขาดทุน</span><span class="badge mid">1 - 1.5 พอใช้</span><span class="badge good">1.5 - 2 ดี</span><span class="badge good">&gt; 2 ดีเยี่ยม</span></div>'
-  },
-  dd: {
-    title: 'MAX DRAWDOWN',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l6 6 4-4 8 8"/><path d="M14 17h7v-7"/></svg>',
-    body: '<p>การขาดทุนสูงสุดของพอร์ต คือผลต่างระหว่างจุดสูงสุดของพอร์ต กับจุดต่ำสุดหลังจากนั้น</p><span class="formula">(Peak - Trough) ÷ Peak × 100</span><p>ยิ่งค่าน้อยยิ่งดี เพราะหมายถึงพอร์ตมีความผันผวนต่ำ</p><div class="stats-value-example"><span class="badge good">&lt; 5% ดีมาก</span><span class="badge mid">5-10% ยอมรับได้</span><span class="badge bad">10-20% เสี่ยง</span><span class="badge bad">&gt; 20% อันตราย</span></div>'
-  }
+  winrate:{title:'WIN RATE',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l5-5 4 4 7-8"/><path d="M15 8h5v5"/></svg>',body:'<p>Win Rate ของผมอยู่ที่ <b style="color:#fff">68%</b> จาก 240 ไม้ล่าสุด ตัวเลขนี้เอาไว้ดูความสม่ำเสมอของ execution มากกว่าจะใช้ตัดสินว่าระบบดีหรือไม่ดีจากเปอร์เซ็นต์ชนะอย่างเดียว</p><span class="formula">Winning trades ÷ Closed trades × 100</span><p>เวลาประเมินจริงผมจะดูคู่กับ Risk:Reward และ Profit Factor เสมอ เพราะระบบที่ชนะไม่เยอะก็ยังทำกำไรได้ ถ้าคุมขาดทุนและปล่อยกำไรได้ตามแผน</p>'},
+  rr:{title:'RISK : REWARD',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V6M4 18h16"/><path d="M7 15l4-4 3 2 5-6"/></svg>',body:'<p>ค่าเฉลี่ย Risk:Reward อยู่ประมาณ <b style="color:#fff">1:2.4</b> หมายถึงถ้าผมยอมรับความเสี่ยง 1 ส่วน เป้าหมายเฉลี่ยของผลตอบแทนจะอยู่ราว 2.4 ส่วน</p><span class="formula">Average Risk 1 : Average Reward 2.4</span><p>ผมไม่ได้พยายามบังคับให้ทุกไม้ต้องได้ R เท่ากัน เพราะโครงสร้างตลาดแต่ละวันไม่เหมือนกัน สิ่งที่เน้นคือจุด invalidation ต้องชัด และ reward ที่รับต้องคุ้มกับ risk ก่อนเข้าเทรด</p>'},
+  pf:{title:'PROFIT FACTOR',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19V9M12 19V5M19 19v-7"/></svg>',body:'<p>Profit Factor ปัจจุบันอยู่ที่ <b style="color:#fff">2.1</b> หรือพูดง่าย ๆ คือทุก 1 หน่วยของขาดทุนรวม ระบบสร้างกำไรรวมกลับมาได้ประมาณ 2.1 หน่วย</p><span class="formula">Gross Profit ÷ Gross Loss = 2.1</span><p>ผมใช้ค่านี้ดูคุณภาพของผลลัพธ์โดยรวม เพราะมันรวมทั้งฝั่งกำไรและขาดทุนไว้ในตัวเดียว และช่วยให้เห็นภาพมากกว่า Win Rate เพียงอย่างเดียว</p>'},
+  dd:{title:'MAX DRAWDOWN',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6l5 5 4-3 7 8"/><path d="M15 16h5v-5"/></svg>',body:'<p>Max Drawdown ที่บันทึกไว้คือ <b style="color:#fff">4.8%</b> ซึ่งเป็นช่วงที่ equity ลดลงมากที่สุดจากจุดสูงสุดก่อนหน้า ไม่ได้หมายถึงการขาดทุนต่อไม้</p><span class="formula">(Peak Equity - Lowest Equity) ÷ Peak Equity × 100</span><p>สำหรับผมตัวนี้สำคัญมาก เพราะก่อนมองว่าทำกำไรได้เท่าไร ต้องรู้ก่อนว่าระหว่างทางพอร์ตต้องรับแรงกดดันแค่ไหน เป้าหมายคือรักษา risk ให้คงที่และไม่เพิ่มขนาดเพราะอารมณ์หลังแพ้</p>'}
 };
 
 var CERTS = {
-  acg:  { firm:'Alpha Capital Group', image:'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4712' },
-  fund: { firm:'The Funded Trader',   image:'funded.jpg' },
-  e8:   { firm:'E8 Markets',          image:'e8.jpg' }
+  acg:{firm:'Alpha Capital Group',image:'https://res.cloudinary.com/wjvenewi/image/upload/f_auto,q_auto/IMG_4712',link:'https://alphacapitalgroup.uk/',discountCode:'YOUR_CODE'}
 };
 
 var toastTimer;
@@ -1265,12 +1170,19 @@ function switchTab(name){
 }
 
 function viewCert(id){
-  var cert = CERTS[id];
-  if (!cert) return;
-  document.getElementById('modalTitle').textContent = cert.firm;
-  document.getElementById('modalImg').src = cert.image;
+  var cert=CERTS[id]; if(!cert)return;
+  document.getElementById('modalTitle').textContent=cert.firm;
+  document.getElementById('modalImg').src=cert.image;
+  document.getElementById('certDiscount').textContent=cert.discountCode;
+  document.getElementById('certDiscountText').textContent=cert.discountCode;
+  document.getElementById('certLink').href=cert.link;
   document.getElementById('certModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
+}
+function copyCertCode(){
+  var code=CERTS.acg.discountCode;
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code).then(function(){showToast('คัดลอกโค้ด '+code+' แล้ว');});}
+  else{var ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast('คัดลอกโค้ด '+code+' แล้ว');}catch(e){}document.body.removeChild(ta);}
 }
 function closeCert(e){
   if (e && e.target !== e.currentTarget && e.type === 'click' && !e.target.closest('.modal-close')) return;
@@ -1287,89 +1199,35 @@ document.addEventListener('keydown', function(e){
   }
 });
 
+var MONTHS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+var chartPoints=[];
+var chartDragging=false;
+var chartTooltipTimer=null;
 function drawChart(){
-  var data = CONFIG.chart.data;
-  var maxY = CONFIG.chart.maxY;
-  var W = 320, H = 170;
-  var padL = 36, padR = 12, padT = 16, padB = 34;
-  var w = W - padL - padR;
-  var h = H - padT - padB;
-  var pts = data.map(function(v, i){
-    return [padL + (i / (data.length - 1)) * w, padT + h - (v / maxY) * h];
-  });
-  var d = 'M ' + pts[0][0].toFixed(2) + ',' + pts[0][1].toFixed(2);
-  for (var i = 0; i < pts.length - 1; i++){
-    var x1 = pts[i][0], y1 = pts[i][1];
-    var x2 = pts[i+1][0], y2 = pts[i+1][1];
-    var cx = (x1 + x2) / 2;
-    d += ' C ' + cx.toFixed(2) + ',' + y1.toFixed(2) + ' ' + cx.toFixed(2) + ',' + y2.toFixed(2) + ' ' + x2.toFixed(2) + ',' + y2.toFixed(2);
-  }
-  var baseline = padT + h;
-  var areaD = d + ' L ' + pts[pts.length-1][0].toFixed(2) + ',' + baseline + ' L ' + pts[0][0].toFixed(2) + ',' + baseline + ' Z';
-  var lineEl = document.getElementById('equityLine');
-  lineEl.setAttribute('d', d);
-  document.getElementById('equityArea').setAttribute('d', areaD);
-  try {
-    var len = lineEl.getTotalLength();
-    lineEl.style.strokeDasharray = len;
-    lineEl.style.strokeDashoffset = len;
-  } catch(e){
-    lineEl.style.strokeDasharray = 2500;
-    lineEl.style.strokeDashoffset = 2500;
-  }
-  var last = pts[pts.length - 1];
-  document.getElementById('equityDot').setAttribute('cx', last[0]);
-  document.getElementById('equityDot').setAttribute('cy', last[1]);
-  document.getElementById('equityDotOuter').setAttribute('cx', last[0]);
-  document.getElementById('equityDotOuter').setAttribute('cy', last[1]);
-  var hitGroup = document.getElementById('chartHitAreas');
-  hitGroup.innerHTML = '';
-  pts.forEach(function(p, idx){
-    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    c.setAttribute('cx', p[0]);
-    c.setAttribute('cy', p[1]);
-    c.setAttribute('r', 14);
-    c.setAttribute('class', 'chart-hit-area');
-    c.addEventListener('click', function(ev){ ev.stopPropagation(); showChartTooltip(idx); });
-    c.addEventListener('mouseenter', function(){ showChartTooltip(idx); });
-    hitGroup.appendChild(c);
-  });
+  var data=CONFIG.chart.data,maxY=CONFIG.chart.maxY,W=320,H=170,padL=36,padR=12,padT=16,padB=34,w=W-padL-padR,h=H-padT-padB;
+  chartPoints=data.map(function(v,i){return[padL+(i/(data.length-1))*w,padT+h-(v/maxY)*h];});
+  var d='M '+chartPoints[0][0].toFixed(2)+','+chartPoints[0][1].toFixed(2);
+  for(var i=0;i<chartPoints.length-1;i++){var a=chartPoints[i],b=chartPoints[i+1],cx=(a[0]+b[0])/2;d+=' C '+cx.toFixed(2)+','+a[1].toFixed(2)+' '+cx.toFixed(2)+','+b[1].toFixed(2)+' '+b[0].toFixed(2)+','+b[1].toFixed(2);}
+  var base=padT+h,line=document.getElementById('equityLine');line.setAttribute('d',d);document.getElementById('equityArea').setAttribute('d',d+' L '+chartPoints[chartPoints.length-1][0]+','+base+' L '+chartPoints[0][0]+','+base+' Z');
+  try{var len=line.getTotalLength();line.style.strokeDasharray=len;line.style.strokeDashoffset=len;}catch(e){}
+  var last=chartPoints[chartPoints.length-1];['equityDot','equityDotOuter'].forEach(function(id){var el=document.getElementById(id);el.setAttribute('cx',last[0]);el.setAttribute('cy',last[1]);});
+  var hits=document.getElementById('chartHitAreas');hits.innerHTML='';chartPoints.forEach(function(p,idx){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',14);c.setAttribute('class','chart-hit-area');c.addEventListener('pointerdown',function(ev){ev.preventDefault();startChartInteraction(idx);});c.addEventListener('mouseenter',function(){if(!chartDragging)showChartTooltip(idx,false);});hits.appendChild(c);});
 }
+function nearestChartIndex(clientX){var svg=document.getElementById('equityChart'),r=svg.getBoundingClientRect(),x=(clientX-r.left)*(320/r.width),best=0,dist=Infinity;chartPoints.forEach(function(p,i){var d=Math.abs(p[0]-x);if(d<dist){dist=d;best=i;}});return best;}
+function startChartInteraction(index){chartDragging=true;document.getElementById('chartWrap').classList.add('interacting');showChartTooltip(index,true);clearTimeout(chartTooltipTimer);}
+function endChartInteraction(){if(!chartDragging)return;chartDragging=false;setTimeout(function(){document.getElementById('chartWrap').classList.remove('interacting');},180);chartTooltipTimer=setTimeout(hideChartTooltip,1800);}
+function showChartTooltip(index,active){
+  var data=CONFIG.chart.data,p=chartPoints[index];if(!p)return;var svg=document.getElementById('equityChart'),wrap=document.getElementById('chartWrap'),sr=svg.getBoundingClientRect(),wr=wrap.getBoundingClientRect(),x=(sr.left-wr.left)+p[0]*(sr.width/320),y=(sr.top-wr.top)+p[1]*(sr.height/170),prev=index>0?data[index-1]:data[index],diff=data[index]-prev,sign=diff>0?'+':'';
+  var t=document.getElementById('chartTooltip');t.innerHTML='<div class="ct-month">'+MONTHS[index]+'</div><div class="ct-value">'+data[index]+'%</div><div class="ct-diff '+(diff>=0?'up':'dn')+'">'+(index===0?'Starting point':sign+diff+'% from previous')+'</div>';t.style.left=x+'px';t.style.top=y+'px';t.classList.add('show');
+  var guide=document.getElementById('chartGuide');guide.setAttribute('x1',p[0]);guide.setAttribute('x2',p[0]);['equityDot','equityDotOuter'].forEach(function(id){var el=document.getElementById(id);el.setAttribute('cx',p[0]);el.setAttribute('cy',p[1]);});
+  if(active){document.getElementById('chartWrap').classList.add('interacting');}else{clearTimeout(chartTooltipTimer);chartTooltipTimer=setTimeout(hideChartTooltip,3000);}
+}
+function hideChartTooltip(){document.getElementById('chartTooltip').classList.remove('show');if(!chartDragging)document.getElementById('chartWrap').classList.remove('interacting');}
+var chartWrapEl=document.getElementById('chartWrap');
+chartWrapEl.addEventListener('pointerdown',function(e){startChartInteraction(nearestChartIndex(e.clientX));try{chartWrapEl.setPointerCapture(e.pointerId);}catch(err){}});
+chartWrapEl.addEventListener('pointermove',function(e){if(chartDragging){e.preventDefault();showChartTooltip(nearestChartIndex(e.clientX),true);}});
+chartWrapEl.addEventListener('pointerup',endChartInteraction);chartWrapEl.addEventListener('pointercancel',endChartInteraction);chartWrapEl.addEventListener('pointerleave',function(){if(chartDragging)endChartInteraction();});
 drawChart();
-
-var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-var chartTooltipTimer = null;
-
-function showChartTooltip(index){
-  var data = CONFIG.chart.data;
-  var maxY = CONFIG.chart.maxY;
-  var W = 320, H = 170;
-  var padL = 36, padR = 12, padT = 16, padB = 34;
-  var w = W - padL - padR;
-  var h = H - padT - padB;
-  var px = padL + (index / (data.length - 1)) * w;
-  var py = padT + h - (data[index] / maxY) * h;
-  var svg = document.getElementById('equityChart');
-  var wrap = document.getElementById('chartWrap');
-  var svgRect = svg.getBoundingClientRect();
-  var wrapRect = wrap.getBoundingClientRect();
-  var tooltipX = (svgRect.left - wrapRect.left) + px * (svgRect.width / W);
-  var tooltipY = (svgRect.top - wrapRect.top) + py * (svgRect.height / H);
-  var tooltip = document.getElementById('chartTooltip');
-  var prevValue = index > 0 ? data[index - 1] : 0;
-  var diff = data[index] - prevValue;
-  var diffClass = diff >= 0 ? 'up' : 'dn';
-  var diffSign = diff >= 0 ? '+' : '';
-  tooltip.innerHTML = '<div class="ct-month">' + MONTHS[index] + '</div><div class="ct-value">' + data[index] + '%</div><div class="ct-diff ' + diffClass + '">' + diffSign + diff + '% MoM</div>';
-  tooltip.style.left = tooltipX + 'px';
-  tooltip.style.top = tooltipY + 'px';
-  tooltip.classList.add('show');
-  clearTimeout(chartTooltipTimer);
-  chartTooltipTimer = setTimeout(function(){ hideChartTooltip(); }, 4500);
-}
-function hideChartTooltip(){
-  document.getElementById('chartTooltip').classList.remove('show');
-}
 
 function renderProducts(){
   var list = document.getElementById('productList');
