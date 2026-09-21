@@ -2271,3 +2271,209 @@ window.addEventListener('load', function(){
 }
 
 </style>
+
+<style>
+
+/* V8 — restore normal song-title color */
+.music-now-title,
+.music-now-title.playing{
+  color:rgba(255,255,255,.82)!important;
+  background:none!important;
+  background-image:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+  -webkit-text-fill-color:rgba(255,255,255,.82)!important;
+  animation:none!important;
+  filter:none!important;
+  text-shadow:none!important;
+}
+.music-now-title.playing{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:0 0 12px rgba(73,169,255,.28)!important;
+}
+
+/* Stable SVG speaker states */
+.music-vol-btn svg{
+  display:block!important;
+  width:17px!important;
+  height:17px!important;
+  overflow:visible!important;
+  pointer-events:none;
+}
+.music-vol-btn .spk-fill{display:block!important;fill:currentColor!important}
+.music-vol-btn .spk-wave{
+  display:block;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.8!important;
+  stroke-linecap:round!important;
+}
+.music-vol-btn .mute-x{
+  display:none;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.9!important;
+  stroke-linecap:round!important;
+}
+.music-vol-btn.muted .spk-fill{display:block!important}
+.music-vol-btn.muted .spk-wave{display:none!important}
+.music-vol-btn.muted .mute-x{display:block!important}
+
+</style>
+
+<style>
+
+/* V10 — restrained, designer-led trading details */
+
+/* VERIFIED TRADER: credential, not a decorative pill */
+.verified-badge{
+  position:relative;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  margin:0 0 13px!important;
+  padding:0 0 6px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  color:rgba(225,231,238,.78)!important;
+  font-size:9px!important;
+  font-weight:650!important;
+  letter-spacing:1.45px!important;
+  line-height:1!important;
+}
+.verified-badge::before{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:29px;height:1px;
+  background:rgba(104,190,255,.62);
+  box-shadow:none;
+}
+.verified-badge::after{
+  content:"";
+  position:absolute;
+  left:33px;right:0;bottom:0;
+  height:1px;
+  background:rgba(255,255,255,.07);
+}
+.verified-badge svg{
+  width:12px!important;
+  height:12px!important;
+  margin:0!important;
+  padding:2px!important;
+  box-sizing:border-box;
+  border:1px solid rgba(104,190,255,.48);
+  border-radius:50%;
+  color:#9bd7ff!important;
+  stroke-width:2.3!important;
+  filter:none!important;
+}
+
+/* MARKET TICKER: one continuous market strip, no repeated AI-style cards */
+.ticker{
+  height:37px!important;
+  padding:0!important;
+  background:rgba(5,8,12,.93)!important;
+  border-top:1px solid rgba(255,255,255,.035)!important;
+  border-bottom:1px solid rgba(255,255,255,.07)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.ticker::before{
+  background:linear-gradient(90deg,
+    rgba(5,8,12,1) 0%,
+    rgba(5,8,12,.12) 7%,
+    rgba(5,8,12,.12) 93%,
+    rgba(5,8,12,1) 100%)!important;
+  border:0!important;
+}
+.ticker::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg,transparent 5%,rgba(92,177,235,.17) 28%,rgba(255,255,255,.07) 50%,rgba(92,177,235,.12) 72%,transparent 95%);
+  pointer-events:none;
+}
+.ticker-track{
+  height:37px!important;
+  align-items:center!important;
+  animation-duration:62s!important;
+}
+.ticker-seg{
+  height:100%;
+  align-items:center!important;
+  gap:0!important;
+  padding-right:0!important;
+}
+.ticker-seg>span{
+  position:relative;
+  display:inline-flex!important;
+  align-items:baseline!important;
+  gap:8px!important;
+  height:auto!important;
+  padding:0 17px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+  line-height:1!important;
+}
+.ticker-seg>span::before{
+  content:none!important;
+}
+.ticker-seg>span::after{
+  content:"";
+  position:absolute;
+  right:0;top:50%;
+  width:1px;height:13px;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,.075);
+}
+.ticker-seg .sym{
+  color:rgba(238,242,247,.88)!important;
+  font-family:'JetBrains Mono',monospace!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  letter-spacing:.7px!important;
+}
+.ticker-seg em{
+  min-width:42px;
+  font-family:'JetBrains Mono',monospace!important;
+  font-style:normal!important;
+  font-size:9px!important;
+  font-weight:600!important;
+  letter-spacing:.05px!important;
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+}
+.ticker-seg .up{color:rgba(89,211,157,.88)!important}
+.ticker-seg .dn{color:rgba(242,112,128,.88)!important}
+
+/* Tiny market-status marker gives the strip one intentional focal detail */
+.ticker-seg>span:nth-child(4n+1) .sym::before{
+  content:"";
+  display:inline-block;
+  width:3px;height:3px;
+  margin:0 7px 2px 0;
+  border-radius:50%;
+  background:rgba(107,193,248,.78);
+  box-shadow:0 0 5px rgba(77,176,239,.3);
+}
+
+@media(max-width:400px){
+  .ticker{height:35px!important}
+  .ticker-track{height:35px!important}
+  .ticker-seg>span{padding:0 13px!important;gap:6px!important}
+  .ticker-seg .sym,.ticker-seg em{font-size:8.5px!important}
+  .verified-badge{font-size:8.5px!important}
+}
+
+</style>
