@@ -203,38 +203,44 @@ body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color
 .product-buy{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;transition:.22s;display:flex;align-items:center;gap:6px;flex:0 0 auto;white-space:nowrap}
 .product-buy svg{width:12px;height:12px;flex:0 0 12px}
 .product-buy:hover{background:#fff;color:#000;border-color:#fff;transform:scale(1.05)}
-.music{padding:20px 10px}
-.music .song-list{display:flex;flex-direction:row;justify-content:center;align-items:center;overflow-x:auto;padding:20px 10px 10px;scrollbar-width:none;-ms-overflow-style:none}
+.music{padding:16px 10px 18px;background:linear-gradient(180deg,rgba(10,14,20,.36),rgba(5,5,5,.18))}
+.music .song-list{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;overflow-x:auto;padding:12px 12px 14px;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .music .song-list::-webkit-scrollbar{display:none}
-.music .song-item{flex:0 0 auto;width:84px;height:84px;min-height:84px;border-radius:20px;border:2px solid #fff;padding:0;margin-left:-14px;position:relative;overflow:hidden;background-size:cover;background-position:center;background-color:#1a1a1a;box-shadow:0 4px 12px rgba(0,0,0,.8);transition:transform .3s,box-shadow .3s,border-color .3s,z-index .3s;z-index:1;isolation:isolate;cursor:pointer}
+.music .song-item{flex:0 0 74px;width:74px;height:74px;min-height:74px;border-radius:18px;border:1px solid rgba(255,255,255,.13);padding:0;margin-left:-12px;position:relative;overflow:hidden;background-size:cover;background-position:center;background-color:#111;box-shadow:0 8px 22px -14px rgba(0,0,0,.95);transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s,filter .3s,opacity .3s;z-index:1;isolation:isolate;cursor:pointer;scroll-snap-align:center}
 .music .song-item:first-child{margin-left:0}
 .music .song-item:nth-child(odd){transform:rotate(-6deg)}
 .music .song-item:nth-child(even){transform:rotate(6deg)}
-.music .song-item:hover{transform:rotate(0deg) translateY(-8px) scale(1.15);z-index:10;box-shadow:0 12px 28px -8px rgba(255,255,255,.6);border-color:#fff}
-.music .song-item .song-info,.music .song-item .song-play{display:none !important}
-.music .song-item .song-overlay{background:rgba(0,0,0,.3);transition:background .3s}
-.music .song-item.active .song-overlay{background:rgba(0,0,0,0)}
+.music .song-item:hover{transform:rotate(0deg) translateY(-6px) scale(1.08);z-index:10;border-color:rgba(255,255,255,.28);box-shadow:0 12px 28px -18px rgba(255,255,255,.32)}
+.music .song-item:active{transform:scale(.96)}
+.music .song-item .song-info,.music .song-item .song-play{display:none!important}
+.music .song-item .song-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.16));transition:background .32s,backdrop-filter .32s;z-index:2}
+.music .song-list.has-selection .song-item:not(.active){filter:saturate(.45) brightness(.48);opacity:.58}
+.music .song-list.has-selection .song-item:not(.active) .song-overlay{background:rgba(0,0,0,.38);backdrop-filter:blur(.35px);-webkit-backdrop-filter:blur(.35px)}
+.music .song-list.has-selection .song-item:not(.active):hover{filter:saturate(.7) brightness(.68);opacity:.82}
+.music .song-item.active{filter:none;opacity:1;border-color:rgba(255,255,255,.25);box-shadow:0 12px 30px -18px var(--song-glow,#49a9ff),inset 0 0 0 1px rgba(255,255,255,.04)}
+.music .song-item.active .song-overlay{background:rgba(0,0,0,.03)}
 @keyframes borderSpin{to{--border-angle:360deg}}
 @property --border-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
-.music .song-item::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:3px;background:conic-gradient(from var(--border-angle),transparent 0%,var(--song-glow,#00e07a) 20%,transparent 40%,transparent 60%,var(--song-glow,#00e07a) 80%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none;transition:opacity .4s;z-index:10}
-.music .song-item.playing::after{opacity:1;animation:borderSpin 4s linear infinite}
-.music .song-item .song-eq{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:32px;height:32px;padding-bottom:8px;border-radius:50%;background:rgba(0,0,0,.75);display:none;align-items:flex-end;justify-content:center;gap:3px;z-index:15;box-shadow:0 0 10px var(--song-glow,#00e07a)}
-.music .song-item.playing .song-eq{display:flex}
-.music .song-item .song-eq i{width:3px;background:#fff;border-radius:2px;animation:eq 2.5s ease-in-out infinite;transform-origin:bottom center}
-.music .song-item .song-eq i:nth-child(1){height:55%;animation-delay:0s}
-.music .song-item .song-eq i:nth-child(2){height:85%;animation-delay:.8s}
-.music .song-item .song-eq i:nth-child(3){height:65%;animation-delay:1.6s}
-@keyframes eq{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
-.music-volume{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 20px 0;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
-.music-vol-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:.22s;user-select:none;flex-shrink:0;min-width:76px}
-.music-vol-btn:hover{border-color:rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.06)}
-.music-vol-btn:active{transform:scale(.96)}
-.music-vol-btn.muted{color:#ff6b8a;border-color:rgba(255,107,138,.4);background:rgba(255,107,138,.08)}
-.music-vol-slider{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.15);outline:none;cursor:pointer;min-width:0}
-.music-vol-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 0 8px rgba(255,255,255,.5);transition:transform .15s}
-.music-vol-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.music-vol-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;cursor:pointer;border:none;box-shadow:0 0 8px rgba(255,255,255,.5)}
-.music-vol-value{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;min-width:30px;text-align:right;flex-shrink:0}
+.music .song-item::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--border-angle),transparent 0%,var(--song-glow,#49a9ff) 20%,transparent 42%,transparent 60%,var(--song-glow,#49a9ff) 82%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;pointer-events:none;transition:opacity .35s;z-index:10}
+.music .song-item.playing::after{opacity:.9;animation:borderSpin 4s linear infinite}
+.music .song-item .song-eq{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:28px;height:28px;padding-bottom:7px;border-radius:50%;background:rgba(4,4,4,.72);border:1px solid rgba(255,255,255,.10);display:none;align-items:flex-end;justify-content:center;gap:2.5px;z-index:15;box-shadow:0 5px 16px -7px var(--song-glow,#49a9ff);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.music .song-item.playing .song-eq{display:flex;animation:musicPop .28s ease both}
+@keyframes musicPop{from{opacity:0;transform:translateX(-50%) scale(.72)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+.music .song-item .song-eq i{width:2.5px;background:#fff;border-radius:3px;animation:eq 1.15s ease-in-out infinite;transform-origin:bottom center}
+.music .song-item .song-eq i:nth-child(1){height:45%;animation-delay:0s}.music .song-item .song-eq i:nth-child(2){height:78%;animation-delay:.18s}.music .song-item .song-eq i:nth-child(3){height:58%;animation-delay:.36s}
+@keyframes eq{0%,100%{transform:scaleY(.42);opacity:.65}50%{transform:scaleY(1);opacity:1}}
+.music-volume{display:flex;align-items:center;gap:9px;margin:8px 12px 0;padding:7px 9px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px rgba(255,255,255,.025)}
+.music-vol-btn{width:32px;height:32px;flex:0 0 32px;padding:0;border-radius:9px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);color:#a8a8a8;display:grid;place-items:center;cursor:pointer;transition:.2s;user-select:none;font-size:0}
+.music-vol-btn::before{content:'♪';font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:currentColor}
+.music-vol-btn:hover{border-color:rgba(255,255,255,.2);color:#fff;background:rgba(255,255,255,.065)}
+.music-vol-btn:active{transform:scale(.93)}
+.music-vol-btn.muted{color:#ff7189;border-color:rgba(255,113,137,.22);background:rgba(255,113,137,.07)}
+.music-vol-btn.muted::before{content:'×';font-size:18px;font-weight:500}
+.music-vol-slider{-webkit-appearance:none;appearance:none;flex:1;height:3px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.8) 0%,rgba(255,255,255,.8) var(--volume-fill,40%),rgba(255,255,255,.10) var(--volume-fill,40%),rgba(255,255,255,.10) 100%);outline:none;cursor:pointer;min-width:0}
+.music-vol-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:12px;border-radius:50%;background:#fff;cursor:grab;border:2px solid rgba(0,0,0,.65);box-shadow:0 2px 8px rgba(0,0,0,.6);transition:transform .15s}
+.music-vol-slider::-webkit-slider-thumb:active{cursor:grabbing;transform:scale(1.2)}
+.music-vol-slider::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:#fff;cursor:grab;border:2px solid rgba(0,0,0,.65);box-shadow:0 2px 8px rgba(0,0,0,.6)}
+.music-vol-value{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#8b8b8b;min-width:25px;text-align:right;flex-shrink:0}
 .yt-hidden{position:absolute!important;top:-9999px!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;z-index:-9999!important;overflow:hidden!important}
 .yt-hidden>div{width:200px;height:120px}
 .hint{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;font-weight:300;display:flex;align-items:center;justify-content:center;gap:5px}
@@ -400,11 +406,11 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
   .tarot-card-front .tc-symbol{font-size:18px}
   .tarot-card-front .tc-num{font-size:5.5px}
   .tarot-card-front .tc-name{font-size:4.8px}
-  .music-volume{margin:12px 12px 0;padding:8px 10px;gap:8px}
-  .music-vol-btn{font-size:9.5px;padding:5px 10px;min-width:66px}
-  .music-vol-slider::-webkit-slider-thumb{width:12px;height:12px}
-  .music-vol-value{font-size:10px;min-width:26px}
-  .music .song-item{width:72px;height:72px;min-height:72px;border-radius:16px;margin-left:-12px}
+  .music-volume{margin:8px 8px 0;padding:6px 8px;gap:8px}
+  .music-vol-btn{width:30px;height:30px;flex-basis:30px}
+  .music-vol-slider::-webkit-slider-thumb{width:11px;height:11px}
+  .music-vol-value{font-size:8.5px;min-width:23px}
+  .music .song-item{flex-basis:66px;width:66px;height:66px;min-height:66px;border-radius:15px;margin-left:-10px}
   .music .song-item .song-eq{width:26px;height:26px;padding-bottom:5px;bottom:5px;gap:2px}
   .music .song-item .song-eq i{width:2.5px}
   .menu-btn{top:42px;left:12px;width:38px;height:38px}
@@ -544,7 +550,7 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
     </div>
     <div class="hint">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      Altare &amp; Ariana Grande &amp; Justine Skye · Full Track
+      4 TRACKS · TAP TO PLAY · SWIPE TO BROWSE
     </div>
   </section>
 
@@ -900,7 +906,8 @@ var CONFIG = {
   songs: [
     { title: "bye (Altare Remix)", artist: "Ariana Grande, Altare", videoId: "agneRtEe-t8", startAt: 15, cover: "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg", glow: "#c5f82a" },
     { title: "hate that i made you love me", artist: "Ariana Grande", videoId: "v1t4MTqdfyI", startAt: 26, cover: "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg", glow: "#f0b232" },
-    { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" }
+    { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" },
+    { title: "New Track", artist: "YouTube", videoId: "AoqLkVnRfQE", startAt: 0, cover: "https://img.youtube.com/vi/AoqLkVnRfQE/maxresdefault.jpg", glow: "#49a9ff" }
   ],
   products: [{
     id: "p1", name: "รับดูดวงฟรี", price: "ฟรี", image: "",
@@ -1482,6 +1489,7 @@ try {
 } catch(e){}
 volSlider.value = currentVolume;
 volValue.textContent = currentVolume;
+volSlider.style.setProperty('--volume-fill', currentVolume + '%');
 
 function applyVolume(){
   if (!ytPlayer || typeof ytPlayer.setVolume !== 'function') return;
@@ -1512,6 +1520,7 @@ function toggleMute(){
 volSlider.addEventListener('input', function(e){
   currentVolume = parseInt(e.target.value, 10);
   volValue.textContent = currentVolume;
+  volSlider.style.setProperty('--volume-fill', currentVolume + '%');
   try { localStorage.setItem('munzq_vol', String(currentVolume)); } catch(e){}
   if (currentVolume > 0 && isMuted){
     isMuted = false;
@@ -1653,10 +1662,15 @@ function resumeCurrent(){
   setTimeout(applyVolume, 200);
 }
 function updateUI(){
+  if (songList) songList.classList.toggle('has-selection', currentIndex >= 0);
   document.querySelectorAll('.song-item').forEach(function(el, i){
     el.classList.toggle('active', i === currentIndex);
     el.classList.toggle('playing', i === currentIndex && isPlaying);
   });
+  var activeSong = document.querySelector('.song-item.active');
+  if (activeSong && currentIndex >= 0){
+    activeSong.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+  }
 }
 
 function animateCount(el){
