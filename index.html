@@ -770,7 +770,41 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
         </div>
       </div>
     </div>
-    <div class="tab-pane" id="pane-chart">
+    
+<div class="stat-journal-row">
+  <button class="stat-journal-link" id="journalPreviewBtn" type="button" aria-expanded="false" aria-controls="journalEmbedPanel">
+    <span class="journal-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M6.5 3.5h8.2l3.8 3.8v13.2h-12z"/>
+        <path d="M14.5 3.8v4h3.8M9.3 11h6.2M9.3 14h6.2M9.3 17h4.1"/>
+      </svg>
+    </span>
+    <span class="journal-copy">
+      <span class="journal-kicker">TRADING JOURNAL</span>
+      <span class="journal-title">PREVIEW</span>
+    </span>
+    <svg class="journal-arrow" viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M6 14 14 6M8 6h6v6"/>
+    </svg>
+  </button>
+</div>
+<div class="journal-embed-panel" id="journalEmbedPanel" aria-hidden="true">
+  <div class="journal-embed-head">
+    <div>
+      <span class="journal-embed-kicker">TRADING JOURNAL</span>
+      <strong>JOURNAL PREVIEW</strong>
+    </div>
+    <button class="journal-close" id="journalCloseBtn" type="button" aria-label="Close journal preview">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15"/></svg>
+    </button>
+  </div>
+  <div class="journal-frame-shell">
+    <div class="journal-loading" id="journalLoading">LOADING JOURNAL...</div>
+    <iframe id="journalFrame" data-src="https://feline-tiger-dd9.notion.site/ebd//2541c59de51980f39c38e1c11780a5d0" title="Trading Journal Preview" frameborder="0" allowfullscreen loading="lazy"></iframe>
+  </div>
+</div>
+
+<div class="tab-pane" id="pane-chart">
       <div class="chart-toolbar">
         <div>
           <div class="chart-toolbar-title">EQUITY CURVE</div>
@@ -3148,5 +3182,228 @@ window.addEventListener('load', function(){
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',professionalizeCandles,{once:true});
   else professionalizeCandles();
+})();
+</script>
+
+<style>
+
+/* V18 — Trading Journal action inside STAT */
+.stat-journal-row{
+  display:flex;
+  justify-content:flex-end;
+  margin:2px 0 11px;
+}
+.stat-journal-link{
+  display:inline-grid;
+  grid-template-columns:25px auto 16px;
+  align-items:center;
+  gap:8px;
+  min-width:174px;
+  padding:7px 9px;
+  color:inherit;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:7px;
+  background:rgba(255,255,255,.018);
+  transition:border-color .18s ease,background .18s ease,transform .18s ease;
+}
+.stat-journal-link:hover{
+  border-color:rgba(73,169,255,.20);
+  background:rgba(255,255,255,.028);
+  transform:translateY(-1px);
+}
+.journal-icon{
+  width:25px;height:25px;
+  display:grid;place-items:center;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.journal-icon svg{
+  width:14px;height:14px;
+  fill:none;
+  stroke:rgba(155,210,248,.80);
+  stroke-width:1.35;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.journal-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.journal-kicker{
+  font-size:6.5px;
+  letter-spacing:1.15px;
+  color:rgba(255,255,255,.35);
+  line-height:1;
+}
+.journal-title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  letter-spacing:.35px;
+  color:rgba(255,255,255,.82);
+  line-height:1.2;
+}
+.journal-arrow{
+  width:13px;height:13px;
+  fill:none;
+  stroke:rgba(255,255,255,.42);
+  stroke-width:1.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease,stroke .18s ease;
+}
+.stat-journal-link:hover .journal-arrow{
+  transform:translate(1px,-1px);
+  stroke:rgba(155,210,248,.85);
+}
+@media(max-width:400px){
+  .stat-journal-link{min-width:165px;padding:7px 8px}
+}
+
+</style>
+
+<style>
+
+/* V19 — center journal action + replace date with PREVIEW */
+.stat-journal-row{
+  justify-content:center!important;
+}
+.stat-journal-link{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.journal-title{
+  letter-spacing:1.15px!important;
+  color:rgba(255,255,255,.72)!important;
+}
+
+</style>
+
+<style>
+
+/* V20 — embedded Notion journal inside STAT */
+.stat-journal-link{
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.journal-embed-panel{
+  display:grid;
+  grid-template-rows:0fr;
+  width:100%;
+  opacity:0;
+  overflow:hidden;
+  margin:0;
+  transition:grid-template-rows .38s cubic-bezier(.2,.8,.2,1),opacity .24s ease,margin .38s ease;
+}
+.journal-embed-panel.open{
+  grid-template-rows:1fr;
+  opacity:1;
+  margin:3px 0 14px;
+}
+.journal-embed-panel > *{min-height:0}
+.journal-embed-head{
+  display:none;
+}
+.journal-embed-panel.open .journal-embed-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:9px 10px;
+  border:1px solid rgba(255,255,255,.07);
+  border-bottom:0;
+  border-radius:8px 8px 0 0;
+  background:rgba(255,255,255,.018);
+}
+.journal-embed-head>div{display:flex;flex-direction:column;gap:3px}
+.journal-embed-kicker{font-size:6px;letter-spacing:1.25px;color:rgba(255,255,255,.3)}
+.journal-embed-head strong{font-size:8px;letter-spacing:.85px;color:rgba(255,255,255,.78);font-weight:500}
+.journal-close{
+  width:27px;height:27px;padding:0;
+  display:grid;place-items:center;
+  border:0;background:transparent;color:rgba(255,255,255,.46);
+  cursor:pointer;
+}
+.journal-close svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.journal-frame-shell{
+  position:relative;
+  min-height:0;
+  height:0;
+  overflow:hidden;
+  border:0 solid rgba(255,255,255,.07);
+  border-radius:0 0 8px 8px;
+  background:rgba(2,5,9,.42);
+  transition:height .38s cubic-bezier(.2,.8,.2,1);
+}
+.journal-embed-panel.open .journal-frame-shell{
+  height:min(68vh,620px);
+  min-height:430px;
+  border-width:1px;
+}
+#journalFrame{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:transparent;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+#journalFrame.loaded{opacity:1}
+.journal-loading{
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:7px;letter-spacing:1.3px;
+  color:rgba(255,255,255,.28);
+  pointer-events:none;
+}
+.journal-loading.hidden{display:none}
+.stat-journal-link[aria-expanded="true"]{
+  border-color:rgba(73,169,255,.18);
+}
+@media(max-width:500px){
+  .journal-embed-panel.open .journal-frame-shell{
+    height:68vh;
+    min-height:390px;
+  }
+}
+
+</style>
+
+
+<script>
+(function(){
+  function initJournalEmbed(){
+    const btn=document.getElementById('journalPreviewBtn');
+    const panel=document.getElementById('journalEmbedPanel');
+    const close=document.getElementById('journalCloseBtn');
+    const frame=document.getElementById('journalFrame');
+    const loading=document.getElementById('journalLoading');
+    if(!btn||!panel||!frame)return;
+
+    function openJournal(){
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      btn.setAttribute('aria-expanded','true');
+      if(!frame.src){
+        frame.src=frame.dataset.src;
+        frame.addEventListener('load',function(){
+          frame.classList.add('loaded');
+          if(loading)loading.classList.add('hidden');
+        },{once:true});
+      }
+      setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),120);
+    }
+    function closeJournal(){
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      btn.setAttribute('aria-expanded','false');
+    }
+    btn.addEventListener('click',function(){
+      panel.classList.contains('open') ? closeJournal() : openJournal();
+    });
+    if(close)close.addEventListener('click',closeJournal);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initJournalEmbed,{once:true});
+  else initJournalEmbed();
 })();
 </script>
