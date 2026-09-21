@@ -1232,7 +1232,7 @@ var CONFIG = {
     { title: "hate that i made you love me", artist: "Ariana Grande", videoId: "v1t4MTqdfyI", startAt: 26, cover: "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg", glow: "#f0b232" },
     { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" },
     { title: "No Way Out - ØneHeath", artist: "YouTube", videoId: "AoqLkVnRfQE", startAt: 0, cover: "https://img.youtube.com/vi/AoqLkVnRfQE/maxresdefault.jpg", glow: "#49a9ff" },
-      { title: "Track 5", artist: "YouTube", videoId: "4JcVi9aZNog", startAt: 0, cover: "https://img.youtube.com/vi/AoqLkVnRfQE/maxresdefault.jpg", glow: "#49a9ff" }
+      { title: "Wuthering Waves OST — Mt. Firmament", artist: "YouTube", videoId: "4JcVi9aZNog", startAt: 0, cover: "https://i.ytimg.com/vi/4JcVi9aZNog/hqdefault.jpg", glow: "#49a9ff" }
     ],
   products: [{
     id: "p1", name: "รับดูดวงฟรี", price: "ฟรี", image: "",
@@ -3427,6 +3427,19 @@ window.addEventListener('load', function(){
 .song-icons{
   justify-content:center!important;
   margin-inline:auto!important;
+}
+
+</style>
+
+<style>
+
+/* V22 — track 5 gets its own artwork */
+.music-icons > *:nth-child(5),
+.playlist-icons > *:nth-child(5),
+.song-icons > *:nth-child(5),
+.music-tracks > *:nth-child(5),
+.playlist > *:nth-child(5){
+  --track-cover:url("https://i.ytimg.com/vi/4JcVi9aZNog/hqdefault.jpg");
 }
 
 </style>
