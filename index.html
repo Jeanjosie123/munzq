@@ -1232,8 +1232,8 @@ var CONFIG = {
     { title: "bye (Altare Remix)", artist: "Ariana Grande, Altare", videoId: "agneRtEe-t8", startAt: 15, cover: "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg", glow: "#c5f82a" },
     { title: "hate that i made you love me", artist: "Ariana Grande", videoId: "v1t4MTqdfyI", startAt: 26, cover: "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg", glow: "#f0b232" },
     { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" },
-    { title: "Loading title…", artist: "YouTube", videoId: "a4aCt_cma7E", startAt: 20, cover: "https://i.ytimg.com/vi/a4aCt_cma7E/hqdefault.jpg", glow: "#49a9ff" },
-      { title: "Loading title…", artist: "YouTube", videoId: "cy2avZxPH1k", startAt: 18, cover: "https://i.ytimg.com/vi/cy2avZxPH1k/hqdefault.jpg", glow: "#49a9ff" }
+    { title: "cardigan", artist: "Taylor Swift", videoId: "K-a8s8OLBSE", startAt: 20, cover: "https://img.youtube.com/vi/K-a8s8OLBSE/maxresdefault.jpg", glow: "#b8b0a8" },
+      { title: "Track 05", artist: "YouTube", videoId: "SUZJGVq4N_g", startAt: 18, cover: "https://img.youtube.com/vi/SUZJGVq4N_g/maxresdefault.jpg", glow: "#d8d8d8" }
     ],
   products: [{
     id: "p1", name: "รับดูดวงฟรี", price: "ฟรี", image: "",
@@ -2096,6 +2096,188 @@ window.addEventListener('load', function(){
   populateProvinces();
 });
 </script>
+
+
+
+<style id="v40-menu-style">
+/* V40 — actual game side menu; only BACKGROUND is blurred, menu UI stays sharp */
+#menuOverlay{display:none!important;pointer-events:none!important}
+
+/* profile trigger */
+#menuBtn.menu-btn{
+  width:34px!important;height:32px!important;min-width:34px!important;min-height:32px!important;
+  padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;
+  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
+  gap:4px!important;z-index:2001!important;
+}
+#menuBtn.menu-btn span{
+  display:block!important;position:static!important;width:3px!important;height:3px!important;flex:0 0 3px!important;
+  border-radius:50%!important;background:rgba(250,252,255,.94)!important;opacity:1!important;transform:none!important;
+}
+body.v40-open #menuBtn{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+
+/* background blur is separate and BEHIND the drawer */
+#v40Backdrop{
+  position:fixed!important;inset:0!important;z-index:1980!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  background:rgba(0,0,0,.035)!important;
+  backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important;
+  transition:opacity .26s ease,visibility .26s ease!important;
+}
+body.v40-open #v40Backdrop{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+
+/* side drawer itself: glass, but its CONTENT is not blurred */
+#sideMenu.side-menu{
+  position:fixed!important;top:0!important;left:0!important;right:auto!important;bottom:0!important;
+  width:min(280px,76vw)!important;height:100dvh!important;min-height:100dvh!important;
+  padding:0!important;margin:0!important;border:0!important;border-radius:0!important;
+  background:linear-gradient(90deg,rgba(5,10,15,.48),rgba(9,18,25,.37) 65%,rgba(12,24,32,.28))!important;
+  border-right:1px solid rgba(220,240,255,.16)!important;
+  box-shadow:18px 0 50px rgba(0,0,0,.16)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  overflow:hidden!important;z-index:1990!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transform:translateX(-102%)!important;
+  transition:transform .42s cubic-bezier(.16,.88,.24,1),opacity .22s ease,visibility .42s!important;
+}
+#sideMenu.side-menu.show{
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateX(0)!important;
+}
+#sideMenu > *{display:none!important}
+#sideMenu > .v40-drawer{display:flex!important}
+
+.v40-drawer{
+  position:relative;height:100%;box-sizing:border-box;flex-direction:column;
+  padding:calc(env(safe-area-inset-top,0px) + 27px) 13px calc(env(safe-area-inset-bottom,0px) + 18px);
+  /* blur only the pixels behind the glass via pseudo-layer */
+}
+.v40-drawer::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  backdrop-filter:blur(18px) saturate(118%);-webkit-backdrop-filter:blur(18px) saturate(118%);
+}
+.v40-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 8px 20px;border-bottom:1px solid rgba(235,246,252,.16);
+}
+.v40-title{font-size:21px;font-weight:650;letter-spacing:.45px;color:#fff}
+.v40-close{
+  width:32px;height:32px;border:0;border-radius:8px;background:transparent;
+  color:rgba(255,255,255,.6);font-size:24px;display:grid;place-items:center;cursor:pointer;
+}
+.v40-list{padding-top:38px}
+
+/* Fortune is crisp and above all blur layers */
+.v40-fortune{
+  position:relative!important;z-index:3!important;width:100%!important;height:60px!important;
+  padding:1.5px!important;border:0!important;border-radius:14px!important;
+  display:block!important;overflow:hidden!important;isolation:isolate!important;
+  background:transparent!important;filter:none!important;backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;cursor:pointer!important;
+  opacity:0;transform:translateX(-20px);
+}
+#sideMenu.show .v40-fortune{animation:v40In .38s .09s cubic-bezier(.16,.9,.24,1) forwards!important}
+.v40-fortune::before{
+  content:"";position:absolute;inset:-145%;z-index:0;
+  background:conic-gradient(from 0deg,#ff4d91,#ff9848,#ffe46a,#54e5a2,#52d2ff,#7d7cff,#dd69ff,#ff4d91);
+  animation:v40Rainbow 3.15s linear infinite;
+}
+.v40-fortune::after{
+  content:"";position:absolute;inset:1.5px;z-index:1;border-radius:12.5px;
+  background:rgba(6,11,15,.70); /* sharp readable center; NO backdrop-filter */
+}
+.v40-fortune-inner{
+  position:relative;z-index:2;height:100%;padding:0 16px;display:flex;align-items:center;gap:12px;
+  color:#fff;filter:none!important;
+}
+.v40-icon{width:30px;height:30px;display:grid;place-items:center;filter:none!important}
+.v40-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.v40-label{font-size:13px;font-weight:650;letter-spacing:.15px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+@keyframes v40Rainbow{to{transform:rotate(360deg)}}
+@keyframes v40In{to{opacity:1;transform:translateX(0)}}
+
+body.v40-product #menuBtn,
+body.v40-product #sideMenu,
+body.v40-product #v40Backdrop{display:none!important}
+</style>
+
+<script id="v40-menu-script">
+(function(){
+ function initV40(){
+   const old=document.getElementById('menuBtn'), menu=document.getElementById('sideMenu');
+   const modal=document.getElementById('buyModal');
+   if(!old||!menu)return;
+
+   /* Clone removes ALL old menu listeners — this was the conflict in previous builds. */
+   const btn=old.cloneNode(true);
+   old.replaceWith(btn);
+
+   /* Remove old menu children completely, not merely hide them. */
+   menu.replaceChildren();
+
+   const drawer=document.createElement('div');
+   drawer.className='v40-drawer';
+   drawer.innerHTML=`
+    <div class="v40-head">
+      <div class="v40-title">MENU</div>
+      <button class="v40-close" type="button" aria-label="ปิด">×</button>
+    </div>
+    <div class="v40-list">
+      <button class="v40-fortune" type="button">
+        <span class="v40-fortune-inner">
+          <span class="v40-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <circle cx="16" cy="13.2" r="9.2"/>
+              <path d="M10.3 22.1c1.7 1.15 3.6 1.72 5.7 1.72s4-.57 5.7-1.72"/>
+              <path d="M11.4 23.6 9.8 28h12.4l-1.6-4.4M8.8 28h14.4"/>
+              <path d="M12.1 8.9c1.15-1.05 2.55-1.62 4.15-1.7"/>
+              <circle cx="12.8" cy="12.3" r=".8" fill="currentColor" stroke="none"/>
+              <circle cx="19" cy="15.3" r=".65" fill="currentColor" stroke="none"/>
+              <path d="M23 4.9v2.5M21.75 6.15h2.5"/>
+            </svg>
+          </span>
+          <span class="v40-label">ดูดวงฟรี</span>
+        </span>
+      </button>
+    </div>`;
+   menu.appendChild(drawer);
+
+   document.getElementById('v40Backdrop')?.remove();
+   const backdrop=document.createElement('div');
+   backdrop.id='v40Backdrop';
+   document.body.appendChild(backdrop);
+
+   function open(){
+     menu.classList.add('show'); document.body.classList.add('v40-open');
+     document.body.style.overflow='';document.documentElement.style.overflow='';
+   }
+   function close(after){
+     menu.classList.remove('show'); document.body.classList.remove('v40-open');
+     document.body.style.overflow='';document.documentElement.style.overflow='';
+     if(after)setTimeout(after,430);
+   }
+   btn.onclick=e=>{e.preventDefault();e.stopPropagation();menu.classList.contains('show')?close():open()};
+   drawer.querySelector('.v40-close').onclick=e=>{e.preventDefault();e.stopPropagation();close()};
+   backdrop.onclick=()=>close();
+   drawer.querySelector('.v40-fortune').onclick=e=>{
+     e.preventDefault();e.stopPropagation();
+     close(()=>{if(typeof openBuyModal==='function')openBuyModal('p1')});
+   };
+
+   function syncModal(){
+     if(!modal)return;
+     const cs=getComputedStyle(modal);
+     const on=modal.classList.contains('show')||modal.classList.contains('open')||modal.classList.contains('active')||
+       (cs.display!=='none'&&cs.visibility!=='hidden'&&parseFloat(cs.opacity||'1')>0);
+     document.body.classList.toggle('v40-product',on);
+     if(on)close();
+   }
+   if(modal)new MutationObserver(syncModal).observe(modal,{attributes:true,attributeFilter:['class','style','hidden','aria-hidden']});
+   syncModal();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV40,{once:true});else initV40();
+})();
+</script>
+
 </body>
 </html>
 <style>
@@ -4372,842 +4554,440 @@ html,body{overscroll-behavior:auto!important}
 
 </style>
 
+<style id="v41-final-game-drawer">
+/* FINAL CASCADE: this block is intentionally last in the file. */
+#menuOverlay{display:none!important;visibility:hidden!important;pointer-events:none!important}
 
-
-<style>
-
-/* V33 — fortune item directly BELOW the 3-dot trigger, no guide | lines */
-.v32-line{display:none!important}
-
-/* Keep host compact and position it below the trigger/profile menu area */
-#sideMenu.side-menu{
-  top:88px!important;
-  left:18px!important;
-  width:142px!important;
-  height:48px!important;
-  overflow:visible!important;
-}
-.v32-rail{
-  width:142px!important;
-  padding:0!important;
-  display:block!important;
-}
-
-/* Transparent center + animated rainbow border */
-.v32-fortune{
-  position:relative!important;
-  width:132px!important;
-  height:42px!important;
-  padding:1px!important;
-  display:flex!important;
-  align-items:center!important;
-  gap:9px!important;
-  border:0!important;
-  border-radius:13px!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  overflow:hidden!important;
-  opacity:0;
-  transform:translateY(-13px) scale(.88);
-  transform-origin:top left;
-  transition:none!important;
-}
-.v32-fortune::before{
-  content:""!important;
-  position:absolute!important;
-  inset:-65%!important;
-  background:conic-gradient(
-    from 0deg,
-    #ff4f8b,
-    #ff9f43,
-    #ffe66d,
-    #55e6a5,
-    #55c8ff,
-    #8c7bff,
-    #e66bff,
-    #ff4f8b
-  )!important;
-  animation:v33RainbowSpin 3.2s linear infinite!important;
-  z-index:0!important;
-}
-.v32-fortune::after{
-  content:""!important;
-  position:absolute!important;
-  inset:1.5px!important;
-  border-radius:11.5px!important;
-  background:rgba(7,11,16,.82)!important;
-  backdrop-filter:blur(12px)!important;
-  -webkit-backdrop-filter:blur(12px)!important;
-  z-index:1!important;
-}
-.v32-fortune > *{position:relative!important;z-index:2!important}
-.v32-icon{
-  width:34px!important;height:34px!important;
-  display:grid!important;place-items:center!important;
-  font-size:21px!important;
-  background:transparent!important;
-}
-.v32-label{
-  font-size:12px!important;
-  font-weight:550!important;
-  color:rgba(255,255,255,.92)!important;
-  letter-spacing:.2px!important;
-}
-
-/* Opening: drop down from underneath the vertical dots */
-#sideMenu.show .v32-fortune{
-  animation:v33FortuneIn .38s cubic-bezier(.16,.9,.22,1.18) forwards!important;
-}
-/* Closing: visibly retract upward into the dots */
-#sideMenu.v33-closing{
-  opacity:1!important;
-  visibility:visible!important;
-  pointer-events:none!important;
-}
-#sideMenu.v33-closing .v32-fortune{
-  animation:v33FortuneOut .30s cubic-bezier(.55,.05,.8,.35) forwards!important;
-}
-@keyframes v33FortuneIn{
-  0%{opacity:0;transform:translateY(-15px) scale(.84)}
-  65%{opacity:1;transform:translateY(3px) scale(1.025)}
-  100%{opacity:1;transform:translateY(0) scale(1)}
-}
-@keyframes v33FortuneOut{
-  0%{opacity:1;transform:translateY(0) scale(1)}
-  45%{opacity:.85;transform:translateY(-3px) scale(.96)}
-  100%{opacity:0;transform:translateY(-16px) scale(.82)}
-}
-@keyframes v33RainbowSpin{to{transform:rotate(360deg)}}
-
-/* 3 dots: horizontal closed, vertical while open, animated both directions */
+/* launcher */
 #menuBtn.menu-btn{
-  transition:transform .3s cubic-bezier(.2,.85,.25,1.12)!important;
+  position:fixed!important;
+  top:18px!important;left:18px!important;
+  width:34px!important;height:32px!important;min-width:34px!important;min-height:32px!important;
+  padding:0!important;margin:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  flex-direction:row!important;gap:4px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  overflow:visible!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  transform:none!important;z-index:3002!important;
 }
+#menuBtn.menu-btn::before,#menuBtn.menu-btn::after{display:none!important;content:none!important}
 #menuBtn.menu-btn span{
-  transition:transform .30s cubic-bezier(.2,.85,.25,1.12),opacity .18s ease!important;
+  display:block!important;position:static!important;
+  width:3px!important;height:3px!important;flex:0 0 3px!important;
+  border-radius:50%!important;background:rgba(250,252,255,.94)!important;
+  opacity:1!important;transform:none!important;box-shadow:none!important;
 }
-body.v33-open #menuBtn.menu-btn{
-  flex-direction:column!important;
-  gap:3px!important;
-  animation:v33DotsOpen .30s cubic-bezier(.2,.85,.25,1.12)!important;
+body.v41-open #menuBtn.menu-btn{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+
+/* ONLY page behind the drawer gets blurred */
+#v41Backdrop{
+  position:fixed!important;inset:0!important;z-index:2990!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  background:rgba(3,7,10,.055)!important;
+  backdrop-filter:blur(7px)!important;-webkit-backdrop-filter:blur(7px)!important;
+  transition:opacity .28s ease,visibility .28s ease!important;
 }
-body.v33-returning #menuBtn.menu-btn{
-  animation:v33DotsClose .32s cubic-bezier(.2,.85,.25,1.12)!important;
-}
-@keyframes v33DotsOpen{
-  0%{transform:scale(.86) rotate(-8deg)}
-  100%{transform:scale(1) rotate(0)}
-}
-@keyframes v33DotsClose{
-  0%{transform:scale(1)}
-  55%{transform:scale(.84)}
-  100%{transform:scale(1)}
-}
+body.v41-open #v41Backdrop{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
 
-</style>
-
-<script>
-(function(){
-  function initV33(){
-    const btn=document.getElementById('menuBtn');
-    const menu=document.getElementById('sideMenu');
-    const overlay=document.getElementById('menuOverlay');
-    if(!btn||!menu)return;
-
-    document.body.style.overflow='';
-    document.documentElement.style.overflow='';
-    if(overlay) overlay.classList.remove('show');
-
-    let rail=menu.querySelector('.v32-rail');
-    if(!rail){
-      rail=document.createElement('div');
-      rail.className='v32-rail';
-      rail.innerHTML=`
-        <button class="v32-fortune" id="v33Fortune" type="button" aria-label="ดูดวง">
-          <span class="v32-icon" aria-hidden="true">🔮</span>
-          <span class="v32-label">ดูดวง</span>
-        </button>`;
-      menu.prepend(rail);
-    }else{
-      rail.querySelectorAll('.v32-line').forEach(el=>el.remove());
-      const fortune=rail.querySelector('.v32-fortune');
-      if(fortune) fortune.id='v33Fortune';
-    }
-
-    let busy=false;
-    function openMenu(){
-      if(busy)return;
-      document.body.classList.remove('v33-returning');
-      document.body.classList.add('v33-open');
-      menu.classList.remove('v33-closing');
-      menu.classList.add('show');
-      btn.classList.add('open');
-      btn.setAttribute('aria-expanded','true');
-    }
-    function closeMenu(done){
-      if(busy)return;
-      if(!menu.classList.contains('show')){ if(done)done(); return; }
-      busy=true;
-      menu.classList.add('v33-closing');
-      // Item retracts first while dots remain vertical.
-      setTimeout(function(){
-        menu.classList.remove('show','v33-closing');
-        document.body.classList.remove('v33-open');
-        document.body.classList.add('v33-returning');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-        // Finish the reverse dots animation, then clean the helper class.
-        setTimeout(function(){
-          document.body.classList.remove('v33-returning');
-          busy=false;
-          if(done)done();
-        },320);
-      },300);
-    }
-
-    btn.onclick=function(e){
-      if(e){e.preventDefault();e.stopPropagation();}
-      menu.classList.contains('show') ? closeMenu() : openMenu();
-      return false;
-    };
-
-    const fortune=document.getElementById('v33Fortune');
-    if(fortune){
-      fortune.onclick=function(e){
-        e.preventDefault();e.stopPropagation();
-        closeMenu(function(){
-          if(typeof openBuyModal==='function') openBuyModal('p1');
-        });
-        return false;
-      };
-    }
-
-    document.addEventListener('pointerdown',function(e){
-      if(!menu.classList.contains('show'))return;
-      if(menu.contains(e.target)||btn.contains(e.target))return;
-      closeMenu();
-    },{passive:true});
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV33,{once:true});
-  else initV33();
-})();
-</script>
-
-<style>
-
-/* V34 — final placement + modal cleanup */
-
-/* Dropdown: sit a little below the 3-dot button, no giant empty host */
-#sideMenu.side-menu{
-  top:96px!important;
-  left:18px!important;
-  width:142px!important;
-  height:44px!important;
-  min-height:44px!important;
-}
-.v32-rail{height:44px!important}
-.v32-fortune{
-  width:132px!important;
-  height:42px!important;
-}
-
-/* Once Product Details is open, launcher UI must disappear completely. */
-body.v34-fortune-modal #menuBtn,
-body.v34-fortune-modal #sideMenu,
-body.v34-fortune-modal .v32-rail,
-body.v34-fortune-modal .v32-fortune{
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-  display:none!important;
-}
-
-/* Left-half translucent blur veil while fortune modal is open */
-#v34LeftBlur{
-  position:fixed;
-  left:0;top:0;bottom:0;
-  width:50vw;
-  z-index:1490;
-  pointer-events:none;
-  opacity:0;
-  visibility:hidden;
-  background:linear-gradient(90deg,
-    rgba(205,231,248,.105) 0%,
-    rgba(146,197,229,.065) 48%,
-    rgba(110,163,199,.025) 82%,
-    transparent 100%);
-  backdrop-filter:blur(18px) saturate(112%);
-  -webkit-backdrop-filter:blur(18px) saturate(112%);
-  transition:opacity .28s ease,visibility .28s ease;
-}
-body.v34-fortune-modal #v34LeftBlur{
-  opacity:1;
-  visibility:visible;
-}
-
-/* Keep actual Product Details above the blur veil */
-#buyModal,.buy-modal{
-  z-index:1500!important;
-}
-
-</style>
-
-<script>
-(function(){
-  function initV34(){
-    const menu=document.getElementById('sideMenu');
-    const btn=document.getElementById('menuBtn');
-    const modal=document.getElementById('buyModal');
-
-    let blur=document.getElementById('v34LeftBlur');
-    if(!blur){
-      blur=document.createElement('div');
-      blur.id='v34LeftBlur';
-      blur.setAttribute('aria-hidden','true');
-      document.body.appendChild(blur);
-    }
-
-    function modalOpen(){
-      if(!modal)return false;
-      const cs=getComputedStyle(modal);
-      return modal.classList.contains('show') ||
-             modal.classList.contains('open') ||
-             modal.classList.contains('active') ||
-             (cs.display!=='none' && cs.visibility!=='hidden' && parseFloat(cs.opacity||'1')>0);
-    }
-
-    function sync(){
-      const open=modalOpen();
-      document.body.classList.toggle('v34-fortune-modal',open);
-      if(open){
-        if(menu) menu.classList.remove('show','v33-closing');
-        document.body.classList.remove('v33-open','v33-returning','v32-open');
-        if(btn) btn.classList.remove('open');
-        document.body.style.overflow='';
-        document.documentElement.style.overflow='';
-      }
-    }
-
-    if(modal){
-      new MutationObserver(sync).observe(modal,{
-        attributes:true,
-        attributeFilter:['class','style','hidden','aria-hidden']
-      });
-    }
-
-    /* Also sync after any click, covering modal implementations that change ancestors. */
-    document.addEventListener('click',function(){setTimeout(sync,0)},true);
-    sync();
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV34,{once:true});
-  else initV34();
-})();
-</script>
-
-<style>
-
-/* V35 — game-style left drawer inspired by the supplied reference */
-#v34LeftBlur{display:none!important}
-
-/* Full-height LEFT drawer, not a floating card */
+/* Actual game drawer: above backdrop, never blurred */
 #sideMenu.side-menu{
   position:fixed!important;
-  top:0!important;left:0!important;bottom:0!important;right:auto!important;
-  width:min(255px,72vw)!important;
-  height:100dvh!important;
-  max-height:none!important;
-  padding:0!important;
-  margin:0!important;
-  border:0!important;
-  border-right:1px solid rgba(208,234,249,.11)!important;
-  border-radius:0!important;
-  background:
-    linear-gradient(90deg,rgba(8,13,18,.91),rgba(13,22,29,.78) 72%,rgba(22,35,44,.55))!important;
-  box-shadow:18px 0 48px rgba(0,0,0,.22)!important;
-  backdrop-filter:blur(22px) saturate(112%)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(112%)!important;
+  top:0!important;left:0!important;right:auto!important;bottom:0!important;
+  width:min(285px,78vw)!important;height:100dvh!important;min-height:100dvh!important;
+  padding:0!important;margin:0!important;
+  border:0!important;border-right:1px solid rgba(225,241,251,.18)!important;border-radius:0!important;
+  background:linear-gradient(90deg,rgba(5,11,16,.72),rgba(9,19,27,.62) 68%,rgba(13,26,35,.53))!important;
+  box-shadow:20px 0 55px rgba(0,0,0,.22)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  filter:none!important;
   overflow:hidden!important;
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-  transform:translateX(-102%)!important;
-  transition:
-    transform .42s cubic-bezier(.16,.88,.24,1),
-    opacity .24s ease,
-    visibility .42s!important;
-  z-index:1450!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transform:translate3d(-103%,0,0)!important;
+  transition:transform .44s cubic-bezier(.16,.88,.24,1),opacity .22s ease,visibility .44s!important;
+  z-index:3000!important;
 }
 #sideMenu.side-menu.show{
-  opacity:1!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
-  transform:translateX(0)!important;
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  transform:translate3d(0,0,0)!important;
 }
+#sideMenu.side-menu > *{display:none!important}
+#sideMenu.side-menu > .v41-drawer{display:flex!important}
 
-/* translucent blurred half-screen atmosphere to the right of drawer */
-#v35DrawerBlur{
-  position:fixed;
-  inset:0;
-  z-index:1440;
-  pointer-events:none;
-  opacity:0;
-  visibility:hidden;
-  background:linear-gradient(90deg,
-    rgba(5,9,13,.16) 0,
-    rgba(9,16,22,.10) 45%,
-    transparent 72%);
-  backdrop-filter:blur(0);
-  -webkit-backdrop-filter:blur(0);
-  transition:opacity .3s ease,visibility .3s ease,backdrop-filter .3s ease;
-}
-body.v35-drawer-open #v35DrawerBlur{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
-}
-
-/* Hide all old menu / fortune dropdown pieces */
-#sideMenu .side-menu-head,
-#sideMenu .side-menu-body,
-#sideMenu .v28-game-launcher,
-#sideMenu .v30-dock,
-#sideMenu .v32-rail{display:none!important}
-
-.v35-drawer{
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  padding:24px 12px 18px;
-}
-.v35-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:8px 7px 17px;
-  border-bottom:1px solid rgba(225,240,249,.12);
-}
-.v35-title{
-  font-size:20px;
-  line-height:1;
-  font-weight:500;
-  letter-spacing:.5px;
-  color:rgba(255,255,255,.94);
-}
-.v35-close{
-  width:28px;height:28px;
-  padding:0;
-  display:grid;place-items:center;
-  border:0;
-  border-radius:8px;
-  background:transparent;
-  color:rgba(255,255,255,.48);
-  font-size:20px;
-  cursor:pointer;
-}
-.v35-close:active{background:rgba(255,255,255,.055)}
-.v35-list{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  padding-top:42px;
-}
-.v35-item{
-  width:100%;
-  min-height:54px;
-  padding:0 13px;
-  display:flex;
-  align-items:center;
-  gap:11px;
-  border:1px solid rgba(218,237,249,.055);
-  border-radius:4px;
-  background:rgba(3,7,10,.55);
-  color:rgba(255,255,255,.88);
-  text-align:left;
-  cursor:pointer;
-  box-shadow:inset 0 1px rgba(255,255,255,.025);
-  opacity:0;
-  transform:translateX(-18px);
-}
-#sideMenu.show .v35-item{
-  animation:v35ItemIn .36s cubic-bezier(.16,.9,.24,1) forwards;
-}
-#sideMenu.show .v35-item:nth-child(1){animation-delay:.08s}
-#sideMenu.show .v35-item:nth-child(2){animation-delay:.12s}
-#sideMenu.show .v35-item:nth-child(3){animation-delay:.16s}
-.v35-item:hover,.v35-item:active{
-  background:rgba(30,48,60,.66);
-  border-color:rgba(165,215,247,.14);
-}
-.v35-item-icon{
-  width:25px;
-  display:grid;place-items:center;
-  font-size:19px;
-}
-.v35-item-text{
-  font-size:13px;
-  font-weight:500;
-  letter-spacing:.15px;
-}
-.v35-item.disabled{opacity:.32!important;pointer-events:none}
-@keyframes v35ItemIn{
-  to{opacity:1;transform:translateX(0)}
-}
-
-/* Three-dot trigger remains compact; rotate visual orientation only while drawer is open */
-#menuBtn.menu-btn{
-  z-index:1460!important;
-  transition:transform .28s cubic-bezier(.2,.85,.25,1.1)!important;
-}
-body.v35-drawer-open #menuBtn.menu-btn{
+.v41-drawer{
+  width:100%;height:100%;box-sizing:border-box;
   flex-direction:column!important;
-  gap:3px!important;
+  padding:calc(env(safe-area-inset-top,0px) + 30px) 14px calc(env(safe-area-inset-bottom,0px) + 20px);
+  color:#fff!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.v41-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 8px 20px;border-bottom:1px solid rgba(235,246,252,.17);
+}
+.v41-title{font-size:21px;font-weight:700;letter-spacing:.45px;color:#fff!important;filter:none!important}
+.v41-close{
+  width:32px;height:32px;padding:0;border:0;border-radius:8px;background:transparent!important;
+  color:rgba(255,255,255,.68)!important;font-size:24px;line-height:1;display:grid;place-items:center;cursor:pointer;
+}
+.v41-list{padding-top:38px}
+
+/* Fortune item is FRONT UI — crisp, no blur */
+.v41-fortune{
+  position:relative!important;width:100%!important;height:60px!important;
+  padding:1.5px!important;margin:0!important;border:0!important;border-radius:14px!important;
+  display:block!important;overflow:hidden!important;isolation:isolate!important;
+  background:transparent!important;filter:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  cursor:pointer!important;opacity:0;transform:translateX(-22px);
+}
+#sideMenu.show .v41-fortune{animation:v41ItemIn .4s .1s cubic-bezier(.16,.9,.24,1) forwards!important}
+.v41-fortune::before{
+  content:"";position:absolute;inset:-150%;z-index:0;
+  background:conic-gradient(from 0deg,#ff4f97,#ff9847,#ffe56b,#54e5a2,#53d3ff,#7e7cff,#de69ff,#ff4f97);
+  animation:v41Rainbow 3.15s linear infinite;
+}
+.v41-fortune::after{
+  content:"";position:absolute;inset:1.5px;z-index:1;border-radius:12.5px;
+  background:rgba(7,12,17,.88)!important;
+}
+.v41-fortune-inner{
+  position:relative;z-index:2;height:100%;padding:0 16px;
+  display:flex;align-items:center;gap:12px;color:#fff!important;
+  filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.v41-icon{width:30px;height:30px;display:grid;place-items:center}
+.v41-icon svg{
+  width:26px;height:26px;display:block;fill:none;stroke:currentColor;stroke-width:1.55;
+  stroke-linecap:round;stroke-linejoin:round;filter:none!important;
+}
+.v41-label{font-size:13px;font-weight:650;letter-spacing:.15px;color:#fff!important}
+@keyframes v41Rainbow{to{transform:rotate(360deg)}}
+@keyframes v41ItemIn{to{opacity:1;transform:translateX(0)}}
+
+/* Song 4–5 use EXACT SAME tile geometry/cropping behavior as songs 1–3.
+   They are background-image tiles, not <img> elements. */
+.music .song-item[data-index="3"],
+.music .song-item[data-index="4"]{
+  width:74px!important;height:74px!important;min-height:74px!important;flex-basis:74px!important;
+  background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;
+}
+@media(max-width:560px){
+  .music .song-item[data-index="3"],
+  .music .song-item[data-index="4"]{
+    width:66px!important;height:66px!important;min-height:66px!important;flex-basis:66px!important;
+  }
 }
 
-/* Product Details must own the screen: no menu trigger/drawer ghosting */
-body.v34-fortune-modal #sideMenu,
-body.v34-fortune-modal #menuBtn,
-body.v34-fortune-modal #v35DrawerBlur{
-  display:none!important;
-}
-
+/* Product details owns the screen */
+body.v41-product #menuBtn,
+body.v41-product #sideMenu,
+body.v41-product #v41Backdrop{display:none!important}
 </style>
 
-<script>
+
+<script id="v41-final-game-drawer-script">
 (function(){
-  function initV35(){
-    const btn=document.getElementById('menuBtn');
+  function bootV41(){
+    const oldBtn=document.getElementById('menuBtn');
     const menu=document.getElementById('sideMenu');
-    if(!btn||!menu)return;
+    const modal=document.getElementById('buyModal');
+    if(!oldBtn||!menu)return;
 
-    let blur=document.getElementById('v35DrawerBlur');
-    if(!blur){
-      blur=document.createElement('div');
-      blur.id='v35DrawerBlur';
-      document.body.appendChild(blur);
-    }
+    /* Remove every legacy menu listener, including inline onclick. */
+    const btn=oldBtn.cloneNode(true);
+    btn.removeAttribute('onclick');
+    oldBtn.replaceWith(btn);
 
-    let drawer=menu.querySelector('.v35-drawer');
-    if(!drawer){
-      drawer=document.createElement('div');
-      drawer.className='v35-drawer';
-      drawer.innerHTML=`
-        <div class="v35-head">
-          <div class="v35-title">MENU</div>
-          <button class="v35-close" type="button" aria-label="ปิดเมนู">×</button>
-        </div>
-        <div class="v35-list">
-          <button class="v35-item" id="v35Fortune" type="button">
-            <span class="v35-item-icon">🔮</span>
-            <span class="v35-item-text">ดูดวง</span>
-          </button>
-        </div>`;
-      menu.prepend(drawer);
-    }
+    /* Delete all legacy drawer contents. */
+    menu.replaceChildren();
 
-    let closing=false;
-    function openDrawer(){
-      if(closing)return;
-      menu.classList.add('show');
-      document.body.classList.add('v35-drawer-open');
-      btn.classList.add('open');
-      document.body.style.overflow='';
-      document.documentElement.style.overflow='';
-    }
-    function closeDrawer(done){
-      if(closing)return;
-      if(!menu.classList.contains('show')){if(done)done();return;}
-      closing=true;
+    const drawer=document.createElement('div');
+    drawer.className='v41-drawer';
+    drawer.innerHTML=`
+      <div class="v41-head">
+        <div class="v41-title">MENU</div>
+        <button class="v41-close" type="button" aria-label="ปิดเมนู">×</button>
+      </div>
+      <div class="v41-list">
+        <button class="v41-fortune" type="button" aria-label="ดูดวงฟรี">
+          <span class="v41-fortune-inner">
+            <span class="v41-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <circle cx="16" cy="13.2" r="9.2"/>
+                <path d="M10.3 22.1c1.7 1.15 3.6 1.72 5.7 1.72s4-.57 5.7-1.72"/>
+                <path d="M11.4 23.6 9.8 28h12.4l-1.6-4.4M8.8 28h14.4"/>
+                <path d="M12.1 8.9c1.15-1.05 2.55-1.62 4.15-1.7"/>
+                <circle cx="12.8" cy="12.3" r=".8" fill="currentColor" stroke="none"/>
+                <circle cx="19" cy="15.3" r=".65" fill="currentColor" stroke="none"/>
+                <path d="M23 4.9v2.5M21.75 6.15h2.5"/>
+              </svg>
+            </span>
+            <span class="v41-label">ดูดวงฟรี</span>
+          </span>
+        </button>
+      </div>`;
+    menu.appendChild(drawer);
+
+    document.getElementById('v41Backdrop')?.remove();
+    const backdrop=document.createElement('div');
+    backdrop.id='v41Backdrop';
+    document.body.appendChild(backdrop);
+
+    function clear(){
       menu.classList.remove('show');
-      document.body.classList.remove('v35-drawer-open');
-      btn.classList.remove('open');
+      document.body.classList.remove('v41-open');
       document.body.style.overflow='';
       document.documentElement.style.overflow='';
-      setTimeout(function(){closing=false;if(done)done();},430);
+    }
+    function open(){
+      menu.classList.add('show');
+      document.body.classList.add('v41-open');
+      document.body.style.overflow='';
+      document.documentElement.style.overflow='';
+    }
+    function close(after){
+      clear();
+      if(after)setTimeout(after,440);
     }
 
-    btn.onclick=function(e){
-      if(e){e.preventDefault();e.stopPropagation();}
-      menu.classList.contains('show')?closeDrawer():openDrawer();
-      return false;
-    };
-    drawer.querySelector('.v35-close').onclick=function(e){
-      e.preventDefault();e.stopPropagation();closeDrawer();
-    };
-    blur.onclick=function(){closeDrawer()};
-    drawer.querySelector('#v35Fortune').onclick=function(e){
+    btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopImmediatePropagation();
+      menu.classList.contains('show')?close():open();
+    });
+    drawer.querySelector('.v41-close').addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();close();
+    });
+    backdrop.addEventListener('click',function(){close()});
+    drawer.querySelector('.v41-fortune').addEventListener('click',function(e){
       e.preventDefault();e.stopPropagation();
-      closeDrawer(function(){
-        if(typeof openBuyModal==='function')openBuyModal('p1');
-      });
-    };
+      close(function(){ if(typeof openBuyModal==='function') openBuyModal('p1'); });
+    });
+
+    function syncProduct(){
+      if(!modal)return;
+      const cs=getComputedStyle(modal);
+      const on=modal.classList.contains('show')||modal.classList.contains('open')||modal.classList.contains('active')||
+        (cs.display!=='none'&&cs.visibility!=='hidden'&&parseFloat(cs.opacity||'1')>0);
+      document.body.classList.toggle('v41-product',on);
+      if(on)clear();
+    }
+    if(modal)new MutationObserver(syncProduct).observe(modal,{attributes:true,attributeFilter:['class','style','hidden','aria-hidden']});
+    clear(); syncProduct();
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV35,{once:true});
-  else initV35();
+
+  /* Register last, then boot after legacy DOMContentLoaded callbacks have finished. */
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(bootV41,0)},{once:true});
+  }else{
+    setTimeout(bootV41,0);
+  }
 })();
 </script>
 
-<style>
-
-/* V36 — clear glass drawer + rainbow fortune SVG card */
-
-/* IMPORTANT: original profile 3-dot trigger must NOT appear inside drawer */
-body.v35-drawer-open #menuBtn.menu-btn{
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
-}
-
-/* Much clearer / more transparent glass */
-#sideMenu.side-menu{
-  background:
-    linear-gradient(90deg,
-      rgba(10,18,24,.34) 0%,
-      rgba(17,29,38,.25) 62%,
-      rgba(28,43,53,.16) 100%)!important;
-  border-right:1px solid rgba(220,241,255,.13)!important;
-  box-shadow:12px 0 38px rgba(0,0,0,.12)!important;
-  backdrop-filter:blur(18px) saturate(120%)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(120%)!important;
-}
-body.v35-drawer-open #v35DrawerBlur{
-  background:linear-gradient(90deg,
-    rgba(7,12,17,.07) 0%,
-    rgba(7,12,17,.035) 48%,
-    transparent 76%)!important;
-  backdrop-filter:blur(3px)!important;
-  -webkit-backdrop-filter:blur(3px)!important;
-}
-
-/* Remove old emoji/menu styling */
-#v35Fortune.v35-item{
-  position:relative!important;
-  width:100%!important;
-  min-height:58px!important;
-  padding:1px!important;
-  gap:0!important;
-  border:0!important;
-  border-radius:14px!important;
-  background:transparent!important;
-  overflow:hidden!important;
-  isolation:isolate!important;
-  box-shadow:0 8px 25px rgba(0,0,0,.10)!important;
-}
-#v35Fortune.v35-item::before{
-  content:""!important;
+<style id="v42-polish">
+/* V42: 3-dot trigger anchored to the profile card, mirroring the view counter */
+.hero{position:relative!important}
+#menuBtn.menu-btn{
   position:absolute!important;
-  inset:-120%!important;
-  z-index:0!important;
-  background:conic-gradient(
-    from 0deg,
-    #ff4f9a,#ff994c,#ffe36a,#54e6a5,
-    #56cfff,#847cff,#d96cff,#ff4f9a
-  )!important;
-  animation:v36RainbowBorder 3.4s linear infinite!important;
+  top:16px!important;
+  left:16px!important;
+  right:auto!important;
+  width:34px!important;height:28px!important;
+  z-index:20!important;
 }
-#v35Fortune.v35-item::after{
+
+/* Fortune: rainbow ONLY on the border. Interior is plain dark/transparent. */
+.v41-fortune{
+  padding:1.5px!important;
+  background:linear-gradient(90deg,#ff4f97,#ff9847,#ffe56b,#54e5a2,#53d3ff,#7e7cff,#de69ff,#ff4f97)!important;
+  background-size:300% 100%!important;
+  animation:v42FortuneBorder 4s linear infinite!important;
+}
+.v41-fortune::before{display:none!important;content:none!important;animation:none!important}
+.v41-fortune::after{
   content:""!important;
   position:absolute!important;
   inset:1.5px!important;
   z-index:1!important;
   border-radius:12.5px!important;
-  background:rgba(8,14,19,.31)!important;
-  backdrop-filter:blur(13px) saturate(115%)!important;
-  -webkit-backdrop-filter:blur(13px) saturate(115%)!important;
-}
-#v35Fortune .v35-fortune-content{
-  position:relative!important;
-  z-index:2!important;
-  width:100%!important;
-  min-height:56px!important;
-  padding:0 15px!important;
-  display:flex!important;
-  align-items:center!important;
-  gap:12px!important;
-}
-#v35Fortune .v35-item-icon{
-  width:30px!important;height:30px!important;
-  display:grid!important;place-items:center!important;
-  color:rgba(245,250,255,.94)!important;
-}
-#v35Fortune .v35-item-icon svg{
-  width:25px!important;height:25px!important;
-  display:block!important;
-  fill:none!important;
-  stroke:currentColor!important;
-  stroke-width:1.55!important;
-  stroke-linecap:round!important;
-  stroke-linejoin:round!important;
-  filter:drop-shadow(0 0 5px rgba(137,211,255,.16));
-}
-#v35Fortune .v35-item-text{
-  color:rgba(255,255,255,.94)!important;
-  font-size:13px!important;
-  font-weight:550!important;
-}
-#v35Fortune:active .v35-fortune-content{transform:scale(.985)}
-@keyframes v36RainbowBorder{to{transform:rotate(360deg)}}
-
-/* cleaner spacing like a real game drawer */
-.v35-list{padding-top:30px!important}
-
-</style>
-
-<script>
-(function(){
-  function initV36(){
-    const fortune=document.getElementById('v35Fortune');
-    if(!fortune)return;
-
-    /* Replace emoji with a real inline SVG crystal-ball icon. */
-    fortune.innerHTML=`
-      <span class="v35-fortune-content">
-        <span class="v35-item-icon" aria-hidden="true">
-          <svg viewBox="0 0 32 32">
-            <circle cx="16" cy="13.3" r="9.1"/>
-            <path d="M10.3 22.2c1.7 1.1 3.6 1.7 5.7 1.7s4-.6 5.7-1.7"/>
-            <path d="M11.3 23.6 9.7 28h12.6l-1.6-4.4"/>
-            <path d="M8.9 28h14.2"/>
-            <path d="M12.2 8.9c1.2-1.1 2.5-1.6 4.1-1.7"/>
-            <circle cx="12.7" cy="12.4" r=".8" fill="currentColor" stroke="none"/>
-            <circle cx="18.9" cy="15.4" r=".65" fill="currentColor" stroke="none"/>
-            <path d="M22.8 5.1v2.2M21.7 6.2h2.2"/>
-          </svg>
-        </span>
-        <span class="v35-item-text">ดูดวง</span>
-      </span>`;
-
-    /* Re-bind direct action because replacing inner HTML must not affect button behavior. */
-    fortune.onclick=function(e){
-      e.preventDefault();
-      e.stopPropagation();
-
-      const menu=document.getElementById('sideMenu');
-      const btn=document.getElementById('menuBtn');
-      if(menu) menu.classList.remove('show');
-      document.body.classList.remove('v35-drawer-open');
-      if(btn) btn.classList.remove('open');
-
-      setTimeout(function(){
-        if(typeof openBuyModal==='function') openBuyModal('p1');
-      },420);
-      return false;
-    };
-  }
-  if(document.readyState==='loading')
-    document.addEventListener('DOMContentLoaded',initV36,{once:true});
-  else initV36();
-})();
-</script>
-
-<style>
-
-/* V37 — drawer blur cleanup + free fortune label */
-#v35Fortune .v35-item-text::after{content:""!important}
-
-/* Blur must never survive after drawer closes. */
-body:not(.v35-drawer-open) #v35DrawerBlur{
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
+  background:rgba(7,12,17,.78)!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
-#v35DrawerBlur{
-  transition:opacity .24s ease,visibility .24s ease!important;
+.v41-fortune-inner{background:transparent!important}
+@keyframes v42FortuneBorder{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
 }
-
 </style>
-
-<script>
+<script id="v42-profile-anchor">
 (function(){
-  function initV37(){
-    const menu=document.getElementById('sideMenu');
-    const blur=document.getElementById('v35DrawerBlur');
+  function anchorMenuButton(){
     const btn=document.getElementById('menuBtn');
-    const fortune=document.getElementById('v35Fortune');
-
-    /* Label */
-    if(fortune){
-      const label=fortune.querySelector('.v35-item-text');
-      if(label) label.textContent='ดูดวงฟรี';
-    }
-
-    /* One cleanup function used by every possible close path. */
-    function hardCleanupDrawer(){
-      if(menu) menu.classList.remove('show','open','active');
-      document.body.classList.remove(
-        'v35-drawer-open','v33-open','v33-returning',
-        'v32-open','v31-open','v30-dock-open'
-      );
-      if(btn) btn.classList.remove('open');
-      if(blur){
-        blur.style.opacity='0';
-        blur.style.visibility='hidden';
-        blur.style.pointerEvents='none';
-        blur.style.backdropFilter='none';
-        blur.style.webkitBackdropFilter='none';
-      }
-      document.body.style.overflow='';
-      document.documentElement.style.overflow='';
-    }
-
-    /* Whenever the drawer is no longer shown, forcibly clear blur. */
-    if(menu){
-      new MutationObserver(function(){
-        if(!menu.classList.contains('show')) hardCleanupDrawer();
-      }).observe(menu,{attributes:true,attributeFilter:['class']});
-    }
-
-    document.addEventListener('pointerup',function(){
-      setTimeout(function(){
-        if(menu && !menu.classList.contains('show')) hardCleanupDrawer();
-      },460);
-    },{passive:true});
-
-    window.addEventListener('pageshow',hardCleanupDrawer);
-    window.addEventListener('pagehide',hardCleanupDrawer);
-
-    /* Pull the real YouTube title after a replacement track is loaded.
-       This avoids guessing the title and keeps the on-page title accurate. */
-    function syncYouTubeTitle(){
-      try{
-        if(typeof ytPlayer==='undefined' || !ytPlayer || currentIndex < 0) return;
-        const data=ytPlayer.getVideoData ? ytPlayer.getVideoData() : null;
-        if(!data || !data.title) return;
-        const song=CONFIG.songs[currentIndex];
-        if(!song) return;
-        if(song.videoId==='a4aCt_cma7E' || song.videoId==='cy2avZxPH1k'){
-          song.title=data.title;
-          song.artist=data.author || 'YouTube';
-          if(typeof updateNowPlayingTitle==='function') updateNowPlayingTitle();
-          const item=document.querySelector('.song-item[data-index="'+currentIndex+'"]');
-          if(item) item.title=song.title+' - '+song.artist;
-        }
-      }catch(e){}
-    }
-
-    /* Hook without replacing the existing player-state logic. */
-    const timer=setInterval(syncYouTubeTitle,900);
-    setTimeout(function(){clearInterval(timer)},30000);
-
-    /* Re-run briefly after a song tile is tapped. */
-    document.addEventListener('click',function(e){
-      const item=e.target.closest && e.target.closest('.song-item');
-      if(!item)return;
-      let n=0;
-      const t=setInterval(function(){
-        syncYouTubeTitle();
-        if(++n>8) clearInterval(t);
-      },650);
-    },{passive:true});
-
-    hardCleanupDrawer();
+    const hero=document.querySelector('.hero');
+    if(!btn||!hero)return;
+    /* Move the launcher into the profile card so it scrolls/moves with the profile,
+       exactly opposite the view counter on the left. */
+    if(btn.parentElement!==hero) hero.appendChild(btn);
   }
-
-  if(document.readyState==='loading')
-    document.addEventListener('DOMContentLoaded',initV37,{once:true});
-  else initV37();
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(anchorMenuButton,10)},{once:true});
+  }else{
+    setTimeout(anchorMenuButton,10);
+  }
 })();
 </script>
+
+<style id="v43-visible-controls">
+/* V43 — make the profile launcher clearly look clickable */
+#menuBtn.menu-btn{
+  position:absolute!important;
+  top:16px!important;left:16px!important;right:auto!important;
+  width:38px!important;height:30px!important;min-width:38px!important;min-height:30px!important;
+  border:1px solid rgba(220,238,248,.26)!important;
+  border-radius:9px!important;
+  background:rgba(8,15,21,.32)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 4px 14px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+#menuBtn.menu-btn:active{
+  transform:scale(.95)!important;
+  background:rgba(15,27,36,.46)!important;
+  border-color:rgba(225,242,252,.4)!important;
+}
+#menuBtn.menu-btn span{
+  width:3.5px!important;height:3.5px!important;flex:0 0 3.5px!important;
+  background:#f5f9fc!important;
+  box-shadow:0 0 4px rgba(255,255,255,.22)!important;
+}
+
+/* Fortune button — strong animated rainbow BORDER ONLY */
+.v41-fortune{
+  padding:2px!important;
+  background:linear-gradient(90deg,
+    #ff2f8b 0%,#ff6b35 13%,#ffd83d 27%,#53e56f 42%,
+    #35d7e8 57%,#3b8cff 70%,#8c5cff 83%,#ee4bff 93%,#ff2f8b 100%)!important;
+  background-size:350% 100%!important;
+  animation:v43RainbowBorder 3s linear infinite!important;
+  box-shadow:0 0 10px rgba(95,170,255,.08)!important;
+}
+.v41-fortune::before{
+  display:none!important;content:none!important;background:none!important;
+}
+.v41-fortune::after{
+  content:""!important;
+  position:absolute!important;inset:2px!important;z-index:1!important;
+  border-radius:12px!important;
+  background:rgba(6,11,16,.92)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.v41-fortune-inner{
+  position:relative!important;z-index:2!important;
+  background:transparent!important;
+  filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+@keyframes v43RainbowBorder{
+  from{background-position:0% 50%}
+  to{background-position:350% 50%}
+}
+</style>
+
+<style id="v44-final-visual-fixes">
+/* Fortune: unmistakable animated rainbow BORDER, solid neutral interior */
+.v41-fortune{
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+  animation:none!important;
+}
+.v41-fortune::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-2px!important;
+  z-index:-2!important;
+  border-radius:16px!important;
+  background:conic-gradient(from var(--v44-angle),
+    #ff2d8d,#ff6a36,#ffd83d,#53e86d,#2fe0cf,#36a2ff,#7d63ff,#e44cff,#ff2d8d)!important;
+  animation:v44RainbowSpin 2.4s linear infinite!important;
+  filter:drop-shadow(0 0 5px rgba(104,166,255,.22))!important;
+}
+.v41-fortune::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:1px!important;
+  z-index:-1!important;
+  border-radius:13px!important;
+  background:#071016!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.v41-fortune-inner{z-index:2!important}
+@property --v44-angle{
+  syntax:"<angle>";
+  initial-value:0deg;
+  inherits:false;
+}
+@keyframes v44RainbowSpin{to{--v44-angle:360deg}}
+
+/* Song 4–5: use same active halo mechanics as 1–3, but glow derives from each cover. */
+.music .song-item[data-index="3"],
+.music .song-item[data-index="4"]{
+  background-size:cover!important;
+  background-position:center!important;
+  overflow:visible!important;
+}
+.music .song-item[data-index="3"]{--song-glow:#b8b0a8!important}
+.music .song-item[data-index="4"]{--song-glow:#d8d8d8!important}
+.music .song-item[data-index="3"].active,
+.music .song-item[data-index="4"].active,
+.music .song-item[data-index="3"].playing,
+.music .song-item[data-index="4"].playing{
+  box-shadow:
+    0 0 0 2px var(--song-glow),
+    0 0 12px var(--song-glow),
+    0 0 25px color-mix(in srgb,var(--song-glow) 52%,transparent)!important;
+}
+</style>
+
+<script id="v44-cover-color-glow">
+(function(){
+ function rgbToHex(r,g,b){return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('')}
+ function coverGlow(index){
+   const song=window.CONFIG&&CONFIG.songs&&CONFIG.songs[index];
+   const tile=document.querySelector('.song-item[data-index="'+index+'"]');
+   if(!song||!tile)return;
+   const img=new Image(); img.crossOrigin='anonymous';
+   img.onload=function(){
+     try{
+       const c=document.createElement('canvas');c.width=c.height=24;
+       const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,24,24);
+       const d=x.getImageData(0,0,24,24).data;
+       let r=0,g=0,b=0,n=0;
+       for(let i=0;i<d.length;i+=16){
+         if(d[i+3]<100)continue;
+         const mx=Math.max(d[i],d[i+1],d[i+2]), mn=Math.min(d[i],d[i+1],d[i+2]);
+         if(mx<45)continue;
+         const sat=mx-mn;
+         const w=1+sat/90;
+         r+=d[i]*w;g+=d[i+1]*w;b+=d[i+2]*w;n+=w;
+       }
+       if(n){
+         r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
+         const mx=Math.max(r,g,b); if(mx<150){const k=150/Math.max(mx,1);r*=k;g*=k;b*=k}
+         const col=rgbToHex(Math.round(r),Math.round(g),Math.round(b));
+         tile.style.setProperty('--song-glow',col,'important');
+         song.glow=col;
+       }
+     }catch(e){}
+   };
+   img.src=song.cover;
+ }
+ function boot(){coverGlow(3);coverGlow(4)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+</script>
+
