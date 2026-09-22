@@ -1232,8 +1232,7 @@ var CONFIG = {
     { title: "bye (Altare Remix)", artist: "Ariana Grande, Altare", videoId: "agneRtEe-t8", startAt: 15, cover: "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg", glow: "#c5f82a" },
     { title: "hate that i made you love me", artist: "Ariana Grande", videoId: "v1t4MTqdfyI", startAt: 26, cover: "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg", glow: "#f0b232" },
     { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" },
-    { title: "cardigan", artist: "Taylor Swift", videoId: "K-a8s8OLBSE", startAt: 20, cover: "https://img.youtube.com/vi/K-a8s8OLBSE/maxresdefault.jpg", glow: "#b8b0a8" },
-      { title: "Track 05", artist: "YouTube", videoId: "SUZJGVq4N_g", startAt: 18, cover: "https://img.youtube.com/vi/SUZJGVq4N_g/maxresdefault.jpg", glow: "#d8d8d8" }
+    { title: "Cinnamon Girl", artist: "Lana Del Rey", videoId: "tQz93eTCpSA", startAt: 22, cover: "https://img.youtube.com/vi/tQz93eTCpSA/maxresdefault.jpg", glow: "#49a9ff" }
     ],
   products: [{
     id: "p1", name: "รับดูดวงฟรี", price: "ฟรี", image: "",
@@ -4953,31 +4952,36 @@ body.v41-product #v41Backdrop{display:none!important}
 }
 </style>
 
-<script id="v44-cover-color-glow">
+<script id="v45-four-song-fix">
 (function(){
- function rgbToHex(r,g,b){return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('')}
- function coverGlow(index){
-   const song=window.CONFIG&&CONFIG.songs&&CONFIG.songs[index];
-   const tile=document.querySelector('.song-item[data-index="'+index+'"]');
-   if(!song||!tile)return;
-   const img=new Image(); img.crossOrigin='anonymous';
+ function rgbToHex(r,g,b){
+   return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');
+ }
+ function setSong4Glow(){
+   if(!window.CONFIG||!CONFIG.songs||!CONFIG.songs[3])return;
+   const song=CONFIG.songs[3];
+   const tile=document.querySelector('.song-item[data-index="3"]');
+   if(!tile)return;
+   const img=new Image();
+   img.crossOrigin='anonymous';
    img.onload=function(){
      try{
-       const c=document.createElement('canvas');c.width=c.height=24;
-       const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,24,24);
+       const c=document.createElement('canvas'); c.width=c.height=24;
+       const x=c.getContext('2d',{willReadFrequently:true});
+       x.drawImage(img,0,0,24,24);
        const d=x.getImageData(0,0,24,24).data;
        let r=0,g=0,b=0,n=0;
        for(let i=0;i<d.length;i+=16){
          if(d[i+3]<100)continue;
-         const mx=Math.max(d[i],d[i+1],d[i+2]), mn=Math.min(d[i],d[i+1],d[i+2]);
-         if(mx<45)continue;
-         const sat=mx-mn;
-         const w=1+sat/90;
+         const mx=Math.max(d[i],d[i+1],d[i+2]),mn=Math.min(d[i],d[i+1],d[i+2]);
+         if(mx<42)continue;
+         const w=1+(mx-mn)/85;
          r+=d[i]*w;g+=d[i+1]*w;b+=d[i+2]*w;n+=w;
        }
        if(n){
          r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
-         const mx=Math.max(r,g,b); if(mx<150){const k=150/Math.max(mx,1);r*=k;g*=k;b*=k}
+         const mx=Math.max(r,g,b);
+         if(mx<155){const k=155/Math.max(mx,1);r*=k;g*=k;b*=k}
          const col=rgbToHex(Math.round(r),Math.round(g),Math.round(b));
          tile.style.setProperty('--song-glow',col,'important');
          song.glow=col;
@@ -4986,8 +4990,88 @@ body.v41-product #v41Backdrop{display:none!important}
    };
    img.src=song.cover;
  }
- function boot(){coverGlow(3);coverGlow(4)}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+ function boot(){
+   /* Defensive cleanup: render only 4 song tiles even if old DOM was cached/generated. */
+   document.querySelectorAll('.song-item[data-index]').forEach(function(el){
+     if(Number(el.dataset.index)>=4)el.remove();
+   });
+   setSong4Glow();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
+ else boot();
 })();
 </script>
+
+<style id="v48-music-only-preserve">
+.music-list,.music-icons,.songs,.song-list{
+  justify-content:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.music .song-item[data-index="0"],
+.music .song-item[data-index="1"],
+.music .song-item[data-index="2"],
+.music .song-item[data-index="3"]{
+  flex:0 0 auto!important;
+}
+.music .song-item[data-index="3"]{
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  overflow:visible!important;
+  --song-glow:#49a9ff;
+}
+.music .song-item[data-index="3"].active,
+.music .song-item[data-index="3"].playing{
+  box-shadow:
+    0 0 0 2px var(--song-glow),
+    0 0 12px var(--song-glow),
+    0 0 25px color-mix(in srgb,var(--song-glow) 52%,transparent)!important;
+}
+</style>
+
+<style id="v49-line-only-indicator-fix">
+/*
+  Keep the ORIGINAL chart toggle dimensions.
+  Only when LINE is selected: shorten the blue active visual to ~half
+  and clip it so it cannot escape the original rounded control.
+*/
+.chart-switch,
+.chart-mode-switch,
+.chart-toggle,
+.mode-switch{
+  overflow:hidden!important;
+}
+
+/* LINE is normally the second control. Do not resize the actual button. */
+.chart-switch > :nth-child(2).active,
+.chart-mode-switch > :nth-child(2).active,
+.chart-toggle > :nth-child(2).active,
+.mode-switch > :nth-child(2).active,
+.chart-switch > :nth-child(2)[aria-pressed="true"],
+.chart-mode-switch > :nth-child(2)[aria-pressed="true"],
+.chart-toggle > :nth-child(2)[aria-pressed="true"],
+.mode-switch > :nth-child(2)[aria-pressed="true"]{
+  background-size:50% 100%!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(70,164,255,.42),
+    inset 0 0 10px rgba(70,164,255,.08)!important;
+  outline:none!important;
+  overflow:hidden!important;
+}
+
+/* If the old UI paints its blue slider with a pseudo-element, shorten THAT only. */
+.chart-switch > :nth-child(2).active::before,
+.chart-mode-switch > :nth-child(2).active::before,
+.chart-toggle > :nth-child(2).active::before,
+.mode-switch > :nth-child(2).active::before{
+  width:50%!important;
+  left:25%!important;
+  right:auto!important;
+  max-width:50%!important;
+  box-sizing:border-box!important;
+}
+</style>
 
