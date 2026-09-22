@@ -760,17 +760,6 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
         <div class="stat" data-stat="pf"><div class="lbl-top">Profit Factor <span class="info-dot">i</span></div><div class="num gold" data-count="2.1" data-decimals="1">0</div><div class="sub">gross profit ÷ gross loss</div></div>
         <div class="stat" data-stat="dd"><div class="lbl-top">Max Drawdown <span class="info-dot">i</span></div><div class="num red" data-count="4.8" data-suffix="%" data-decimals="1">0%</div><div class="sub">largest peak-to-trough decline</div></div>
       </div>
-    </div>
-    <div class="tab-pane" id="pane-certs">
-      <div class="cert-list">
-        <div class="cert-list-item" onclick="viewCert('acg')">
-          <div class="cert-list-logo">ACG</div>
-          <div class="cert-list-info"><div class="cert-list-firm">Alpha Capital Group</div><div class="cert-list-name">$50K Challenge Passed</div><div class="cert-list-status">Certificate available</div></div>
-          <div class="cert-list-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </div>
-    </div>
-    
 <div class="stat-journal-row">
   <button class="stat-journal-link" id="journalPreviewBtn" type="button" aria-expanded="false" aria-controls="journalEmbedPanel">
     <span class="journal-icon" aria-hidden="true">
@@ -803,6 +792,18 @@ footer{text-align:center;padding:18px 0 4px;font-family:'JetBrains Mono',monospa
     <iframe id="journalFrame" data-src="https://feline-tiger-dd9.notion.site/ebd//2541c59de51980f39c38e1c11780a5d0" title="Trading Journal Preview" frameborder="0" allowfullscreen loading="lazy"></iframe>
   </div>
 </div>
+    </div>
+    <div class="tab-pane" id="pane-certs">
+      <div class="cert-list">
+        <div class="cert-list-item" onclick="viewCert('acg')">
+          <div class="cert-list-logo">ACG</div>
+          <div class="cert-list-info"><div class="cert-list-firm">Alpha Capital Group</div><div class="cert-list-name">$50K Challenge Passed</div><div class="cert-list-status">Certificate available</div></div>
+          <div class="cert-list-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+    
+
 
 <div class="tab-pane" id="pane-chart">
       <div class="chart-toolbar">
@@ -1231,8 +1232,8 @@ var CONFIG = {
     { title: "bye (Altare Remix)", artist: "Ariana Grande, Altare", videoId: "agneRtEe-t8", startAt: 15, cover: "https://img.youtube.com/vi/agneRtEe-t8/maxresdefault.jpg", glow: "#c5f82a" },
     { title: "hate that i made you love me", artist: "Ariana Grande", videoId: "v1t4MTqdfyI", startAt: 26, cover: "https://img.youtube.com/vi/v1t4MTqdfyI/maxresdefault.jpg", glow: "#f0b232" },
     { title: "Collide (Solo Version)", artist: "Justine Skye", videoId: "Bfolf_L5wp0", startAt: 27, cover: "https://img.youtube.com/vi/Bfolf_L5wp0/maxresdefault.jpg", glow: "#6A5ACD" },
-    { title: "No Way Out - ØneHeath", artist: "YouTube", videoId: "AoqLkVnRfQE", startAt: 0, cover: "https://img.youtube.com/vi/AoqLkVnRfQE/maxresdefault.jpg", glow: "#49a9ff" },
-      { title: "Wuthering Waves OST — Mt. Firmament", artist: "YouTube", videoId: "4JcVi9aZNog", startAt: 0, cover: "https://i.ytimg.com/vi/4JcVi9aZNog/hqdefault.jpg", glow: "#49a9ff" }
+    { title: "Loading title…", artist: "YouTube", videoId: "a4aCt_cma7E", startAt: 20, cover: "https://i.ytimg.com/vi/a4aCt_cma7E/hqdefault.jpg", glow: "#49a9ff" },
+      { title: "Loading title…", artist: "YouTube", videoId: "cy2avZxPH1k", startAt: 18, cover: "https://i.ytimg.com/vi/cy2avZxPH1k/hqdefault.jpg", glow: "#49a9ff" }
     ],
   products: [{
     id: "p1", name: "รับดูดวงฟรี", price: "ฟรี", image: "",
@@ -3443,3 +3444,1770 @@ window.addEventListener('load', function(){
 }
 
 </style>
+
+<style>
+
+/* V23 — Journal preview belongs to STAT only */
+.stat-journal-row,
+.journal-embed-panel{
+  display:none!important;
+}
+body.stat-view-active .stat-journal-row{
+  display:flex!important;
+}
+body.stat-view-active .journal-embed-panel{
+  display:grid!important;
+}
+
+/* V23 — clean macOS-inspired OTHER menu */
+.other-menu,
+.more-menu,
+.side-menu,
+.menu-panel,
+.nav-drawer{
+  background:rgba(24,24,27,.78)!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  border-radius:14px!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.07)!important;
+  backdrop-filter:blur(24px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+}
+.other-menu a,.other-menu button,
+.more-menu a,.more-menu button,
+.side-menu a,.side-menu button,
+.menu-panel a,.menu-panel button,
+.nav-drawer a,.nav-drawer button{
+  border-radius:9px!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  transition:background .16s ease,transform .16s ease!important;
+}
+.other-menu a:hover,.other-menu button:hover,
+.more-menu a:hover,.more-menu button:hover,
+.side-menu a:hover,.side-menu button:hover,
+.menu-panel a:hover,.menu-panel button:hover,
+.nav-drawer a:hover,.nav-drawer button:hover{
+  background:rgba(255,255,255,.075)!important;
+  transform:none!important;
+}
+
+/* hamburger itself: macOS-like compact control */
+.hamburger,.menu-toggle,.hamburger-btn,#menuBtn,#menuToggle{
+  width:34px!important;height:34px!important;
+  border-radius:9px!important;
+  background:rgba(255,255,255,.035)!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+.hamburger:hover,.menu-toggle:hover,.hamburger-btn:hover,#menuBtn:hover,#menuToggle:hover{
+  background:rgba(255,255,255,.065)!important;
+  border-color:rgba(255,255,255,.11)!important;
+}
+
+/* Tone down old sci-fi/glow decorations inside the OTHER menu only */
+.other-menu::before,.other-menu::after,
+.more-menu::before,.more-menu::after,
+.side-menu::before,.side-menu::after,
+.menu-panel::before,.menu-panel::after,
+.nav-drawer::before,.nav-drawer::after{
+  box-shadow:none!important;
+  filter:none!important;
+}
+
+</style>
+
+<script>
+(function(){
+  function initV23(){
+    const body=document.body;
+    const journal=document.querySelector('.stat-journal-row');
+    if(!journal)return;
+
+    function isStatControl(el){
+      if(!el)return false;
+      const txt=(el.textContent||'').trim().toUpperCase();
+      const target=((el.getAttribute('data-tab')||'')+' '+(el.getAttribute('data-target')||'')+' '+(el.getAttribute('href')||'')).toUpperCase();
+      return txt==='STAT' || /\bSTAT\b/.test(target);
+    }
+    function syncStat(){
+      const candidates=[...document.querySelectorAll('button,a,[role="tab"],[data-tab],[data-target]')];
+      const stat=candidates.find(isStatControl);
+      if(!stat){ body.classList.add('stat-view-active'); return; }
+      const active=stat.classList.contains('active') ||
+                   stat.getAttribute('aria-selected')==='true' ||
+                   stat.getAttribute('aria-current')==='page';
+      body.classList.toggle('stat-view-active',active);
+    }
+    document.addEventListener('click',function(e){
+      const ctl=e.target.closest('button,a,[role="tab"],[data-tab],[data-target]');
+      if(!ctl)return;
+      setTimeout(syncStat,0);
+    });
+    syncStat();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV23,{once:true});
+  else initV23();
+})();
+</script>
+
+<style>
+
+/* V24 — replace hamburger visual with a single clean macOS-style launcher */
+.hamburger,.menu-toggle,.hamburger-btn,#menuBtn,#menuToggle{
+  position:relative!important;
+  width:38px!important;height:38px!important;
+  border-radius:12px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  background:rgba(28,28,31,.66)!important;
+  border:1px solid rgba(255,255,255,.105)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.07)!important;
+  backdrop-filter:blur(20px) saturate(130%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(130%)!important;
+  font-size:0!important;
+  overflow:hidden!important;
+}
+.hamburger span,.menu-toggle span,.hamburger-btn span,#menuBtn span,#menuToggle span{
+  display:none!important;
+}
+/* one compact "command center" glyph instead of 3 lines */
+.hamburger::before,.menu-toggle::before,.hamburger-btn::before,#menuBtn::before,#menuToggle::before{
+  content:""!important;
+  display:block!important;
+  width:16px!important;height:16px!important;
+  background:
+    radial-gradient(circle at 25% 25%,rgba(255,255,255,.88) 0 1.6px,transparent 1.8px),
+    radial-gradient(circle at 75% 25%,rgba(255,255,255,.55) 0 1.6px,transparent 1.8px),
+    radial-gradient(circle at 25% 75%,rgba(255,255,255,.55) 0 1.6px,transparent 1.8px),
+    radial-gradient(circle at 75% 75%,rgba(255,255,255,.88) 0 1.6px,transparent 1.8px)!important;
+  opacity:.9!important;
+  transition:transform .22s ease,opacity .22s ease!important;
+}
+.hamburger::after,.menu-toggle::after,.hamburger-btn::after,#menuBtn::after,#menuToggle::after{
+  display:none!important;
+}
+.hamburger:hover::before,.menu-toggle:hover::before,.hamburger-btn:hover::before,#menuBtn:hover::before,#menuToggle:hover::before{
+  transform:rotate(45deg) scale(1.04)!important;
+  opacity:1!important;
+}
+
+/* floating popover, closer to macOS Control Center than a drawer */
+.other-menu,.more-menu,.side-menu,.menu-panel,.nav-drawer{
+  border-radius:16px!important;
+  padding:7px!important;
+  background:rgba(26,26,29,.82)!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  box-shadow:0 22px 60px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.075)!important;
+  backdrop-filter:blur(28px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(135%)!important;
+}
+.other-menu a,.other-menu button,
+.more-menu a,.more-menu button,
+.side-menu a,.side-menu button,
+.menu-panel a,.menu-panel button,
+.nav-drawer a,.nav-drawer button{
+  min-height:38px!important;
+  padding:8px 10px!important;
+  border-radius:10px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  text-align:left!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.other-menu a:hover,.other-menu button:hover,
+.more-menu a:hover,.more-menu button:hover,
+.side-menu a:hover,.side-menu button:hover,
+.menu-panel a:hover,.menu-panel button:hover,
+.nav-drawer a:hover,.nav-drawer button:hover{
+  background:rgba(255,255,255,.075)!important;
+}
+
+/* compact open animation */
+.other-menu,.more-menu,.side-menu,.menu-panel,.nav-drawer{
+  transform-origin:top left!important;
+}
+.other-menu.open,.more-menu.open,.side-menu.open,.menu-panel.open,.nav-drawer.open,
+.other-menu.active,.more-menu.active,.side-menu.active,.menu-panel.active,.nav-drawer.active{
+  animation:v24PopoverIn .2s cubic-bezier(.2,.8,.2,1)!important;
+}
+@keyframes v24PopoverIn{
+  from{opacity:0;transform:translateY(-5px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+</style>
+
+<style>
+
+/* V25 — journal is physically inside STATS only */
+#pane-stats .stat-journal-row{display:flex!important;justify-content:center!important}
+#pane-stats .journal-embed-panel{display:grid!important}
+#pane-certs .stat-journal-row,#pane-certs .journal-embed-panel,
+#pane-chart .stat-journal-row,#pane-chart .journal-embed-panel{display:none!important}
+
+/* Compact macOS-style ellipsis trigger — no hamburger / no 4-dot launcher */
+#menuBtn.menu-btn{
+  width:32px!important;height:28px!important;
+  min-width:32px!important;min-height:28px!important;
+  padding:0!important;
+  border-radius:9px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3.5px!important;
+  background:rgba(30,30,32,.44)!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.055)!important;
+  backdrop-filter:blur(18px) saturate(125%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%)!important;
+  overflow:visible!important;
+}
+#menuBtn.menu-btn::before,#menuBtn.menu-btn::after{display:none!important;content:none!important}
+#menuBtn.menu-btn span{
+  display:block!important;
+  position:static!important;
+  width:3px!important;height:3px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.84)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  opacity:1!important;
+}
+#menuBtn.menu-btn.open span{transform:none!important}
+#menuBtn.menu-btn:hover{background:rgba(255,255,255,.07)!important}
+
+/* Transparent macOS popover */
+#sideMenu.side-menu{
+  top:52px!important;
+  left:12px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:min(360px,calc(100vw - 24px))!important;
+  height:auto!important;
+  max-height:min(72vh,610px)!important;
+  border-radius:18px!important;
+  overflow:hidden!important;
+  background:rgba(25,25,28,.58)!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  box-shadow:0 24px 70px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.09)!important;
+  backdrop-filter:blur(32px) saturate(145%)!important;
+  -webkit-backdrop-filter:blur(32px) saturate(145%)!important;
+  transform:translateY(-7px) scale(.975)!important;
+  transform-origin:top left!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1)!important;
+}
+#sideMenu.side-menu.show{
+  transform:translateY(0) scale(1)!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+#menuOverlay.menu-overlay{
+  background:rgba(0,0,0,.08)!important;
+  backdrop-filter:blur(2px)!important;
+  -webkit-backdrop-filter:blur(2px)!important;
+}
+
+/* macOS window header */
+#sideMenu .side-menu-head{
+  min-height:50px!important;
+  padding:9px 12px!important;
+  display:grid!important;
+  grid-template-columns:54px 1fr 30px!important;
+  align-items:center!important;
+  border-bottom:1px solid rgba(255,255,255,.08)!important;
+  background:rgba(255,255,255,.018)!important;
+}
+#sideMenu .brand-icon{display:none!important}
+#sideMenu .side-menu-head::before{
+  content:""!important;
+  width:42px!important;height:12px!important;
+  display:block!important;
+  background:
+    radial-gradient(circle at 6px 6px,#ff5f57 0 5px,transparent 5.4px),
+    radial-gradient(circle at 21px 6px,#febc2e 0 5px,transparent 5.4px),
+    radial-gradient(circle at 36px 6px,#28c840 0 5px,transparent 5.4px)!important;
+}
+#sideMenu .side-menu-title{
+  justify-self:center!important;
+  font-size:9px!important;
+  letter-spacing:1.5px!important;
+  color:rgba(255,255,255,.72)!important;
+}
+#sideMenu .side-menu-close{
+  width:26px!important;height:26px!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  border:0!important;
+  color:rgba(255,255,255,.42)!important;
+}
+#sideMenu .side-menu-close:hover{background:rgba(255,255,255,.07)!important;color:#fff!important}
+
+#sideMenu .side-menu-body{
+  padding:13px!important;
+  max-height:calc(min(72vh,610px) - 50px)!important;
+  overflow:auto!important;
+  background:transparent!important;
+}
+#sideMenu .side-menu-body>.sec-title{
+  margin:2px 2px 12px!important;
+  font-size:8px!important;
+  letter-spacing:1.8px!important;
+  color:rgba(255,255,255,.36)!important;
+}
+#sideMenu .menu-product-wrap{
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#sideMenu #productList>*{
+  border-radius:13px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.085)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.045)!important;
+}
+#sideMenu #productList>*:hover{
+  background:rgba(255,255,255,.075)!important;
+  border-color:rgba(255,255,255,.12)!important;
+}
+#sideMenu .menu-hint{
+  margin:12px 0 2px!important;
+  color:rgba(255,255,255,.24)!important;
+  font-size:8px!important;
+}
+@media(max-width:430px){
+  #sideMenu.side-menu{
+    left:10px!important;
+    top:48px!important;
+    width:calc(100vw - 20px)!important;
+    max-height:68vh!important;
+    border-radius:16px!important;
+  }
+}
+
+</style>
+
+<style>
+
+/* V26 — horizontal macOS ellipsis + refined menu controls */
+#menuBtn.menu-btn{
+  flex-direction:row!important;
+  gap:4px!important;
+}
+#menuBtn.menu-btn span{
+  display:block!important;
+  width:3px!important;height:3px!important;
+  flex:0 0 3px!important;
+}
+
+/* OTHER section becomes a clean tab/card like the rest of the site */
+#sideMenu .side-menu-body>.sec-title{
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  margin:1px 3px 11px!important;
+  padding:0!important;
+}
+#sideMenu .side-menu-body>.sec-title::after{
+  content:""!important;
+  height:1px!important;
+  flex:1!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.10),transparent)!important;
+}
+#sideMenu #productList{
+  display:grid!important;
+  gap:8px!important;
+}
+#sideMenu #productList>*{
+  position:relative!important;
+  min-height:72px!important;
+  padding:11px!important;
+  border-radius:13px!important;
+  background:rgba(255,255,255,.035)!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+  overflow:hidden!important;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease!important;
+}
+#sideMenu #productList>*::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:linear-gradient(110deg,rgba(73,169,255,.045),transparent 42%,rgba(140,100,255,.025))!important;
+}
+#sideMenu #productList>*:hover{
+  background:rgba(255,255,255,.055)!important;
+  border-color:rgba(120,190,255,.16)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Send/action control: match the site's compact tabs instead of plain text */
+#sideMenu #productList button,
+#sideMenu #productList .send-btn,
+#sideMenu #productList [class*="send"]{
+  min-width:56px!important;
+  min-height:32px!important;
+  padding:0 11px!important;
+  justify-content:center!important;
+  border-radius:9px!important;
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  color:rgba(255,255,255,.82)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.045)!important;
+}
+#sideMenu #productList button:hover,
+#sideMenu #productList .send-btn:hover,
+#sideMenu #productList [class*="send"]:hover{
+  background:rgba(73,169,255,.10)!important;
+  border-color:rgba(73,169,255,.22)!important;
+}
+
+/* Fortune/result UI after pressing Send */
+#sideMenu .result,
+#sideMenu .fortune-result,
+#sideMenu [class*="result-card"],
+#sideMenu [class*="fortune-card"],
+#sideMenu [class*="reading"]{
+  border-radius:14px!important;
+  background:rgba(255,255,255,.038)!important;
+  border:1px solid rgba(255,255,255,.085)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.04),0 10px 30px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  padding:13px!important;
+}
+#sideMenu .result h1,#sideMenu .result h2,#sideMenu .result h3,
+#sideMenu .fortune-result h1,#sideMenu .fortune-result h2,#sideMenu .fortune-result h3,
+#sideMenu [class*="result-card"] h3,#sideMenu [class*="fortune-card"] h3{
+  font-weight:600!important;
+  letter-spacing:.25px!important;
+  color:rgba(255,255,255,.92)!important;
+}
+#sideMenu .result p,#sideMenu .fortune-result p,
+#sideMenu [class*="result-card"] p,#sideMenu [class*="fortune-card"] p,
+#sideMenu [class*="reading"] p{
+  line-height:1.65!important;
+  color:rgba(255,255,255,.62)!important;
+}
+#sideMenu input,#sideMenu textarea,#sideMenu select{
+  border-radius:10px!important;
+  background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  color:rgba(255,255,255,.86)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.025)!important;
+  outline:none!important;
+}
+#sideMenu input:focus,#sideMenu textarea:focus,#sideMenu select:focus{
+  border-color:rgba(73,169,255,.30)!important;
+  box-shadow:0 0 0 3px rgba(73,169,255,.07)!important;
+}
+
+/* remove old rainbow/product glow if present */
+#sideMenu .menu-product-wrap::before,
+#sideMenu .menu-product-wrap::after,
+#sideMenu #productList>*::after{
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+</style>
+
+<style>
+
+/* V27 — spacing, icy glass menu, unified fortune UI */
+
+/* Give Trading Journal comfortable breathing room inside STATS */
+#pane-stats .stat-journal-row{
+  margin-top:18px!important;
+  margin-bottom:8px!important;
+}
+#pane-stats .stat-journal-link{
+  margin-top:0!important;
+}
+
+/* Remove macOS traffic-light dots completely */
+#sideMenu .side-menu-head::before{
+  content:none!important;
+  display:none!important;
+}
+#sideMenu .side-menu-head{
+  grid-template-columns:30px 1fr 30px!important;
+}
+#sideMenu .side-menu-title{
+  grid-column:2!important;
+  justify-self:center!important;
+}
+
+/* Main vertical menu panel: translucent white/blue ice glass */
+#sideMenu.side-menu{
+  background:
+    linear-gradient(145deg,rgba(224,242,255,.115),rgba(123,188,235,.055) 38%,rgba(255,255,255,.035) 72%),
+    rgba(11,18,25,.60)!important;
+  border:1px solid rgba(205,235,255,.20)!important;
+  box-shadow:
+    0 26px 75px rgba(0,0,0,.40),
+    inset 0 1px rgba(255,255,255,.16),
+    inset 0 0 34px rgba(112,191,244,.035)!important;
+  backdrop-filter:blur(34px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(34px) saturate(135%)!important;
+}
+#sideMenu .side-menu-head{
+  background:linear-gradient(180deg,rgba(236,247,255,.075),rgba(153,210,250,.025))!important;
+  border-bottom:1px solid rgba(210,237,255,.12)!important;
+}
+#sideMenu .side-menu-body{
+  background:linear-gradient(180deg,rgba(158,213,250,.025),transparent 28%)!important;
+}
+#sideMenu .side-menu-body>.sec-title::after{
+  background:linear-gradient(90deg,rgba(184,225,255,.18),transparent)!important;
+}
+
+/* Fortune selector card uses same language as main site cards */
+#sideMenu #productList>*{
+  background:
+    linear-gradient(135deg,rgba(189,226,255,.065),rgba(255,255,255,.018) 52%,rgba(83,162,220,.035))!important;
+  border:1px solid rgba(190,226,251,.13)!important;
+  border-radius:14px!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.075)!important;
+}
+#sideMenu #productList>*::before{
+  background:linear-gradient(115deg,rgba(99,187,246,.065),transparent 44%,rgba(255,255,255,.025))!important;
+}
+#sideMenu #productList>*:hover{
+  background:linear-gradient(135deg,rgba(185,226,255,.10),rgba(255,255,255,.028))!important;
+  border-color:rgba(126,199,248,.24)!important;
+}
+
+/* Product details / fortune modal: same icy glass shell */
+.product-modal,
+.product-detail-modal,
+.fortune-modal,
+.modal-card,
+.product-detail{
+  background:
+    linear-gradient(145deg,rgba(221,241,255,.105),rgba(99,177,230,.045) 42%,rgba(255,255,255,.025)),
+    rgba(9,15,21,.76)!important;
+  border:1px solid rgba(199,231,253,.18)!important;
+  box-shadow:0 26px 80px rgba(0,0,0,.46),inset 0 1px rgba(255,255,255,.13)!important;
+  backdrop-filter:blur(30px) saturate(130%)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(130%)!important;
+}
+.product-modal .modal-header,
+.product-detail-modal .modal-header,
+.fortune-modal .modal-header,
+.product-detail .modal-header{
+  background:rgba(224,243,255,.035)!important;
+  border-bottom:1px solid rgba(203,233,255,.11)!important;
+}
+
+/* Form controls inside fortune flow */
+.product-modal input,.product-modal textarea,.product-modal select,
+.product-detail-modal input,.product-detail-modal textarea,.product-detail-modal select,
+.fortune-modal input,.fortune-modal textarea,.fortune-modal select,
+.product-detail input,.product-detail textarea,.product-detail select{
+  background:rgba(225,243,255,.035)!important;
+  border:1px solid rgba(195,228,250,.12)!important;
+  border-radius:11px!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+}
+.product-modal input:focus,.product-modal textarea:focus,.product-modal select:focus,
+.product-detail-modal input:focus,.product-detail-modal textarea:focus,.product-detail-modal select:focus,
+.fortune-modal input:focus,.fortune-modal textarea:focus,.fortune-modal select:focus,
+.product-detail input:focus,.product-detail textarea:focus,.product-detail select:focus{
+  border-color:rgba(87,178,240,.34)!important;
+  box-shadow:0 0 0 3px rgba(73,169,255,.065),inset 0 1px rgba(255,255,255,.04)!important;
+}
+
+/* Nested birth-chart / fortune sections */
+.product-modal fieldset,.product-detail-modal fieldset,.fortune-modal fieldset,
+.product-modal [class*="birth"],.product-detail-modal [class*="birth"],.fortune-modal [class*="birth"],
+.product-modal [class*="form-section"],.product-detail-modal [class*="form-section"],.fortune-modal [class*="form-section"]{
+  background:linear-gradient(145deg,rgba(218,240,255,.045),rgba(255,255,255,.015))!important;
+  border-color:rgba(196,228,249,.10)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+}
+
+/* Stats such as queue / remaining quota */
+.product-modal [class*="stat"],.product-detail-modal [class*="stat"],.fortune-modal [class*="stat"]{
+  background:rgba(219,240,255,.035)!important;
+  border-color:rgba(192,226,249,.10)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+}
+
+/* Close / action buttons follow the compact tabs on main page */
+.product-modal button,.product-detail-modal button,.fortune-modal button,
+.product-detail button{
+  border-radius:10px!important;
+}
+.product-modal .close,.product-detail-modal .close,.fortune-modal .close,
+.product-modal [class*="close"],.product-detail-modal [class*="close"],.fortune-modal [class*="close"]{
+  background:rgba(226,244,255,.04)!important;
+  border:1px solid rgba(202,233,253,.10)!important;
+}
+
+/* Remove remaining loud rainbow framing from fortune UI */
+.product-modal::before,.product-detail-modal::before,.fortune-modal::before,
+.product-modal::after,.product-detail-modal::after,.fortune-modal::after{
+  filter:none!important;
+  box-shadow:none!important;
+}
+
+</style>
+
+<style>
+
+/* V28 — game-style vertical quick launcher */
+#menuBtn.menu-btn{
+  transition:width .22s ease,height .22s ease,border-radius .22s ease,background .22s ease!important;
+}
+body.v28-menu-open #menuBtn.menu-btn{
+  width:34px!important;
+  height:74px!important;
+  min-height:74px!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  border-radius:12px!important;
+  background:rgba(14,22,30,.72)!important;
+  border-color:rgba(184,225,255,.15)!important;
+  backdrop-filter:blur(22px)!important;
+  -webkit-backdrop-filter:blur(22px)!important;
+}
+body.v28-menu-open #menuBtn.menu-btn span{
+  width:3px!important;height:3px!important;flex:0 0 3px!important;
+}
+
+/* Old large menu is no longer the first-stage UI */
+#sideMenu.side-menu.v28-launcher-mode{
+  top:54px!important;
+  left:12px!important;
+  width:58px!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding:6px!important;
+  border-radius:15px!important;
+  overflow:visible!important;
+  background:rgba(13,21,29,.68)!important;
+  border:1px solid rgba(193,230,255,.14)!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.09)!important;
+  backdrop-filter:blur(26px) saturate(125%)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(125%)!important;
+}
+#sideMenu.v28-launcher-mode .side-menu-head,
+#sideMenu.v28-launcher-mode .side-menu-body{display:none!important}
+
+.v28-game-launcher{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.v28-launch-item{
+  position:relative;
+  width:44px;height:44px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  border:1px solid rgba(203,233,253,.10);
+  background:rgba(229,244,255,.035);
+  color:rgba(255,255,255,.82);
+  cursor:pointer;
+  box-shadow:inset 0 1px rgba(255,255,255,.045);
+  transition:transform .16s ease,background .16s ease,border-color .16s ease;
+}
+.v28-launch-item:hover,.v28-launch-item:active{
+  transform:translateX(2px);
+  background:rgba(102,190,249,.10);
+  border-color:rgba(119,198,249,.24);
+}
+.v28-launch-item svg{
+  width:20px;height:20px;
+  fill:none;stroke:currentColor;stroke-width:1.45;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.v28-launch-item .v28-tip{
+  position:absolute;
+  left:52px;top:50%;
+  transform:translateY(-50%) translateX(-4px);
+  padding:6px 9px;
+  border-radius:8px;
+  white-space:nowrap;
+  font-size:8px;letter-spacing:.5px;
+  color:rgba(255,255,255,.78);
+  background:rgba(16,23,30,.88);
+  border:1px solid rgba(200,231,252,.11);
+  box-shadow:0 8px 22px rgba(0,0,0,.25);
+  opacity:0;pointer-events:none;
+  transition:opacity .15s ease,transform .15s ease;
+}
+.v28-launch-item:hover .v28-tip{
+  opacity:1;transform:translateY(-50%) translateX(0);
+}
+.v28-launch-item.active{
+  background:rgba(72,169,235,.13);
+  border-color:rgba(113,197,250,.30);
+  color:#dff3ff;
+}
+@media(max-width:430px){
+  #sideMenu.side-menu.v28-launcher-mode{left:9px!important;top:50px!important;width:56px!important}
+  .v28-launch-item{width:42px;height:42px}
+}
+
+/* When entering Fortune, restore the full themed panel */
+#sideMenu.side-menu.v28-fortune-mode{
+  width:min(360px,calc(100vw - 24px))!important;
+  max-height:min(72vh,610px)!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+#sideMenu.v28-fortune-mode .v28-game-launcher{display:none!important}
+#sideMenu.v28-fortune-mode .side-menu-head{display:grid!important}
+#sideMenu.v28-fortune-mode .side-menu-body{display:block!important}
+
+</style>
+
+
+
+
+
+
+<style>
+
+/* V29 interaction safety */
+#sideMenu.side-menu:not(.show):not(.open):not(.active){
+  pointer-events:none!important;
+}
+#sideMenu.side-menu.show,
+#sideMenu.side-menu.open,
+#sideMenu.side-menu.active{
+  pointer-events:auto!important;
+}
+.v28-game-launcher{pointer-events:auto!important}
+
+</style>
+
+<style>
+
+/* V30 — compact animated game dock, kept inside profile zone */
+#menuOverlay{display:none!important}
+
+/* trigger stays in profile/top zone; no tall button that escapes upward */
+#menuBtn.menu-btn{
+  z-index:1201!important;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1),background .2s ease,border-color .2s ease!important;
+}
+body.v30-dock-open #menuBtn.menu-btn{
+  width:32px!important;height:32px!important;min-height:32px!important;
+  flex-direction:column!important;
+  gap:3px!important;
+  transform:translateY(0)!important;
+  border-radius:10px!important;
+}
+body.v30-dock-open #menuBtn.menu-btn span{
+  width:3px!important;height:3px!important;flex:0 0 3px!important;
+}
+
+/* hide old menu window completely; use it only as a host for the quick dock */
+#sideMenu.side-menu{
+  position:fixed!important;
+  top:58px!important;
+  left:12px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:48px!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding:5px!important;
+  border-radius:14px!important;
+  overflow:visible!important;
+  background:rgba(13,21,29,.64)!important;
+  border:1px solid rgba(190,229,255,.14)!important;
+  box-shadow:0 14px 38px rgba(0,0,0,.26),inset 0 1px rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(24px) saturate(125%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(125%)!important;
+  opacity:0!important;
+  transform:translateY(-8px) scale(.82)!important;
+  transform-origin:top center!important;
+  pointer-events:none!important;
+  transition:opacity .18s ease,transform .28s cubic-bezier(.18,.9,.24,1.18)!important;
+  z-index:1200!important;
+}
+#sideMenu.side-menu.show{
+  opacity:1!important;
+  transform:translateY(0) scale(1)!important;
+  pointer-events:auto!important;
+}
+#sideMenu .side-menu-head,#sideMenu .side-menu-body{display:none!important}
+
+.v30-dock{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+}
+.v30-dock-btn{
+  width:38px;height:38px;
+  padding:0;
+  display:grid;place-items:center;
+  border-radius:11px;
+  border:1px solid rgba(203,234,255,.11);
+  background:rgba(226,244,255,.035);
+  color:rgba(235,247,255,.86);
+  box-shadow:inset 0 1px rgba(255,255,255,.05);
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(-7px) scale(.78);
+}
+#sideMenu.show .v30-dock-btn{
+  animation:v30DockItemIn .30s .05s cubic-bezier(.18,.9,.24,1.2) forwards;
+}
+@keyframes v30DockItemIn{
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.v30-dock-btn:active{transform:scale(.91)!important}
+.v30-dock-btn svg{
+  width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.45;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* Fortune modal entrance feels like entering a game menu */
+#buyModal.buy-modal{
+  transition:opacity .22s ease!important;
+}
+#buyModal .buy-inner{
+  transform:translateY(16px) scale(.965);
+  opacity:0;
+  transition:transform .34s cubic-bezier(.18,.9,.24,1.08),opacity .22s ease!important;
+}
+#buyModal.show .buy-inner{
+  transform:translateY(0) scale(1);
+  opacity:1;
+}
+
+</style>
+
+
+
+<style>
+
+/* V32 — safe inline rail. No overlay, no scroll lock, no invisible full-screen hit area. */
+#menuOverlay{display:none!important;pointer-events:none!important}
+
+#menuBtn.menu-btn{
+  width:32px!important;height:30px!important;min-width:32px!important;min-height:30px!important;
+  padding:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  flex-direction:row!important;gap:4px!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  overflow:visible!important;
+}
+#menuBtn.menu-btn span{
+  display:block!important;position:static!important;
+  width:3px!important;height:3px!important;flex:0 0 3px!important;
+  border-radius:50%!important;background:rgba(245,248,250,.88)!important;
+  opacity:1!important;transform:none!important;box-shadow:none!important;
+}
+body.v32-open #menuBtn.menu-btn{flex-direction:column!important;gap:3px!important}
+
+/* Host is only a small local region under the profile menu button. */
+#sideMenu.side-menu{
+  position:fixed!important;
+  top:62px!important;left:18px!important;right:auto!important;bottom:auto!important;
+  width:145px!important;height:74px!important;min-width:0!important;min-height:0!important;
+  padding:0!important;margin:0!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  overflow:visible!important;
+  opacity:0!important;visibility:hidden!important;
+  transform:none!important;
+  pointer-events:none!important;
+  z-index:1200!important;
+}
+#sideMenu.side-menu.show{
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+}
+#sideMenu .side-menu-head,#sideMenu .side-menu-body,
+#sideMenu .v28-game-launcher,#sideMenu .v30-dock{display:none!important}
+
+.v32-rail{display:flex;flex-direction:column;align-items:flex-start;padding-left:8px;width:135px}
+.v32-line{
+  width:1px;height:0;margin-left:5px;
+  background:rgba(215,237,250,.30);
+  opacity:0;
+  transition:height .24s cubic-bezier(.2,.8,.2,1),opacity .16s ease;
+}
+#sideMenu.show .v32-line.top{height:12px;opacity:1}
+#sideMenu.show .v32-line.bottom{height:20px;opacity:1;transition-delay:.07s}
+.v32-fortune{
+  display:flex!important;align-items:center!important;gap:7px!important;
+  height:29px!important;padding:0!important;margin:0!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;
+  color:rgba(245,249,252,.90)!important;cursor:pointer!important;
+  opacity:0;transform:translateY(-7px) scale(.94);
+  transition:opacity .18s ease,transform .27s cubic-bezier(.2,.9,.25,1.15)!important;
+}
+#sideMenu.show .v32-fortune{opacity:1;transform:translateY(0) scale(1);transition-delay:.05s!important}
+.v32-icon{font-size:17px;line-height:1}
+.v32-label{font-size:11px;font-weight:500;white-space:nowrap}
+#sideMenu.v32-closing .v32-fortune{opacity:0!important;transform:translateY(-7px) scale(.9)!important;transition-delay:0s!important}
+#sideMenu.v32-closing .v32-line{height:0!important;opacity:0!important}
+
+/* Critical safety: this menu must never lock the page. */
+html,body{overscroll-behavior:auto!important}
+
+</style>
+
+
+
+<style>
+
+/* V33 — fortune item directly BELOW the 3-dot trigger, no guide | lines */
+.v32-line{display:none!important}
+
+/* Keep host compact and position it below the trigger/profile menu area */
+#sideMenu.side-menu{
+  top:88px!important;
+  left:18px!important;
+  width:142px!important;
+  height:48px!important;
+  overflow:visible!important;
+}
+.v32-rail{
+  width:142px!important;
+  padding:0!important;
+  display:block!important;
+}
+
+/* Transparent center + animated rainbow border */
+.v32-fortune{
+  position:relative!important;
+  width:132px!important;
+  height:42px!important;
+  padding:1px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  opacity:0;
+  transform:translateY(-13px) scale(.88);
+  transform-origin:top left;
+  transition:none!important;
+}
+.v32-fortune::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-65%!important;
+  background:conic-gradient(
+    from 0deg,
+    #ff4f8b,
+    #ff9f43,
+    #ffe66d,
+    #55e6a5,
+    #55c8ff,
+    #8c7bff,
+    #e66bff,
+    #ff4f8b
+  )!important;
+  animation:v33RainbowSpin 3.2s linear infinite!important;
+  z-index:0!important;
+}
+.v32-fortune::after{
+  content:""!important;
+  position:absolute!important;
+  inset:1.5px!important;
+  border-radius:11.5px!important;
+  background:rgba(7,11,16,.82)!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  z-index:1!important;
+}
+.v32-fortune > *{position:relative!important;z-index:2!important}
+.v32-icon{
+  width:34px!important;height:34px!important;
+  display:grid!important;place-items:center!important;
+  font-size:21px!important;
+  background:transparent!important;
+}
+.v32-label{
+  font-size:12px!important;
+  font-weight:550!important;
+  color:rgba(255,255,255,.92)!important;
+  letter-spacing:.2px!important;
+}
+
+/* Opening: drop down from underneath the vertical dots */
+#sideMenu.show .v32-fortune{
+  animation:v33FortuneIn .38s cubic-bezier(.16,.9,.22,1.18) forwards!important;
+}
+/* Closing: visibly retract upward into the dots */
+#sideMenu.v33-closing{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:none!important;
+}
+#sideMenu.v33-closing .v32-fortune{
+  animation:v33FortuneOut .30s cubic-bezier(.55,.05,.8,.35) forwards!important;
+}
+@keyframes v33FortuneIn{
+  0%{opacity:0;transform:translateY(-15px) scale(.84)}
+  65%{opacity:1;transform:translateY(3px) scale(1.025)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes v33FortuneOut{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  45%{opacity:.85;transform:translateY(-3px) scale(.96)}
+  100%{opacity:0;transform:translateY(-16px) scale(.82)}
+}
+@keyframes v33RainbowSpin{to{transform:rotate(360deg)}}
+
+/* 3 dots: horizontal closed, vertical while open, animated both directions */
+#menuBtn.menu-btn{
+  transition:transform .3s cubic-bezier(.2,.85,.25,1.12)!important;
+}
+#menuBtn.menu-btn span{
+  transition:transform .30s cubic-bezier(.2,.85,.25,1.12),opacity .18s ease!important;
+}
+body.v33-open #menuBtn.menu-btn{
+  flex-direction:column!important;
+  gap:3px!important;
+  animation:v33DotsOpen .30s cubic-bezier(.2,.85,.25,1.12)!important;
+}
+body.v33-returning #menuBtn.menu-btn{
+  animation:v33DotsClose .32s cubic-bezier(.2,.85,.25,1.12)!important;
+}
+@keyframes v33DotsOpen{
+  0%{transform:scale(.86) rotate(-8deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+@keyframes v33DotsClose{
+  0%{transform:scale(1)}
+  55%{transform:scale(.84)}
+  100%{transform:scale(1)}
+}
+
+</style>
+
+<script>
+(function(){
+  function initV33(){
+    const btn=document.getElementById('menuBtn');
+    const menu=document.getElementById('sideMenu');
+    const overlay=document.getElementById('menuOverlay');
+    if(!btn||!menu)return;
+
+    document.body.style.overflow='';
+    document.documentElement.style.overflow='';
+    if(overlay) overlay.classList.remove('show');
+
+    let rail=menu.querySelector('.v32-rail');
+    if(!rail){
+      rail=document.createElement('div');
+      rail.className='v32-rail';
+      rail.innerHTML=`
+        <button class="v32-fortune" id="v33Fortune" type="button" aria-label="ดูดวง">
+          <span class="v32-icon" aria-hidden="true">🔮</span>
+          <span class="v32-label">ดูดวง</span>
+        </button>`;
+      menu.prepend(rail);
+    }else{
+      rail.querySelectorAll('.v32-line').forEach(el=>el.remove());
+      const fortune=rail.querySelector('.v32-fortune');
+      if(fortune) fortune.id='v33Fortune';
+    }
+
+    let busy=false;
+    function openMenu(){
+      if(busy)return;
+      document.body.classList.remove('v33-returning');
+      document.body.classList.add('v33-open');
+      menu.classList.remove('v33-closing');
+      menu.classList.add('show');
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+    function closeMenu(done){
+      if(busy)return;
+      if(!menu.classList.contains('show')){ if(done)done(); return; }
+      busy=true;
+      menu.classList.add('v33-closing');
+      // Item retracts first while dots remain vertical.
+      setTimeout(function(){
+        menu.classList.remove('show','v33-closing');
+        document.body.classList.remove('v33-open');
+        document.body.classList.add('v33-returning');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        // Finish the reverse dots animation, then clean the helper class.
+        setTimeout(function(){
+          document.body.classList.remove('v33-returning');
+          busy=false;
+          if(done)done();
+        },320);
+      },300);
+    }
+
+    btn.onclick=function(e){
+      if(e){e.preventDefault();e.stopPropagation();}
+      menu.classList.contains('show') ? closeMenu() : openMenu();
+      return false;
+    };
+
+    const fortune=document.getElementById('v33Fortune');
+    if(fortune){
+      fortune.onclick=function(e){
+        e.preventDefault();e.stopPropagation();
+        closeMenu(function(){
+          if(typeof openBuyModal==='function') openBuyModal('p1');
+        });
+        return false;
+      };
+    }
+
+    document.addEventListener('pointerdown',function(e){
+      if(!menu.classList.contains('show'))return;
+      if(menu.contains(e.target)||btn.contains(e.target))return;
+      closeMenu();
+    },{passive:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV33,{once:true});
+  else initV33();
+})();
+</script>
+
+<style>
+
+/* V34 — final placement + modal cleanup */
+
+/* Dropdown: sit a little below the 3-dot button, no giant empty host */
+#sideMenu.side-menu{
+  top:96px!important;
+  left:18px!important;
+  width:142px!important;
+  height:44px!important;
+  min-height:44px!important;
+}
+.v32-rail{height:44px!important}
+.v32-fortune{
+  width:132px!important;
+  height:42px!important;
+}
+
+/* Once Product Details is open, launcher UI must disappear completely. */
+body.v34-fortune-modal #menuBtn,
+body.v34-fortune-modal #sideMenu,
+body.v34-fortune-modal .v32-rail,
+body.v34-fortune-modal .v32-fortune{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  display:none!important;
+}
+
+/* Left-half translucent blur veil while fortune modal is open */
+#v34LeftBlur{
+  position:fixed;
+  left:0;top:0;bottom:0;
+  width:50vw;
+  z-index:1490;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  background:linear-gradient(90deg,
+    rgba(205,231,248,.105) 0%,
+    rgba(146,197,229,.065) 48%,
+    rgba(110,163,199,.025) 82%,
+    transparent 100%);
+  backdrop-filter:blur(18px) saturate(112%);
+  -webkit-backdrop-filter:blur(18px) saturate(112%);
+  transition:opacity .28s ease,visibility .28s ease;
+}
+body.v34-fortune-modal #v34LeftBlur{
+  opacity:1;
+  visibility:visible;
+}
+
+/* Keep actual Product Details above the blur veil */
+#buyModal,.buy-modal{
+  z-index:1500!important;
+}
+
+</style>
+
+<script>
+(function(){
+  function initV34(){
+    const menu=document.getElementById('sideMenu');
+    const btn=document.getElementById('menuBtn');
+    const modal=document.getElementById('buyModal');
+
+    let blur=document.getElementById('v34LeftBlur');
+    if(!blur){
+      blur=document.createElement('div');
+      blur.id='v34LeftBlur';
+      blur.setAttribute('aria-hidden','true');
+      document.body.appendChild(blur);
+    }
+
+    function modalOpen(){
+      if(!modal)return false;
+      const cs=getComputedStyle(modal);
+      return modal.classList.contains('show') ||
+             modal.classList.contains('open') ||
+             modal.classList.contains('active') ||
+             (cs.display!=='none' && cs.visibility!=='hidden' && parseFloat(cs.opacity||'1')>0);
+    }
+
+    function sync(){
+      const open=modalOpen();
+      document.body.classList.toggle('v34-fortune-modal',open);
+      if(open){
+        if(menu) menu.classList.remove('show','v33-closing');
+        document.body.classList.remove('v33-open','v33-returning','v32-open');
+        if(btn) btn.classList.remove('open');
+        document.body.style.overflow='';
+        document.documentElement.style.overflow='';
+      }
+    }
+
+    if(modal){
+      new MutationObserver(sync).observe(modal,{
+        attributes:true,
+        attributeFilter:['class','style','hidden','aria-hidden']
+      });
+    }
+
+    /* Also sync after any click, covering modal implementations that change ancestors. */
+    document.addEventListener('click',function(){setTimeout(sync,0)},true);
+    sync();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV34,{once:true});
+  else initV34();
+})();
+</script>
+
+<style>
+
+/* V35 — game-style left drawer inspired by the supplied reference */
+#v34LeftBlur{display:none!important}
+
+/* Full-height LEFT drawer, not a floating card */
+#sideMenu.side-menu{
+  position:fixed!important;
+  top:0!important;left:0!important;bottom:0!important;right:auto!important;
+  width:min(255px,72vw)!important;
+  height:100dvh!important;
+  max-height:none!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-right:1px solid rgba(208,234,249,.11)!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(90deg,rgba(8,13,18,.91),rgba(13,22,29,.78) 72%,rgba(22,35,44,.55))!important;
+  box-shadow:18px 0 48px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(22px) saturate(112%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(112%)!important;
+  overflow:hidden!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:translateX(-102%)!important;
+  transition:
+    transform .42s cubic-bezier(.16,.88,.24,1),
+    opacity .24s ease,
+    visibility .42s!important;
+  z-index:1450!important;
+}
+#sideMenu.side-menu.show{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  transform:translateX(0)!important;
+}
+
+/* translucent blurred half-screen atmosphere to the right of drawer */
+#v35DrawerBlur{
+  position:fixed;
+  inset:0;
+  z-index:1440;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  background:linear-gradient(90deg,
+    rgba(5,9,13,.16) 0,
+    rgba(9,16,22,.10) 45%,
+    transparent 72%);
+  backdrop-filter:blur(0);
+  -webkit-backdrop-filter:blur(0);
+  transition:opacity .3s ease,visibility .3s ease,backdrop-filter .3s ease;
+}
+body.v35-drawer-open #v35DrawerBlur{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+
+/* Hide all old menu / fortune dropdown pieces */
+#sideMenu .side-menu-head,
+#sideMenu .side-menu-body,
+#sideMenu .v28-game-launcher,
+#sideMenu .v30-dock,
+#sideMenu .v32-rail{display:none!important}
+
+.v35-drawer{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding:24px 12px 18px;
+}
+.v35-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 7px 17px;
+  border-bottom:1px solid rgba(225,240,249,.12);
+}
+.v35-title{
+  font-size:20px;
+  line-height:1;
+  font-weight:500;
+  letter-spacing:.5px;
+  color:rgba(255,255,255,.94);
+}
+.v35-close{
+  width:28px;height:28px;
+  padding:0;
+  display:grid;place-items:center;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:rgba(255,255,255,.48);
+  font-size:20px;
+  cursor:pointer;
+}
+.v35-close:active{background:rgba(255,255,255,.055)}
+.v35-list{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  padding-top:42px;
+}
+.v35-item{
+  width:100%;
+  min-height:54px;
+  padding:0 13px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  border:1px solid rgba(218,237,249,.055);
+  border-radius:4px;
+  background:rgba(3,7,10,.55);
+  color:rgba(255,255,255,.88);
+  text-align:left;
+  cursor:pointer;
+  box-shadow:inset 0 1px rgba(255,255,255,.025);
+  opacity:0;
+  transform:translateX(-18px);
+}
+#sideMenu.show .v35-item{
+  animation:v35ItemIn .36s cubic-bezier(.16,.9,.24,1) forwards;
+}
+#sideMenu.show .v35-item:nth-child(1){animation-delay:.08s}
+#sideMenu.show .v35-item:nth-child(2){animation-delay:.12s}
+#sideMenu.show .v35-item:nth-child(3){animation-delay:.16s}
+.v35-item:hover,.v35-item:active{
+  background:rgba(30,48,60,.66);
+  border-color:rgba(165,215,247,.14);
+}
+.v35-item-icon{
+  width:25px;
+  display:grid;place-items:center;
+  font-size:19px;
+}
+.v35-item-text{
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.15px;
+}
+.v35-item.disabled{opacity:.32!important;pointer-events:none}
+@keyframes v35ItemIn{
+  to{opacity:1;transform:translateX(0)}
+}
+
+/* Three-dot trigger remains compact; rotate visual orientation only while drawer is open */
+#menuBtn.menu-btn{
+  z-index:1460!important;
+  transition:transform .28s cubic-bezier(.2,.85,.25,1.1)!important;
+}
+body.v35-drawer-open #menuBtn.menu-btn{
+  flex-direction:column!important;
+  gap:3px!important;
+}
+
+/* Product Details must own the screen: no menu trigger/drawer ghosting */
+body.v34-fortune-modal #sideMenu,
+body.v34-fortune-modal #menuBtn,
+body.v34-fortune-modal #v35DrawerBlur{
+  display:none!important;
+}
+
+</style>
+
+<script>
+(function(){
+  function initV35(){
+    const btn=document.getElementById('menuBtn');
+    const menu=document.getElementById('sideMenu');
+    if(!btn||!menu)return;
+
+    let blur=document.getElementById('v35DrawerBlur');
+    if(!blur){
+      blur=document.createElement('div');
+      blur.id='v35DrawerBlur';
+      document.body.appendChild(blur);
+    }
+
+    let drawer=menu.querySelector('.v35-drawer');
+    if(!drawer){
+      drawer=document.createElement('div');
+      drawer.className='v35-drawer';
+      drawer.innerHTML=`
+        <div class="v35-head">
+          <div class="v35-title">MENU</div>
+          <button class="v35-close" type="button" aria-label="ปิดเมนู">×</button>
+        </div>
+        <div class="v35-list">
+          <button class="v35-item" id="v35Fortune" type="button">
+            <span class="v35-item-icon">🔮</span>
+            <span class="v35-item-text">ดูดวง</span>
+          </button>
+        </div>`;
+      menu.prepend(drawer);
+    }
+
+    let closing=false;
+    function openDrawer(){
+      if(closing)return;
+      menu.classList.add('show');
+      document.body.classList.add('v35-drawer-open');
+      btn.classList.add('open');
+      document.body.style.overflow='';
+      document.documentElement.style.overflow='';
+    }
+    function closeDrawer(done){
+      if(closing)return;
+      if(!menu.classList.contains('show')){if(done)done();return;}
+      closing=true;
+      menu.classList.remove('show');
+      document.body.classList.remove('v35-drawer-open');
+      btn.classList.remove('open');
+      document.body.style.overflow='';
+      document.documentElement.style.overflow='';
+      setTimeout(function(){closing=false;if(done)done();},430);
+    }
+
+    btn.onclick=function(e){
+      if(e){e.preventDefault();e.stopPropagation();}
+      menu.classList.contains('show')?closeDrawer():openDrawer();
+      return false;
+    };
+    drawer.querySelector('.v35-close').onclick=function(e){
+      e.preventDefault();e.stopPropagation();closeDrawer();
+    };
+    blur.onclick=function(){closeDrawer()};
+    drawer.querySelector('#v35Fortune').onclick=function(e){
+      e.preventDefault();e.stopPropagation();
+      closeDrawer(function(){
+        if(typeof openBuyModal==='function')openBuyModal('p1');
+      });
+    };
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initV35,{once:true});
+  else initV35();
+})();
+</script>
+
+<style>
+
+/* V36 — clear glass drawer + rainbow fortune SVG card */
+
+/* IMPORTANT: original profile 3-dot trigger must NOT appear inside drawer */
+body.v35-drawer-open #menuBtn.menu-btn{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+/* Much clearer / more transparent glass */
+#sideMenu.side-menu{
+  background:
+    linear-gradient(90deg,
+      rgba(10,18,24,.34) 0%,
+      rgba(17,29,38,.25) 62%,
+      rgba(28,43,53,.16) 100%)!important;
+  border-right:1px solid rgba(220,241,255,.13)!important;
+  box-shadow:12px 0 38px rgba(0,0,0,.12)!important;
+  backdrop-filter:blur(18px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(120%)!important;
+}
+body.v35-drawer-open #v35DrawerBlur{
+  background:linear-gradient(90deg,
+    rgba(7,12,17,.07) 0%,
+    rgba(7,12,17,.035) 48%,
+    transparent 76%)!important;
+  backdrop-filter:blur(3px)!important;
+  -webkit-backdrop-filter:blur(3px)!important;
+}
+
+/* Remove old emoji/menu styling */
+#v35Fortune.v35-item{
+  position:relative!important;
+  width:100%!important;
+  min-height:58px!important;
+  padding:1px!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  box-shadow:0 8px 25px rgba(0,0,0,.10)!important;
+}
+#v35Fortune.v35-item::before{
+  content:""!important;
+  position:absolute!important;
+  inset:-120%!important;
+  z-index:0!important;
+  background:conic-gradient(
+    from 0deg,
+    #ff4f9a,#ff994c,#ffe36a,#54e6a5,
+    #56cfff,#847cff,#d96cff,#ff4f9a
+  )!important;
+  animation:v36RainbowBorder 3.4s linear infinite!important;
+}
+#v35Fortune.v35-item::after{
+  content:""!important;
+  position:absolute!important;
+  inset:1.5px!important;
+  z-index:1!important;
+  border-radius:12.5px!important;
+  background:rgba(8,14,19,.31)!important;
+  backdrop-filter:blur(13px) saturate(115%)!important;
+  -webkit-backdrop-filter:blur(13px) saturate(115%)!important;
+}
+#v35Fortune .v35-fortune-content{
+  position:relative!important;
+  z-index:2!important;
+  width:100%!important;
+  min-height:56px!important;
+  padding:0 15px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+#v35Fortune .v35-item-icon{
+  width:30px!important;height:30px!important;
+  display:grid!important;place-items:center!important;
+  color:rgba(245,250,255,.94)!important;
+}
+#v35Fortune .v35-item-icon svg{
+  width:25px!important;height:25px!important;
+  display:block!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.55!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  filter:drop-shadow(0 0 5px rgba(137,211,255,.16));
+}
+#v35Fortune .v35-item-text{
+  color:rgba(255,255,255,.94)!important;
+  font-size:13px!important;
+  font-weight:550!important;
+}
+#v35Fortune:active .v35-fortune-content{transform:scale(.985)}
+@keyframes v36RainbowBorder{to{transform:rotate(360deg)}}
+
+/* cleaner spacing like a real game drawer */
+.v35-list{padding-top:30px!important}
+
+</style>
+
+<script>
+(function(){
+  function initV36(){
+    const fortune=document.getElementById('v35Fortune');
+    if(!fortune)return;
+
+    /* Replace emoji with a real inline SVG crystal-ball icon. */
+    fortune.innerHTML=`
+      <span class="v35-fortune-content">
+        <span class="v35-item-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <circle cx="16" cy="13.3" r="9.1"/>
+            <path d="M10.3 22.2c1.7 1.1 3.6 1.7 5.7 1.7s4-.6 5.7-1.7"/>
+            <path d="M11.3 23.6 9.7 28h12.6l-1.6-4.4"/>
+            <path d="M8.9 28h14.2"/>
+            <path d="M12.2 8.9c1.2-1.1 2.5-1.6 4.1-1.7"/>
+            <circle cx="12.7" cy="12.4" r=".8" fill="currentColor" stroke="none"/>
+            <circle cx="18.9" cy="15.4" r=".65" fill="currentColor" stroke="none"/>
+            <path d="M22.8 5.1v2.2M21.7 6.2h2.2"/>
+          </svg>
+        </span>
+        <span class="v35-item-text">ดูดวง</span>
+      </span>`;
+
+    /* Re-bind direct action because replacing inner HTML must not affect button behavior. */
+    fortune.onclick=function(e){
+      e.preventDefault();
+      e.stopPropagation();
+
+      const menu=document.getElementById('sideMenu');
+      const btn=document.getElementById('menuBtn');
+      if(menu) menu.classList.remove('show');
+      document.body.classList.remove('v35-drawer-open');
+      if(btn) btn.classList.remove('open');
+
+      setTimeout(function(){
+        if(typeof openBuyModal==='function') openBuyModal('p1');
+      },420);
+      return false;
+    };
+  }
+  if(document.readyState==='loading')
+    document.addEventListener('DOMContentLoaded',initV36,{once:true});
+  else initV36();
+})();
+</script>
+
+<style>
+
+/* V37 — drawer blur cleanup + free fortune label */
+#v35Fortune .v35-item-text::after{content:""!important}
+
+/* Blur must never survive after drawer closes. */
+body:not(.v35-drawer-open) #v35DrawerBlur{
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+#v35DrawerBlur{
+  transition:opacity .24s ease,visibility .24s ease!important;
+}
+
+</style>
+
+<script>
+(function(){
+  function initV37(){
+    const menu=document.getElementById('sideMenu');
+    const blur=document.getElementById('v35DrawerBlur');
+    const btn=document.getElementById('menuBtn');
+    const fortune=document.getElementById('v35Fortune');
+
+    /* Label */
+    if(fortune){
+      const label=fortune.querySelector('.v35-item-text');
+      if(label) label.textContent='ดูดวงฟรี';
+    }
+
+    /* One cleanup function used by every possible close path. */
+    function hardCleanupDrawer(){
+      if(menu) menu.classList.remove('show','open','active');
+      document.body.classList.remove(
+        'v35-drawer-open','v33-open','v33-returning',
+        'v32-open','v31-open','v30-dock-open'
+      );
+      if(btn) btn.classList.remove('open');
+      if(blur){
+        blur.style.opacity='0';
+        blur.style.visibility='hidden';
+        blur.style.pointerEvents='none';
+        blur.style.backdropFilter='none';
+        blur.style.webkitBackdropFilter='none';
+      }
+      document.body.style.overflow='';
+      document.documentElement.style.overflow='';
+    }
+
+    /* Whenever the drawer is no longer shown, forcibly clear blur. */
+    if(menu){
+      new MutationObserver(function(){
+        if(!menu.classList.contains('show')) hardCleanupDrawer();
+      }).observe(menu,{attributes:true,attributeFilter:['class']});
+    }
+
+    document.addEventListener('pointerup',function(){
+      setTimeout(function(){
+        if(menu && !menu.classList.contains('show')) hardCleanupDrawer();
+      },460);
+    },{passive:true});
+
+    window.addEventListener('pageshow',hardCleanupDrawer);
+    window.addEventListener('pagehide',hardCleanupDrawer);
+
+    /* Pull the real YouTube title after a replacement track is loaded.
+       This avoids guessing the title and keeps the on-page title accurate. */
+    function syncYouTubeTitle(){
+      try{
+        if(typeof ytPlayer==='undefined' || !ytPlayer || currentIndex < 0) return;
+        const data=ytPlayer.getVideoData ? ytPlayer.getVideoData() : null;
+        if(!data || !data.title) return;
+        const song=CONFIG.songs[currentIndex];
+        if(!song) return;
+        if(song.videoId==='a4aCt_cma7E' || song.videoId==='cy2avZxPH1k'){
+          song.title=data.title;
+          song.artist=data.author || 'YouTube';
+          if(typeof updateNowPlayingTitle==='function') updateNowPlayingTitle();
+          const item=document.querySelector('.song-item[data-index="'+currentIndex+'"]');
+          if(item) item.title=song.title+' - '+song.artist;
+        }
+      }catch(e){}
+    }
+
+    /* Hook without replacing the existing player-state logic. */
+    const timer=setInterval(syncYouTubeTitle,900);
+    setTimeout(function(){clearInterval(timer)},30000);
+
+    /* Re-run briefly after a song tile is tapped. */
+    document.addEventListener('click',function(e){
+      const item=e.target.closest && e.target.closest('.song-item');
+      if(!item)return;
+      let n=0;
+      const t=setInterval(function(){
+        syncYouTubeTitle();
+        if(++n>8) clearInterval(t);
+      },650);
+    },{passive:true});
+
+    hardCleanupDrawer();
+  }
+
+  if(document.readyState==='loading')
+    document.addEventListener('DOMContentLoaded',initV37,{once:true});
+  else initV37();
+})();
+</script>
