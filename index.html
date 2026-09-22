@@ -10,7 +10,7 @@
 :root{--bg:#000;--card:rgba(8,8,8,.55);--border:rgba(255,255,255,.10);--green:#00e07a;--red:#ff3b5c;--yellow:#f0b232;--text:#fff;--muted:#808080}
 html{scroll-behavior:smooth}
 body{font-family:'Kanit','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative;padding:44px 16px 60px}
-.bg-gif{position:fixed;inset:0;z-index:-4;background-image:url('https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyNmw0Yzk5em9icDR2YzE1N2JkODJnNzQ5OTN1NXEyanFwZWZkbm1mNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RCSr5lgX2hO4KFJDU8/giphy.gif');background-size:cover;background-position:center;filter:blur(8px) brightness(.65);opacity:.75;pointer-events:none}
+.bg-gif{position:fixed;inset:0;z-index:-4;background-image:url('https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUycnB3Mzk1d2dscnhyYmYwYmw3bXFscTRqaHFrbmJ6bzhua3F1N2xhdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3CCgRgjlHuDFMkXW6Y/giphy.gif');background-size:cover;background-position:center;filter:blur(8px) brightness(.65);opacity:.75;pointer-events:none}
 .bg-gif-overlay{position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(ellipse 100% 80% at 50% 30%,rgba(0,0,0,.2) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.75) 100%),linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.55) 100%)}
 .aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
 .aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5}
@@ -4665,16 +4665,9 @@ body.v41-open #v41Backdrop{opacity:1!important;visibility:visible!important;poin
 
 /* Song 4–5 use EXACT SAME tile geometry/cropping behavior as songs 1–3.
    They are background-image tiles, not <img> elements. */
-.music .song-item[data-index="3"],
-.music .song-item[data-index="4"]{
-  width:74px!important;height:74px!important;min-height:74px!important;flex-basis:74px!important;
-  background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;
-}
+
 @media(max-width:560px){
-  .music .song-item[data-index="3"],
-  .music .song-item[data-index="4"]{
-    width:66px!important;height:66px!important;min-height:66px!important;flex-basis:66px!important;
-  }
+  
 }
 
 /* Product details owns the screen */
@@ -4892,144 +4885,6 @@ body.v41-product #v41Backdrop{display:none!important}
 }
 </style>
 
-<style id="v44-final-visual-fixes">
-/* Fortune: unmistakable animated rainbow BORDER, solid neutral interior */
-.v41-fortune{
-  padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  overflow:visible!important;
-  isolation:isolate!important;
-  animation:none!important;
-}
-.v41-fortune::before{
-  content:""!important;
-  display:block!important;
-  position:absolute!important;
-  inset:-2px!important;
-  z-index:-2!important;
-  border-radius:16px!important;
-  background:conic-gradient(from var(--v44-angle),
-    #ff2d8d,#ff6a36,#ffd83d,#53e86d,#2fe0cf,#36a2ff,#7d63ff,#e44cff,#ff2d8d)!important;
-  animation:v44RainbowSpin 2.4s linear infinite!important;
-  filter:drop-shadow(0 0 5px rgba(104,166,255,.22))!important;
-}
-.v41-fortune::after{
-  content:""!important;
-  display:block!important;
-  position:absolute!important;
-  inset:1px!important;
-  z-index:-1!important;
-  border-radius:13px!important;
-  background:#071016!important;
-  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
-}
-.v41-fortune-inner{z-index:2!important}
-@property --v44-angle{
-  syntax:"<angle>";
-  initial-value:0deg;
-  inherits:false;
-}
-@keyframes v44RainbowSpin{to{--v44-angle:360deg}}
-
-/* Song 4–5: use same active halo mechanics as 1–3, but glow derives from each cover. */
-.music .song-item[data-index="3"],
-.music .song-item[data-index="4"]{
-  background-size:cover!important;
-  background-position:center!important;
-  overflow:visible!important;
-}
-.music .song-item[data-index="3"]{--song-glow:#b8b0a8!important}
-.music .song-item[data-index="4"]{--song-glow:#d8d8d8!important}
-.music .song-item[data-index="3"].active,
-.music .song-item[data-index="4"].active,
-.music .song-item[data-index="3"].playing,
-.music .song-item[data-index="4"].playing{
-  box-shadow:
-    0 0 0 2px var(--song-glow),
-    0 0 12px var(--song-glow),
-    0 0 25px color-mix(in srgb,var(--song-glow) 52%,transparent)!important;
-}
-</style>
-
-<script id="v45-four-song-fix">
-(function(){
- function rgbToHex(r,g,b){
-   return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');
- }
- function setSong4Glow(){
-   if(!window.CONFIG||!CONFIG.songs||!CONFIG.songs[3])return;
-   const song=CONFIG.songs[3];
-   const tile=document.querySelector('.song-item[data-index="3"]');
-   if(!tile)return;
-   const img=new Image();
-   img.crossOrigin='anonymous';
-   img.onload=function(){
-     try{
-       const c=document.createElement('canvas'); c.width=c.height=24;
-       const x=c.getContext('2d',{willReadFrequently:true});
-       x.drawImage(img,0,0,24,24);
-       const d=x.getImageData(0,0,24,24).data;
-       let r=0,g=0,b=0,n=0;
-       for(let i=0;i<d.length;i+=16){
-         if(d[i+3]<100)continue;
-         const mx=Math.max(d[i],d[i+1],d[i+2]),mn=Math.min(d[i],d[i+1],d[i+2]);
-         if(mx<42)continue;
-         const w=1+(mx-mn)/85;
-         r+=d[i]*w;g+=d[i+1]*w;b+=d[i+2]*w;n+=w;
-       }
-       if(n){
-         r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
-         const mx=Math.max(r,g,b);
-         if(mx<155){const k=155/Math.max(mx,1);r*=k;g*=k;b*=k}
-         const col=rgbToHex(Math.round(r),Math.round(g),Math.round(b));
-         tile.style.setProperty('--song-glow',col,'important');
-         song.glow=col;
-       }
-     }catch(e){}
-   };
-   img.src=song.cover;
- }
- function boot(){
-   /* Defensive cleanup: render only 4 song tiles even if old DOM was cached/generated. */
-   document.querySelectorAll('.song-item[data-index]').forEach(function(el){
-     if(Number(el.dataset.index)>=4)el.remove();
-   });
-   setSong4Glow();
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
- else boot();
-})();
-</script>
-
-<style id="v48-music-only-preserve">
-.music-list,.music-icons,.songs,.song-list{
-  justify-content:center!important;
-  margin-left:auto!important;
-  margin-right:auto!important;
-}
-.music .song-item[data-index="0"],
-.music .song-item[data-index="1"],
-.music .song-item[data-index="2"],
-.music .song-item[data-index="3"]{
-  flex:0 0 auto!important;
-}
-.music .song-item[data-index="3"]{
-  background-size:cover!important;
-  background-position:center!important;
-  background-repeat:no-repeat!important;
-  overflow:visible!important;
-  --song-glow:#49a9ff;
-}
-.music .song-item[data-index="3"].active,
-.music .song-item[data-index="3"].playing{
-  box-shadow:
-    0 0 0 2px var(--song-glow),
-    0 0 12px var(--song-glow),
-    0 0 25px color-mix(in srgb,var(--song-glow) 52%,transparent)!important;
-}
-</style>
-
 <style id="v49-line-only-indicator-fix">
 /*
   Keep the ORIGINAL chart toggle dimensions.
@@ -5074,4 +4929,23 @@ body.v41-product #v41Backdrop{display:none!important}
   box-sizing:border-box!important;
 }
 </style>
+
+<script id="v55-song4-inherit-exactly">
+(function(){
+  function makeSong4UseBaseStyle(){
+    var el=document.querySelector('.music .song-item[data-index="3"]');
+    if(!el)return;
+    ['width','height','min-width','min-height','flex','flex-basis','border',
+     'border-color','border-radius','box-shadow','filter','transform',
+     '--song-glow'].forEach(function(p){el.style.removeProperty(p);});
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){
+      setTimeout(makeSong4UseBaseStyle,0);
+    },{once:true});
+  }else{
+    setTimeout(makeSong4UseBaseStyle,0);
+  }
+})();
+</script>
 
