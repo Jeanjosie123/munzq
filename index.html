@@ -5187,3 +5187,30 @@ body.v41-product #v41Backdrop{display:none!important}
 }
 </style>
 
+<script id="v81-default-certs">
+(function(){
+  function openCerts(){
+    var btn=document.querySelector('[data-tab="certs"]');
+    if(!btn){
+      var candidates=document.querySelectorAll('button,[role="tab"],.perf-tab,.tab-btn');
+      for(var i=0;i<candidates.length;i++){
+        if((candidates[i].textContent||'').trim().toUpperCase()==='CERTS'){
+          btn=candidates[i]; break;
+        }
+      }
+    }
+    if(btn) btn.click();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){
+      requestAnimationFrame(function(){ requestAnimationFrame(openCerts); });
+    });
+  }else{
+    requestAnimationFrame(function(){ requestAnimationFrame(openCerts); });
+  }
+
+  window.addEventListener('pageshow',openCerts);
+})();
+</script>
+
